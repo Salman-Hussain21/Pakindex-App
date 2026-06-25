@@ -1,0 +1,19 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+
+  /* PakIndex brand green, sampled from the logo */
+  --color-brand-50:  #e6f3ed;
+  --color-brand-100: #c1e3d2;
+  --color-brand-200: #99d1b6;
+  --color-brand-300: #6abf97;
+  --color-brand-400: #3aac78;
+  --color-brand-500: #128a55;
+  --color-brand-600: #03603d;
+  --color-brand-700: #02502f;
+  --color-brand-800: #023f26;
+  --color-brand-900: #01301c;
+
+  --color-ink-900: #252422;
+}
