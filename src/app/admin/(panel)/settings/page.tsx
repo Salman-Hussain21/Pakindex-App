@@ -2,6 +2,7 @@
 
 import { useEffect, useState, useCallback } from "react";
 import { Moon, Sun } from "lucide-react";
+import { useTheme } from "@/components/admin/ThemeProvider";
 import {
   getMe,
   updateMe,
@@ -128,29 +129,14 @@ function ProfileTab() {
 }
 
 function AppearanceTab() {
-  const [dark, setDark] = useState(false);
-
-  useEffect(() => {
-    setDark(document.documentElement.classList.contains("dark"));
-  }, []);
-
-  async function setTheme(value: boolean) {
-    setDark(value);
-    document.documentElement.classList.toggle("dark", value);
-    localStorage.setItem("pakindex-dark-mode", String(value));
-    try {
-      await updateMe({ darkMode: value });
-    } catch {
-      // localStorage already updated for this browser
-    }
-  }
+  const { dark, setDark } = useTheme();
 
   return (
     <Card>
       <h2 className="mb-4 text-sm font-semibold text-ink-900 dark:text-gray-100">Theme</h2>
       <div className="flex gap-3">
         <button
-          onClick={() => setTheme(false)}
+          onClick={() => setDark(false)}
           className={`flex flex-1 flex-col items-center gap-2 rounded-xl border p-4 text-sm font-medium ${
             !dark ? "border-brand-500 bg-brand-50 text-brand-700 dark:bg-brand-900/20 dark:text-brand-400" : "border-black/10 text-ink-900/60 dark:border-white/10 dark:text-gray-400"
           }`}
@@ -158,7 +144,7 @@ function AppearanceTab() {
           <Sun size={20} /> Light
         </button>
         <button
-          onClick={() => setTheme(true)}
+          onClick={() => setDark(true)}
           className={`flex flex-1 flex-col items-center gap-2 rounded-xl border p-4 text-sm font-medium ${
             dark ? "border-brand-500 bg-brand-50 text-brand-700 dark:bg-brand-900/20 dark:text-brand-400" : "border-black/10 text-ink-900/60 dark:border-white/10 dark:text-gray-400"
           }`}

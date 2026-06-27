@@ -1,6 +1,7 @@
 "use client";
 
-import { MapContainer, TileLayer, CircleMarker, Popup } from "react-leaflet";
+import { useEffect } from "react";
+import { MapContainer, TileLayer, CircleMarker, Popup, useMap } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 
 export interface MapBusiness {
@@ -22,8 +23,27 @@ const STATUS_COLOR: Record<string, string> = {
 };
 
 // Karachi — most of the demo data lives here. Re-centers automatically once
-// real businesses load (see fitBounds logic in the parent page if needed).
+// real businesses load.
 const DEFAULT_CENTER: [number, number] = [24.8607, 67.0011];
+
+// Pans/zooms the map to fit whatever set of businesses is currently shown —
+// this is what makes selecting an area in the dropdown actually "zoom into"
+// it instead of just filtering markers on a static view.
+function FitBounds({ businesses }: { businesses: MapBusiness[] }) {
+  const map = useMap();
+
+  useEffect(() => {
+    if (businesses.length === 0) return;
+    const bounds: [number, number][] = businesses.map((b) => [Number(b.latitude), Number(b.longitude)]);
+    if (bounds.length === 1) {
+      map.setView(bounds[0], 15);
+    } else {
+      map.fitBounds(bounds, { padding: [40, 40], maxZoom: 16 });
+    }
+  }, [businesses, map]);
+
+  return null;
+}
 
 export default function LiveMap({ businesses }: { businesses: MapBusiness[] }) {
   return (
@@ -37,6 +57,7 @@ export default function LiveMap({ businesses }: { businesses: MapBusiness[] }) {
         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
       />
+      <FitBounds businesses={businesses} />
       {businesses.map((b) => (
         <CircleMarker
           key={b.id}

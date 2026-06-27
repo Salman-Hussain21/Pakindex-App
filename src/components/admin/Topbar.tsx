@@ -11,12 +11,10 @@ export default function Topbar({
   fullName,
   email,
   title,
-  darkMode,
 }: {
   fullName: string;
   email: string;
   title?: string;
-  darkMode: boolean;
 }) {
   const router = useRouter();
   const [loggingOut, setLoggingOut] = useState(false);
@@ -35,7 +33,7 @@ export default function Topbar({
     <header className="flex h-16 flex-shrink-0 items-center justify-between border-b border-black/5 bg-white px-6 dark:border-white/10 dark:bg-gray-900">
       <h1 className="text-lg font-semibold text-ink-900 dark:text-gray-100">{title || "Admin Panel"}</h1>
       <div className="flex items-center gap-3">
-        <ThemeToggle initialDarkMode={darkMode} />
+        <ThemeToggle />
         <NotificationBell />
         <div className="mx-1 h-6 w-px bg-black/10 dark:bg-white/10" />
         <div className="text-right">

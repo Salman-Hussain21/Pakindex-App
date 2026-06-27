@@ -1,39 +1,60 @@
 "use client";
 
 import { useEffect, useState, useCallback } from "react";
-import { getCompanies, createCompany } from "@/lib/admin-api";
+import { getCompanies, bulkCompanyAction, getCompany } from "@/lib/admin-api";
 import StatusBadge from "@/components/admin/StatusBadge";
+import BulkActionBar from "@/components/admin/BulkActionBar";
+import CompanyFormModal, { CompanyEditData } from "@/components/admin/CompanyFormModal";
 
 interface Company {
   id: string;
   name: string;
+  legal_name: string | null;
   industry: string | null;
-  admin_email: string | null;
+  email: string;
+  phone: string | null;
   status: string;
   plan: string;
+  max_employees: number;
   employee_count: number;
+  areas: { id: number; name: string }[];
+  categories: { id: number; name: string }[];
   created_at: string;
 }
+
+const PLAN_LABEL: Record<string, string> = {
+  free: "Free",
+  premium: "Premium",
+  ultra_premium: "Ultra Premium",
+  trial: "Free (legacy)",
+  basic: "Premium (legacy)",
+  pro: "Ultra Premium (legacy)",
+  enterprise: "Ultra Premium (legacy)",
+};
+
+const PLAN_COLOR: Record<string, string> = {
+  free: "bg-gray-100 text-gray-700 dark:bg-gray-800 dark:text-gray-300",
+  premium: "bg-amber-50 text-amber-700 dark:bg-amber-900/30 dark:text-amber-300",
+  ultra_premium: "bg-brand-50 text-brand-700 dark:bg-brand-900/30 dark:text-brand-300",
+};
 
 export default function CompanyManagementPage() {
   const [companies, setCompanies] = useState<Company[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
-  const [showForm, setShowForm] = useState(false);
-  const [form, setForm] = useState({
-    companyName: "",
-    industry: "",
-    adminFullName: "",
-    adminEmail: "",
-    adminPassword: "",
-  });
-  const [saving, setSaving] = useState(false);
+  const [search, setSearch] = useState("");
+  const [statusFilter, setStatusFilter] = useState("");
+  const [planFilter, setPlanFilter] = useState("");
+  const [selected, setSelected] = useState<Set<string>>(new Set());
+  const [bulkBusy, setBulkBusy] = useState(false);
+  const [editTarget, setEditTarget] = useState<CompanyEditData | null | undefined>(undefined); // undefined = closed, null = creating
 
   const load = useCallback(async () => {
     setLoading(true);
     try {
       const data: any = await getCompanies();
       setCompanies(data.companies);
+      setSelected(new Set());
     } catch (e: any) {
       setError(e.message);
     } finally {
@@ -41,23 +62,62 @@ export default function CompanyManagementPage() {
     }
   }, []);
 
-  useEffect(() => {
-    load();
-  }, [load]);
+  useEffect(() => { load(); }, [load]);
 
-  async function handleCreate(e: React.FormEvent) {
-    e.preventDefault();
-    setSaving(true);
-    setError(null);
+  const filtered = companies.filter((c) => {
+    if (statusFilter && c.status !== statusFilter) return false;
+    if (planFilter && c.plan !== planFilter) return false;
+    if (search) {
+      const s = search.toLowerCase();
+      if (!c.name.toLowerCase().includes(s) && !(c.legal_name || "").toLowerCase().includes(s) && !c.email.toLowerCase().includes(s)) {
+        return false;
+      }
+    }
+    return true;
+  });
+
+  function toggle(id: string) {
+    setSelected((prev) => {
+      const next = new Set(prev);
+      next.has(id) ? next.delete(id) : next.add(id);
+      return next;
+    });
+  }
+  function toggleAll() {
+    setSelected((prev) => (prev.size === filtered.length ? new Set() : new Set(filtered.map((c) => c.id))));
+  }
+
+  async function bulkAction(action: string) {
+    if (action === "delete" && !confirm(`Cancel ${selected.size} company account(s)? Their logins will stop working.`)) return;
+    setBulkBusy(true);
     try {
-      await createCompany(form);
-      setShowForm(false);
-      setForm({ companyName: "", industry: "", adminFullName: "", adminEmail: "", adminPassword: "" });
+      await bulkCompanyAction({ action, ids: Array.from(selected) });
       load();
     } catch (e: any) {
       setError(e.message);
     } finally {
-      setSaving(false);
+      setBulkBusy(false);
+    }
+  }
+
+  async function openEdit(companyId: string) {
+    try {
+      const data: any = await getCompany(companyId);
+      setEditTarget({
+        id: data.company.id,
+        name: data.company.name,
+        legal_name: data.company.legal_name,
+        email: data.company.email,
+        phone: data.company.phone,
+        industry: data.company.industry,
+        plan: data.company.plan,
+        max_employees: data.company.max_employees,
+        status: data.company.status,
+        areaIds: data.areas.map((a: any) => a.id),
+        categoryIds: data.categories.map((c: any) => c.id),
+      });
+    } catch (e: any) {
+      setError(e.message);
     }
   }
 
@@ -66,41 +126,115 @@ export default function CompanyManagementPage() {
       <div className="mb-4 flex items-center justify-between">
         <h1 className="text-xl font-semibold text-ink-900 dark:text-gray-100">Company Management</h1>
         <button
-          onClick={() => setShowForm(true)}
+          onClick={() => setEditTarget(null)}
           className="rounded-lg bg-brand-600 px-3 py-1.5 text-sm font-medium text-white hover:bg-brand-700"
         >
           + New Company
         </button>
       </div>
 
-      {error && !showForm && (
-        <p className="mb-3 rounded-lg bg-red-50 px-3 py-2 text-sm text-red-700 dark:bg-red-900/20 dark:text-red-400">{error}</p>
-      )}
+      <div className="mb-4 flex flex-wrap gap-2">
+        <input
+          value={search}
+          onChange={(e) => setSearch(e.target.value)}
+          placeholder="Search by name, legal name, or email…"
+          className="w-64 rounded-lg border border-black/10 bg-white px-3 py-2 text-sm text-ink-900 outline-none focus:border-brand-500 dark:border-white/10 dark:bg-gray-800 dark:text-gray-100"
+        />
+        <select
+          value={statusFilter}
+          onChange={(e) => setStatusFilter(e.target.value)}
+          className="rounded-lg border border-black/10 bg-white px-3 py-2 text-sm text-ink-900 outline-none focus:border-brand-500 dark:border-white/10 dark:bg-gray-800 dark:text-gray-100"
+        >
+          <option value="">All statuses</option>
+          <option value="active">Active</option>
+          <option value="suspended">Suspended</option>
+          <option value="cancelled">Cancelled</option>
+        </select>
+        <select
+          value={planFilter}
+          onChange={(e) => setPlanFilter(e.target.value)}
+          className="rounded-lg border border-black/10 bg-white px-3 py-2 text-sm text-ink-900 outline-none focus:border-brand-500 dark:border-white/10 dark:bg-gray-800 dark:text-gray-100"
+        >
+          <option value="">All plans</option>
+          <option value="free">Free</option>
+          <option value="premium">Premium</option>
+          <option value="ultra_premium">Ultra Premium</option>
+        </select>
+      </div>
+
+      {error && <p className="mb-3 rounded-lg bg-red-50 px-3 py-2 text-sm text-red-700 dark:bg-red-900/20 dark:text-red-400">{error}</p>}
+
+      <BulkActionBar count={selected.size} onClear={() => setSelected(new Set())}>
+        <button disabled={bulkBusy} onClick={() => bulkAction("activate")} className="rounded-lg border border-black/10 px-3 py-1.5 text-xs font-medium hover:bg-gray-50 disabled:opacity-50 dark:border-white/10 dark:hover:bg-gray-800">
+          Activate
+        </button>
+        <button disabled={bulkBusy} onClick={() => bulkAction("suspend")} className="rounded-lg bg-amber-600 px-3 py-1.5 text-xs font-medium text-white hover:bg-amber-700 disabled:opacity-50">
+          Suspend
+        </button>
+        <button disabled={bulkBusy} onClick={() => bulkAction("delete")} className="rounded-lg bg-red-600 px-3 py-1.5 text-xs font-medium text-white hover:bg-red-700 disabled:opacity-50">
+          Cancel Selected
+        </button>
+      </BulkActionBar>
 
       <div className="overflow-hidden rounded-2xl border border-black/5 bg-white shadow-sm dark:border-white/10 dark:bg-gray-900">
         <table className="w-full text-sm">
           <thead className="bg-gray-50 text-left text-xs uppercase text-ink-900/40 dark:bg-gray-950 dark:text-gray-500">
             <tr>
+              <th className="w-10 px-4 py-3">
+                <input type="checkbox" checked={filtered.length > 0 && selected.size === filtered.length} onChange={toggleAll} className="rounded border-black/20" />
+              </th>
               <th className="px-4 py-3">Company</th>
-              <th className="px-4 py-3">Admin Email</th>
+              <th className="px-4 py-3">Industry</th>
+              <th className="px-4 py-3">Assigned Areas</th>
               <th className="px-4 py-3">Employees</th>
               <th className="px-4 py-3">Plan</th>
               <th className="px-4 py-3">Status</th>
+              <th className="px-4 py-3 text-right">Actions</th>
             </tr>
           </thead>
           <tbody className="divide-y divide-black/5 dark:divide-white/10">
             {loading ? (
-              <tr><td colSpan={5} className="px-4 py-6 text-center text-ink-900/40 dark:text-gray-500">Loading…</td></tr>
-            ) : companies.length === 0 ? (
-              <tr><td colSpan={5} className="px-4 py-6 text-center text-ink-900/40 dark:text-gray-500">No companies yet.</td></tr>
+              <tr><td colSpan={8} className="px-4 py-6 text-center text-ink-900/40 dark:text-gray-500">Loading…</td></tr>
+            ) : filtered.length === 0 ? (
+              <tr><td colSpan={8} className="px-4 py-6 text-center text-ink-900/40 dark:text-gray-500">No companies match.</td></tr>
             ) : (
-              companies.map((c) => (
-                <tr key={c.id} className="hover:bg-gray-50 dark:hover:bg-gray-800">
-                  <td className="px-4 py-3 font-medium text-ink-900 dark:text-gray-100">{c.name}</td>
-                  <td className="px-4 py-3 text-ink-900/60 dark:text-gray-400">{c.admin_email || "—"}</td>
-                  <td className="px-4 py-3 text-ink-900/60 dark:text-gray-400">{c.employee_count}</td>
-                  <td className="px-4 py-3 text-ink-900/60 dark:text-gray-400 capitalize">{c.plan}</td>
+              filtered.map((c) => (
+                <tr key={c.id} className={`hover:bg-gray-50 dark:hover:bg-gray-800 ${selected.has(c.id) ? "bg-brand-50/40 dark:bg-brand-900/10" : ""}`}>
+                  <td className="px-4 py-3">
+                    <input type="checkbox" checked={selected.has(c.id)} onChange={() => toggle(c.id)} className="rounded border-black/20" />
+                  </td>
+                  <td className="px-4 py-3">
+                    <p className="font-medium text-ink-900 dark:text-gray-100">{c.name}</p>
+                    <p className="text-xs text-ink-900/40 dark:text-gray-500">{c.email}</p>
+                  </td>
+                  <td className="px-4 py-3 text-ink-900/60 dark:text-gray-400">{c.industry || "—"}</td>
+                  <td className="px-4 py-3">
+                    {c.areas.length === 0 ? (
+                      <span className="text-xs text-red-600 dark:text-red-400">None — sees no data</span>
+                    ) : (
+                      <div className="flex flex-wrap gap-1">
+                        {c.areas.slice(0, 3).map((a) => (
+                          <span key={a.id} className="rounded-full bg-gray-100 px-2 py-0.5 text-xs text-ink-900/70 dark:bg-gray-800 dark:text-gray-300">{a.name}</span>
+                        ))}
+                        {c.areas.length > 3 && <span className="text-xs text-ink-900/40 dark:text-gray-500">+{c.areas.length - 3}</span>}
+                      </div>
+                    )}
+                  </td>
+                  <td className="px-4 py-3 text-ink-900/60 dark:text-gray-400">{c.employee_count} / {c.max_employees}</td>
+                  <td className="px-4 py-3">
+                    <span className={`inline-flex rounded-full px-2.5 py-0.5 text-xs font-medium ${PLAN_COLOR[c.plan] || PLAN_COLOR.free}`}>
+                      {PLAN_LABEL[c.plan] || c.plan}
+                    </span>
+                  </td>
                   <td className="px-4 py-3"><StatusBadge status={c.status} /></td>
+                  <td className="px-4 py-3 text-right">
+                    <button
+                      onClick={() => openEdit(c.id)}
+                      className="rounded-lg border border-black/10 px-2.5 py-1 text-xs font-medium hover:bg-gray-50 dark:border-white/10 dark:hover:bg-gray-800"
+                    >
+                      Edit
+                    </button>
+                  </td>
                 </tr>
               ))
             )}
@@ -108,73 +242,13 @@ export default function CompanyManagementPage() {
         </table>
       </div>
 
-      {showForm && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 p-4" onClick={() => setShowForm(false)}>
-          <form
-            onSubmit={handleCreate}
-            onClick={(e) => e.stopPropagation()}
-            className="w-full max-w-md rounded-2xl bg-white p-6 shadow-xl dark:bg-gray-900"
-          >
-            <h2 className="mb-4 text-lg font-semibold text-ink-900 dark:text-gray-100">New Company</h2>
-
-            {error && (
-              <p className="mb-3 rounded-lg bg-red-50 px-3 py-2 text-sm text-red-700 dark:bg-red-900/20 dark:text-red-400">{error}</p>
-            )}
-
-            <div className="space-y-3">
-              <Input label="Company Name" value={form.companyName} onChange={(v) => setForm({ ...form, companyName: v })} required />
-              <Input label="Industry" value={form.industry} onChange={(v) => setForm({ ...form, industry: v })} />
-              <Input label="Admin Full Name" value={form.adminFullName} onChange={(v) => setForm({ ...form, adminFullName: v })} required />
-              <Input label="Admin Email" type="email" value={form.adminEmail} onChange={(v) => setForm({ ...form, adminEmail: v })} required />
-              <Input label="Admin Password" type="password" value={form.adminPassword} onChange={(v) => setForm({ ...form, adminPassword: v })} required />
-            </div>
-
-            <div className="mt-5 flex justify-end gap-2">
-              <button
-                type="button"
-                onClick={() => { setShowForm(false); setError(null); }}
-                className="rounded-lg border border-black/10 px-4 py-2 text-sm font-medium hover:bg-gray-50 dark:border-white/10 dark:hover:bg-gray-800"
-              >
-                Cancel
-              </button>
-              <button
-                type="submit"
-                disabled={saving}
-                className="rounded-lg bg-brand-600 px-4 py-2 text-sm font-medium text-white hover:bg-brand-700 disabled:opacity-50"
-              >
-                {saving ? "Creating…" : "Create Company"}
-              </button>
-            </div>
-          </form>
-        </div>
+      {editTarget !== undefined && (
+        <CompanyFormModal
+          company={editTarget}
+          onClose={() => setEditTarget(undefined)}
+          onSaved={() => { setEditTarget(undefined); load(); }}
+        />
       )}
-    </div>
-  );
-}
-
-function Input({
-  label,
-  value,
-  onChange,
-  type = "text",
-  required,
-}: {
-  label: string;
-  value: string;
-  onChange: (v: string) => void;
-  type?: string;
-  required?: boolean;
-}) {
-  return (
-    <div>
-      <label className="mb-1 block text-xs font-medium text-ink-900/60 dark:text-gray-400">{label}</label>
-      <input
-        type={type}
-        required={required}
-        value={value}
-        onChange={(e) => onChange(e.target.value)}
-        className="w-full rounded-lg border border-black/10 bg-white px-3 py-2 text-sm text-ink-900 outline-none focus:border-brand-500 focus:ring-1 focus:ring-brand-500 dark:border-white/10 dark:bg-gray-800 dark:text-gray-100"
-      />
     </div>
   );
 }

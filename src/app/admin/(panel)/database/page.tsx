@@ -6,6 +6,11 @@ import BusinessDetailModal, { BusinessDetail } from "@/components/admin/Business
 import StatusBadge from "@/components/admin/StatusBadge";
 import BulkActionBar from "@/components/admin/BulkActionBar";
 
+function isRecent(createdAt?: string): boolean {
+  if (!createdAt) return false;
+  return Date.now() - new Date(createdAt).getTime() < 48 * 60 * 60 * 1000;
+}
+
 export default function HorecaDatabasePage() {
   const [rows, setRows] = useState<BusinessDetail[]>([]);
   const [total, setTotal] = useState(0);
@@ -138,7 +143,16 @@ export default function HorecaDatabasePage() {
                   <td className="cursor-pointer px-4 py-3 text-ink-900/60 dark:text-gray-400" onClick={() => setPreview(b)}>{b.review_count ?? 0}</td>
                   <td className="cursor-pointer px-4 py-3 text-ink-900/60 dark:text-gray-400" onClick={() => setPreview(b)}>{b.phone || "—"}</td>
                   <td className="cursor-pointer px-4 py-3 text-ink-900/60 dark:text-gray-400" onClick={() => setPreview(b)}>{(b as any).area_name || "—"}</td>
-                  <td className="cursor-pointer px-4 py-3" onClick={() => setPreview(b)}><StatusBadge status={b.status} /></td>
+                  <td className="cursor-pointer px-4 py-3" onClick={() => setPreview(b)}>
+                    <div className="flex items-center gap-1.5">
+                      <StatusBadge status={b.status} />
+                      {isRecent(b.created_at) && (
+                        <span className="rounded-full bg-blue-50 px-2 py-0.5 text-[10px] font-semibold uppercase text-blue-700 dark:bg-blue-900/30 dark:text-blue-300">
+                          New
+                        </span>
+                      )}
+                    </div>
+                  </td>
                 </tr>
               ))
             )}

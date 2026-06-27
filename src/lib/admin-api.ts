@@ -99,7 +99,37 @@ export function getAuditLogs(paramsObj: Record<string, string | number | undefin
   return request(`/api/admin/audit-logs?${search.toString()}`);
 }
 
-export function getMapBusinesses(status?: string) {
-  const q = status ? `?status=${encodeURIComponent(status)}` : "";
-  return request(`/api/admin/businesses/map${q}`);
+export function getMapBusinesses(status?: string, areaId?: string | number) {
+  const params = new URLSearchParams();
+  if (status) params.set("status", status);
+  if (areaId) params.set("areaId", String(areaId));
+  return request(`/api/admin/businesses/map?${params.toString()}`);
+}
+
+export function getCompany(id: string) {
+  return request(`/api/admin/companies/${id}`);
+}
+
+export function updateCompany(id: string, body: Record<string, any>) {
+  return request(`/api/admin/companies/${id}`, { method: "PATCH", body: JSON.stringify(body) });
+}
+
+export function deleteCompany(id: string) {
+  return request(`/api/admin/companies/${id}`, { method: "DELETE" });
+}
+
+export function bulkCompanyAction(body: Record<string, any>) {
+  return request(`/api/admin/companies/bulk`, { method: "POST", body: JSON.stringify(body) });
+}
+
+export function getScrapeJobs(paramsObj: Record<string, string | number | undefined> = {}) {
+  const search = new URLSearchParams();
+  Object.entries(paramsObj).forEach(([k, v]) => {
+    if (v !== undefined && v !== "") search.set(k, String(v));
+  });
+  return request(`/api/admin/scrape-jobs?${search.toString()}`);
+}
+
+export function bulkApproveScrapeJobs(jobIds: string[]) {
+  return request(`/api/admin/scrape-jobs/bulk-approve`, { method: "POST", body: JSON.stringify({ jobIds }) });
 }

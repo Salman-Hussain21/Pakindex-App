@@ -17,7 +17,7 @@ CREATE TYPE user_role       AS ENUM ('super_admin', 'company_admin', 'employee')
 CREATE TYPE user_status     AS ENUM ('active', 'inactive', 'suspended');
 
 CREATE TYPE company_status  AS ENUM ('active', 'suspended', 'cancelled');
-CREATE TYPE plan_type       AS ENUM ('trial', 'basic', 'pro', 'enterprise');
+CREATE TYPE plan_type       AS ENUM ('trial', 'basic', 'pro', 'enterprise', 'free', 'premium', 'ultra_premium');
 
 CREATE TYPE business_status AS ENUM ('pending', 'approved', 'rejected', 'duplicate', 'merged', 'trashed');
 CREATE TYPE business_tier   AS ENUM ('tier_1', 'tier_2', 'tier_3');   -- high / mid / low volume
@@ -166,6 +166,7 @@ CREATE TABLE businesses (
   -- Thumbnail / Images (array of URLs stored as JSONB)
   thumbnail           VARCHAR(500),
   images              JSONB         DEFAULT '[]',
+  extensions          JSONB         DEFAULT '{}',  -- raw "Popular For" / "Offerings" / "Highlights" style metadata
 
   -- Service Options  (stored as string array)
   service_options     TEXT[]        DEFAULT '{}',
@@ -279,6 +280,7 @@ CREATE INDEX idx_users_status    ON users(status);
 CREATE TABLE companies (
   id               UUID         PRIMARY KEY DEFAULT uuid_generate_v4(),
   name             VARCHAR(200) NOT NULL,
+  legal_name       VARCHAR(255),                  -- registered/legal entity name, may differ from trading name
   slug             VARCHAR(220) NOT NULL UNIQUE,
   industry         VARCHAR(100),                  -- Food wholesale, FMCG, Beverage …
   logo_url         VARCHAR(500),
@@ -489,6 +491,26 @@ CREATE TABLE company_pinned_businesses (
   pinned_at    TIMESTAMPTZ NOT NULL DEFAULT now(),
   PRIMARY KEY (company_id, business_id)
 );
+
+-- Which areas a company is allowed to see. A direct company<->area
+-- junction — simpler and less error-prone than routing through territories.
+CREATE TABLE company_areas (
+  company_id  UUID    NOT NULL REFERENCES companies(id) ON DELETE CASCADE,
+  area_id     INTEGER NOT NULL REFERENCES areas(id)     ON DELETE CASCADE,
+  assigned_at TIMESTAMPTZ NOT NULL DEFAULT now(),
+  PRIMARY KEY (company_id, area_id)
+);
+CREATE INDEX idx_company_areas_company ON company_areas(company_id);
+
+-- Which business categories a company is allowed to see (e.g. a beverages
+-- distributor only needs cafes/restaurants). No rows = no restriction.
+CREATE TABLE company_categories (
+  company_id  UUID    NOT NULL REFERENCES companies(id)  ON DELETE CASCADE,
+  category_id INTEGER NOT NULL REFERENCES categories(id) ON DELETE CASCADE,
+  assigned_at TIMESTAMPTZ NOT NULL DEFAULT now(),
+  PRIMARY KEY (company_id, category_id)
+);
+CREATE INDEX idx_company_categories_company ON company_categories(company_id);
 
 
 -- =============================================================================

@@ -74,7 +74,7 @@ export async function GET(request: NextRequest) {
   const { rows } = await query(
     `SELECT
         b.id, b.name, b.business_type, b.address, b.phone, b.website,
-        b.rating, b.review_count, b.price_range, b.open_state, b.thumbnail, b.images,
+        b.rating, b.review_count, b.price_range, b.open_state, b.thumbnail, b.images, b.extensions,
         b.service_options, b.status, b.rejection_reason, b.source,
         b.place_id, b.latitude, b.longitude, b.created_at, b.updated_at, b.deleted_at,
         c.name AS category_name,

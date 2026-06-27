@@ -87,19 +87,24 @@ async function main() {
       .map((p) => p.url)
       .filter(Boolean)
       .slice(0, 8);
+    const extensionsToStore = {
+      popularFor: biz.extensions?.popularFor || [],
+      offerings: biz.extensions?.offerings || [],
+      highlights: biz.extensions?.highlights || [],
+    };
 
     const result = await pool.query(
       `INSERT INTO businesses (
           name, place_id, category_id, business_type, address,
           area_id, city_id, latitude, longitude, phone, website,
           rating, review_count, price_range, open_state, thumbnail,
-          service_options, images, status, rejection_reason, source
+          service_options, images, extensions, status, rejection_reason, source
        )
        VALUES (
           $1, $2, $3, $4, $5,
           $6, $7, $8, $9, $10, $11,
           $12, $13, $14, $15, $16,
-          $17, $18, $19, $20, 'google_maps'
+          $17, $18, $19, $20, $21, 'google_maps'
        )
        ON CONFLICT (place_id) DO NOTHING
        RETURNING id`,
@@ -122,6 +127,7 @@ async function main() {
         biz.thumbnail || null,
         biz.serviceOptions && biz.serviceOptions.length > 0 ? biz.serviceOptions : null,
         JSON.stringify(menuPhotos),
+        JSON.stringify(extensionsToStore),
         status,
         status === "rejected" ? "Demo: duplicate / low data quality" : null,
       ]

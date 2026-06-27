@@ -20,6 +20,13 @@ interface RawBusiness {
   gpsCoordinates?: { latitude?: number; longitude?: number };
   serviceOptions?: string[];
   menu?: { overview?: { menuPhotos?: { url?: string }[] } };
+  extensions?: {
+    popularFor?: string[];
+    offerings?: string[];
+    highlights?: string[];
+    atmosphere?: string[];
+    diningOptions?: string[];
+  };
 }
 
 export async function POST(request: NextRequest) {
@@ -70,19 +77,24 @@ export async function POST(request: NextRequest) {
         .map((p) => p.url)
         .filter((u): u is string => Boolean(u))
         .slice(0, 8);
+      const extensionsToStore = {
+        popularFor: biz.extensions?.popularFor || [],
+        offerings: biz.extensions?.offerings || [],
+        highlights: biz.extensions?.highlights || [],
+      };
 
       const result = await query(
         `INSERT INTO businesses (
             name, place_id, category_id, business_type, address,
             area_id, city_id, latitude, longitude, phone, website,
             rating, review_count, price_range, open_state, thumbnail,
-            service_options, images, status, source, scrape_job_id
+            service_options, images, extensions, status, source, scrape_job_id
          )
          VALUES (
             $1, $2, $3, $4, $5,
             $6, $7, $8, $9, $10, $11,
             $12, $13, $14, $15, $16,
-            $17, $18, 'pending', 'google_maps', $19
+            $17, $18, $19, 'pending', 'google_maps', $20
          )
          ON CONFLICT (place_id) DO NOTHING
          RETURNING id`,
@@ -105,6 +117,7 @@ export async function POST(request: NextRequest) {
           biz.thumbnail || null,
           biz.serviceOptions && biz.serviceOptions.length > 0 ? biz.serviceOptions : null,
           JSON.stringify(menuPhotos),
+          JSON.stringify(extensionsToStore),
           jobId,
         ]
       );

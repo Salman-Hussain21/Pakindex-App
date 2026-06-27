@@ -23,10 +23,12 @@ export interface BusinessDetail {
   service_options?: string[] | null;
   thumbnail?: string | null;
   images?: string[] | null;
+  extensions?: { popularFor?: string[]; offerings?: string[]; highlights?: string[] } | null;
   status?: string | null;
   rejection_reason?: string | null;
   added_by_company?: string | null;
   assigned_employee?: string | null;
+  created_at?: string;
 }
 
 function Thumbnail({ src, alt }: { src: string; alt: string }) {
@@ -147,6 +149,35 @@ export default function BusinessDetailModal({
               full
             />
           </Section>
+
+          {((business.extensions?.popularFor?.length ?? 0) > 0 || (business.extensions?.offerings?.length ?? 0) > 0) && (
+            <Section title="Popular For & Offerings">
+              {(business.extensions?.popularFor?.length ?? 0) > 0 && (
+                <div className="col-span-2">
+                  <p className="mb-1 text-[11px] text-ink-900/40 dark:text-gray-500">Popular For</p>
+                  <div className="flex flex-wrap gap-1.5">
+                    {business.extensions!.popularFor!.map((tag, i) => (
+                      <span key={i} className="rounded-full bg-brand-50 px-2.5 py-0.5 text-xs text-brand-700 dark:bg-brand-900/30 dark:text-brand-300">
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              )}
+              {(business.extensions?.offerings?.length ?? 0) > 0 && (
+                <div className="col-span-2">
+                  <p className="mb-1 text-[11px] text-ink-900/40 dark:text-gray-500">Offerings</p>
+                  <div className="flex flex-wrap gap-1.5">
+                    {business.extensions!.offerings!.map((tag, i) => (
+                      <span key={i} className="rounded-full bg-gray-100 px-2.5 py-0.5 text-xs text-ink-900/70 dark:bg-gray-800 dark:text-gray-300">
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              )}
+            </Section>
+          )}
 
           {(business.added_by_company || business.assigned_employee) && (
             <Section title="CRM">
