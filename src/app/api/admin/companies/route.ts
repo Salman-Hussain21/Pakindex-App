@@ -1,7 +1,8 @@
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 import { query, pool } from "@/lib/db";
-import { hashPassword } from "@/lib/auth";
+import { hashPassword, getSession } from "@/lib/auth";
+import { logAudit, notifyAdmins } from "@/lib/audit";
 
 function slugify(s: string): string {
   return s.toLowerCase().trim().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "");
@@ -78,6 +79,23 @@ export async function POST(request: NextRequest) {
     await client.query(`UPDATE companies SET admin_user_id = $1 WHERE id = $2`, [userId, companyId]);
 
     await client.query("COMMIT");
+
+    const session = await getSession();
+    await logAudit({
+      performedBy: session?.userId ?? null,
+      companyId,
+      entityType: "company",
+      entityId: companyId,
+      action: "create",
+      newValues: { companyName, adminEmail },
+    });
+    await notifyAdmins({
+      type: "company_activity",
+      title: `New company created: ${companyName}`,
+      body: `Admin account: ${adminEmail}`,
+      link: "/admin/companies",
+    });
+
     return NextResponse.json({ companyId, userId }, { status: 201 });
   } catch (err) {
     await client.query("ROLLBACK");

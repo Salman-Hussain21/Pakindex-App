@@ -46,7 +46,8 @@ CREATE TABLE provinces (
   id          SERIAL PRIMARY KEY,
   name        VARCHAR(100) NOT NULL UNIQUE,
   code        VARCHAR(10)  NOT NULL UNIQUE,
-  created_at  TIMESTAMPTZ  NOT NULL DEFAULT now()
+  created_at  TIMESTAMPTZ  NOT NULL DEFAULT now(),
+  updated_at  TIMESTAMPTZ  NOT NULL DEFAULT now()
 );
 
 CREATE TABLE cities (
@@ -56,6 +57,7 @@ CREATE TABLE cities (
   code        VARCHAR(20),
   boundary    GEOMETRY(MULTIPOLYGON, 4326),
   created_at  TIMESTAMPTZ  NOT NULL DEFAULT now(),
+  updated_at  TIMESTAMPTZ  NOT NULL DEFAULT now(),
   UNIQUE (province_id, name)
 );
 
@@ -65,7 +67,8 @@ CREATE TABLE areas (
   name        VARCHAR(150) NOT NULL,
   slug        VARCHAR(170) NOT NULL UNIQUE,
   boundary    GEOMETRY(MULTIPOLYGON, 4326),
-  created_at  TIMESTAMPTZ  NOT NULL DEFAULT now()
+  created_at  TIMESTAMPTZ  NOT NULL DEFAULT now(),
+  updated_at  TIMESTAMPTZ  NOT NULL DEFAULT now()
 );
 
 -- Territories are named groupings of areas assigned to a company

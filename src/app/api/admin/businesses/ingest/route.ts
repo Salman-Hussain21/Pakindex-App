@@ -2,7 +2,8 @@ import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 import { query } from "@/lib/db";
 import { getSession } from "@/lib/auth";
-import { matchGeoFromQuery, matchCategoryFromType } from "@/lib/geo-match";
+import { matchGeoFromQuery, matchAreaFromAddress, matchCategoryFromType } from "@/lib/geo-match";
+import { logAudit, notifyAdmins } from "@/lib/audit";
 
 interface RawBusiness {
   title?: string;
@@ -18,6 +19,7 @@ interface RawBusiness {
   priceDescription?: string;
   gpsCoordinates?: { latitude?: number; longitude?: number };
   serviceOptions?: string[];
+  menu?: { overview?: { menuPhotos?: { url?: string }[] } };
 }
 
 export async function POST(request: NextRequest) {
@@ -59,21 +61,28 @@ export async function POST(request: NextRequest) {
       }
 
       const categoryId = await matchCategoryFromType(biz.type);
+      const perRecordMatch = await matchAreaFromAddress(biz.address);
+      const resolvedAreaId = perRecordMatch.areaId ?? areaId;
+      const resolvedCityId = perRecordMatch.cityId ?? cityId;
       const lat = biz.gpsCoordinates?.latitude ?? null;
       const lng = biz.gpsCoordinates?.longitude ?? null;
+      const menuPhotos = (biz.menu?.overview?.menuPhotos || [])
+        .map((p) => p.url)
+        .filter((u): u is string => Boolean(u))
+        .slice(0, 8);
 
       const result = await query(
         `INSERT INTO businesses (
             name, place_id, category_id, business_type, address,
             area_id, city_id, latitude, longitude, phone, website,
             rating, review_count, price_range, open_state, thumbnail,
-            service_options, status, source, scrape_job_id
+            service_options, images, status, source, scrape_job_id
          )
          VALUES (
             $1, $2, $3, $4, $5,
             $6, $7, $8, $9, $10, $11,
             $12, $13, $14, $15, $16,
-            $17, 'pending', 'google_maps', $18
+            $17, $18, 'pending', 'google_maps', $19
          )
          ON CONFLICT (place_id) DO NOTHING
          RETURNING id`,
@@ -83,8 +92,8 @@ export async function POST(request: NextRequest) {
           categoryId,
           biz.type || null,
           biz.address || null,
-          areaId,
-          cityId,
+          resolvedAreaId,
+          resolvedCityId,
           lat,
           lng,
           biz.phone || null,
@@ -95,6 +104,7 @@ export async function POST(request: NextRequest) {
           biz.openState || null,
           biz.thumbnail || null,
           biz.serviceOptions && biz.serviceOptions.length > 0 ? biz.serviceOptions : null,
+          JSON.stringify(menuPhotos),
           jobId,
         ]
       );
@@ -116,6 +126,23 @@ export async function POST(request: NextRequest) {
      WHERE id = $4`,
     [newRecords, duplicates, failedRecords, jobId]
   );
+
+  await logAudit({
+    performedBy: session?.userId ?? null,
+    entityType: "scrape_job",
+    entityId: jobId,
+    action: "import",
+    newValues: { searchQuery, newRecords, duplicates, failedRecords },
+  });
+
+  if (newRecords > 0) {
+    await notifyAdmins({
+      type: "new_scrape",
+      title: `${newRecords} new business${newRecords === 1 ? "" : "es"} scraped`,
+      body: `"${searchQuery}" added ${newRecords} new record${newRecords === 1 ? "" : "s"} to Pending Approval.`,
+      link: "/admin/pending",
+    });
+  }
 
   return NextResponse.json({
     jobId,

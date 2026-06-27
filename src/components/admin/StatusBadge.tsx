@@ -13,7 +13,7 @@ const STYLES: Record<string, string> = {
 };
 
 export default function StatusBadge({ status }: { status: Status | null | undefined }) {
-  if (!status) return <span className="text-ink-900/40 text-xs">—</span>;
+  if (!status) return <span className="text-ink-900/40 dark:text-gray-500 text-xs">—</span>;
   const style = STYLES[status] || "bg-gray-100 text-gray-600 ring-gray-200";
   return (
     <span

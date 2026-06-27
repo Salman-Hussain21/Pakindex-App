@@ -1,5 +1,6 @@
 import { redirect } from "next/navigation";
 import { getSession } from "@/lib/auth";
+import { query } from "@/lib/db";
 import Sidebar from "@/components/admin/Sidebar";
 import Topbar from "@/components/admin/Topbar";
 
@@ -11,11 +12,14 @@ export default async function PanelLayout({ children }: { children: React.ReactN
     redirect("/admin/login");
   }
 
+  const result = await query(`SELECT dark_mode FROM users WHERE id = $1`, [session.userId]);
+  const darkMode = result.rows[0]?.dark_mode ?? false;
+
   return (
-    <div className="flex h-screen bg-gray-50">
+    <div className={`flex h-screen bg-gray-50 dark:bg-gray-950 ${darkMode ? "dark" : ""}`}>
       <Sidebar />
       <div className="flex flex-1 flex-col overflow-hidden">
-        <Topbar fullName={session.fullName} email={session.email} />
+        <Topbar fullName={session.fullName} email={session.email} darkMode={darkMode} />
         <main className="flex-1 overflow-y-auto p-6">{children}</main>
       </div>
     </div>

@@ -70,3 +70,36 @@ export function logout() {
 export function getMe() {
   return request("/api/admin/me");
 }
+
+export function updateMe(body: Record<string, any>) {
+  return request("/api/admin/me", { method: "PATCH", body: JSON.stringify(body) });
+}
+
+export function getAreas() {
+  return request("/api/admin/areas");
+}
+
+export function createArea(body: { name: string; cityId: number }) {
+  return request("/api/admin/areas", { method: "POST", body: JSON.stringify(body) });
+}
+
+export function getCities() {
+  return request("/api/admin/cities");
+}
+
+export function createCategory(name: string) {
+  return request("/api/admin/categories", { method: "POST", body: JSON.stringify({ name }) });
+}
+
+export function getAuditLogs(paramsObj: Record<string, string | number | undefined>) {
+  const search = new URLSearchParams();
+  Object.entries(paramsObj).forEach(([k, v]) => {
+    if (v !== undefined && v !== "") search.set(k, String(v));
+  });
+  return request(`/api/admin/audit-logs?${search.toString()}`);
+}
+
+export function getMapBusinesses(status?: string) {
+  const q = status ? `?status=${encodeURIComponent(status)}` : "";
+  return request(`/api/admin/businesses/map${q}`);
+}
