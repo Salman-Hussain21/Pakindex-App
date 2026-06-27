@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 import { query } from "@/lib/db";
 import { verifyPassword, createSessionToken, SESSION_COOKIE } from "@/lib/auth";
+import { logAudit } from "@/lib/audit";
 
 export async function POST(request: NextRequest) {
   let body: { email?: string; password?: string };
@@ -56,6 +57,7 @@ export async function POST(request: NextRequest) {
   });
 
   await query(`UPDATE users SET last_login_at = now() WHERE id = $1`, [user.id]);
+  await logAudit({ performedBy: user.id, entityType: "user", entityId: user.id, action: "login" });
 
   const response = NextResponse.json({
     user: { id: user.id, fullName: user.full_name, email: user.email, role: user.role },

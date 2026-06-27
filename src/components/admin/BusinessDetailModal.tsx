@@ -1,5 +1,7 @@
 "use client";
 
+import { useState } from "react";
+import { ImageOff, X } from "lucide-react";
 import StatusBadge from "./StatusBadge";
 
 export interface BusinessDetail {
@@ -20,10 +22,48 @@ export interface BusinessDetail {
   price_range?: string | null;
   service_options?: string[] | null;
   thumbnail?: string | null;
+  images?: string[] | null;
   status?: string | null;
   rejection_reason?: string | null;
   added_by_company?: string | null;
   assigned_employee?: string | null;
+}
+
+function Thumbnail({ src, alt }: { src: string; alt: string }) {
+  const [failed, setFailed] = useState(false);
+  if (failed) {
+    return (
+      <div className="flex h-40 w-full flex-col items-center justify-center gap-1 rounded-xl bg-gray-100 text-ink-900/30 dark:bg-gray-800 dark:text-gray-600">
+        <ImageOff size={22} />
+        <span className="text-xs">Photo unavailable</span>
+      </div>
+    );
+  }
+  return (
+    // eslint-disable-next-line @next/next/no-img-element
+    <img
+      src={src}
+      alt={alt}
+      onError={() => setFailed(true)}
+      referrerPolicy="no-referrer"
+      className="h-40 w-full rounded-xl object-cover"
+    />
+  );
+}
+
+function MenuPhotoThumb({ src }: { src: string }) {
+  const [failed, setFailed] = useState(false);
+  if (failed) return null;
+  return (
+    // eslint-disable-next-line @next/next/no-img-element
+    <img
+      src={src}
+      alt="Menu"
+      onError={() => setFailed(true)}
+      referrerPolicy="no-referrer"
+      className="h-20 w-20 flex-shrink-0 rounded-lg object-cover"
+    />
+  );
 }
 
 export default function BusinessDetailModal({
@@ -35,33 +75,41 @@ export default function BusinessDetailModal({
   onClose: () => void;
   actions?: React.ReactNode;
 }) {
+  const menuPhotos = (business.images || []).filter(Boolean);
+
   return (
     <div
       className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 p-4"
       onClick={onClose}
     >
       <div
-        className="max-h-[90vh] w-full max-w-2xl overflow-y-auto rounded-2xl bg-white shadow-xl"
+        className="max-h-[90vh] w-full max-w-2xl overflow-y-auto rounded-2xl bg-white shadow-xl dark:bg-gray-900"
         onClick={(e) => e.stopPropagation()}
       >
-        <div className="flex items-start justify-between border-b border-black/5 px-6 py-4">
+        <div className="flex items-start justify-between border-b border-black/5 px-6 py-4 dark:border-white/10">
           <div>
-            <h2 className="text-lg font-semibold text-ink-900">{business.name}</h2>
+            <h2 className="text-lg font-semibold text-ink-900 dark:text-gray-100">{business.name}</h2>
             <div className="mt-1"><StatusBadge status={business.status} /></div>
           </div>
-          <button onClick={onClose} className="text-ink-900/40 hover:text-ink-900">
-            ✕
+          <button
+            onClick={onClose}
+            className="text-ink-900/40 hover:text-ink-900 dark:text-gray-500 dark:hover:text-gray-100"
+          >
+            <X size={18} />
           </button>
         </div>
 
         <div className="space-y-6 px-6 py-5">
-          {business.thumbnail && (
-            // eslint-disable-next-line @next/next/no-img-element
-            <img
-              src={business.thumbnail}
-              alt={business.name}
-              className="h-40 w-full rounded-xl object-cover"
-            />
+          {business.thumbnail && <Thumbnail src={business.thumbnail} alt={business.name} />}
+
+          {menuPhotos.length > 0 && (
+            <Section title={`Menu Photos (${menuPhotos.length})`}>
+              <div className="col-span-2 flex gap-2 overflow-x-auto pb-1">
+                {menuPhotos.map((url, i) => (
+                  <MenuPhotoThumb key={i} src={url} />
+                ))}
+              </div>
+            </Section>
           )}
 
           <Section title="Basic">
@@ -109,13 +157,13 @@ export default function BusinessDetailModal({
 
           {business.rejection_reason && (
             <Section title="Rejection Reason">
-              <p className="text-sm text-red-700">{business.rejection_reason}</p>
+              <p className="text-sm text-red-700 dark:text-red-400">{business.rejection_reason}</p>
             </Section>
           )}
         </div>
 
         {actions && (
-          <div className="flex justify-end gap-2 border-t border-black/5 px-6 py-4">{actions}</div>
+          <div className="flex justify-end gap-2 border-t border-black/5 px-6 py-4 dark:border-white/10">{actions}</div>
         )}
       </div>
     </div>
@@ -125,7 +173,7 @@ export default function BusinessDetailModal({
 function Section({ title, children }: { title: string; children: React.ReactNode }) {
   return (
     <div>
-      <h3 className="mb-2 text-xs font-semibold uppercase tracking-wide text-ink-900/40">
+      <h3 className="mb-2 text-xs font-semibold uppercase tracking-wide text-ink-900/40 dark:text-gray-500">
         {title}
       </h3>
       <div className="grid grid-cols-2 gap-3">{children}</div>
@@ -146,22 +194,22 @@ function Field({
 }) {
   return (
     <div className={full ? "col-span-2" : ""}>
-      <p className="text-[11px] text-ink-900/40">{label}</p>
+      <p className="text-[11px] text-ink-900/40 dark:text-gray-500">{label}</p>
       {value ? (
         link ? (
           <a
             href={String(value)}
             target="_blank"
             rel="noreferrer"
-            className="break-all text-sm text-brand-700 hover:underline"
+            className="break-all text-sm text-brand-700 hover:underline dark:text-brand-400"
           >
             {value}
           </a>
         ) : (
-          <p className="break-words text-sm text-ink-900">{value}</p>
+          <p className="break-words text-sm text-ink-900 dark:text-gray-100">{value}</p>
         )
       ) : (
-        <p className="text-sm text-ink-900/30">—</p>
+        <p className="text-sm text-ink-900/30 dark:text-gray-600">—</p>
       )}
     </div>
   );

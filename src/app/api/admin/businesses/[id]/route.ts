@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 import { query } from "@/lib/db";
 import { getSession } from "@/lib/auth";
+import { logAudit, type AuditAction } from "@/lib/audit";
 
 const EDITABLE_FIELDS = [
   "name",
@@ -45,6 +46,8 @@ export async function PATCH(request: NextRequest, { params }: { params: Promise<
   }
 
   const { action, reason, fields } = body;
+  const before = await query(`SELECT name, status FROM businesses WHERE id = $1`, [id]);
+  const beforeRow = before.rows[0];
 
   switch (action) {
     case "approve": {
@@ -98,12 +101,40 @@ export async function PATCH(request: NextRequest, { params }: { params: Promise<
       return NextResponse.json({ error: "Unknown action" }, { status: 400 });
   }
 
+  const actionMap: Record<string, AuditAction> = {
+    approve: "approve",
+    reject: "reject",
+    restore: "restore",
+    trash: "delete",
+    edit: "update",
+  };
+  await logAudit({
+    performedBy: session?.userId ?? null,
+    entityType: "business",
+    entityId: id,
+    action: actionMap[action || ""] || "update",
+    oldValues: beforeRow ? { status: beforeRow.status } : null,
+    newValues: { name: beforeRow?.name, action, reason },
+  });
+
   const { rows } = await query(`SELECT * FROM businesses WHERE id = $1`, [id]);
   return NextResponse.json({ business: rows[0] });
 }
 
 export async function DELETE(_request: NextRequest, { params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
+  const session = await getSession();
+  const before = await query(`SELECT name FROM businesses WHERE id = $1`, [id]);
+
   await query(`DELETE FROM businesses WHERE id = $1`, [id]);
+
+  await logAudit({
+    performedBy: session?.userId ?? null,
+    entityType: "business",
+    entityId: id,
+    action: "delete",
+    oldValues: before.rows[0] ? { name: before.rows[0].name, permanentlyDeleted: true } : null,
+  });
+
   return NextResponse.json({ ok: true });
 }

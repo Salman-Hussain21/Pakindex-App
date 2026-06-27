@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 import { query } from "@/lib/db";
 import { getSession } from "@/lib/auth";
+import { logAudit, type AuditAction } from "@/lib/audit";
 
 export async function POST(request: NextRequest) {
   const session = await getSession();
@@ -49,6 +50,20 @@ export async function POST(request: NextRequest) {
     default:
       return NextResponse.json({ error: "Unknown action" }, { status: 400 });
   }
+
+  const actionMap: Record<string, AuditAction> = {
+    approve: "approve",
+    reject: "reject",
+    restore: "restore",
+    trash: "delete",
+    delete: "delete",
+  };
+  await logAudit({
+    performedBy: session?.userId ?? null,
+    entityType: "business",
+    action: actionMap[action || ""] || "update",
+    newValues: { bulkAction: action, count: ids.length, reason },
+  });
 
   return NextResponse.json({ ok: true, affected: ids.length });
 }
