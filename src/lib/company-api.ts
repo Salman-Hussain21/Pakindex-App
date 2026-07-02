@@ -7,8 +7,11 @@ async function request<T = any>(url: string, options?: RequestInit): Promise<T> 
     ...options,
     headers: { "Content-Type": "application/json", ...(options?.headers || {}) },
   });
-  const isJson = res.headers.get("content-type")?.includes("application/json");
+  
+  const contentType = res.headers.get("content-type") || "";
+  const isJson = contentType.includes("application/json");
   const body = isJson ? await res.json() : null;
+  
   if (!res.ok) {
     throw new Error(body?.error || `Request failed (${res.status})`);
   }
@@ -48,12 +51,28 @@ export function createEmployee(body: Record<string, any>) {
   return request("/api/company/employees", { method: "POST", body: JSON.stringify(body) });
 }
 
-export function updateEmployee(id: string, body: Record<string, any>) {
-  return request(`/api/company/employees/${id}`, { method: "PATCH", body: JSON.stringify(body) });
+// Matches the actual route: single PUT to /api/company/employees with
+// { action: "update_profile", id, ...fields } or { action: "reset_password", id, password }
+export function updateEmployeeProfile(id: string, fields: Record<string, any>) {
+  return request("/api/company/employees", {
+    method: "PUT",
+    body: JSON.stringify({ action: "update_profile", id, ...fields }),
+  });
 }
 
-export function deleteEmployee(id: string) {
-  return request(`/api/company/employees/${id}`, { method: "DELETE" });
+export function resetEmployeePassword(id: string, password: string) {
+  return request("/api/company/employees", {
+    method: "PUT",
+    body: JSON.stringify({ action: "reset_password", id, password }),
+  });
+}
+
+// Matches the actual route: bulk PATCH with { action, ids: [...] }
+export function bulkUpdateEmployees(action: "activate" | "suspend" | "delete", ids: string[]) {
+  return request("/api/company/employees", {
+    method: "PATCH",
+    body: JSON.stringify({ action, ids }),
+  });
 }
 
 // ==========================================
@@ -72,7 +91,18 @@ export function patchCRMLead(id: string, body: Record<string, any>) {
 }
 
 // ==========================================
-// 5. Session Operations
+// 5. Audit Logs
+// ==========================================
+export function getCompanyAuditLogs(paramsObj: Record<string, string | number | undefined>) {
+  const search = new URLSearchParams();
+  Object.entries(paramsObj).forEach(([k, v]) => {
+    if (v !== undefined && v !== "") search.set(k, String(v));
+  });
+  return request(`/api/company/audit-logs?${search.toString()}`);
+}
+
+// ==========================================
+// 6. Session Operations
 // ==========================================
 /**
  * Clears the corporate session cookie and logs the user out
@@ -80,9 +110,16 @@ export function patchCRMLead(id: string, body: Record<string, any>) {
 export async function companyLogout() {
   const res = await fetch("/api/company/logout", {
     method: "POST",
+    headers: { "Content-Type": "application/json" }
   });
+  
   if (!res.ok) {
     throw new Error("Failed to log out cleanly");
   }
-  return res.json();
+  
+  const contentType = res.headers.get("content-type") || "";
+  if (contentType.includes("application/json")) {
+    return res.json();
+  }
+  return { success: true };
 }

@@ -1,6 +1,7 @@
 "use client";
 
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState, useRef, useCallback } from "react";
+import { AlertTriangle, Trash2, Search, ChevronDown, Check, UserCheck, UserX, Edit3 } from "lucide-react";
 
 interface Employee {
     id: string;
@@ -18,21 +19,28 @@ interface Employee {
 
 export default function FullyIntegratedEmployeeModule() {
     const [employees, setEmployees] = useState<Employee[]>([]);
+    const [maxEmployees, setMaxEmployees] = useState<number>(5);
     const [loading, setLoading] = useState(true);
     const [globalError, setGlobalError] = useState<string | null>(null);
 
-    // Filter & Search Controls
+    // Search and Status Filters
     const [search, setSearch] = useState("");
     const [statusFilter, setStatusFilter] = useState("");
     const [isStatusDropdownOpen, setIsStatusDropdownOpen] = useState(false);
     const dropdownRef = useRef<HTMLDivElement>(null);
 
-    // Modals / Selection States
+    // Bulk Checklist Action Row Selection Array
+    const [selectedIds, setSelectedIds] = useState<string[]>([]);
+    const [bulkBusy, setBulkBusy] = useState(false);
+
+    // Dialog Modal Configuration Switches
     const [showAddModal, setShowAddModal] = useState(false);
+    const [showLimitModal, setShowLimitModal] = useState(false);
     const [selectedEmp, setSelectedEmp] = useState<Employee | null>(null);
     const [showPassModal, setShowPassModal] = useState(false);
+    const [showEditModal, setShowEditModal] = useState(false);
 
-    // Form Fields
+    // Controlled Form Elements State Values
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
     const [username, setUsername] = useState("");
@@ -41,9 +49,30 @@ export default function FullyIntegratedEmployeeModule() {
     const [designation, setDesignation] = useState("");
     const [department, setDepartment] = useState("");
     const [formSubmitting, setFormSubmitting] = useState(false);
-    const [formError, setFormError] = useState<string | null>(null);
 
-    // Close custom dropdown when clicking outside
+    const loadData = useCallback(async () => {
+        try {
+            setLoading(true);
+            const url = `/api/company/employees?search=${encodeURIComponent(search)}&status=${encodeURIComponent(statusFilter)}`;
+            const res = await fetch(url);
+            if (!res.ok) throw new Error("Failed to clear employee repository directory sync updates.");
+
+            const data = await res.json();
+            setEmployees(data.employees || []);
+            if (typeof data.maxEmployees === "number") {
+                setMaxEmployees(data.maxEmployees);
+            }
+        } catch (err: any) {
+            setGlobalError(err.message);
+        } finally {
+            setLoading(false);
+        }
+    }, [search, statusFilter]);
+
+    useEffect(() => {
+        loadData();
+    }, [loadData]);
+
     useEffect(() => {
         function handleClickOutside(event: MouseEvent) {
             if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
@@ -54,172 +83,242 @@ export default function FullyIntegratedEmployeeModule() {
         return () => document.removeEventListener("mousedown", handleClickOutside);
     }, []);
 
-    function loadEmployeeGrid() {
-        fetch(`/api/company/employees?search=${encodeURIComponent(search)}&status=${statusFilter}`)
-            .then((res) => {
-                if (!res.ok) throw new Error("Could not populate company workforce list.");
-                return res.json();
-            })
-            .then((data) => {
-                setEmployees(data);
-                setLoading(false);
-            })
-            .catch((err) => {
-                setGlobalError(err.message);
-                setLoading(false);
-            });
+    function handleTriggerAddModal() {
+        if (employees.length >= maxEmployees) {
+            setShowLimitModal(true);
+        } else {
+            setShowAddModal(true);
+        }
     }
 
-    useEffect(() => {
-        loadEmployeeGrid();
-    }, [search, statusFilter]);
+    // Mounts Data Array Element and pre-populates previous form entries safely
+    function handleTriggerEditModal(emp: Employee) {
+        setSelectedEmp(emp);
+        setName(emp.full_name);
+        setEmail(emp.email);
+        setUsername(emp.username);
+        setPhone(emp.phone || "");
+        setDesignation(emp.designation || "");
+        setDepartment(emp.department || "");
+        setShowEditModal(true);
+    }
 
-    async function handleCreate(e: React.FormEvent) {
+    async function handleAddEmployee(e: React.FormEvent) {
         e.preventDefault();
         setFormSubmitting(true);
-        setFormError(null);
+        setGlobalError(null);
 
         try {
             const res = await fetch("/api/company/employees", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ name, email, password, phone, designation, department, username }),
+                body: JSON.stringify({ name, email, username, password, phone, designation, department }),
             });
             const data = await res.json();
-            if (!res.ok) throw new Error(data.error || "Failed to finalize employee setup.");
+
+            if (!res.ok) {
+                if (res.status === 403) {
+                    setShowAddModal(false);
+                    setShowLimitModal(true);
+                    return;
+                }
+                throw new Error(data.error || "Failed to submit new personnel workspace row.");
+            }
 
             setShowAddModal(false);
             setName(""); setEmail(""); setUsername(""); setPassword(""); setPhone(""); setDesignation(""); setDepartment("");
-            loadEmployeeGrid();
+            loadData();
         } catch (err: any) {
-            setFormError(err.message);
+            setGlobalError(err.message);
         } finally {
             setFormSubmitting(false);
         }
     }
 
+    async function handleUpdateEmployeeProfile(e: React.FormEvent) {
+        e.preventDefault();
+        if (!selectedEmp) return;
+        setFormSubmitting(true);
+        setGlobalError(null);
 
-    async function changeEmployeeStatus(emp: Employee, nextStatus: "active" | "inactive" | "suspended") {
         try {
             const res = await fetch("/api/company/employees", {
                 method: "PUT",
                 headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ id: emp.id, action: "change_status", status: nextStatus }),
+                body: JSON.stringify({
+                    action: "update_profile",
+                    id: selectedEmp.id,
+                    name,
+                    email,
+                    username,
+                    phone,
+                    designation,
+                    department
+                }),
             });
-            if (res.ok) loadEmployeeGrid();
-        } catch (err) {
-            console.error(err);
+            const data = await res.json();
+
+            if (!res.ok) throw new Error(data.error || "Failed to update employee details.");
+
+            setShowEditModal(false);
+            setSelectedEmp(null);
+            setName(""); setEmail(""); setUsername(""); setPhone(""); setDesignation(""); setDepartment("");
+            loadData();
+        } catch (err: any) {
+            setGlobalError(err.message);
+        } finally {
+            setFormSubmitting(false);
         }
     }
 
-    async function handleDelete(id: string) {
-        if (!confirm("Are you absolutely sure you want to delete this employee account?")) return;
+    async function runBulkAction(action: "activate" | "suspend" | "delete") {
+        if (selectedIds.length === 0) return;
+
+        let confirmMsg = `Are you sure you want to alter status profile updates for ${selectedIds.length} elements?`;
+        if (action === "delete") {
+            confirmMsg = `Are you absolutely sure you want to soft-delete ${selectedIds.length} employees? This completely signs out user records and releases active licence capacity limits instantly.`;
+        }
+        if (!confirm(confirmMsg)) return;
+
+        setBulkBusy(true);
         try {
-            const res = await fetch(`/api/company/employees?id=${id}`, { method: "DELETE" });
-            if (res.ok) {
-                setSelectedEmp(null);
-                loadEmployeeGrid();
-            }
-        } catch (err) {
-            console.error(err);
+            const res = await fetch("/api/company/employees", {
+                method: "PATCH",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ action, ids: selectedIds }),
+            });
+            const data = await res.json();
+            if (!res.ok) throw new Error(data.error || "Bulk process transaction aborted.");
+
+            setSelectedIds([]);
+            loadData();
+        } catch (err: any) {
+            alert(err.message);
+        } finally {
+            setBulkBusy(false);
         }
     }
 
     async function handlePasswordReset(e: React.FormEvent) {
         e.preventDefault();
-        if (!selectedEmp || !password) return;
+        if (!selectedEmp) return;
         setFormSubmitting(true);
         try {
             const res = await fetch("/api/company/employees", {
                 method: "PUT",
                 headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ id: selectedEmp.id, action: "reset_password", password }),
+                body: JSON.stringify({ action: "reset_password", id: selectedEmp.id, password }),
             });
-            if (res.ok) {
-                setShowPassModal(false);
-                setPassword("");
-                alert("Employee tracking password reset successful.");
+            if (!res.ok) {
+                const d = await res.json();
+                throw new Error(d.error || "Failed credential overwrite validation configuration.");
             }
-        } catch (err) {
-            console.error(err);
+            setShowPassModal(false);
+            setSelectedEmp(null);
+            setPassword("");
+            alert("Security credentials modified successfully!");
+        } catch (err: any) {
+            alert(err.message);
         } finally {
             setFormSubmitting(false);
         }
     }
 
-    const statusLabelMap: Record<string, string> = {
-        "": "All Statuses",
-        "active": "Active Accounts",
-        "inactive": "Inactive Accounts",
-        "suspended": "Suspended Accounts"
+    const toggleSelectAll = () => {
+        if (employees.length > 0 && selectedIds.length === employees.length) {
+            setSelectedIds([]);
+        } else {
+            setSelectedIds(employees.map((e) => e.id));
+        }
+    };
+
+    const toggleSelectOne = (id: string) => {
+        setSelectedIds((prev) =>
+            prev.includes(id) ? prev.filter((item) => item !== id) : [...prev, id]
+        );
     };
 
     return (
-        <div className="space-y-6 p-6 font-sans antialiased text-slate-900 bg-slate-50/50 min-h-screen">
-            {/* Header Panel */}
-            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between border-b border-slate-200/60 pb-5 gap-4">
+        <div className="p-6 max-w-7xl mx-auto space-y-5 antialiased text-slate-600">
+            {/* Top Workspace Bar Header Module */}
+            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 border-b border-slate-100 pb-5">
                 <div>
-                    <h2 className="text-xl font-bold tracking-tight text-slate-900">Employee Management</h2>
-                    <p className="text-xs text-slate-500 mt-0.5">Register field agents, configure operational department matrices, and oversee system records.</p>
+                    <h1 className="text-xl font-bold text-slate-900 tracking-tight">Personnel Directory</h1>
+                    <p className="text-xs text-slate-400 mt-0.5">
+                        Allocated Occupied Vacancies: <span className="font-semibold text-slate-700">{employees.length}</span> / <span className="font-semibold text-brand-600">{maxEmployees} total seats allocated</span>
+                    </p>
                 </div>
-
                 <button
-                    onClick={() => setShowAddModal(true)}
-                    className="inline-flex items-center justify-center rounded-lg bg-brand-600 px-4 py-2 text-sm font-semibold text-white hover:bg-brand-700 transition-colors disabled:opacity-50 shadow-sm gap-2"
+                    onClick={handleTriggerAddModal}
+                    className="cursor-pointer inline-flex items-center justify-center rounded-lg bg-brand-600 hover:bg-brand-700 px-3 py-1.5 text-sm font-medium text-white hover:bg-emerald-700 transition-colors"
                 >
-                    <svg className="w-4 h-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M12 4v16m8-8H4" />
-                    </svg>
-                    <span>Create Employee</span>
+                    + Add New Employee
                 </button>
             </div>
 
-            {/* Modern Filter Layout Controls */}
-            <div className="flex flex-col sm:flex-row gap-3 items-center">
-                <div className="relative flex-1 w-full">
-                    <span className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none text-slate-400">
-                        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-                        </svg>
+            {/* Premium Dynamic Bulk Multi Selection Action Bar */}
+            {selectedIds.length > 0 && (
+                <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between p-3.5 bg-slate-50 border border-slate-200/80 rounded-2xl gap-3 animate-in fade-in duration-200">
+                    <span className="text-xs font-medium text-slate-700">
+                        Selected <span className="font-bold text-brand-600">{selectedIds.length}</span> personnel rows checked
                     </span>
+                    <div className="flex items-center gap-2 flex-wrap w-full sm:w-auto">
+                        <button
+                            disabled={bulkBusy}
+                            onClick={() => runBulkAction("activate")}
+                            className="flex items-center gap-1.5 text-xs font-bold text-emerald-700 bg-white hover:bg-emerald-50 border border-emerald-200 px-3 py-1.5 rounded-xl transition-all cursor-pointer disabled:opacity-50"
+                        >
+                            <UserCheck className="w-3.5 h-3.5" /> Set Active
+                        </button>
+                        <button
+                            disabled={bulkBusy}
+                            onClick={() => runBulkAction("suspend")}
+                            className="flex items-center gap-1.5 text-xs font-bold text-amber-700 bg-white hover:bg-amber-50 border border-amber-200 px-3 py-1.5 rounded-xl transition-all cursor-pointer disabled:opacity-50"
+                        >
+                            <UserX className="w-3.5 h-3.5" /> Set Inactive
+                        </button>
+                        <button
+                            disabled={bulkBusy}
+                            onClick={() => runBulkAction("delete")}
+                            className="flex items-center gap-1.5 text-xs font-bold text-red-700 bg-red-50 hover:bg-red-100 border border-red-200 px-3 py-1.5 rounded-xl transition-all cursor-pointer disabled:opacity-50"
+                        >
+                            <Trash2 className="w-3.5 h-3.5" /> Soft Delete (Frees Seat)
+                        </button>
+                    </div>
+                </div>
+            )}
+
+            {/* Searching Filters Element Inputs Input Layer Row */}
+            <div className="flex items-center gap-3">
+                <div className="relative w-64">
+                    <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
                     <input
                         type="text"
-                        placeholder="Search identity records (Name, Code, Email)..."
+                        placeholder="Search name, code, or handle parameters..."
                         value={search}
                         onChange={(e) => setSearch(e.target.value)}
-                        className="w-full rounded-xl border border-slate-200 bg-white pl-9 pr-4 py-2.5 text-sm placeholder-slate-400 text-slate-800 shadow-sm focus:border-brand-500 focus:ring-1 focus:ring-brand-500 focus:outline-none transition-all duration-150"
+                        className="w-full rounded-xl border border-slate-200 bg-white pl-9 pr-3 py-1.5 text-xs outline-none focus:border-brand-500 transition-colors"
                     />
                 </div>
 
-                {/* Custom Premium Dropdown Component */}
-                <div className="relative w-full sm:w-64" ref={dropdownRef}>
+                <div className="relative" ref={dropdownRef}>
                     <button
-                        type="button"
                         onClick={() => setIsStatusDropdownOpen(!isStatusDropdownOpen)}
-                        className="flex items-center justify-between w-full rounded-xl border border-slate-200 bg-white px-4 py-2.5 text-sm text-slate-700 shadow-sm hover:bg-slate-50 focus:border-brand-500 focus:outline-none transition-all duration-150"
+                        className="cursor-pointer rounded-xl border border-slate-200 bg-white px-3 py-1.5 text-xs font-medium text-slate-700 hover:bg-slate-50 flex items-center gap-1.5 min-w-[110px] justify-between"
                     >
-                        <span className="font-medium">{statusLabelMap[statusFilter]}</span>
-                        <svg className={`w-4 h-4 text-slate-400 transition-transform duration-200 ${isStatusDropdownOpen ? "rotate-180" : ""}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7" />
-                        </svg>
+                        <span className="capitalize">{statusFilter || "All Statuses"}</span>
+                        <ChevronDown className="w-3 h-3 text-slate-400" />
                     </button>
-
                     {isStatusDropdownOpen && (
-                        <div className="absolute right-0 z-20 mt-1.5 w-full origin-top-right rounded-xl border border-slate-100 bg-white p-1.5 shadow-xl ring-1 ring-black/5 animate-in fade-in slide-in-from-top-2 duration-150">
-                            {Object.entries(statusLabelMap).map(([value, label]) => (
+                        <div className="absolute left-0 mt-1 z-10 w-40 rounded-xl border border-slate-100 bg-white p-1 shadow-lg ring-1 ring-black/5 animate-in fade-in scale-in duration-100">
+                            {["", "active", "inactive"].map((st) => (
                                 <button
-                                    key={value}
-                                    type="button"
-                                    onClick={() => {
-                                        setStatusFilter(value);
-                                        setIsStatusDropdownOpen(false);
-                                    }}
-                                    className={`flex w-full items-center rounded-lg px-3 py-2 text-sm text-left transition-colors ${statusFilter === value
-                                        ? "bg-brand-50 text-brand-700 font-semibold"
-                                        : "text-slate-600 hover:bg-slate-50"
-                                        }`}
+                                    key={st}
+                                    onClick={() => { setStatusFilter(st); setIsStatusDropdownOpen(false); }}
+                                    className="w-full text-left rounded-lg px-2.5 py-1.5 text-xs text-slate-600 hover:bg-slate-50 capitalize flex items-center justify-between"
                                 >
-                                    {label}
+                                    <span>{st || "All Statuses"}</span>
+                                    {statusFilter === st && <Check className="w-3 h-3 text-brand-600" />}
                                 </button>
                             ))}
                         </div>
@@ -227,78 +326,85 @@ export default function FullyIntegratedEmployeeModule() {
                 </div>
             </div>
 
-            {globalError && <p className="text-xs text-rose-600 bg-rose-50 px-4 py-3 rounded-xl border border-rose-100">{globalError}</p>}
+            {/* Error Banner System Notifications */}
+            {globalError && (
+                <div className="p-3 bg-red-50 border border-red-200 text-red-700 rounded-xl text-xs flex items-center gap-2">
+                    <AlertTriangle className="w-4 h-4 shrink-0" />
+                    <span>{globalError}</span>
+                </div>
+            )}
 
-            {/* Main Table View Grid */}
-            <div className="overflow-hidden rounded-2xl border border-slate-200/80 bg-white shadow-sm">
+            {/* Main Interactive Spreadsheet Layout Table Component */}
+            <div className="bg-white rounded-2xl border border-slate-200/60 shadow-2xs overflow-hidden">
                 <div className="overflow-x-auto">
-                    <table className="w-full text-left border-collapse">
+                    <table className="w-full text-left text-xs border-collapse">
                         <thead>
-                            <tr className="border-b border-slate-100 bg-slate-50 text-[11px] font-bold text-slate-500 uppercase tracking-wider">
-                                <th className="px-6 py-3.5">Code ID</th>
-                                <th className="px-6 py-3.5">Full Name</th>
-                                <th className="px-6 py-3.5">Department</th>
-                                <th className="px-6 py-3.5">Status</th>
-                                <th className="px-6 py-3.5 text-center w-48">Actions</th>
+                            <tr className="bg-slate-50 border-b border-slate-100 text-slate-400 font-semibold uppercase tracking-wider text-[10px]">
+                                <th className="p-4 w-10">
+                                    <input
+                                        type="checkbox"
+                                        checked={employees.length > 0 && selectedIds.length === employees.length}
+                                        onChange={toggleSelectAll}
+                                        className="rounded accent-brand-600 w-3.5 h-3.5 cursor-pointer border-slate-300"
+                                    />
+                                </th>
+                                <th className="p-4">Name</th>
+                                <th className="p-4">Contact Info</th>
+                                <th className="p-4">Workspace</th>
+                                <th className="p-4">Status</th>
+                                <th className="p-4 text-center">Action Modules</th>
                             </tr>
                         </thead>
-                        <tbody className="divide-y divide-slate-100 text-sm text-slate-700">
+                        <tbody className="divide-y divide-slate-100 text-slate-600">
                             {loading ? (
-                                <tr><td colSpan={5} className="text-center py-12 animate-pulse text-slate-400 text-xs">Synchronizing workspace metadata...</td></tr>
+                                <tr><td colSpan={6} className="p-12 text-center text-slate-400 animate-pulse font-medium">Reading table roster registries data rows...</td></tr>
                             ) : employees.length === 0 ? (
-                                <tr><td colSpan={5} className="text-center py-14 text-slate-400 text-xs">No active employee profiles found matching parameters.</td></tr>
+                                <tr><td colSpan={6} className="p-12 text-center text-slate-400 italic">No corresponding records matched database constraints.</td></tr>
                             ) : (
                                 employees.map((emp) => (
-                                    <tr key={emp.id} className="hover:bg-slate-50/60 transition-colors duration-150">
-                                        <td className="px-6 py-4 font-mono text-xs text-brand-600 font-bold">{emp.employee_code || "N/A"}</td>
-                                        <td className="px-6 py-4">
-                                            <div className="flex flex-col">
-                                                <button onClick={() => setSelectedEmp(emp)} className="hover:text-brand-600 text-left font-semibold text-slate-900 transition-colors">
-                                                    {emp.full_name}
+                                    <tr
+                                        key={emp.id}
+                                        className={`hover:bg-slate-50/30 transition-colors ${selectedIds.includes(emp.id) ? "bg-brand-50/10 hover:bg-brand-50/20" : ""}`}
+                                    >
+                                        <td className="p-4">
+                                            <input
+                                                type="checkbox"
+                                                checked={selectedIds.includes(emp.id)}
+                                                onChange={() => toggleSelectOne(emp.id)}
+                                                className="rounded accent-brand-600 w-3.5 h-3.5 cursor-pointer border-slate-300"
+                                            />
+                                        </td>
+                                        <td className="p-4">
+                                            <div className="font-semibold text-slate-900">{emp.full_name}</div>
+                                            <div className="text-[10px] text-slate-400 font-mono mt-0.5">{emp.employee_code || "PENDING"}</div>
+                                        </td>
+                                        <td className="p-4">
+                                            <div className="font-medium text-slate-800">{emp.email}</div>
+                                            <div className="text-[10px] text-slate-400 mt-0.5">{emp.phone || "—"}</div>
+                                        </td>
+                                        <td className="p-4">
+                                            <div className="font-medium text-slate-800">{emp.designation || "Employee"}</div>
+                                            <div className="text-[10px] text-slate-400 mt-0.5">{emp.department || "Corporate Unit"}</div>
+                                        </td>
+                                        <td className="p-4">
+                                            <span className={`inline-flex items-center px-2 py-0.5 rounded font-bold text-[10px] uppercase tracking-wide ${emp.status === "active" ? "bg-emerald-50 text-emerald-700 border border-emerald-200" : "bg-slate-100 text-slate-500 border border-slate-200"}`}>
+                                                {emp.status}
+                                            </span>
+                                        </td>
+                                        <td className="p-4 text-right">
+                                            <div className="flex items-center justify-end gap-2">
+                                                <button
+                                                    onClick={() => handleTriggerEditModal(emp)}
+                                                    className="inline-flex items-center gap-1 rounded-xl border border-slate-200 bg-white px-2.5 py-1 text-xs font-semibold text-slate-600 hover:bg-emerald-50 hover:text-emerald-700 hover:border-emerald-200 transition-all cursor-pointer shadow-3xs"
+                                                >
+                                                    <Edit3 className="w-3 h-3 text-slate-400 group-hover:text-emerald-600 transition-colors" /> Edit Details
                                                 </button>
-                                                <span className="text-xs text-slate-400 font-normal mt-0.5">{emp.email}</span>
-                                            </div>
-                                        </td>
-                                        <td className="px-6 py-4 text-slate-500 font-medium">
-                                            {emp.department ? (
-                                                <div className="flex items-center space-x-1.5">
-                                                    <span className="text-slate-700">{emp.department}</span>
-                                                    <span className="text-slate-300">•</span>
-                                                    <span className="text-xs text-slate-400">{emp.designation || "Staff"}</span>
-                                                </div>
-                                            ) : (
-                                                <span className="text-xs text-slate-300 italic">Unassigned</span>
-                                            )}
-                                        </td>
-                                        <td className="px-6 py-4">
-                                            <select
-                                                value={emp.status}
-                                                onChange={(e) => changeEmployeeStatus(emp, e.target.value as any)}
-                                                className={`inline-flex items-center rounded-md border px-2 py-1 text-xs font-bold uppercase tracking-wide cursor-pointer focus:outline-none transition-all ${emp.status === "active"
-                                                        ? "bg-emerald-50 border-emerald-200 text-emerald-700 focus:ring-1 focus:ring-emerald-500"
-                                                        : emp.status === "suspended"
-                                                            ? "bg-amber-50 border-amber-200 text-amber-700 focus:ring-1 focus:ring-amber-500"
-                                                            : "bg-slate-100 border-slate-200 text-slate-600 focus:ring-1 focus:ring-slate-500"
-                                                    }`}
-                                            >
-                                                <option value="active" className="bg-white text-slate-700 font-semibold">Active</option>
-                                                <option value="inactive" className="bg-white text-slate-700 font-semibold">Inactive</option>
-                                                <option value="suspended" className="bg-white text-slate-700 font-semibold">Suspended</option>
-                                            </select>
-                                        </td>
-                                        <td className="px-6 py-4">
-                                            <div className="flex items-center justify-center gap-2">
+
                                                 <button
                                                     onClick={() => { setSelectedEmp(emp); setShowPassModal(true); }}
-                                                    className="inline-flex w-22 items-center justify-center rounded-lg bg-white border border-slate-200 px-2.5 py-1.5 text-xs font-semibold text-slate-600 shadow-sm hover:bg-slate-50 hover:text-slate-900 transition-colors"
+                                                    className="rounded-xl border border-slate-200 bg-white px-2.5 py-1 text-xs font-semibold text-slate-600 hover:bg-emerald-50 hover:text-emerald-700 hover:border-emerald-200 transition-all cursor-pointer shadow-3xs"
                                                 >
-                                                    Reset Pass
-                                                </button>
-                                                <button
-                                                    onClick={() => handleDelete(emp.id)}
-                                                    className="inline-flex items-center justify-center rounded-lg bg-rose-50 border border-rose-100 px-2.5 py-1.5 text-xs font-semibold text-rose-600 shadow-sm hover:bg-rose-100 hover:text-rose-700 transition-colors"
-                                                >
-                                                    Delete
+                                                    Reset Access
                                                 </button>
                                             </div>
                                         </td>
@@ -310,106 +416,158 @@ export default function FullyIntegratedEmployeeModule() {
                 </div>
             </div>
 
-            {/* MODAL 1: Create Employee Dialog Pane */}
+            {/* SEAT REGISTRATION OVERFLOW LIMIT ATTAINED MODAL */}
+            {showLimitModal && (
+                <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 backdrop-blur-xs p-4 animate-in fade-in duration-200">
+                    <div className="bg-white rounded-2xl border border-slate-200 max-w-sm w-full p-6 text-center space-y-4 shadow-xl">
+                        <div className="w-12 h-12 rounded-full bg-red-50 border border-red-100 flex items-center justify-center mx-auto text-red-600">
+                            <AlertTriangle className="w-5 h-5" />
+                        </div>
+                        <div>
+                            <h3 className="text-sm font-bold text-slate-900">Personnel Seat Overflow</h3>
+                            <p className="text-xs text-slate-400 mt-1.5 leading-relaxed">
+                                Your maximum allocated workspace capacity (<span className="font-bold text-slate-700">{maxEmployees} seats</span>) has been hit.
+                                Leaving records as Inactive preserves structural history logs but locks vacancies. To safely release an operational seat allocation quota, highlight rows and click **Soft Delete**.
+                            </p>
+                        </div>
+                        <button
+                            onClick={() => setShowLimitModal(false)}
+                            className="w-full py-2 bg-slate-900 hover:bg-slate-800 text-white rounded-xl text-xs font-semibold shadow-xs transition-all cursor-pointer"
+                        >
+                            Acknowledge Constraints
+                        </button>
+                    </div>
+                </div>
+            )}
+
+            {/* PROVISION INTERFACE CREATION DIALOG MODAL */}
             {showAddModal && (
-                <div className="fixed inset-0 z-50 flex items-center justify-center bg-slate-900/40 backdrop-blur-sm p-4">
-                    <div className="w-full max-w-lg rounded-2xl bg-white p-6 shadow-2xl animate-in fade-in zoom-in-95 duration-200 border border-slate-100">
-                        <h3 className="text-base font-bold text-slate-900">Create Employee Record</h3>
-                        <p className="text-xs text-slate-400 mt-0.5 mb-5">Input administrative parameters to generate a corporate profile agent account.</p>
+                <div className="fixed inset-0 z-40 flex items-center justify-center bg-black/30 backdrop-blur-xs p-4 animate-in fade-in duration-200">
+                    <form onSubmit={handleAddEmployee} className="bg-white rounded-2xl border border-slate-200 max-w-md w-full p-6 space-y-4 shadow-xl max-h-[90vh] overflow-y-auto">
+                        <div>
+                            <h3 className="text-sm font-bold text-slate-900">Employee Profile</h3>
+                            <p className="text-[11px] text-slate-400 mt-0.5">Authorizes secure corporate identity entries into the active table roster indices mapping.</p>
+                        </div>
 
-                        <form onSubmit={handleCreate} className="space-y-4">
-                            {formError && <p className="text-xs text-rose-600 bg-rose-50 p-3 rounded-lg border border-rose-100">{formError}</p>}
-
-                            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                                <div>
-                                    <label className="block text-[11px] font-bold text-slate-500 uppercase tracking-wide mb-1.5">Full Name *</label>
-                                    <input type="text" required value={name} onChange={(e) => setName(e.target.value)} className="w-full rounded-xl border border-slate-200 bg-white px-3 py-2 text-sm text-slate-800 shadow-sm focus:border-brand-500 focus:ring-1 focus:ring-brand-500 focus:outline-none transition-all" placeholder="Ali Ahmed" />
-                                </div>
-                                <div>
-                                    <label className="block text-[11px] font-bold text-slate-500 uppercase tracking-wide mb-1.5">Username ID *</label>
-                                    <input type="text" required value={username} onChange={(e) => setUsername(e.target.value)} className="w-full rounded-xl border border-slate-200 bg-white px-3 py-2 text-sm text-slate-800 shadow-sm focus:border-brand-500 focus:ring-1 focus:ring-brand-500 focus:outline-none transition-all" placeholder="ali.ahmed" />
-                                </div>
-                            </div>
-
-                            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                                <div>
-                                    <label className="block text-[11px] font-bold text-slate-500 uppercase tracking-wide mb-1.5">Email Address *</label>
-                                    <input type="email" required value={email} onChange={(e) => setEmail(e.target.value)} className="w-full rounded-xl border border-slate-200 bg-white px-3 py-2 text-sm text-slate-800 shadow-sm focus:border-brand-500 focus:ring-1 focus:ring-brand-500 focus:outline-none transition-all" placeholder="name@company.com" />
-                                </div>
-                                <div>
-                                    <label className="block text-[11px] font-bold text-slate-500 uppercase tracking-wide mb-1.5">Secure Password *</label>
-                                    <input type="password" required minLength={6} value={password} onChange={(e) => setPassword(e.target.value)} className="w-full rounded-xl border border-slate-200 bg-white px-3 py-2 text-sm text-slate-800 shadow-sm focus:border-brand-500 focus:ring-1 focus:ring-brand-500 focus:outline-none transition-all" placeholder="••••••••" />
-                                </div>
-                            </div>
-
-                            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-                                <div>
-                                    <label className="block text-[11px] font-bold text-slate-500 uppercase tracking-wide mb-1.5">Phone</label>
-                                    <input type="text" value={phone} onChange={(e) => setPhone(e.target.value)} className="w-full rounded-xl border border-slate-200 bg-white px-3 py-2 text-sm text-slate-800 shadow-sm focus:border-brand-500 focus:ring-1 focus:ring-brand-500 focus:outline-none transition-all" placeholder="03001234567" />
-                                </div>
-                                <div>
-                                    <label className="block text-[11px] font-bold text-slate-500 uppercase tracking-wide mb-1.5">Department</label>
-                                    <input type="text" value={department} onChange={(e) => setDepartment(e.target.value)} className="w-full rounded-xl border border-slate-200 bg-white px-3 py-2 text-sm text-slate-800 shadow-sm focus:border-brand-500 focus:ring-1 focus:ring-brand-500 focus:outline-none transition-all" placeholder="Sales" />
-                                </div>
-                                <div>
-                                    <label className="block text-[11px] font-bold text-slate-500 uppercase tracking-wide mb-1.5">Designation</label>
-                                    <input type="text" value={designation} onChange={(e) => setDesignation(e.target.value)} className="w-full rounded-xl border border-slate-200 bg-white px-3 py-2 text-sm text-slate-800 shadow-sm focus:border-brand-500 focus:ring-1 focus:ring-brand-500 focus:outline-none transition-all" placeholder="Officer" />
-                                </div>
-                            </div>
-
-                            <div className="flex justify-end space-x-2 pt-4 mt-2 border-t border-slate-100">
-                                <button type="button" onClick={() => setShowAddModal(false)} className="rounded-lg border border-slate-200 px-4 py-2 text-sm font-semibold text-slate-600 hover:bg-slate-50 transition-colors">Cancel</button>
-                                <button type="submit" disabled={formSubmitting} className="rounded-lg bg-brand-600 px-4 py-2 text-sm font-semibold text-white hover:bg-brand-700 shadow-sm transition-colors disabled:opacity-50">{formSubmitting ? "Creating..." : "Save Record"}</button>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            )}
-
-            {/* MODAL 2: User Directory Profile Popup Summary */}
-            {selectedEmp && !showPassModal && (
-                <div className="fixed inset-0 z-50 flex items-center justify-center bg-slate-900/40 backdrop-blur-sm p-4">
-                    <div className="w-full max-w-md rounded-2xl bg-white p-6 shadow-2xl animate-in fade-in zoom-in-95 duration-200 border border-slate-100 space-y-4">
-                        <div className="flex items-start justify-between">
+                        <div className="grid grid-cols-1 gap-3.5 pt-1">
                             <div>
-                                <span className="text-[10px] font-mono bg-brand-50 text-brand-700 font-bold uppercase tracking-wider px-2 py-0.5 rounded">{selectedEmp.employee_code || "No Code Assigned"}</span>
-                                <h3 className="text-lg font-bold text-slate-900 mt-2">{selectedEmp.full_name}</h3>
-                                <p className="text-xs text-slate-400 mt-0.5">Corporate Employee Profile View</p>
+                                <label className="block text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-1">Full Identity Name</label>
+                                <input type="text" required value={name} onChange={(e) => setName(e.target.value)} className="w-full border border-slate-200 rounded-xl p-2 text-xs outline-none focus:border-brand-500 transition-colors" placeholder="e.g. Muhammad Yousuf" />
                             </div>
-                            <span className="inline-block rounded-md bg-slate-50 border border-slate-200 px-2 py-0.5 text-xs font-bold text-slate-600 uppercase tracking-wide">{selectedEmp.role}</span>
+                            <div className="grid grid-cols-2 gap-3">
+                                <div>
+                                    <label className="block text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-1">Email Handle</label>
+                                    <input type="email" required value={email} onChange={(e) => setEmail(e.target.value)} className="w-full border border-slate-200 rounded-xl p-2 text-xs outline-none focus:border-brand-500 transition-colors" placeholder="name@domain.com" />
+                                </div>
+                                <div>
+                                    <label className="block text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-1">Unique Username</label>
+                                    <input type="text" required value={username} onChange={(e) => setUsername(e.target.value)} className="w-full border border-slate-200 rounded-xl p-2 text-xs outline-none focus:border-brand-500 transition-colors" placeholder="yousuf99" />
+                                </div>
+                            </div>
+                            <div>
+                                <label className="block text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-1">Password String</label>
+                                <input type="password" required minLength={8} value={password} onChange={(e) => setPassword(e.target.value)} className="w-full border border-slate-200 rounded-xl p-2 text-xs outline-none focus:border-brand-500 transition-colors" placeholder="Minimum 8 characters long" />
+                            </div>
+                            <div>
+                                <label className="block text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-1">Contact Phone (Optional)</label>
+                                <input type="text" value={phone} onChange={(e) => setPhone(e.target.value)} className="w-full border border-slate-200 rounded-xl p-2 text-xs outline-none focus:border-brand-500 transition-colors" placeholder="+92 300 1234567" />
+                            </div>
+                            <div className="grid grid-cols-2 gap-3">
+                                <div>
+                                    <label className="block text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-1">Designation Title</label>
+                                    <input type="text" value={designation} onChange={(e) => setDesignation(e.target.value)} className="w-full border border-slate-200 rounded-xl p-2 text-xs outline-none focus:border-brand-500 transition-colors" placeholder="Lead Engineer" />
+                                </div>
+                                <div>
+                                    <label className="block text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-1">Department Unit Area</label>
+                                    <input type="text" value={department} onChange={(e) => setDepartment(e.target.value)} className="w-full border border-slate-200 rounded-xl p-2 text-xs outline-none focus:border-brand-500 transition-colors" placeholder="Development" />
+                                </div>
+                            </div>
                         </div>
 
-                        <div className="border-t border-slate-100 pt-3 space-y-2.5 text-sm">
-                            <div className="flex justify-between"><span className="text-slate-400 font-medium">Username:</span><span className="font-semibold text-slate-800">{selectedEmp.username}</span></div>
-                            <div className="flex justify-between"><span className="text-slate-400 font-medium">Email Address:</span><span className="font-semibold text-slate-800">{selectedEmp.email}</span></div>
-                            <div className="flex justify-between"><span className="text-slate-400 font-medium">Phone Number:</span><span className="font-semibold text-slate-800">{selectedEmp.phone || "N/A"}</span></div>
-                            <div className="flex justify-between"><span className="text-slate-400 font-medium">Department Group:</span><span className="font-semibold text-slate-800">{selectedEmp.department || "N/A"}</span></div>
-                            <div className="flex justify-between"><span className="text-slate-400 font-medium">Operational Track:</span><span className="font-semibold text-slate-800">{selectedEmp.designation || "N/A"}</span></div>
-                            <div className="flex justify-between"><span className="text-slate-400 font-medium">Account Status:</span><span className="font-bold text-emerald-600 capitalize">{selectedEmp.status}</span></div>
+                        <div className="flex justify-end gap-2 text-xs font-semibold pt-4 border-t border-slate-100">
+                            <button type="button" onClick={() => setShowAddModal(false)} className="px-3 py-2 bg-slate-50 hover:bg-slate-100 text-slate-600 rounded-xl border border-slate-200 cursor-pointer">Cancel</button>
+                            <button type="submit" disabled={formSubmitting} className="px-4 py-2 bg-brand-600 hover:bg-brand-700 text-white rounded-xl shadow-sm disabled:opacity-50 transition-colors cursor-pointer">
+                                {formSubmitting ? "Saving Matrix..." : "Save Member"}
+                            </button>
                         </div>
-
-                        <div className="flex justify-end pt-2 border-t border-slate-100">
-                            <button onClick={() => setSelectedEmp(null)} className="w-full rounded-lg bg-slate-900 px-4 py-2 text-sm font-semibold text-white hover:bg-black transition-colors shadow-sm">Close Directory Profile</button>
-                        </div>
-                    </div>
+                    </form>
                 </div>
             )}
 
-            {/* MODAL 3: Reset Password Trigger Overlay */}
-            {showPassModal && selectedEmp && (
-                <div className="fixed inset-0 z-50 flex items-center justify-center bg-slate-900/40 backdrop-blur-sm p-4">
-                    <div className="w-full max-w-sm rounded-2xl bg-white p-6 shadow-2xl animate-in fade-in zoom-in-95 duration-200 border border-slate-100">
-                        <h3 className="text-base font-bold text-slate-900">Reset Password</h3>
-                        <p className="text-xs text-slate-400 mt-0.5 mb-4">Overwrite credentials for <strong className="text-slate-700">{selectedEmp.full_name}</strong> securely.</p>
+            {/* EDIT EMPLOYEE / UPDATE PROFILE DETAILS DIALOG MODAL (PRE-POPULATED DATA) */}
+            {showEditModal && selectedEmp && (
+                <div className="fixed inset-0 z-40 flex items-center justify-center bg-black/30 backdrop-blur-xs p-4 animate-in fade-in duration-200">
+                    <form onSubmit={handleUpdateEmployeeProfile} className="bg-white rounded-2xl border border-slate-200 max-w-md w-full p-6 space-y-4 shadow-xl max-h-[90vh] overflow-y-auto">
+                        <div>
+                            <h3 className="text-sm font-bold text-slate-900">Update Employee Details</h3>
+                            <p className="text-[11px] text-slate-400 mt-0.5">Modifies existing parameters mapping for: <span className="font-semibold text-slate-700">{selectedEmp.full_name}</span></p>
+                        </div>
 
+                        <div className="grid grid-cols-1 gap-3.5 pt-1">
+                            <div>
+                                <label className="block text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-1">Full Identity Name</label>
+                                <input type="text" required value={name} onChange={(e) => setName(e.target.value)} className="w-full border border-slate-200 rounded-xl p-2 text-xs outline-none focus:border-brand-500 transition-colors" />
+                            </div>
+                            <div className="grid grid-cols-2 gap-3">
+                                <div>
+                                    <label className="block text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-1">Email Handle</label>
+                                    <input type="email" required value={email} onChange={(e) => setEmail(e.target.value)} className="w-full border border-slate-200 rounded-xl p-2 text-xs outline-none focus:border-brand-500 transition-colors" />
+                                </div>
+                                <div>
+                                    <label className="block text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-1">Unique Username</label>
+                                    <input type="text" required value={username} onChange={(e) => setUsername(e.target.value)} className="w-full border border-slate-200 rounded-xl p-2 text-xs outline-none focus:border-brand-500 transition-colors" />
+                                </div>
+                            </div>
+                            <div>
+                                <label className="block text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-1">Contact Phone (Optional)</label>
+                                <input type="text" value={phone} onChange={(e) => setPhone(e.target.value)} className="w-full border border-slate-200 rounded-xl p-2 text-xs outline-none focus:border-brand-500 transition-colors" placeholder="—" />
+                            </div>
+                            <div className="grid grid-cols-2 gap-3">
+                                <div>
+                                    <label className="block text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-1">Designation Title</label>
+                                    <input type="text" value={designation} onChange={(e) => setDesignation(e.target.value)} className="w-full border border-slate-200 rounded-xl p-2 text-xs outline-none focus:border-brand-500 transition-colors" placeholder="—" />
+                                </div>
+                                <div>
+                                    <label className="block text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-1">Department Unit Area</label>
+                                    <input type="text" value={department} onChange={(e) => setDepartment(e.target.value)} className="w-full border border-slate-200 rounded-xl p-2 text-xs outline-none focus:border-brand-500 transition-colors" placeholder="—" />
+                                </div>
+                            </div>
+                        </div>
+
+                        <div className="flex justify-end gap-2 text-xs font-semibold pt-4 border-t border-slate-100">
+                            <button type="button" onClick={() => { setShowEditModal(false); setSelectedEmp(null); }} className="px-3 py-2 bg-slate-50 hover:bg-slate-100 text-slate-600 rounded-xl border border-slate-200 cursor-pointer">Cancel</button>
+                            <button type="submit" disabled={formSubmitting} className="px-4 py-2 bg-brand-600 hover:bg-brand-700 text-white rounded-xl shadow-sm disabled:opacity-50 transition-colors cursor-pointer">
+                                {formSubmitting ? "Updating..." : "Save Changes"}
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            )}
+
+            {/* PASSWORD CORRECTION CREDENTIAL OVERWRITE MODAL */}
+            {showPassModal && selectedEmp && (
+                <div className="fixed inset-0 z-40 flex items-center justify-center bg-black/30 backdrop-blur-xs p-4 animate-in fade-in duration-200">
+                    <div className="bg-white rounded-2xl border border-slate-200 max-w-sm w-full p-6 space-y-4 shadow-xl">
+                        <div>
+                            <h3 className="text-sm font-bold text-slate-900">Reset Access Passwords</h3>
+                            <p className="text-xs text-slate-400 mt-0.5">Altering credentials string for: <span className="font-semibold text-slate-700">{selectedEmp.full_name}</span></p>
+                        </div>
                         <form onSubmit={handlePasswordReset} className="space-y-4">
                             <div>
-                                <label className="block text-[11px] font-bold text-slate-500 uppercase tracking-wide mb-1.5">New Secure Password</label>
-                                <input type="password" required minLength={6} value={password} onChange={(e) => setPassword(e.target.value)} className="w-full rounded-xl border border-slate-200 bg-white px-3 py-2 text-sm focus:border-brand-500 focus:ring-1 focus:ring-brand-500 focus:outline-none transition-all" placeholder="••••••••" />
+                                <label className="block text-[10px] font-bold text-slate-400 uppercase tracking-wide mb-1.5">New Account Password Phrase</label>
+                                <input
+                                    type="password"
+                                    required
+                                    minLength={8}
+                                    value={password}
+                                    onChange={(e) => setPassword(e.target.value)}
+                                    className="w-full rounded-xl border border-slate-200 px-3 py-2 text-xs focus:border-brand-500 focus:outline-none transition-all"
+                                    placeholder="••••••••"
+                                />
                             </div>
-                            <div className="flex justify-end space-x-2 pt-4 border-t border-slate-100">
-                                <button type="button" onClick={() => { setShowPassModal(false); setSelectedEmp(null); setPassword(""); }} className="rounded-lg border border-slate-200 px-4 py-2 text-sm font-semibold text-slate-600 hover:bg-slate-50 transition-colors">Cancel</button>
-                                <button type="submit" disabled={formSubmitting} className="inline-flex items-center justify-center rounded-lg bg-brand-600 px-4 py-2 text-sm font-semibold text-white hover:bg-brand-700 transition-colors disabled:opacity-50 shadow-sm gap-2">Reset Credentials</button>
+                            <div className="flex justify-end space-x-2 pt-4 border-t border-slate-100 text-xs font-semibold">
+                                <button type="button" onClick={() => { setShowPassModal(false); setSelectedEmp(null); setPassword(""); }} className="rounded-xl border border-slate-200 px-4 py-2 text-slate-600 hover:bg-slate-50">Cancel</button>
+                                <button type="submit" disabled={formSubmitting} className="rounded-xl bg-brand-600 px-4 py-2 text-white hover:bg-brand-700 disabled:opacity-50 shadow-sm">Reset Credentials</button>
                             </div>
                         </form>
                     </div>

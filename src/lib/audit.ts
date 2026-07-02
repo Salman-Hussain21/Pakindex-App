@@ -56,3 +56,37 @@ export async function notifyAdmins(params: {
     console.error("notification insert failed:", err);
   }
 }
+
+// Push a notification to a company's users (or a specific subset via
+// recipientIds). Mirrors notifyAdmins but scoped to a single company_id —
+// used by company_admin/employee side routes (employees, CRM, restaurants).
+export async function notifyCompany(params: {
+  companyId: string;
+  type: string;
+  title: string;
+  body?: string;
+  link?: string;
+  recipientIds?: string[]; // optional — if omitted, notifies all active users in the company
+}) {
+  try {
+    let recipients: { id: string }[];
+    if (params.recipientIds && params.recipientIds.length > 0) {
+      recipients = params.recipientIds.map((id) => ({ id }));
+    } else {
+      const res = await query(
+        `SELECT id FROM users WHERE company_id = $1 AND deleted_at IS NULL AND status = 'active'`,
+        [params.companyId]
+      );
+      recipients = res.rows;
+    }
+
+    for (const row of recipients) {
+      await query(
+        `INSERT INTO notifications (recipient_id, company_id, type, title, body, link) VALUES ($1, $2, $3, $4, $5, $6)`,
+        [row.id, params.companyId, params.type, params.title, params.body ?? null, params.link ?? null]
+      );
+    }
+  } catch (err) {
+    console.error("company notification insert failed:", err);
+  }
+}

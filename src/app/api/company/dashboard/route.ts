@@ -13,11 +13,9 @@ export async function GET() {
 
     // Scoped Count Strategy — only counts businesses within the areas
     // (and, if set, categories) actually assigned to this company via
-    // Company Management. A company with no assigned area sees 0, not the
-    // whole database. See src/lib/company-visibility.ts for the same
-    // scoping rules used by the full /api/company/businesses list.
-    const statsPromise = query(`
-      SELECT
+    // Company Management.
+    const statsPromise = query(
+      `SELECT
         (SELECT COUNT(*) FROM businesses b
            WHERE b.status = 'approved' AND b.deleted_at IS NULL
              AND b.area_id IN (SELECT area_id FROM company_areas WHERE company_id = $1)
@@ -36,27 +34,68 @@ export async function GET() {
              )
         ) AS new_restaurants,
         (SELECT COUNT(*) FROM users WHERE company_id = $1 AND role = 'employee' AND deleted_at IS NULL) AS total_employees
-    `, [companyId]);
+      `,
+      [companyId]
+    );
 
-    const [statsResult] = await Promise.all([statsPromise]);
+    // Recently approved restaurants within this company's assigned areas —
+    // same scoping rules as the stats above, just returning rows instead of a count.
+    const recentRestaurantsPromise = query(
+      `SELECT b.id, b.name, b.status, a.name AS area_name
+       FROM businesses b
+       INNER JOIN areas a ON b.area_id = a.id
+       WHERE b.status = 'approved' AND b.deleted_at IS NULL
+         AND b.area_id IN (SELECT area_id FROM company_areas WHERE company_id = $1)
+         AND (
+           NOT EXISTS (SELECT 1 FROM company_categories WHERE company_id = $1)
+           OR b.category_id IN (SELECT category_id FROM company_categories WHERE company_id = $1)
+         )
+       ORDER BY b.created_at DESC
+       LIMIT 5`,
+      [companyId]
+    );
+
+    // Employee lead-conversion performance — uses the vw_employee_performance
+    // view already defined in the schema, scoped to this company.
+    const employeePerformancePromise = query(
+      `SELECT employee_id AS id, full_name, leads_assigned AS assigned_leads, leads_won AS converted_leads
+       FROM vw_employee_performance
+       WHERE company_id = $1
+       ORDER BY leads_won DESC, leads_assigned DESC
+       LIMIT 5`,
+      [companyId]
+    );
+
+    // CRM pipeline totals — uses the vw_company_lead_stats view already
+    // defined in the schema. Will simply return zeros until CRM leads exist.
+    const crmStatsPromise = query(
+      `SELECT total_leads, won_leads, lost_leads, new_leads
+       FROM vw_company_lead_stats
+       WHERE company_id = $1`,
+      [companyId]
+    );
+
+    const [statsResult, recentRestaurantsResult, employeePerformanceResult, crmStatsResult] =
+      await Promise.all([statsPromise, recentRestaurantsPromise, employeePerformancePromise, crmStatsPromise]);
+
     const stats = statsResult.rows[0] || {};
+    const crm = crmStatsResult.rows[0] || { total_leads: 0, won_leads: 0, lost_leads: 0, new_leads: 0 };
+    const activeLeads = Number(crm.total_leads || 0) - Number(crm.won_leads || 0) - Number(crm.lost_leads || 0);
 
     return NextResponse.json({
       stats: {
         total_restaurants: stats.total_restaurants || "0",
         new_restaurants: stats.new_restaurants || "0",
-        crm_entries: "0",
+        crm_entries: String(crm.total_leads || 0),
         total_employees: stats.total_employees || "0",
-        active_leads: "0",
-        won_leads: "0"
+        active_leads: String(activeLeads),
+        won_leads: String(crm.won_leads || 0),
       },
-      recentRestaurants: [],
-      employeePerformance: [],
+      recentRestaurants: recentRestaurantsResult.rows,
+      employeePerformance: employeePerformanceResult.rows,
     });
-
   } catch (error: any) {
     console.error("Database Error Context:", error.message);
-    // This sends the exact query failure directly to your front-end screen for visibility
     return NextResponse.json({ error: `Database Error: ${error.message}` }, { status: 500 });
   }
 }
