@@ -247,9 +247,9 @@ export default function FullyIntegratedEmployeeModule() {
     return (
         <div className="p-6 max-w-7xl mx-auto space-y-5 antialiased text-slate-600">
             {/* Top Workspace Bar Header Module */}
-            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 border-b border-slate-100 pb-5">
+            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 border-b border-slate-100 dark:border-white/10 pb-5">
                 <div>
-                    <h1 className="text-xl font-bold text-slate-900 tracking-tight">Personnel Directory</h1>
+                    <h1 className="text-xl font-bold text-slate-900 dark:text-white tracking-tight">Personnel Directory</h1>
                     <p className="text-xs text-slate-400 mt-0.5">
                         Allocated Occupied Vacancies: <span className="font-semibold text-slate-700">{employees.length}</span> / <span className="font-semibold text-brand-600">{maxEmployees} total seats allocated</span>
                     </p>
@@ -264,8 +264,8 @@ export default function FullyIntegratedEmployeeModule() {
 
             {/* Premium Dynamic Bulk Multi Selection Action Bar */}
             {selectedIds.length > 0 && (
-                <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between p-3.5 bg-slate-50 border border-slate-200/80 rounded-2xl gap-3 animate-in fade-in duration-200">
-                    <span className="text-xs font-medium text-slate-700">
+                <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between p-3.5 bg-slate-50 dark:bg-gray-800 border border-slate-200/80 dark:border-white/10 rounded-2xl gap-3 animate-in fade-in duration-200">
+                    <span className="text-xs font-medium text-slate-700 dark:text-gray-300">
                         Selected <span className="font-bold text-brand-600">{selectedIds.length}</span> personnel rows checked
                     </span>
                     <div className="flex items-center gap-2 flex-wrap w-full sm:w-auto">
@@ -303,14 +303,14 @@ export default function FullyIntegratedEmployeeModule() {
                         placeholder="Search name, code, or handle parameters..."
                         value={search}
                         onChange={(e) => setSearch(e.target.value)}
-                        className="w-full rounded-xl border border-slate-200 bg-white pl-9 pr-3 py-1.5 text-xs outline-none focus:border-brand-500 transition-colors"
+                        className="w-full rounded-xl border border-slate-200 dark:border-white/10 bg-white dark:bg-gray-900 dark:text-white pl-9 pr-3 py-1.5 text-xs outline-none focus:border-brand-500 transition-colors"
                     />
                 </div>
 
                 <div className="relative" ref={dropdownRef}>
                     <button
                         onClick={() => setIsStatusDropdownOpen(!isStatusDropdownOpen)}
-                        className="cursor-pointer rounded-xl border border-slate-200 bg-white px-3 py-1.5 text-xs font-medium text-slate-700 hover:bg-slate-50 flex items-center gap-1.5 min-w-[110px] justify-between"
+                        className="cursor-pointer rounded-xl border border-slate-200 dark:border-white/10 bg-white dark:bg-gray-900 dark:hover:bg-gray-800 px-3 py-1.5 text-xs font-medium text-slate-700 dark:text-gray-300 hover:bg-slate-50 flex items-center gap-1.5 min-w-[110px] justify-between"
                     >
                         <span className="capitalize">{statusFilter || "All Statuses"}</span>
                         <ChevronDown className="w-3 h-3 text-slate-400" />
@@ -334,11 +334,11 @@ export default function FullyIntegratedEmployeeModule() {
 
 
             {/* Main Interactive Spreadsheet Layout Table Component */}
-            <div className="bg-white rounded-2xl border border-slate-200/60 shadow-2xs overflow-hidden">
+            <div className="bg-white dark:bg-gray-900 rounded-2xl border border-slate-200/60 dark:border-white/10 shadow-2xs overflow-hidden">
                 <div className="overflow-x-auto">
                     <table className="w-full text-left text-xs border-collapse">
                         <thead>
-                            <tr className="bg-slate-50 border-b border-slate-100 text-slate-400 font-semibold uppercase tracking-wider text-[10px]">
+                            <tr className="bg-slate-50 dark:bg-gray-800 border-b border-slate-100 dark:border-white/10 text-slate-400 dark:text-gray-400 font-semibold uppercase tracking-wider text-[10px]">
                                 <th className="p-4 w-10">
                                     <input
                                         type="checkbox"
@@ -374,16 +374,16 @@ export default function FullyIntegratedEmployeeModule() {
                                             />
                                         </td>
                                         <td className="p-4">
-                                            <div className="font-semibold text-slate-900">{emp.full_name}</div>
-                                            <div className="text-[10px] text-slate-400 font-mono mt-0.5">{emp.employee_code || "PENDING"}</div>
+                                            <div className="font-semibold text-slate-900 dark:text-white">{emp.full_name}</div>
+                                            <div className="text-[10px] text-slate-400 dark:text-gray-500 font-mono mt-0.5">{emp.employee_code || "PENDING"}</div>
                                         </td>
                                         <td className="p-4">
-                                            <div className="font-medium text-slate-800">{emp.email}</div>
-                                            <div className="text-[10px] text-slate-400 mt-0.5">{emp.phone || "—"}</div>
+                                            <div className="font-medium text-slate-800 dark:text-gray-300">{emp.email}</div>
+                                            <div className="text-[10px] text-slate-400 dark:text-gray-500 mt-0.5">{emp.phone || "—"}</div>
                                         </td>
                                         <td className="p-4">
-                                            <div className="font-medium text-slate-800">{emp.designation || "Employee"}</div>
-                                            <div className="text-[10px] text-slate-400 mt-0.5">{emp.department || "Corporate Unit"}</div>
+                                            <div className="font-medium text-slate-800 dark:text-gray-300">{emp.designation || "Employee"}</div>
+                                            <div className="text-[10px] text-slate-400 dark:text-gray-500 mt-0.5">{emp.department || "Corporate Unit"}</div>
                                         </td>
                                         <td className="p-4">
                                             <span className={`inline-flex items-center px-2 py-0.5 rounded font-bold text-[10px] uppercase tracking-wide ${emp.status === "active" ? "bg-emerald-50 text-emerald-700 border border-emerald-200" : "bg-slate-100 text-slate-500 border border-slate-200"}`}>
@@ -394,14 +394,14 @@ export default function FullyIntegratedEmployeeModule() {
                                             <div className="flex items-center justify-end gap-2">
                                                 <button
                                                     onClick={() => handleTriggerEditModal(emp)}
-                                                    className="inline-flex items-center gap-1 rounded-xl border border-slate-200 bg-white px-2.5 py-1 text-xs font-semibold text-slate-600 hover:bg-emerald-50 hover:text-emerald-700 hover:border-emerald-200 transition-all cursor-pointer shadow-3xs"
+                                                    className="inline-flex items-center gap-1 rounded-xl border border-slate-200 dark:border-white/10 bg-white dark:bg-gray-800 px-2.5 py-1 text-xs font-semibold text-slate-600 dark:text-gray-300 hover:bg-emerald-50 dark:hover:bg-emerald-900/30 hover:text-emerald-700 hover:border-emerald-200 transition-all cursor-pointer shadow-3xs"
                                                 >
                                                     <Edit3 className="w-3 h-3 text-slate-400 group-hover:text-emerald-600 transition-colors" /> Edit Details
                                                 </button>
 
                                                 <button
                                                     onClick={() => { setSelectedEmp(emp); setShowPassModal(true); }}
-                                                    className="rounded-xl border border-slate-200 bg-white px-2.5 py-1 text-xs font-semibold text-slate-600 hover:bg-emerald-50 hover:text-emerald-700 hover:border-emerald-200 transition-all cursor-pointer shadow-3xs"
+                                                    className="rounded-xl border border-slate-200 dark:border-white/10 bg-white dark:bg-gray-800 px-2.5 py-1 text-xs font-semibold text-slate-600 dark:text-gray-300 hover:bg-emerald-50 dark:hover:bg-emerald-900/30 hover:text-emerald-700 hover:border-emerald-200 transition-all cursor-pointer shadow-3xs"
                                                 >
                                                     Reset Access
                                                 </button>
@@ -441,10 +441,10 @@ export default function FullyIntegratedEmployeeModule() {
 
             {/* PROVISION INTERFACE CREATION DIALOG MODAL */}
             {showAddModal && (
-                <div className="fixed inset-0 z-40 flex items-center justify-center bg-black/30 backdrop-blur-xs p-4 animate-in fade-in duration-200">
-                    <form onSubmit={handleAddEmployee} className="bg-white rounded-2xl border border-slate-200 max-w-md w-full p-6 space-y-4 shadow-xl max-h-[90vh] overflow-y-auto">
+                <div className="fixed inset-0 z-40 flex items-center justify-center bg-black/50 backdrop-blur-xs p-4 animate-in fade-in duration-200">
+                    <form onSubmit={handleAddEmployee} className="bg-white dark:bg-gray-900 rounded-2xl border border-slate-200 dark:border-white/10 max-w-md w-full p-6 space-y-4 shadow-xl max-h-[90vh] overflow-y-auto">
                         <div>
-                            <h3 className="text-sm font-bold text-slate-900">Employee Profile</h3>
+                            <h3 className="text-sm font-bold text-slate-900 dark:text-white">Employee Profile</h3>
                             <p className="text-[11px] text-slate-400 mt-0.5">Authorizes secure corporate identity entries into the active table roster indices mapping.</p>
                         </div>
                         {formError && (
