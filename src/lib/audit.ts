@@ -92,40 +92,55 @@ export async function notifyCompany(params: {
 }
 
 // Automatically dispatches target notifications to all companies in the area
-// of a newly approved restaurant/business, customized by subscription status.
-export async function notifyCompaniesOfNewData(businessId: string) {
+// of newly approved restaurants/businesses, customized by subscription status.
+// Groups bulk approvals into a single aggregated notification.
+export async function notifyCompaniesOfNewData(businessIds: string[] | string) {
   try {
-    // 1. Fetch business details
-    const bizRes = await query(
-      `SELECT name, area_id FROM businesses WHERE id = $1`,
-      [businessId]
-    );
-    if (bizRes.rows.length === 0) return;
-    const { name: bizName, area_id: areaId } = bizRes.rows[0];
-    if (!areaId) return;
+    const ids = Array.isArray(businessIds) ? businessIds : [businessIds];
+    if (ids.length === 0) return;
 
-    // 2. Find all companies tracking this area and their subscription plans
-    const companiesRes = await query(
-      `SELECT c.id AS company_id, c.plan
-       FROM company_areas ca
+    // Fetch mapping of business to company based on target area assignments
+    const res = await query(
+      `SELECT b.id AS business_id, b.name AS business_name, ca.company_id, c.plan
+       FROM businesses b
+       JOIN company_areas ca ON ca.area_id = b.area_id
        JOIN companies c ON c.id = ca.company_id
-       WHERE ca.area_id = $1`,
-      [areaId]
+       WHERE b.id = ANY($1)`,
+      [ids]
     );
 
-    for (const row of companiesRes.rows) {
-      const isFree = row.plan === "free" || row.plan === "trial";
+    // Group matching records by company
+    const companyGroups: Record<string, { plan: string; names: string[] }> = {};
+    for (const row of res.rows) {
+      if (!companyGroups[row.company_id]) {
+        companyGroups[row.company_id] = { plan: row.plan, names: [] };
+      }
+      companyGroups[row.company_id].names.push(row.business_name);
+    }
+
+    // Send a single, aggregated notification per company
+    for (const [companyId, group] of Object.entries(companyGroups)) {
+      const isFree = group.plan === "free" || group.plan === "trial";
+      const count = group.names.length;
       
-      const title = isFree ? "New Territory Data Available" : "New Restaurant Approved";
-      const body = isFree 
-        ? "New HORECA data has been added to your area! Upgrade your subscription to unlock and view this new data."
-        : `New restaurant "${bizName}" has been approved and added to your assigned territory.`;
-      const link = isFree 
-        ? "/company/database?upgrade=true"
-        : "/company/database";
+      let title = "";
+      let body = "";
+      const link = isFree ? "/company/database?upgrade=true" : "/company/database";
+
+      if (count === 1) {
+        title = isFree ? "New Territory Data Available" : "New Restaurant Approved";
+        body = isFree
+          ? "New HORECA data has been added to your area! Upgrade your subscription to unlock and view this new data."
+          : `New restaurant "${group.names[0]}" has been approved and added to your assigned territory.`;
+      } else {
+        title = isFree ? "New Territory Data Available" : "New Restaurants Found";
+        body = isFree
+          ? `New ${count} HORECA data entries have been added to your area! Upgrade your subscription to unlock and view this new data.`
+          : `New ${count} restaurants have been found / approved in your territory.`;
+      }
 
       await notifyCompany({
-        companyId: row.company_id,
+        companyId,
         type: "new_restaurant",
         title,
         body,

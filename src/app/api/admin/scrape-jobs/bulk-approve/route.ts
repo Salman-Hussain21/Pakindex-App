@@ -37,9 +37,8 @@ export async function POST(request: NextRequest) {
     newValues: { bulkApprovedFromJobs: jobIds, count: result.rows.length },
   });
 
-  for (const row of result.rows) {
-    await notifyCompaniesOfNewData(row.id);
-  }
+  const approvedIds = result.rows.map((row) => row.id);
+  await notifyCompaniesOfNewData(approvedIds);
 
   return NextResponse.json({ ok: true, approved: result.rows.length });
 }

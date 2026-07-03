@@ -28,9 +28,7 @@ export async function POST(request: NextRequest) {
          WHERE id = ANY($2)`,
         [session?.userId ?? null, ids]
       );
-      for (const id of ids) {
-        await notifyCompaniesOfNewData(id);
-      }
+      await notifyCompaniesOfNewData(ids);
       break;
     case "reject":
       await query(
