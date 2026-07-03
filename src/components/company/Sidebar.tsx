@@ -52,56 +52,66 @@ const NAV_GROUPS: NavGroup[] = [
   },
 ];
 
-export default function CompanySidebar() {
+export default function CompanySidebar({ plan = "free" }: { plan?: string }) {
   const pathname = usePathname();
 
   return (
-    <aside className="flex h-screen w-64 flex-shrink-0 flex-col border-r border-black/5 bg-white">
+    <aside className="flex h-screen w-64 flex-shrink-0 flex-col border-r border-black/5 bg-white dark:bg-gray-900 dark:border-white/10">
       {/* Brand Header Section matching Admin spacing exactly */}
-      <div className="flex items-center gap-2 border-b border-black/5 px-5 py-5">
+      <div className="flex items-center gap-2 border-b border-black/5 px-5 py-5 dark:border-white/10">
         {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img src="/brand/logo-full.png" alt="PakIndex" className="h-7 w-auto" />
-        <span className="ml-auto rounded-full bg-emerald-50 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-emerald-700">
+        <img src="/brand/logo-full.png" alt="PakIndex" className="h-7 w-auto dark:invert dark:opacity-90" />
+        <span className="ml-auto rounded-full bg-emerald-50 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-emerald-700 dark:bg-emerald-900/30 dark:text-emerald-400">
           Company
         </span>
       </div>
 
       {/* Structured Navigation with Admin Subgroup Styling */}
       <nav className="flex-1 overflow-y-auto px-3 py-4">
-        {NAV_GROUPS.map((group) => (
-          <div key={group.label} className="mb-5">
-            <p className="mb-1.5 px-3 text-[10px] font-semibold uppercase tracking-wider text-ink-900/35">
-              {group.label}
-            </p>
-            <ul className="space-y-0.5">
-              {group.items.map((item) => {
-                const isActive = item.exact
-                  ? pathname === item.href
-                  : pathname === item.href || pathname.startsWith(item.href + "/");
-                const Icon = item.icon;
-                return (
-                  <li key={item.href}>
-                    <Link
-                      href={item.href}
-                      className={`flex items-center gap-2.5 rounded-lg px-3 py-2 text-sm font-medium transition-colors ${
-                        isActive
-                          ? "bg-brand-600 text-white"
-                          : "text-ink-900/70 hover:bg-brand-50 hover:text-brand-700"
-                      }`}
-                    >
-                      <Icon size={16} className="flex-shrink-0" />
-                      {item.label}
-                    </Link>
-                  </li>
-                );
-              })}
-            </ul>
-          </div>
-        ))}
+        {NAV_GROUPS.map((group) => {
+          // Filter out HORECA map for free/trial users
+          const isFree = plan === "free" || plan === "trial";
+          const visibleItems = group.items.filter(
+            (item) => !(isFree && item.label === "HORECA Map")
+          );
+
+          if (visibleItems.length === 0) return null;
+
+          return (
+            <div key={group.label} className="mb-5">
+              <p className="mb-1.5 px-3 text-[10px] font-semibold uppercase tracking-wider text-ink-900/35 dark:text-gray-500">
+                {group.label}
+              </p>
+              <ul className="space-y-0.5">
+                {visibleItems.map((item) => {
+                  const isActive = item.exact
+                    ? pathname === item.href
+                    : pathname === item.href || pathname.startsWith(item.href + "/");
+                  const Icon = item.icon;
+                  return (
+                    <li key={item.href}>
+                      <Link
+                        href={item.href}
+                        className={`flex items-center gap-2.5 rounded-lg px-3 py-2 text-sm font-medium transition-colors ${
+                          isActive
+                            ? "bg-brand-600 text-white dark:bg-brand-700"
+                            : "text-ink-900/70 hover:bg-brand-50 hover:text-brand-700 dark:text-gray-400 dark:hover:bg-gray-800 dark:hover:text-gray-200"
+                        }`}
+                      >
+                        <Icon size={16} className="flex-shrink-0" />
+                        {item.label}
+                      </Link>
+                    </li>
+                  );
+                })}
+              </ul>
+            </div>
+          );
+        })}
       </nav>
 
       {/* Footer Version Stamp */}
-      <div className="border-t border-black/5 px-5 py-4 text-[11px] text-ink-900/40">
+      <div className="border-t border-black/5 px-5 py-4 text-[11px] text-ink-900/40 dark:border-white/10 dark:text-gray-600">
         PakIndex Company Workspace v0.1
       </div>
     </aside>

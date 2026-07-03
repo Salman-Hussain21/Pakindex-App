@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { Search, Star, Phone, MapPin, Megaphone, Lock, ArrowUpRight } from "lucide-react";
+import BusinessDetailModal, { BusinessDetail } from "@/components/admin/BusinessDetailModal";
 
 interface Restaurant {
   id: string;
@@ -26,6 +27,7 @@ export default function RestaurantDatabasePage() {
   const [shownCount, setShownCount] = useState(0);
   const [plan, setPlan] = useState("");
   const [showUpsellModal, setShowUpsellModal] = useState(false);
+  const [selectedRestaurant, setSelectedRestaurant] = useState<BusinessDetail | null>(null);
 
   useEffect(() => {
     let isMounted = true;
@@ -144,7 +146,12 @@ export default function RestaurantDatabasePage() {
                           )}
                         </div>
                         <div>
-                          <p className="font-semibold text-ink-900 dark:text-white text-[13px]">{item.name}</p>
+                          <button
+                            onClick={() => setSelectedRestaurant(item as any)}
+                            className="font-semibold text-ink-900 dark:text-white text-[13px] hover:text-brand-600 dark:hover:text-brand-400 hover:underline text-left"
+                          >
+                            {item.name}
+                          </button>
                           <p className="text-[11px] text-gray-400 truncate max-w-[200px] mt-0.5">
                             {item.business_type || item.address || "—"}
                           </p>
@@ -273,6 +280,14 @@ export default function RestaurantDatabasePage() {
             <p className="text-xs text-gray-400 mt-4">Contact your account manager to upgrade.</p>
           </div>
         </div>
+      )}
+
+      {/* ── RESTAURANT DETAIL MODAL ── */}
+      {selectedRestaurant && (
+        <BusinessDetailModal
+          business={selectedRestaurant}
+          onClose={() => setSelectedRestaurant(null)}
+        />
       )}
     </div>
   );

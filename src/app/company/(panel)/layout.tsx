@@ -17,15 +17,19 @@ export default async function CompanyPanelLayout({ children }: { children: React
   // dark_mode lives on the users table, not in the session token, so it
   // needs its own lookup — same pattern as the admin panel's initial theme.
   const { rows } = await query(
-    `SELECT dark_mode FROM users WHERE id = $1`,
+    `SELECT dark_mode, c.plan 
+     FROM users u 
+     JOIN companies c ON c.id = u.company_id
+     WHERE u.id = $1`,
     [session.userId]
   );
   const initialDarkMode = rows[0]?.dark_mode ?? false;
+  const plan = rows[0]?.plan ?? "free";
 
   return (
     <ThemeProvider initialDarkMode={initialDarkMode}>
       <div className="flex h-screen bg-gray-50 dark:bg-gray-950">
-        <Sidebar />
+        <Sidebar plan={plan} />
         <div className="flex flex-1 flex-col overflow-hidden">
           <Topbar fullName={session.fullName} email={session.email} />
           <main className="flex-1 overflow-y-auto p-6">{children}</main>
