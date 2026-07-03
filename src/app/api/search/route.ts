@@ -70,8 +70,8 @@ async function fetchPage(apiKey: string, query: string, ll: string, start: numbe
   }
 }
 
-// Max pages to prevent runaway credit usage
-const MAX_PAGES = 10; // Up to 200 results
+// Max pages to prevent runaway credit usage — 50 pages = up to 1000 results
+const MAX_PAGES = 50;
 
 export async function GET(request: NextRequest) {
   const { searchParams } = new URL(request.url);
