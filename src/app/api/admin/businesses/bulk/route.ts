@@ -2,7 +2,7 @@ import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 import { query } from "@/lib/db";
 import { getSession } from "@/lib/auth";
-import { logAudit, type AuditAction } from "@/lib/audit";
+import { logAudit, notifyCompaniesOfNewData, type AuditAction } from "@/lib/audit";
 
 export async function POST(request: NextRequest) {
   const session = await getSession();
@@ -28,6 +28,9 @@ export async function POST(request: NextRequest) {
          WHERE id = ANY($2)`,
         [session?.userId ?? null, ids]
       );
+      for (const id of ids) {
+        await notifyCompaniesOfNewData(id);
+      }
       break;
     case "reject":
       await query(

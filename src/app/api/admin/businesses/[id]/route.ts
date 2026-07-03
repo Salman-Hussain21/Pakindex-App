@@ -2,7 +2,7 @@ import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 import { query } from "@/lib/db";
 import { getSession } from "@/lib/auth";
-import { logAudit, type AuditAction } from "@/lib/audit";
+import { logAudit, notifyCompaniesOfNewData, type AuditAction } from "@/lib/audit";
 
 const EDITABLE_FIELDS = [
   "name",
@@ -57,6 +57,7 @@ export async function PATCH(request: NextRequest, { params }: { params: Promise<
          WHERE id = $1`,
         [id, session?.userId ?? null]
       );
+      await notifyCompaniesOfNewData(id);
       break;
     }
     case "reject": {

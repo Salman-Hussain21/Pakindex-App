@@ -90,3 +90,49 @@ export async function notifyCompany(params: {
     console.error("company notification insert failed:", err);
   }
 }
+
+// Automatically dispatches target notifications to all companies in the area
+// of a newly approved restaurant/business, customized by subscription status.
+export async function notifyCompaniesOfNewData(businessId: string) {
+  try {
+    // 1. Fetch business details
+    const bizRes = await query(
+      `SELECT name, area_id FROM businesses WHERE id = $1`,
+      [businessId]
+    );
+    if (bizRes.rows.length === 0) return;
+    const { name: bizName, area_id: areaId } = bizRes.rows[0];
+    if (!areaId) return;
+
+    // 2. Find all companies tracking this area and their subscription plans
+    const companiesRes = await query(
+      `SELECT c.id AS company_id, c.plan
+       FROM company_areas ca
+       JOIN companies c ON c.id = ca.company_id
+       WHERE ca.area_id = $1`,
+      [areaId]
+    );
+
+    for (const row of companiesRes.rows) {
+      const isFree = row.plan === "free" || row.plan === "trial";
+      
+      const title = isFree ? "New Territory Data Available" : "New Restaurant Approved";
+      const body = isFree 
+        ? "New HORECA data has been added to your area! Upgrade your subscription to unlock and view this new data."
+        : `New restaurant "${bizName}" has been approved and added to your assigned territory.`;
+      const link = isFree 
+        ? "/company/database?upgrade=true"
+        : "/company/database";
+
+      await notifyCompany({
+        companyId: row.company_id,
+        type: "new_restaurant",
+        title,
+        body,
+        link
+      });
+    }
+  } catch (err) {
+    console.error("Failed to notify companies of new data:", err);
+  }
+}

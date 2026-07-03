@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { Search, Star, Phone, MapPin, Megaphone, Lock, ArrowUpRight } from "lucide-react";
+import { useSearchParams } from "next/navigation";
 import BusinessDetailModal, { BusinessDetail } from "@/components/admin/BusinessDetailModal";
 
 interface Restaurant {
@@ -28,6 +29,13 @@ export default function RestaurantDatabasePage() {
   const [plan, setPlan] = useState("");
   const [showUpsellModal, setShowUpsellModal] = useState(false);
   const [selectedRestaurant, setSelectedRestaurant] = useState<BusinessDetail | null>(null);
+  const searchParams = useSearchParams();
+
+  useEffect(() => {
+    if (searchParams.get("upgrade") === "true") {
+      setShowUpsellModal(true);
+    }
+  }, [searchParams]);
 
   useEffect(() => {
     let isMounted = true;

@@ -2,7 +2,7 @@ import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 import { query } from "@/lib/db";
 import { getSession } from "@/lib/auth";
-import { logAudit } from "@/lib/audit";
+import { logAudit, notifyCompaniesOfNewData } from "@/lib/audit";
 
 // Bulk-approves every still-pending business that came from the selected
 // scrape job(s) — useful once an admin trusts a particular scrape batch and
@@ -36,6 +36,10 @@ export async function POST(request: NextRequest) {
     action: "approve",
     newValues: { bulkApprovedFromJobs: jobIds, count: result.rows.length },
   });
+
+  for (const row of result.rows) {
+    await notifyCompaniesOfNewData(row.id);
+  }
 
   return NextResponse.json({ ok: true, approved: result.rows.length });
 }
