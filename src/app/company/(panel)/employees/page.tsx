@@ -15,12 +15,24 @@ interface Employee {
     designation: string | null;
     department: string | null;
     created_at: string;
+    assigned_area_id: number | null;
+    area_name: string | null;
+}
+
+interface CompanyArea {
+    id: number;
+    name: string;
+    city_name: string;
 }
 
 export default function FullyIntegratedEmployeeModule() {
     const [employees, setEmployees] = useState<Employee[]>([]);
     const [maxEmployees, setMaxEmployees] = useState<number>(5);
     const [loading, setLoading] = useState(true);
+
+    // Company's assigned areas — sourced from company_areas via /api/company/areas.
+    // An employee can only ever be assigned one of these, never an arbitrary area.
+    const [companyAreas, setCompanyAreas] = useState<CompanyArea[]>([]);
 
     // Search and Status Filters
     const [search, setSearch] = useState("");
@@ -47,6 +59,7 @@ export default function FullyIntegratedEmployeeModule() {
     const [phone, setPhone] = useState("");
     const [designation, setDesignation] = useState("");
     const [department, setDepartment] = useState("");
+    const [areaId, setAreaId] = useState<string>("");
     const [formSubmitting, setFormSubmitting] = useState(false);
     const [formError, setFormError] = useState<string | null>(null);
 
@@ -69,9 +82,26 @@ export default function FullyIntegratedEmployeeModule() {
         }
     }, [search, statusFilter]);
 
+    // Load the company's assigned areas once — used to populate the
+    // Assigned Area dropdown in both Add and Edit modals.
+    const loadCompanyAreas = useCallback(async () => {
+        try {
+            const res = await fetch("/api/company/areas");
+            if (!res.ok) return;
+            const data = await res.json();
+            setCompanyAreas(data.areas || []);
+        } catch (err) {
+            console.error("Failed to load company areas:", err);
+        }
+    }, []);
+
     useEffect(() => {
         loadData();
     }, [loadData]);
+
+    useEffect(() => {
+        loadCompanyAreas();
+    }, [loadCompanyAreas]);
 
     useEffect(() => {
         function handleClickOutside(event: MouseEvent) {
@@ -88,6 +118,9 @@ export default function FullyIntegratedEmployeeModule() {
             setShowLimitModal(true);
         } else {
             setFormError(null);
+            // If the company only has one assigned area, pre-select it since
+            // there's nothing to choose between.
+            setAreaId(companyAreas.length === 1 ? String(companyAreas[0].id) : "");
             setShowAddModal(true);
         }
     }
@@ -101,6 +134,7 @@ export default function FullyIntegratedEmployeeModule() {
         setPhone(emp.phone || "");
         setDesignation(emp.designation || "");
         setDepartment(emp.department || "");
+        setAreaId(emp.assigned_area_id ? String(emp.assigned_area_id) : "");
         setFormError(null);
         setShowEditModal(true);
     }
@@ -114,7 +148,7 @@ export default function FullyIntegratedEmployeeModule() {
             const res = await fetch("/api/company/employees", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ name, email, username, password, phone, designation, department }),
+                body: JSON.stringify({ name, email, username, password, phone, designation, department, areaId: areaId || null }),
             });
             const data = await res.json();
 
@@ -129,7 +163,7 @@ export default function FullyIntegratedEmployeeModule() {
             }
 
             setShowAddModal(false);
-            setName(""); setEmail(""); setUsername(""); setPassword(""); setPhone(""); setDesignation(""); setDepartment("");
+            setName(""); setEmail(""); setUsername(""); setPassword(""); setPhone(""); setDesignation(""); setDepartment(""); setAreaId("");
             loadData();
         } catch (err: any) {
             setFormError(err.message);
@@ -156,7 +190,8 @@ export default function FullyIntegratedEmployeeModule() {
                     username,
                     phone,
                     designation,
-                    department
+                    department,
+                    areaId: areaId || null,
                 }),
             });
             const data = await res.json();
@@ -168,7 +203,7 @@ export default function FullyIntegratedEmployeeModule() {
 
             setShowEditModal(false);
             setSelectedEmp(null);
-            setName(""); setEmail(""); setUsername(""); setPhone(""); setDesignation(""); setDepartment("");
+            setName(""); setEmail(""); setUsername(""); setPhone(""); setDesignation(""); setDepartment(""); setAreaId("");
             loadData();
         } catch (err: any) {
             setFormError(err.message);
@@ -243,6 +278,47 @@ export default function FullyIntegratedEmployeeModule() {
             prev.includes(id) ? prev.filter((item) => item !== id) : [...prev, id]
         );
     };
+
+    // Renders as a fixed read-only value when the company has only one
+    // assigned area (nothing to choose), or a dropdown when it has several.
+    // Renders nothing at all if the company currently has zero assigned areas.
+    function AssignedAreaField() {
+        if (companyAreas.length === 0) {
+            return (
+                <div className="rounded-lg bg-amber-50 border border-amber-200 px-3 py-2 text-[11px] text-amber-700">
+                    No areas have been assigned to your company yet — contact the admin to get territories assigned before adding employees to specific areas.
+                </div>
+            );
+        }
+
+        if (companyAreas.length === 1) {
+            return (
+                <div>
+                    <label className="block text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-1">Assigned Area</label>
+                    <div className="w-full border border-slate-200 rounded-xl p-2 text-xs bg-slate-50 text-slate-600">
+                        {companyAreas[0].name} · {companyAreas[0].city_name}
+                    </div>
+                </div>
+            );
+        }
+
+        return (
+            <div>
+                <label className="block text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-1">Assigned Area</label>
+                <select
+                    required
+                    value={areaId}
+                    onChange={(e) => setAreaId(e.target.value)}
+                    className="w-full border border-slate-200 rounded-xl p-2 text-xs outline-none focus:border-brand-500 transition-colors bg-white"
+                >
+                    <option value="" disabled>Select an area…</option>
+                    {companyAreas.map((a) => (
+                        <option key={a.id} value={a.id}>{a.name} · {a.city_name}</option>
+                    ))}
+                </select>
+            </div>
+        );
+    }
 
     return (
         <div className="p-6 max-w-7xl mx-auto space-y-5 antialiased text-slate-600">
@@ -348,17 +424,18 @@ export default function FullyIntegratedEmployeeModule() {
                                     />
                                 </th>
                                 <th className="p-4">Name</th>
-                                <th className="p-4">Contact Info</th>
+                                <th className="p-4">Contact</th>
                                 <th className="p-4">Workspace</th>
+                                <th className="p-4">Area</th>
                                 <th className="p-4">Status</th>
-                                <th className="p-4 text-center">Action Modules</th>
+                                <th className="p-4 text-center">Action</th>
                             </tr>
                         </thead>
                         <tbody className="divide-y divide-slate-100 text-slate-600">
                             {loading ? (
-                                <tr><td colSpan={6} className="p-12 text-center text-slate-400 animate-pulse font-medium">Reading table roster registries data rows...</td></tr>
+                                <tr><td colSpan={7} className="p-12 text-center text-slate-400 animate-pulse font-medium">Reading table roster registries data rows...</td></tr>
                             ) : employees.length === 0 ? (
-                                <tr><td colSpan={6} className="p-12 text-center text-slate-400 italic">No corresponding records matched database constraints.</td></tr>
+                                <tr><td colSpan={7} className="p-12 text-center text-slate-400 italic">No corresponding records matched database constraints.</td></tr>
                             ) : (
                                 employees.map((emp) => (
                                     <tr
@@ -384,6 +461,9 @@ export default function FullyIntegratedEmployeeModule() {
                                         <td className="p-4">
                                             <div className="font-medium text-slate-800 dark:text-gray-300">{emp.designation || "Employee"}</div>
                                             <div className="text-[10px] text-slate-400 dark:text-gray-500 mt-0.5">{emp.department || "Corporate Unit"}</div>
+                                        </td>
+                                        <td className="p-4">
+                                            <span className="font-medium text-slate-800 dark:text-gray-300">{emp.area_name || "Unassigned"}</span>
                                         </td>
                                         <td className="p-4">
                                             <span className={`inline-flex items-center px-2 py-0.5 rounded font-bold text-[10px] uppercase tracking-wide ${emp.status === "active" ? "bg-emerald-50 text-emerald-700 border border-emerald-200" : "bg-slate-100 text-slate-500 border border-slate-200"}`}>
@@ -486,6 +566,7 @@ export default function FullyIntegratedEmployeeModule() {
                                     <input type="text" value={department} onChange={(e) => setDepartment(e.target.value)} className="w-full border border-slate-200 rounded-xl p-2 text-xs outline-none focus:border-brand-500 transition-colors" placeholder="Development" />
                                 </div>
                             </div>
+                            <AssignedAreaField />
                         </div>
 
                         <div className="flex justify-end gap-2 text-xs font-semibold pt-4 border-t border-slate-100">
@@ -541,6 +622,7 @@ export default function FullyIntegratedEmployeeModule() {
                                     <input type="text" value={department} onChange={(e) => setDepartment(e.target.value)} className="w-full border border-slate-200 rounded-xl p-2 text-xs outline-none focus:border-brand-500 transition-colors" placeholder="—" />
                                 </div>
                             </div>
+                            <AssignedAreaField />
                         </div>
 
                         <div className="flex justify-end gap-2 text-xs font-semibold pt-4 border-t border-slate-100">
