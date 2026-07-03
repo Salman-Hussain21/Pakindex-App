@@ -21,7 +21,6 @@ export default function FullyIntegratedEmployeeModule() {
     const [employees, setEmployees] = useState<Employee[]>([]);
     const [maxEmployees, setMaxEmployees] = useState<number>(5);
     const [loading, setLoading] = useState(true);
-    const [loading, setLoading] = useState(true);
 
     // Search and Status Filters
     const [search, setSearch] = useState("");
