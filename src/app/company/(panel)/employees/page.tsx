@@ -21,7 +21,7 @@ export default function FullyIntegratedEmployeeModule() {
     const [employees, setEmployees] = useState<Employee[]>([]);
     const [maxEmployees, setMaxEmployees] = useState<number>(5);
     const [loading, setLoading] = useState(true);
-    const [globalError, setGlobalError] = useState<string | null>(null);
+    const [loading, setLoading] = useState(true);
 
     // Search and Status Filters
     const [search, setSearch] = useState("");
@@ -49,6 +49,7 @@ export default function FullyIntegratedEmployeeModule() {
     const [designation, setDesignation] = useState("");
     const [department, setDepartment] = useState("");
     const [formSubmitting, setFormSubmitting] = useState(false);
+    const [formError, setFormError] = useState<string | null>(null);
 
     const loadData = useCallback(async () => {
         try {
@@ -63,7 +64,7 @@ export default function FullyIntegratedEmployeeModule() {
                 setMaxEmployees(data.maxEmployees);
             }
         } catch (err: any) {
-            setGlobalError(err.message);
+            console.error("Failed to load employees:", err);
         } finally {
             setLoading(false);
         }
@@ -87,6 +88,7 @@ export default function FullyIntegratedEmployeeModule() {
         if (employees.length >= maxEmployees) {
             setShowLimitModal(true);
         } else {
+            setFormError(null);
             setShowAddModal(true);
         }
     }
@@ -100,13 +102,14 @@ export default function FullyIntegratedEmployeeModule() {
         setPhone(emp.phone || "");
         setDesignation(emp.designation || "");
         setDepartment(emp.department || "");
+        setFormError(null);
         setShowEditModal(true);
     }
 
     async function handleAddEmployee(e: React.FormEvent) {
         e.preventDefault();
         setFormSubmitting(true);
-        setGlobalError(null);
+        setFormError(null);
 
         try {
             const res = await fetch("/api/company/employees", {
@@ -122,14 +125,15 @@ export default function FullyIntegratedEmployeeModule() {
                     setShowLimitModal(true);
                     return;
                 }
-                throw new Error(data.error || "Failed to submit new personnel workspace row.");
+                setFormError(data.error || "Failed to add employee. Please check the details.");
+                return;
             }
 
             setShowAddModal(false);
             setName(""); setEmail(""); setUsername(""); setPassword(""); setPhone(""); setDesignation(""); setDepartment("");
             loadData();
         } catch (err: any) {
-            setGlobalError(err.message);
+            setFormError(err.message);
         } finally {
             setFormSubmitting(false);
         }
@@ -139,7 +143,7 @@ export default function FullyIntegratedEmployeeModule() {
         e.preventDefault();
         if (!selectedEmp) return;
         setFormSubmitting(true);
-        setGlobalError(null);
+        setFormError(null);
 
         try {
             const res = await fetch("/api/company/employees", {
@@ -158,14 +162,17 @@ export default function FullyIntegratedEmployeeModule() {
             });
             const data = await res.json();
 
-            if (!res.ok) throw new Error(data.error || "Failed to update employee details.");
+            if (!res.ok) {
+                setFormError(data.error || "Failed to update employee details.");
+                return;
+            }
 
             setShowEditModal(false);
             setSelectedEmp(null);
             setName(""); setEmail(""); setUsername(""); setPhone(""); setDesignation(""); setDepartment("");
             loadData();
         } catch (err: any) {
-            setGlobalError(err.message);
+            setFormError(err.message);
         } finally {
             setFormSubmitting(false);
         }
@@ -326,13 +333,6 @@ export default function FullyIntegratedEmployeeModule() {
                 </div>
             </div>
 
-            {/* Error Banner System Notifications */}
-            {globalError && (
-                <div className="p-3 bg-red-50 border border-red-200 text-red-700 rounded-xl text-xs flex items-center gap-2">
-                    <AlertTriangle className="w-4 h-4 shrink-0" />
-                    <span>{globalError}</span>
-                </div>
-            )}
 
             {/* Main Interactive Spreadsheet Layout Table Component */}
             <div className="bg-white rounded-2xl border border-slate-200/60 shadow-2xs overflow-hidden">
@@ -448,6 +448,11 @@ export default function FullyIntegratedEmployeeModule() {
                             <h3 className="text-sm font-bold text-slate-900">Employee Profile</h3>
                             <p className="text-[11px] text-slate-400 mt-0.5">Authorizes secure corporate identity entries into the active table roster indices mapping.</p>
                         </div>
+                        {formError && (
+                            <div className="p-3 text-xs font-medium text-red-700 bg-red-50 border border-red-200 rounded-lg">
+                                {formError}
+                            </div>
+                        )}
 
                         <div className="grid grid-cols-1 gap-3.5 pt-1">
                             <div>
@@ -502,6 +507,11 @@ export default function FullyIntegratedEmployeeModule() {
                             <h3 className="text-sm font-bold text-slate-900">Update Employee Details</h3>
                             <p className="text-[11px] text-slate-400 mt-0.5">Modifies existing parameters mapping for: <span className="font-semibold text-slate-700">{selectedEmp.full_name}</span></p>
                         </div>
+                        {formError && (
+                            <div className="p-3 text-xs font-medium text-red-700 bg-red-50 border border-red-200 rounded-lg">
+                                {formError}
+                            </div>
+                        )}
 
                         <div className="grid grid-cols-1 gap-3.5 pt-1">
                             <div>

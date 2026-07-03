@@ -1,12 +1,16 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { Search, Star, Phone, MapPin, Megaphone, Lock, ArrowUpRight } from "lucide-react";
 
 interface Restaurant {
   id: string;
   name: string;
   phone: string | null;
   address: string | null;
+  thumbnail: string | null;
+  rating: number | null;
+  business_type: string | null;
   approval_status: string;
   area_name: string;
   city_name: string | null;
@@ -17,182 +21,256 @@ export default function RestaurantDatabasePage() {
   const [search, setSearch] = useState("");
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
-  const [selectedIds, setSelectedIds] = useState<string[]>([]);
+  const [isLimited, setIsLimited] = useState(false);
+  const [totalCount, setTotalCount] = useState(0);
+  const [shownCount, setShownCount] = useState(0);
+  const [plan, setPlan] = useState("");
+  const [showUpsellModal, setShowUpsellModal] = useState(false);
 
   useEffect(() => {
     let isMounted = true;
     setLoading(true);
-
-    const delayDebounce = setTimeout(() => {
-      // Hitting the exact API endpoint directory path specified
-      fetch(`/api/company/database?search=${encodeURIComponent(search)}`, {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-          "Accept": "application/json"
-        }
-      })
+    const debounce = setTimeout(() => {
+      fetch(`/api/company/database?search=${encodeURIComponent(search)}`)
         .then(async (res) => {
-          const contentType = res.headers.get("content-type");
-          if (!contentType || !contentType.includes("application/json")) {
-            throw new Error("Server returned HTML formatting. Ensure your root middleware allows background /api traffic without cookie drops.");
-          }
-          if (!res.ok) throw new Error(`HTTP System Failure Code: ${res.status}`);
+          if (!res.ok) throw new Error(`Error ${res.status}`);
           return res.json();
         })
         .then((data) => {
-          if (isMounted) {
-            if (data.success || data.restaurants) {
-              setRestaurants(data.restaurants || []);
-              setError(null);
-            } else {
-              throw new Error(data.error || "Failed to process database records payload.");
-            }
-            setLoading(false);
-          }
+          if (!isMounted) return;
+          setRestaurants(data.restaurants || []);
+          setIsLimited(data.isLimited || false);
+          setTotalCount(data.totalCount || 0);
+          setShownCount(data.shownCount || 0);
+          setPlan(data.plan || "");
+          setError(null);
+          setLoading(false);
         })
         .catch((err) => {
-          if (isMounted) {
-            setError(err.message);
-            setLoading(false);
-          }
+          if (!isMounted) return;
+          setError(err.message);
+          setLoading(false);
         });
-    }, 300); // 300ms network layout typing debouncer
-
-    return () => {
-      isMounted = false;
-      clearTimeout(delayDebounce);
-    };
+    }, 300);
+    return () => { isMounted = false; clearTimeout(debounce); };
   }, [search]);
 
-  // Master Bulk Toggle Switch
-  const toggleSelectAll = () => {
-    if (selectedIds.length === restaurants.length) {
-      setSelectedIds([]);
-    } else {
-      setSelectedIds(restaurants.map((item) => item.id));
-    }
-  };
-
-  // Row Tracker Mapper
-  const toggleSelectRow = (id: string) => {
-    if (selectedIds.includes(id)) {
-      setSelectedIds(selectedIds.filter((rowId) => rowId !== id));
-    } else {
-      setSelectedIds([...selectedIds, id]);
-    }
+  const planLabel: Record<string, string> = {
+    free: "Free", trial: "Free Trial",
+    premium: "Premium", basic: "Premium",
+    ultra_premium: "Ultra Premium", pro: "Ultra Premium", enterprise: "Ultra Premium",
   };
 
   return (
-    <div className="p-6 max-w-6xl mx-auto space-y-4 font-sans select-none">
-      <div>
-        <h1 className="text-xl font-bold text-slate-800 tracking-tight flex items-center gap-2">
-          <span className="p-1.5 bg-brand-50 text-brand-700 rounded-lg text-xs">🟢</span>
-          Restaurant Database Portfolio
-        </h1>
-        <p className="text-xs text-slate-400">
-          Viewing dynamically populated restaurant nodes matching your workspace geographical areas.
-        </p>
-      </div>
-
-      {/* Control Utility Toolbar */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 bg-white p-3 rounded-xl border border-black/5 shadow-xs">
-        <div className="relative flex-1 max-w-md">
-          <input
-            type="text"
-            placeholder="Search by restaurant name, territory segment, or phone line..."
-            value={search}
-            onChange={(e) => setSearch(e.target.value)}
-            className="w-full px-3 py-1.5 text-xs rounded-lg border border-black/10 outline-none focus:border-brand-500 text-slate-800 bg-gray-50/50 transition-all select-text"
-          />
-        </div>
-        
-        <div className="flex items-center gap-2 text-xs">
-          {selectedIds.length > 0 && (
-            <div className="text-[10px] font-bold uppercase tracking-wider text-amber-800 bg-amber-50 border border-amber-200 px-2.5 py-1 rounded-md">
-              Selected Rows: {selectedIds.length}
-            </div>
-          )}
-          <div className="text-[11px] font-medium text-slate-500 bg-slate-50 border border-black/5 px-2.5 py-1 rounded-md">
-            Operational Pool: <span className="font-bold text-brand-700">{restaurants.length}</span>
-          </div>
-        </div>
-      </div>
-
-      {/* Data Render Swapper */}
-      {error ? (
-        <div className="rounded-xl bg-red-50 border border-red-100 p-4 text-xs font-medium text-red-700 space-y-2 select-text">
-          <p className="font-bold">⚠️ Data Connection Lifecycle Error Flagged:</p>
-          <p className="font-mono bg-white/70 p-2 rounded border border-red-200/50 text-[11px]">{error}</p>
-          <p className="text-[11px] text-red-600/80">
-            Fix confirmation: Files are operating out of your exact directory setup. If this error message stays visible, your authentication middleware is dropping user cookies when hitting root paths.
+    <div className="space-y-5">
+      {/* Header */}
+      <div className="flex items-center justify-between">
+        <div>
+          <h1 className="text-xl font-bold text-ink-900 dark:text-white">Restaurant Database</h1>
+          <p className="text-sm text-ink-900/50 dark:text-gray-400 mt-0.5">
+            {loading ? "Loading..." : `${shownCount.toLocaleString()} records in your assigned areas`}
+            {isLimited && !loading && (
+              <span className="ml-2 text-amber-600 dark:text-amber-400 font-semibold">
+                · {totalCount.toLocaleString()} total available
+              </span>
+            )}
           </p>
         </div>
+        {isLimited && (
+          <button
+            onClick={() => setShowUpsellModal(true)}
+            className="flex items-center gap-2 bg-gradient-to-r from-brand-600 to-brand-700 hover:from-brand-700 hover:to-brand-800 text-white px-4 py-2 rounded-xl text-sm font-semibold shadow-md transition-all"
+          >
+            <ArrowUpRight size={16} /> Upgrade Plan
+          </button>
+        )}
+      </div>
+
+      {/* Search Bar */}
+      <div className="flex items-center gap-3 bg-white dark:bg-gray-900 border border-black/5 dark:border-white/10 rounded-2xl px-4 py-3 shadow-sm">
+        <Search size={16} className="text-gray-400 flex-shrink-0" />
+        <input
+          type="text"
+          placeholder="Search by name, area, or phone..."
+          value={search}
+          onChange={(e) => setSearch(e.target.value)}
+          className="flex-1 text-sm bg-transparent outline-none text-ink-900 dark:text-white placeholder:text-gray-400"
+        />
+        <span className="text-xs font-medium text-gray-400 bg-gray-100 dark:bg-gray-800 px-2 py-1 rounded-lg">
+          {planLabel[plan] || plan} Plan
+        </span>
+      </div>
+
+      {/* Table */}
+      {error ? (
+        <div className="rounded-2xl bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 p-6 text-sm text-red-700 dark:text-red-400">
+          ⚠️ {error}
+        </div>
       ) : loading ? (
-        <div className="p-16 text-xs text-slate-400 animate-pulse text-center tracking-widest font-mono">
-          PARSING ALLOCATED TERRITORY RELATIONS...
+        <div className="bg-white dark:bg-gray-900 rounded-2xl border border-black/5 dark:border-white/10 p-16 text-center">
+          <div className="animate-pulse text-sm text-gray-400">Loading restaurant data...</div>
         </div>
       ) : restaurants.length === 0 ? (
-        <div className="bg-white rounded-2xl border border-black/5 p-12 text-center shadow-xs">
-          <p className="text-xs text-slate-400 italic">No approved restaurant assets linked with your active coverage criteria assignments.</p>
+        <div className="bg-white dark:bg-gray-900 rounded-2xl border border-black/5 dark:border-white/10 p-16 text-center">
+          <p className="text-sm text-gray-400">No restaurants found in your assigned areas.</p>
         </div>
       ) : (
-        <div className="bg-white rounded-2xl border border-black/5 shadow-sm overflow-hidden">
+        <div className="relative bg-white dark:bg-gray-900 rounded-2xl border border-black/5 dark:border-white/10 shadow-sm overflow-hidden">
           <div className="overflow-x-auto">
-            <table className="w-full text-left border-collapse text-xs select-text">
-              <thead>
-                <tr className="bg-slate-50 border-b border-black/5 text-slate-400 font-bold uppercase tracking-wider text-[10px] select-none">
-                  <th className="w-12 px-5 py-3">
-                    <input 
-                      type="checkbox" 
-                      className="rounded accent-brand-600 h-3.5 w-3.5 cursor-pointer block"
-                      checked={restaurants.length > 0 && selectedIds.length === restaurants.length}
-                      onChange={toggleSelectAll}
-                    />
-                  </th>
-                  <th className="px-5 py-3">Restaurant Information</th>
-                  <th className="px-5 py-3">Assigned Area Mapping</th>
-                  <th className="px-5 py-3">Primary Contact Line</th>
-                  <th className="px-5 py-3">Verification Badge</th>
+            <table className="w-full text-left text-sm">
+              <thead className="bg-gray-50 dark:bg-gray-800/80 border-b border-black/5 dark:border-white/10">
+                <tr className="text-[11px] font-semibold uppercase tracking-wider text-gray-500 dark:text-gray-400">
+                  <th className="px-5 py-3.5">Restaurant</th>
+                  <th className="px-5 py-3.5">Area</th>
+                  <th className="px-5 py-3.5">Contact</th>
+                  <th className="px-5 py-3.5">Rating</th>
+                  <th className="px-5 py-3.5">Status</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-gray-100 text-slate-700">
-                {restaurants.map((item) => {
-                  const isChecked = selectedIds.includes(item.id);
-                  return (
-                    <tr key={item.id} className={`transition-all duration-150 ${isChecked ? "bg-brand-50/20" : "hover:bg-slate-50/40"}`}>
-                      <td className="px-5 py-3.5 select-none">
-                        <input 
-                          type="checkbox" 
-                          className="rounded accent-brand-600 h-3.5 w-3.5 cursor-pointer block"
-                          checked={isChecked}
-                          onChange={() => toggleSelectRow(item.id)}
-                        />
-                      </td>
-                      <td className="px-5 py-3.5 max-w-xs">
-                        <p className="font-bold text-slate-800 text-[13px] tracking-tight">{item.name}</p>
-                        <p className="text-[11px] text-slate-400 truncate mt-0.5 font-medium">
-                          📍 {item.address || "Street label address absent."}
-                        </p>
-                      </td>
-                      <td className="px-5 py-3.5">
-                        <span className="inline-flex items-center rounded-md bg-brand-50 border border-brand-100 px-2 py-0.5 text-[11px] font-semibold text-brand-700">
-                          {item.area_name} {item.city_name ? `(${item.city_name})` : ""}
+              <tbody className="divide-y divide-black/4 dark:divide-white/5">
+                {restaurants.map((item) => (
+                  <tr key={item.id} className="hover:bg-gray-50/60 dark:hover:bg-gray-800/40 transition-colors group">
+                    {/* Restaurant Name + Thumbnail */}
+                    <td className="px-5 py-3.5">
+                      <div className="flex items-center gap-3">
+                        <div className="h-9 w-9 flex-shrink-0 rounded-lg overflow-hidden bg-gray-100 dark:bg-gray-800 border border-black/5 dark:border-white/10">
+                          {item.thumbnail ? (
+                            // eslint-disable-next-line @next/next/no-img-element
+                            <img src={item.thumbnail} alt={item.name} className="h-full w-full object-cover" />
+                          ) : (
+                            <div className="h-full w-full flex items-center justify-center text-gray-400 text-xs font-bold">
+                              {item.name.charAt(0)}
+                            </div>
+                          )}
+                        </div>
+                        <div>
+                          <p className="font-semibold text-ink-900 dark:text-white text-[13px]">{item.name}</p>
+                          <p className="text-[11px] text-gray-400 truncate max-w-[200px] mt-0.5">
+                            {item.business_type || item.address || "—"}
+                          </p>
+                        </div>
+                      </div>
+                    </td>
+                    {/* Area */}
+                    <td className="px-5 py-3.5">
+                      <span className="inline-flex items-center gap-1 text-[11px] font-medium text-brand-700 dark:text-brand-400 bg-brand-50 dark:bg-brand-900/30 border border-brand-100 dark:border-brand-800 px-2 py-0.5 rounded-md">
+                        <MapPin size={10} /> {item.area_name}{item.city_name ? ` · ${item.city_name}` : ""}
+                      </span>
+                    </td>
+                    {/* Contact */}
+                    <td className="px-5 py-3.5">
+                      {item.phone ? (
+                        <span className="inline-flex items-center gap-1 text-[11px] font-mono text-gray-600 dark:text-gray-300">
+                          <Phone size={10} className="text-gray-400" /> {item.phone}
                         </span>
-                      </td>
-                      <td className="px-5 py-3.5 font-mono text-slate-600 text-[11px]">
-                        {item.phone ? `📞 ${item.phone}` : <span className="text-slate-400 italic font-sans">None</span>}
-                      </td>
-                      <td className="px-5 py-3.5 select-none">
-                        <span className="inline-flex items-center rounded-full bg-emerald-50 px-2.5 py-0.5 text-[10px] font-bold uppercase tracking-wider text-emerald-700 border border-emerald-200">
-                          {item.approval_status}
+                      ) : (
+                        <span className="text-[11px] text-gray-400 italic">No contact</span>
+                      )}
+                    </td>
+                    {/* Rating */}
+                    <td className="px-5 py-3.5">
+                      {item.rating ? (
+                        <span className="inline-flex items-center gap-1 text-[11px] font-semibold text-amber-600">
+                          <Star size={11} className="fill-amber-400 text-amber-400" /> {item.rating}
                         </span>
-                      </td>
-                    </tr>
-                  );
-                })}
+                      ) : (
+                        <span className="text-[11px] text-gray-400">—</span>
+                      )}
+                    </td>
+                    {/* Status */}
+                    <td className="px-5 py-3.5">
+                      <span className="inline-flex items-center rounded-full bg-emerald-50 dark:bg-emerald-900/30 px-2.5 py-0.5 text-[10px] font-bold uppercase tracking-wider text-emerald-700 dark:text-emerald-400 border border-emerald-200 dark:border-emerald-800">
+                        {item.approval_status}
+                      </span>
+                    </td>
+                  </tr>
+                ))}
               </tbody>
             </table>
+          </div>
+
+          {/* ── UPSELL OVERLAY (exact reference design) ── */}
+          {isLimited && (
+            <div
+              className="absolute bottom-0 left-0 right-0 h-48 flex flex-col items-center justify-end pb-6 cursor-pointer"
+              style={{ background: "linear-gradient(to bottom, transparent 0%, rgba(255,255,255,0.92) 40%, white 100%)" }}
+              onClick={() => setShowUpsellModal(true)}
+            >
+              <div className="dark:hidden flex flex-col items-center text-center">
+                <div className="w-12 h-12 rounded-full bg-blue-50 border border-blue-100 flex items-center justify-center mb-3">
+                  <Megaphone size={22} className="text-blue-400" />
+                </div>
+                <p className="text-sm font-bold text-gray-800">Subscribe A Plan To See More!</p>
+                <p className="text-xs text-gray-500 mt-0.5">Upgrade Your Plan And Explore The Full List Of Entries!</p>
+              </div>
+            </div>
+          )}
+
+          {/* Dark mode overlay variant */}
+          {isLimited && (
+            <div
+              className="hidden dark:flex absolute bottom-0 left-0 right-0 h-48 flex-col items-center justify-end pb-6 cursor-pointer"
+              style={{ background: "linear-gradient(to bottom, transparent 0%, rgba(17,24,39,0.92) 40%, rgb(17,24,39) 100%)" }}
+              onClick={() => setShowUpsellModal(true)}
+            >
+              <div className="flex flex-col items-center text-center">
+                <div className="w-12 h-12 rounded-full bg-blue-900/40 border border-blue-700/40 flex items-center justify-center mb-3">
+                  <Megaphone size={22} className="text-blue-400" />
+                </div>
+                <p className="text-sm font-bold text-white">Subscribe A Plan To See More!</p>
+                <p className="text-xs text-gray-400 mt-0.5">Upgrade Your Plan And Explore The Full List Of Entries!</p>
+              </div>
+            </div>
+          )}
+        </div>
+      )}
+
+      {/* ── UPSELL MODAL ── */}
+      {showUpsellModal && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm p-4">
+          <div className="bg-white dark:bg-gray-900 rounded-3xl border border-black/5 dark:border-white/10 max-w-sm w-full p-8 shadow-2xl text-center">
+            <button
+              onClick={() => setShowUpsellModal(false)}
+              className="absolute top-4 right-4 text-gray-400 hover:text-gray-600 dark:hover:text-gray-200 text-xl"
+            >×</button>
+            <div className="w-16 h-16 rounded-full bg-blue-50 dark:bg-blue-900/30 border border-blue-100 dark:border-blue-800 flex items-center justify-center mx-auto mb-5">
+              <Megaphone size={28} className="text-blue-400" />
+            </div>
+            <h2 className="text-lg font-bold text-ink-900 dark:text-white mb-2">Subscribe A Plan To See More!</h2>
+            <p className="text-sm text-gray-500 dark:text-gray-400 mb-2">
+              Upgrade Your Plan And Explore The Details Of Entries!
+            </p>
+            <p className="text-xs text-gray-400 dark:text-gray-500 mb-6">
+              You are on the <span className="font-semibold text-brand-600">{planLabel[plan] || plan}</span> plan.
+              You are seeing <span className="font-semibold">{shownCount}</span> of{" "}
+              <span className="font-semibold">{totalCount}</span> restaurants in your territory.
+            </p>
+
+            <div className="space-y-3">
+              <div className="rounded-2xl border-2 border-brand-500 bg-brand-50 dark:bg-brand-900/20 p-4 text-left">
+                <div className="flex justify-between items-center">
+                  <div>
+                    <p className="font-bold text-brand-700 dark:text-brand-400">Premium</p>
+                    <p className="text-xs text-brand-600/70 dark:text-brand-500">50% of your territory data</p>
+                  </div>
+                  <span className="text-sm font-bold text-brand-700 dark:text-brand-400">Rs 5,000/mo</span>
+                </div>
+              </div>
+              <div className="rounded-2xl border border-black/10 dark:border-white/10 bg-gray-50 dark:bg-gray-800 p-4 text-left">
+                <div className="flex justify-between items-center">
+                  <div>
+                    <div className="flex items-center gap-1.5">
+                      <p className="font-bold text-ink-900 dark:text-white">Ultra Premium</p>
+                      <Lock size={12} className="text-amber-500" />
+                    </div>
+                    <p className="text-xs text-gray-500">100% full data access</p>
+                  </div>
+                  <span className="text-sm font-bold text-ink-900 dark:text-white">Rs 15,000/mo</span>
+                </div>
+              </div>
+            </div>
+
+            <p className="text-xs text-gray-400 mt-4">Contact your account manager to upgrade.</p>
           </div>
         </div>
       )}

@@ -2,7 +2,7 @@
 
 import { createContext, useContext, useEffect, useState } from "react";
 
-const STORAGE_KEY = "pakindex-company-dark-mode";
+const STORAGE_KEY = "pakindex-dark-mode"; // Same key as admin so the no-flash <script> in root layout.tsx works for both panels
 
 interface ThemeContextValue {
   dark: boolean;

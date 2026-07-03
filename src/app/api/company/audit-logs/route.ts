@@ -22,7 +22,12 @@ export async function GET(request: NextRequest) {
 
   // Company scoping is mandatory, not optional — a company must never be able
   // to see another company's (or the platform's) audit trail.
-  const where: string[] = ["al.company_id = $1"];
+  // We also exclude actions performed by super_admins, as requested by the user,
+  // so companies only see their own internal actions.
+  const where: string[] = [
+    "al.company_id = $1",
+    "al.performed_by NOT IN (SELECT id FROM users WHERE role = 'super_admin')"
+  ];
   const values: any[] = [session.companyId];
 
   // Restrict to entities relevant to a company's own activity.
