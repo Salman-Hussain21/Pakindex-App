@@ -1,79 +1,93 @@
 import { NextResponse } from "next/server";
 import { query } from "@/lib/db";
 import { getSession } from "@/lib/auth";
+import bcrypt from "bcryptjs";
+ // Or your preferred hashing engine helper
 
-// 1. GET: Fetch company profile for the current logged-in user session
+// 1. FETCH PROFILE AND CALCULATE ACTIVE SEATS UTILIZATION
 export async function GET() {
   try {
     const session = await getSession();
     if (!session || !session.companyId) {
-      return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+      return NextResponse.json({ error: "Unauthorized access profile." }, { status: 401 });
     }
 
-    const companyId = session.companyId;
-
-    // Fetch Company details based on your existing database schema columns
-    const companyResult = await query(
-      `SELECT id, name, slug, industry, status, plan, created_at 
+    // Get company base info
+    const companyRes = await query(
+      `SELECT id, name, legal_name, email, phone, industry, plan, status, max_employees 
        FROM companies 
        WHERE id = $1 AND deleted_at IS NULL`,
-      [companyId]
+      [session.companyId]
     );
 
-    if (companyResult.rows.length === 0) {
-      return NextResponse.json({ error: "Company profile not found" }, { status: 404 });
+    if (companyRes.rows.length === 0) {
+      return NextResponse.json({ error: "Company profile records missing." }, { status: 404 });
     }
 
-    // Safe Territory Fetch Block
-    let territories: any[] = [];
-    try {
-      const territoriesResult = await query(
-        `SELECT ta.id, ta.name, ta.city 
-         FROM territory_areas ta
-         INNER JOIN company_territories ct ON ct.area_id = ta.id
-         WHERE ct.company_id = $1`,
-        [companyId]
-      );
-      territories = territoriesResult.rows || [];
-    } catch (tableErr) {
-      console.warn("Territory tables are missing or not yet configured.");
-      territories = [];
-    }
+    // Dynamic Live Counter: Pull only active employees tied to this explicit company
+    const counterRes = await query(
+      `SELECT COUNT(*)::int as active_seats 
+       FROM users 
+       WHERE company_id = $1 AND role = 'employee' AND deleted_at IS NULL`,
+      [session.companyId]
+    );
+
+    const companyData = companyRes.rows[0];
+    const seatsUtilized = counterRes.rows[0]?.active_seats ?? 0;
 
     return NextResponse.json({
-      profile: companyResult.rows[0],
-      territories: territories
+      ...companyData,
+      seatsUtilized, // Sent over cleanly to eliminate the "0 /" bug
     });
-  } catch (error: any) {
-    console.error("Profile Fetch Error:", error);
+  } catch (error) {
+    console.error("Profile payload processing crash:", error);
     return NextResponse.json({ error: "Internal Server Error" }, { status: 500 });
   }
 }
 
-// 2. PUT: Update settings variables using correct columns matching your existing logic
+// 2. UPDATE SECURITY KEYS SAFELY WITHOUT ROUTING COLLISION
 export async function PUT(req: Request) {
   try {
     const session = await getSession();
     if (!session || !session.companyId) {
-      return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+      return NextResponse.json({ error: "Unauthorized operation." }, { status: 401 });
     }
 
-    const { name, industry } = await req.json();
-    if (!name || !industry) {
-      return NextResponse.json({ error: "Required fields missing" }, { status: 400 });
+    const { currentPassword, newPassword } = await req.json();
+
+    if (!currentPassword || !newPassword) {
+      return NextResponse.json({ error: "Missing required parameter payloads." }, { status: 400 });
     }
 
-    const updateResult = await query(
-      `UPDATE companies 
-       SET name = $1, industry = $2, updated_at = NOW() 
-       WHERE id = $3 AND deleted_at IS NULL
-       RETURNING id, name, industry`,
-      [name, industry, session.companyId]
+    // Fetch account passwords securely using the current operator context
+    const userRes = await query(
+      `SELECT password_hash FROM users WHERE id = $1 AND deleted_at IS NULL`,
+      [session.userId]
     );
 
-    return NextResponse.json({ success: true, company: updateResult.rows[0] });
-  } catch (error: any) {
-    console.error("Profile Update Error:", error);
+    const user = userRes.rows[0];
+    if (!user) {
+      return NextResponse.json({ error: "Operator identity unverified." }, { status: 404 });
+    }
+
+    // Verify current key hash integrity
+    const isMatch = await bcrypt.compare(currentPassword, user.password_hash);
+    if (!isMatch) {
+      return NextResponse.json({ error: "The current security key is incorrect." }, { status: 400 });
+    }
+
+    // Write new token record cleanly
+    const saltRounds = 10;
+    const newHash = await bcrypt.hash(newPassword, saltRounds);
+
+    await query(
+      `UPDATE users SET password_hash = $1, updated_at = NOW() WHERE id = $2`,
+      [newHash, session.userId]
+    );
+
+    return NextResponse.json({ success: true, message: "Security Key updated successfully." });
+  } catch (error) {
+    console.error("Security engine modification failure:", error);
     return NextResponse.json({ error: "Internal Server Error" }, { status: 500 });
   }
 }

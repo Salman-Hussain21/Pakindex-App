@@ -22,6 +22,11 @@ function CompanyLoginForm() {
         body: JSON.stringify({ email, password }),
       });
       
+      const contentType = res.headers.get("content-type") || "";
+      if (!contentType.includes("application/json")) {
+        throw new Error(`Invalid response format from authentication server (${res.status}).`);
+      }
+
       const body = await res.json();
       if (!res.ok) {
         throw new Error(body?.error || "Login failed");
@@ -54,7 +59,7 @@ function CompanyLoginForm() {
               required
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              className="w-full rounded-lg border border-black/10 px-3 py-2 text-sm outline-none focus:border-brand-500 focus:ring-1 focus:ring-brand-500"
+              className="w-full rounded-lg border border-black/10 px-3 py-2 text-sm outline-none focus:border-brand-500 focus:ring-1 focus:ring-brand-500 bg-white text-slate-800"
               placeholder="manager@company.com"
             />
           </div>
@@ -65,19 +70,19 @@ function CompanyLoginForm() {
               required
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              className="w-full rounded-lg border border-black/10 px-3 py-2 text-sm outline-none focus:border-brand-500 focus:ring-1 focus:ring-brand-500"
+              className="w-full rounded-lg border border-black/10 px-3 py-2 text-sm outline-none focus:border-brand-500 focus:ring-1 focus:ring-brand-500 bg-white text-slate-800"
               placeholder="••••••••"
             />
           </div>
 
           {error && (
-            <p className="rounded-lg bg-red-50 px-3 py-2 text-sm text-red-700">{error}</p>
+            <p className="rounded-lg bg-red-50 px-3 py-2 text-sm text-red-700 border border-red-100">{error}</p>
           )}
 
           <button
             type="submit"
             disabled={loading}
-            className="w-full rounded-lg bg-brand-600 px-3 py-2.5 text-sm font-semibold text-white hover:bg-brand-700 disabled:opacity-50"
+            className="w-full rounded-lg bg-brand-600 px-3 py-2.5 text-sm font-semibold text-white hover:bg-brand-700 disabled:opacity-50 transition-all shadow-sm cursor-pointer"
           >
             {loading ? "Signing in…" : "Sign In"}
           </button>
@@ -89,7 +94,7 @@ function CompanyLoginForm() {
 
 export default function CompanyLoginPage() {
   return (
-    <Suspense>
+    <Suspense fallback={<div className="p-6 text-center text-xs text-slate-400 animate-pulse">Loading login sequence...</div>}>
       <CompanyLoginForm />
     </Suspense>
   );
