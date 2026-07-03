@@ -72,7 +72,7 @@ export default function CompanyAuditLogsPage() {
 
   return (
     <div>
-      <h1 className="mb-4 text-xl font-semibold text-ink-900 dark:text-gray-100">Audit Logs</h1>
+      <h1 className="mb-4 text-xl font-bold text-slate-900 dark:text-white tracking-tight">Audit Logs</h1>
 
       <div className="mb-4 flex gap-2">
         <select
@@ -109,7 +109,7 @@ export default function CompanyAuditLogsPage() {
 
       <div className="overflow-hidden rounded-2xl border border-black/5 bg-white shadow-sm dark:border-white/10 dark:bg-gray-900">
         <table className="w-full text-sm">
-          <thead className="bg-gray-50 text-left text-xs uppercase text-ink-900/40 dark:bg-gray-950 dark:text-gray-500">
+          <thead className="bg-slate-50 dark:bg-gray-800 text-left text-[10px] uppercase font-semibold text-slate-400 dark:text-gray-400 tracking-wider border-b border-slate-100 dark:border-white/10">
             <tr>
               <th className="px-4 py-3">When</th>
               <th className="px-4 py-3">Employee</th>
@@ -126,10 +126,10 @@ export default function CompanyAuditLogsPage() {
             ) : (
               logs.map((log) => (
                 <tr key={log.id} className="hover:bg-gray-50 dark:hover:bg-gray-800">
-                  <td className="whitespace-nowrap px-4 py-3 text-ink-900/60 dark:text-gray-400">
+                  <td className="whitespace-nowrap px-4 py-3 text-slate-500 dark:text-gray-400 font-medium">
                     {new Date(log.created_at).toLocaleString()}
                   </td>
-                  <td className="px-4 py-3 text-ink-900 dark:text-gray-100">
+                  <td className="px-4 py-3 text-slate-900 dark:text-gray-100 font-semibold">
                     {log.performed_by_name || "System"}
                   </td>
                   <td className="px-4 py-3">
@@ -137,10 +137,10 @@ export default function CompanyAuditLogsPage() {
                       {log.action}
                     </span>
                   </td>
-                  <td className="px-4 py-3 text-ink-900/60 capitalize dark:text-gray-400">
+                  <td className="px-4 py-3 text-slate-500 capitalize dark:text-gray-400 font-medium">
                     {log.entity_type.replace("_", " ")}
                   </td>
-                  <td className="px-4 py-3 text-ink-900/70 dark:text-gray-300">{summarize(log)}</td>
+                  <td className="px-4 py-3 text-slate-600 dark:text-gray-300 font-medium">{summarize(log)}</td>
                 </tr>
               ))
             )}

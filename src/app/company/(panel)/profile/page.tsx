@@ -12,7 +12,7 @@ export default function ProfileRedirectPage() {
   }, [router]);
 
   return (
-    <div className="p-6 text-xs text-slate-400 animate-pulse">
+    <div className="p-6 text-xs text-slate-400 dark:text-gray-500 animate-pulse">
       Routing to account configuration engine...
     </div>
   );

@@ -39,8 +39,8 @@ export default function CompanyDashboardPage() {
       });
   }, []);
 
-  if (error) return <p className="text-sm text-red-600 font-medium p-4">{error}</p>;
-  if (loading || !data) return <p className="text-sm text-ink-900/50 p-4 animate-pulse">Loading company intelligence data…</p>;
+  if (error) return <p className="text-sm text-red-600 dark:text-red-400 font-medium p-4">{error}</p>;
+  if (loading || !data) return <p className="text-sm text-ink-900/50 dark:text-gray-500 p-4 animate-pulse">Loading company intelligence data…</p>;
 
   const s = data.stats;
 
@@ -60,7 +60,7 @@ export default function CompanyDashboardPage() {
       {Number(s.new_restaurants) > 0 && (
         <Link
           href="/company/restaurants?filter=new"
-          className="block rounded-xl border border-brand-200 bg-brand-50 px-4 py-3 text-sm font-medium text-brand-800 hover:bg-brand-100 transition-colors"
+          className="block rounded-xl border border-brand-200 dark:border-brand-900/30 bg-brand-50 dark:bg-brand-900/10 px-4 py-3 text-sm font-medium text-brand-800 dark:text-brand-300 hover:bg-brand-100 dark:hover:bg-brand-900/20 transition-colors"
         >
           {s.new_restaurants} unassigned new restaurant profiles matched your pipeline territory rules. View records →
         </Link>
@@ -69,17 +69,17 @@ export default function CompanyDashboardPage() {
       {/* Main Insights Split Grid */}
       <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
         {/* Recent Pipeline Acquisitions */}
-        <div className="rounded-2xl border border-black/5 bg-white p-5 shadow-sm">
-          <h2 className="mb-3 text-sm font-semibold text-ink-900">Recent Restaurant Additions</h2>
+        <div className="rounded-2xl border border-black/5 dark:border-white/10 bg-white dark:bg-gray-900 p-5 shadow-sm">
+          <h2 className="mb-3 text-sm font-semibold text-ink-900 dark:text-white">Recent Restaurant Additions</h2>
           {data.recentRestaurants.length === 0 ? (
-            <p className="text-sm text-ink-900/40">No restaurant accounts synchronized yet.</p>
+            <p className="text-sm text-ink-900/40 dark:text-gray-500">No restaurant accounts synchronized yet.</p>
           ) : (
-            <ul className="divide-y divide-black/5">
+            <ul className="divide-y divide-black/5 dark:divide-white/10">
               {data.recentRestaurants.map((restaurant) => (
                 <li key={restaurant.id} className="flex items-center justify-between py-2 text-sm">
                   <div className="truncate pr-4">
-                    <span className="block font-medium text-ink-900 truncate">{restaurant.name}</span>
-                    <span className="text-xs text-ink-900/40">{restaurant.area_name || "Territory Unassigned"}</span>
+                    <span className="block font-medium text-ink-900 dark:text-gray-200 truncate">{restaurant.name}</span>
+                    <span className="text-xs text-ink-900/40 dark:text-gray-500">{restaurant.area_name || "Territory Unassigned"}</span>
                   </div>
                   <StatusBadge status={restaurant.status || "new"} />
                 </li>
@@ -89,21 +89,21 @@ export default function CompanyDashboardPage() {
         </div>
 
         {/* Employee Performance Tracking Column */}
-        <div className="rounded-2xl border border-black/5 bg-white p-5 shadow-sm">
-          <h2 className="mb-3 text-sm font-semibold text-ink-900">Employee Lead Conversions</h2>
+        <div className="rounded-2xl border border-black/5 dark:border-white/10 bg-white dark:bg-gray-900 p-5 shadow-sm">
+          <h2 className="mb-3 text-sm font-semibold text-ink-900 dark:text-white">Employee Lead Conversions</h2>
           {data.employeePerformance.length === 0 ? (
-            <p className="text-sm text-ink-900/40">No employee active records found.</p>
+            <p className="text-sm text-ink-900/40 dark:text-gray-500">No employee active records found.</p>
           ) : (
             <div className="space-y-3">
               {data.employeePerformance.map((emp) => (
-                <div key={emp.id} className="flex items-center justify-between text-sm border-b border-black/5 pb-2 last:border-none">
+                <div key={emp.id} className="flex items-center justify-between text-sm border-b border-black/5 dark:border-white/10 pb-2 last:border-none">
                   <div>
-                    <span className="block font-medium text-ink-900">{emp.full_name}</span>
-                    <span className="text-xs text-ink-900/40">{emp.assigned_leads || 0} Leads Assigned</span>
+                    <span className="block font-medium text-ink-900 dark:text-gray-200">{emp.full_name}</span>
+                    <span className="text-xs text-ink-900/40 dark:text-gray-500">{emp.assigned_leads || 0} Leads Assigned</span>
                   </div>
                   <div className="text-right">
-                    <span className="block font-semibold text-brand-600">{emp.converted_leads || 0} Won</span>
-                    <span className="text-xs text-ink-900/40">CRMs Updated</span>
+                    <span className="block font-semibold text-brand-600 dark:text-brand-400">{emp.converted_leads || 0} Won</span>
+                    <span className="text-xs text-ink-900/40 dark:text-gray-500">CRMs Updated</span>
                   </div>
                 </div>
               ))}

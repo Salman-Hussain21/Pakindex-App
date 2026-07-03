@@ -41,12 +41,12 @@ export default function CompanySettingsDashboard() {
   return (
     <div className="p-6 max-w-5xl mx-auto space-y-4">
       <div>
-        <h1 className="text-xl font-bold text-slate-800 tracking-tight">Workspace Settings</h1>
-        <p className="text-xs text-slate-400">View corporate indicators, check regional jurisdictions, or update security parameters.</p>
+        <h1 className="text-xl font-bold text-slate-800 dark:text-white tracking-tight">Workspace Settings</h1>
+        <p className="text-xs text-slate-400 dark:text-gray-500">View corporate indicators, check regional jurisdictions, or update security parameters.</p>
       </div>
 
       {/* Navigation Tabs */}
-      <div className="flex gap-1 rounded-xl bg-gray-100 p-1 w-fit">
+      <div className="flex gap-1 rounded-xl bg-gray-100 dark:bg-gray-800 p-1 w-fit">
         {([
           ["profile", "Company Profile Summary"],
           ["security", "Change Password Security"],
@@ -56,8 +56,8 @@ export default function CompanySettingsDashboard() {
             onClick={() => setTab(key)}
             className={`rounded-lg px-4 py-1.5 text-xs font-semibold transition-all cursor-pointer ${
               tab === key
-                ? "bg-white text-brand-700 shadow-sm"
-                : "text-slate-500 hover:text-slate-800"
+                ? "bg-white dark:bg-gray-900 text-brand-700 shadow-sm"
+                : "text-slate-500 dark:text-gray-400 hover:text-slate-800 dark:hover:text-gray-200"
             }`}
           >
             {label}
@@ -108,50 +108,50 @@ function ReadOnlyProfileTab() {
       });
   }, []);
 
-  if (loading) return <div className="p-6 text-xs text-slate-400 animate-pulse text-center">Loading workspace profiles...</div>;
-  if (error) return <p className="rounded-lg bg-red-50 border border-red-100 px-3 py-2 text-xs text-red-700">{error}</p>;
+  if (loading) return <div className="p-6 text-xs text-slate-400 dark:text-gray-500 animate-pulse text-center">Loading workspace profiles...</div>;
+  if (error) return <p className="rounded-lg bg-red-50 dark:bg-red-900/20 border border-red-100 dark:border-red-900/50 px-3 py-2 text-xs text-red-700 dark:text-red-400">{error}</p>;
 
   return (
     <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-      <div className="lg:col-span-2 bg-white rounded-2xl border border-black/5 p-6 shadow-sm space-y-4">
-        <h2 className="text-sm font-bold text-slate-800 mb-2">Corporate Information</h2>
+      <div className="lg:col-span-2 bg-white dark:bg-gray-900 rounded-2xl border border-black/5 dark:border-white/10 p-6 shadow-sm space-y-4">
+        <h2 className="text-sm font-bold text-slate-800 dark:text-white mb-2">Corporate Information</h2>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div>
-            <span className="block text-[10px] font-bold text-slate-400 uppercase tracking-wider">Workspace Brand Name</span>
-            <div className="mt-1 px-3 py-2 bg-gray-50 border border-black/5 rounded-lg text-xs font-medium text-slate-700 select-all">{profile?.name || "—"}</div>
+            <span className="block text-[10px] font-bold text-slate-400 dark:text-gray-500 uppercase tracking-wider">Workspace Brand Name</span>
+            <div className="mt-1 px-3 py-2 bg-gray-50 dark:bg-gray-800 border border-black/5 dark:border-white/5 rounded-lg text-xs font-medium text-slate-700 dark:text-gray-200 select-all">{profile?.name || "—"}</div>
           </div>
           <div>
-            <span className="block text-[10px] font-bold text-slate-400 uppercase tracking-wider">Registered Legal Name</span>
-            <div className="mt-1 px-3 py-2 bg-gray-50 border border-black/5 rounded-lg text-xs font-medium text-slate-700 select-all">{profile?.legal_name || "—"}</div>
+            <span className="block text-[10px] font-bold text-slate-400 dark:text-gray-500 uppercase tracking-wider">Registered Legal Name</span>
+            <div className="mt-1 px-3 py-2 bg-gray-50 dark:bg-gray-800 border border-black/5 dark:border-white/5 rounded-lg text-xs font-medium text-slate-700 dark:text-gray-200 select-all">{profile?.legal_name || "—"}</div>
           </div>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div>
-            <span className="block text-[10px] font-bold text-slate-400 uppercase tracking-wider">Official Email Contact</span>
-            <div className="mt-1 px-3 py-2 bg-gray-50 border border-black/5 rounded-lg text-xs font-medium text-slate-700 select-all">{profile?.email || "—"}</div>
+            <span className="block text-[10px] font-bold text-slate-400 dark:text-gray-500 uppercase tracking-wider">Official Email Contact</span>
+            <div className="mt-1 px-3 py-2 bg-gray-50 dark:bg-gray-800 border border-black/5 dark:border-white/5 rounded-lg text-xs font-medium text-slate-700 dark:text-gray-200 select-all">{profile?.email || "—"}</div>
           </div>
           <div>
-            <span className="block text-[10px] font-bold text-slate-400 uppercase tracking-wider">Official Phone Line</span>
-            <div className="mt-1 px-3 py-2 bg-gray-50 border border-black/5 rounded-lg text-xs font-medium text-slate-700 select-all">{profile?.phone || "—"}</div>
+            <span className="block text-[10px] font-bold text-slate-400 dark:text-gray-500 uppercase tracking-wider">Official Phone Line</span>
+            <div className="mt-1 px-3 py-2 bg-gray-50 dark:bg-gray-800 border border-black/5 dark:border-white/5 rounded-lg text-xs font-medium text-slate-700 dark:text-gray-200 select-all">{profile?.phone || "—"}</div>
           </div>
         </div>
 
         <div>
-          <span className="block text-[10px] font-bold text-slate-400 uppercase tracking-wider">Industry Vertical Sector</span>
-          <div className="mt-1 px-3 py-2 bg-gray-50 border border-black/5 rounded-lg text-xs font-medium text-slate-700">{profile?.industry || "—"}</div>
+          <span className="block text-[10px] font-bold text-slate-400 dark:text-gray-500 uppercase tracking-wider">Industry Vertical Sector</span>
+          <div className="mt-1 px-3 py-2 bg-gray-50 dark:bg-gray-800 border border-black/5 dark:border-white/5 rounded-lg text-xs font-medium text-slate-700 dark:text-gray-200">{profile?.industry || "—"}</div>
         </div>
 
         {/* Dynamic Classifications Display */}
         <div className="pt-2">
-          <span className="block text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-1.5">Operations Classifications</span>
+          <span className="block text-[10px] font-bold text-slate-400 dark:text-gray-500 uppercase tracking-wider mb-1.5">Operations Classifications</span>
           <div className="flex flex-wrap gap-1.5">
             {!profile?.categories || profile.categories.length === 0 ? (
-              <span className="text-xs text-slate-400 italic">No category tags mapped.</span>
+              <span className="text-xs text-slate-400 dark:text-gray-500 italic">No category tags mapped.</span>
             ) : (
               profile.categories.map((cat) => (
-                <span key={cat.id} className="px-2.5 py-1 rounded-md bg-slate-100 border border-black/5 text-[11px] font-medium text-slate-600">{cat.name}</span>
+                <span key={cat.id} className="px-2.5 py-1 rounded-md bg-slate-100 dark:bg-gray-800 border border-black/5 dark:border-white/10 text-[11px] font-medium text-slate-600 dark:text-gray-300">{cat.name}</span>
               ))
             )}
           </div>
@@ -159,13 +159,13 @@ function ReadOnlyProfileTab() {
 
         {/* Dynamic Areas Display */}
         <div className="pt-2">
-          <span className="block text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-1.5">Assigned Coverage Jurisdictions</span>
+          <span className="block text-[10px] font-bold text-slate-400 dark:text-gray-500 uppercase tracking-wider mb-1.5">Assigned Coverage Jurisdictions</span>
           <div className="flex flex-wrap gap-1.5">
             {!profile?.areas || profile.areas.length === 0 ? (
-              <span className="text-xs text-slate-400 italic">No operational sectors linked.</span>
+              <span className="text-xs text-slate-400 dark:text-gray-500 italic">No operational sectors linked.</span>
             ) : (
               profile.areas.map((area) => (
-                <span key={area.id} className="px-2.5 py-1 rounded-md bg-brand-50/50 border border-brand-100 text-[11px] font-medium text-brand-700">
+                <span key={area.id} className="px-2.5 py-1 rounded-md bg-brand-50/50 dark:bg-brand-900/20 border border-brand-100 dark:border-brand-900/40 text-[11px] font-medium text-brand-700 dark:text-brand-300">
                   {area.name} {area.city_name ? `(${area.city_name})` : ""}
                 </span>
               ))
@@ -175,18 +175,18 @@ function ReadOnlyProfileTab() {
       </div>
 
       {/* Allocations & Live Employee Seat Metrics Sidebar */}
-      <div className="bg-white rounded-2xl border border-black/5 p-5 shadow-sm space-y-4 h-fit">
-        <h3 className="text-xs font-bold text-slate-800 uppercase tracking-wider border-b border-gray-100 pb-2">Status & Allocations</h3>
+      <div className="bg-white dark:bg-gray-900 rounded-2xl border border-black/5 dark:border-white/10 p-5 shadow-sm space-y-4 h-fit">
+        <h3 className="text-xs font-bold text-slate-800 dark:text-white uppercase tracking-wider border-b border-gray-100 dark:border-white/10 pb-2">Status & Allocations</h3>
         
         <div>
-          <span className="block text-[10px] font-bold text-slate-400 uppercase tracking-wider">Personnel Seat Limit (Live Counter)</span>
-          <div className="mt-1 flex items-center justify-between text-xs bg-gray-50 p-3 border border-black/5 rounded-lg">
-            <span className="text-slate-600 font-medium">Seats Utilized:</span>
-            <span className="font-bold text-brand-700 bg-white border px-2 py-0.5 rounded shadow-sm text-sm">
+          <span className="block text-[10px] font-bold text-slate-400 dark:text-gray-500 uppercase tracking-wider">Personnel Seat Limit (Live Counter)</span>
+          <div className="mt-1 flex items-center justify-between text-xs bg-gray-50 dark:bg-gray-800 p-3 border border-black/5 dark:border-white/5 rounded-lg">
+            <span className="text-slate-600 dark:text-gray-300 font-medium">Seats Utilized:</span>
+            <span className="font-bold text-brand-700 dark:text-brand-300 bg-white dark:bg-gray-900 border dark:border-white/10 px-2 py-0.5 rounded shadow-sm text-sm">
               {profile?.employee_count} / {profile?.max_employees}
             </span>
           </div>
-          <div className="mt-2 w-full bg-gray-100 rounded-full h-1.5">
+          <div className="mt-2 w-full bg-gray-100 dark:bg-gray-800 rounded-full h-1.5">
             <div 
               className="bg-brand-600 h-1.5 rounded-full transition-all duration-500" 
               style={{ width: `${Math.min(100, ((profile?.employee_count || 0) / (profile?.max_employees || 1)) * 100)}%` }}
@@ -195,13 +195,13 @@ function ReadOnlyProfileTab() {
         </div>
 
         <div>
-          <span className="block text-[10px] font-bold text-slate-400 uppercase tracking-wider">Subscription Plan</span>
-          <span className="inline-block mt-1 font-bold rounded-lg bg-amber-50 border border-amber-200 text-xs text-amber-800 px-2.5 py-0.5 capitalize">{profile?.plan || "Free"} Tier</span>
+          <span className="block text-[10px] font-bold text-slate-400 dark:text-gray-500 uppercase tracking-wider">Subscription Plan</span>
+          <span className="inline-block mt-1 font-bold rounded-lg bg-amber-50 dark:bg-amber-900/20 border border-amber-200 dark:border-amber-900/50 text-xs text-amber-800 dark:text-amber-400 px-2.5 py-0.5 capitalize">{profile?.plan || "Free"} Tier</span>
         </div>
 
         <div>
-          <span className="block text-[10px] font-bold text-slate-400 uppercase tracking-wider">Deployment Status</span>
-          <span className="inline-block mt-1 font-bold rounded-lg bg-emerald-50 border border-emerald-200 text-xs text-emerald-700 uppercase px-2.5 py-0.5">{profile?.status || "active"}</span>
+          <span className="block text-[10px] font-bold text-slate-400 dark:text-gray-500 uppercase tracking-wider">Deployment Status</span>
+          <span className="inline-block mt-1 font-bold rounded-lg bg-emerald-50 dark:bg-emerald-900/20 border border-emerald-200 dark:border-emerald-900/50 text-xs text-emerald-700 dark:text-emerald-400 uppercase px-2.5 py-0.5">{profile?.status || "active"}</span>
         </div>
       </div>
     </div>
@@ -242,24 +242,24 @@ function SecuritySettingsTab() {
   }
 
   return (
-    <div className="max-w-xl bg-white rounded-2xl border border-black/5 p-6 shadow-sm">
-      <h2 className="text-sm font-bold text-slate-800 mb-1">Update Security Key</h2>
-      <p className="text-xs text-slate-400 mb-4">Changes take effect immediately across all sessions.</p>
+    <div className="max-w-xl bg-white dark:bg-gray-900 rounded-2xl border border-black/5 dark:border-white/10 p-6 shadow-sm">
+      <h2 className="text-sm font-bold text-slate-800 dark:text-white mb-1">Update Security Key</h2>
+      <p className="text-xs text-slate-400 dark:text-gray-500 mb-4">Changes take effect immediately across all sessions.</p>
       <form onSubmit={handlePasswordUpdate} className="space-y-3">
         <div>
-          <label className="mb-1 block text-xs font-medium text-slate-500">Current Security Key</label>
-          <input type="password" required value={currentPassword} onChange={(e) => setCurrentPassword(e.target.value)} className="w-full rounded-lg border border-black/10 px-3 py-2 text-sm text-slate-800 outline-none focus:border-brand-500" />
+          <label className="mb-1 block text-xs font-medium text-slate-500 dark:text-gray-400">Current Security Key</label>
+          <input type="password" required value={currentPassword} onChange={(e) => setCurrentPassword(e.target.value)} className="w-full rounded-lg border border-black/10 dark:border-white/10 bg-white dark:bg-gray-800 px-3 py-2 text-sm text-slate-800 dark:text-gray-100 outline-none focus:border-brand-500 dark:focus:border-brand-500 transition-colors" />
         </div>
         <div>
-          <label className="mb-1 block text-xs font-medium text-slate-500">New Security Phrase</label>
-          <input type="password" required value={newPassword} onChange={(e) => setNewPassword(e.target.value)} className="w-full rounded-lg border border-black/10 px-3 py-2 text-sm text-slate-800 outline-none focus:border-brand-500" />
+          <label className="mb-1 block text-xs font-medium text-slate-500 dark:text-gray-400">New Security Phrase</label>
+          <input type="password" required value={newPassword} onChange={(e) => setNewPassword(e.target.value)} className="w-full rounded-lg border border-black/10 dark:border-white/10 bg-white dark:bg-gray-800 px-3 py-2 text-sm text-slate-800 dark:text-gray-100 outline-none focus:border-brand-500 dark:focus:border-brand-500 transition-colors" />
         </div>
         <div>
-          <label className="mb-1 block text-xs font-medium text-slate-500">Confirm Target Security Phrase</label>
-          <input type="password" required value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} className="w-full rounded-lg border border-black/10 px-3 py-2 text-sm text-slate-800 outline-none focus:border-brand-500" />
+          <label className="mb-1 block text-xs font-medium text-slate-500 dark:text-gray-400">Confirm Target Security Phrase</label>
+          <input type="password" required value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} className="w-full rounded-lg border border-black/10 dark:border-white/10 bg-white dark:bg-gray-800 px-3 py-2 text-sm text-slate-800 dark:text-gray-100 outline-none focus:border-brand-500 dark:focus:border-brand-500 transition-colors" />
         </div>
-        {error && <p className="rounded-lg bg-red-50 px-3 py-2 text-xs font-medium text-red-700">{error}</p>}
-        {status && <p className="rounded-lg bg-emerald-50 px-3 py-2 text-xs font-medium text-emerald-700">{status}</p>}
+        {error && <p className="rounded-lg bg-red-50 dark:bg-red-900/20 px-3 py-2 text-xs font-medium text-red-700 dark:text-red-400 border border-red-100 dark:border-red-900/50">{error}</p>}
+        {status && <p className="rounded-lg bg-emerald-50 dark:bg-emerald-900/20 px-3 py-2 text-xs font-medium text-emerald-700 dark:text-emerald-400 border border-emerald-100 dark:border-emerald-900/50">{status}</p>}
         <button type="submit" disabled={saving} className="rounded-lg bg-brand-600 px-4 py-2 text-xs font-semibold text-white hover:bg-brand-700 transition-all cursor-pointer disabled:opacity-50">{saving ? "Updating..." : "Update Security Key"}</button>
       </form>
     </div>
