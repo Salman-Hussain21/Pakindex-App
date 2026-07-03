@@ -43,6 +43,10 @@ export async function PATCH(request: NextRequest, { params }: { params: Promise<
   const { id } = await params;
   const session = await getSession();
 
+  if (!session || session.role !== "super_admin") {
+    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+  }
+
   let body: {
     companyName?: string;
     legalName?: string;
@@ -119,6 +123,10 @@ export async function PATCH(request: NextRequest, { params }: { params: Promise<
 export async function DELETE(_request: NextRequest, { params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
   const session = await getSession();
+
+  if (!session || session.role !== "super_admin") {
+    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+  }
   const before = await query(`SELECT name FROM companies WHERE id = $1`, [id]);
 
   // Soft delete — keeps history/audit trail intact, frees the slug/email

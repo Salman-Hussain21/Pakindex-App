@@ -14,6 +14,7 @@ import {
   MapPin,
   ScrollText,
   Settings as SettingsIcon,
+  Package,
 } from "lucide-react";
 
 interface NavItem {
@@ -53,6 +54,7 @@ const NAV_GROUPS: NavGroup[] = [
     label: "Accounts",
     items: [
       { href: "/admin/companies", label: "Company Management", icon: Building2 },
+      { href: "/admin/packages", label: "Subscription Packages", icon: Package },
       { href: "/admin/crm", label: "CRM Oversight", icon: Users },
     ],
   },
