@@ -189,7 +189,7 @@ export default function RestaurantDatabasePage() {
         </div>
       ) : (
        <div className="relative bg-white dark:bg-gray-900 rounded-2xl border border-black/5 dark:border-white/10 shadow-sm overflow-hidden">
-          <div className="overflow-x-auto overflow-y-auto max-h-[500px]">
+         <div className={`overflow-x-auto overflow-y-auto max-h-[500px] ${isLimited ? "pb-2" : ""}`}>
             <table className="w-full text-left text-sm">
               <thead className="bg-gray-50 dark:bg-gray-800/80 border-b border-black/5 dark:border-white/10 sticky top-0 z-10">
                 <tr className="text-[11px] font-semibold uppercase tracking-wider text-gray-500 dark:text-gray-400">

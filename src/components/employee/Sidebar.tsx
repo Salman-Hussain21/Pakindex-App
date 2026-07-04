@@ -2,11 +2,12 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { LayoutDashboard, MapPin, Users, Navigation } from "lucide-react";
+import { LayoutDashboard, MapPin, Users, Navigation, Table2 } from "lucide-react";
 
 const NAV = [
   { href: "/employee", label: "Dashboard", exact: true, icon: LayoutDashboard },
   { href: "/employee/territory", label: "My Territory", icon: MapPin },
+  { href: "/employee/restaurants", label: "Restaurant Data Table", icon: Table2 },
   { href: "/employee/crm", label: "CRM / Leads", icon: Users },
   { href: "/employee/visits", label: "Field Visits", icon: Navigation },
 ];
