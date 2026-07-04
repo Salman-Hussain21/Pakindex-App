@@ -2,7 +2,6 @@ import { NextResponse } from "next/server";
 import { query } from "@/lib/db";
 import { getSession } from "@/lib/auth";
 
-// Force Next.js to run this live dynamically on every request
 export const dynamic = "force-dynamic";
 
 export async function GET(req: Request) {
@@ -20,14 +19,12 @@ export async function GET(req: Request) {
         const search = searchParams.get("search") || "";
         const searchPattern = `%${search}%`;
 
-        // Get company plan to determine data limit
         const planResult = await query(
             `SELECT c.plan FROM companies c WHERE c.id = $1`,
             [session.companyId]
         );
         const plan = planResult.rows[0]?.plan || "free";
 
-        // Count total matching businesses for this company's areas
         const countResult = await query(
             `SELECT COUNT(*) AS total
              FROM businesses b
@@ -42,7 +39,6 @@ export async function GET(req: Request) {
         );
         const totalCount = parseInt(countResult.rows[0]?.total || "0");
 
-        // Determine row limit based on plan
         let rowLimit: number | null = null;
         let isLimited = false;
 
@@ -53,10 +49,12 @@ export async function GET(req: Request) {
             rowLimit = Math.ceil(totalCount / 2);
             isLimited = totalCount > rowLimit;
         }
-        // ultra_premium, pro, enterprise, enterprise → no limit
 
         const limitClause = rowLimit ? `LIMIT ${rowLimit}` : "";
 
+        // LEFT JOIN crm_leads + users: a business has at most one crm_leads
+        // row per company (UNIQUE company_id, business_id), so this adds at
+        // most one assigned-employee name per row — never duplicates rows.
         const sql = `
             SELECT 
                 b.id,
@@ -68,11 +66,15 @@ export async function GET(req: Request) {
                 b.business_type,
                 b.status AS approval_status,
                 a.name AS area_name,
-                c.name AS city_name
+                c.name AS city_name,
+                cl.assigned_to AS assigned_employee_id,
+                u.full_name AS assigned_employee_name
             FROM businesses b
             INNER JOIN areas a ON b.area_id = a.id
             INNER JOIN cities c ON a.city_id = c.id
             INNER JOIN company_areas ca ON ca.area_id = a.id
+            LEFT JOIN crm_leads cl ON cl.business_id = b.id AND cl.company_id = ca.company_id
+            LEFT JOIN users u ON u.id = cl.assigned_to
             WHERE ca.company_id = $1
                 AND b.status = 'approved'
                 AND b.deleted_at IS NULL

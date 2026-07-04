@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { Search, Star, Phone, MapPin, Megaphone, Lock, ArrowUpRight } from "lucide-react";
+import { Search, Star, Phone, MapPin, Megaphone, Lock, ArrowUpRight, UserPlus, User } from "lucide-react";
 import { useSearchParams } from "next/navigation";
 import BusinessDetailModal, { BusinessDetail } from "@/components/admin/BusinessDetailModal";
 
@@ -16,6 +16,14 @@ interface Restaurant {
   approval_status: string;
   area_name: string;
   city_name: string | null;
+  assigned_employee_id: string | null;
+  assigned_employee_name: string | null;
+}
+
+interface EmployeeOption {
+  id: string;
+  full_name: string;
+  status: string;
 }
 
 export default function RestaurantDatabasePage() {
@@ -30,6 +38,13 @@ export default function RestaurantDatabasePage() {
   const [showUpsellModal, setShowUpsellModal] = useState(false);
   const [selectedRestaurant, setSelectedRestaurant] = useState<BusinessDetail | null>(null);
   const searchParams = useSearchParams();
+
+  // Assign Employee modal state
+  const [employees, setEmployees] = useState<EmployeeOption[]>([]);
+  const [assigningRestaurant, setAssigningRestaurant] = useState<Restaurant | null>(null);
+  const [selectedEmployeeId, setSelectedEmployeeId] = useState<string>("");
+  const [assignSubmitting, setAssignSubmitting] = useState(false);
+  const [assignError, setAssignError] = useState<string | null>(null);
 
   useEffect(() => {
     if (searchParams.get("upgrade") === "true") {
@@ -64,6 +79,54 @@ export default function RestaurantDatabasePage() {
     }, 300);
     return () => { isMounted = false; clearTimeout(debounce); };
   }, [search]);
+
+  // Load the company's employees once, for the Assign Employee modal.
+  useEffect(() => {
+    fetch("/api/company/employees?status=active")
+      .then((res) => res.json())
+      .then((data) => setEmployees(data.employees || []))
+      .catch(() => {});
+  }, []);
+
+  function openAssignModal(restaurant: Restaurant) {
+    setAssigningRestaurant(restaurant);
+    setSelectedEmployeeId(restaurant.assigned_employee_id || "");
+    setAssignError(null);
+  }
+
+  async function handleAssignSubmit(e: React.FormEvent) {
+    e.preventDefault();
+    if (!assigningRestaurant) return;
+    setAssignSubmitting(true);
+    setAssignError(null);
+
+    try {
+      const res = await fetch("/api/company/database/assign", {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          businessId: assigningRestaurant.id,
+          employeeId: selectedEmployeeId || null,
+        }),
+      });
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.error || "Failed to assign employee.");
+
+      const assignedEmp = employees.find((e) => e.id === selectedEmployeeId);
+      setRestaurants((prev) =>
+        prev.map((r) =>
+          r.id === assigningRestaurant.id
+            ? { ...r, assigned_employee_id: selectedEmployeeId || null, assigned_employee_name: assignedEmp?.full_name || null }
+            : r
+        )
+      );
+      setAssigningRestaurant(null);
+    } catch (err: any) {
+      setAssignError(err.message);
+    } finally {
+      setAssignSubmitting(false);
+    }
+  }
 
   const planLabel: Record<string, string> = {
     free: "Free", trial: "Free Trial",
@@ -125,16 +188,17 @@ export default function RestaurantDatabasePage() {
           <p className="text-sm text-gray-400">No restaurants found in your assigned areas.</p>
         </div>
       ) : (
-        <div className="relative bg-white dark:bg-gray-900 rounded-2xl border border-black/5 dark:border-white/10 shadow-sm overflow-hidden">
-          <div className="overflow-x-auto">
+       <div className="relative bg-white dark:bg-gray-900 rounded-2xl border border-black/5 dark:border-white/10 shadow-sm overflow-hidden">
+          <div className="overflow-x-auto overflow-y-auto max-h-[500px]">
             <table className="w-full text-left text-sm">
-              <thead className="bg-gray-50 dark:bg-gray-800/80 border-b border-black/5 dark:border-white/10">
+              <thead className="bg-gray-50 dark:bg-gray-800/80 border-b border-black/5 dark:border-white/10 sticky top-0 z-10">
                 <tr className="text-[11px] font-semibold uppercase tracking-wider text-gray-500 dark:text-gray-400">
                   <th className="px-5 py-3.5">Restaurant</th>
                   <th className="px-5 py-3.5">Area</th>
                   <th className="px-5 py-3.5">Contact</th>
                   <th className="px-5 py-3.5">Rating</th>
                   <th className="px-5 py-3.5">Status</th>
+                  <th className="px-5 py-3.5">Assigned Employee</th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-black/4 dark:divide-white/5">
@@ -168,14 +232,14 @@ export default function RestaurantDatabasePage() {
                     </td>
                     {/* Area */}
                     <td className="px-5 py-3.5">
-                      <span className="inline-flex items-center gap-1 text-[11px] font-medium text-brand-700 dark:text-brand-400 bg-brand-50 dark:bg-brand-900/30 border border-brand-100 dark:border-brand-800 px-2 py-0.5 rounded-md">
+                      <span className="inline-flex items-center gap-1 whitespace-nowrap text-[11px] font-medium text-brand-700 dark:text-brand-400 bg-brand-50 dark:bg-brand-900/30 border border-brand-100 dark:border-brand-800 px-2 py-0.5 rounded-md">
                         <MapPin size={10} /> {item.area_name}{item.city_name ? ` · ${item.city_name}` : ""}
                       </span>
                     </td>
                     {/* Contact */}
                     <td className="px-5 py-3.5">
                       {item.phone ? (
-                        <span className="inline-flex items-center gap-1 text-[11px] font-mono text-gray-600 dark:text-gray-300">
+                        <span className="inline-flex items-center gap-1 whitespace-nowrap text-[11px] font-mono text-gray-600 dark:text-gray-300">
                           <Phone size={10} className="text-gray-400" /> {item.phone}
                         </span>
                       ) : (
@@ -185,7 +249,7 @@ export default function RestaurantDatabasePage() {
                     {/* Rating */}
                     <td className="px-5 py-3.5">
                       {item.rating ? (
-                        <span className="inline-flex items-center gap-1 text-[11px] font-semibold text-amber-600">
+                        <span className="inline-flex items-center gap-1 whitespace-nowrap text-[11px] font-semibold text-amber-600">
                           <Star size={11} className="fill-amber-400 text-amber-400" /> {item.rating}
                         </span>
                       ) : (
@@ -194,46 +258,58 @@ export default function RestaurantDatabasePage() {
                     </td>
                     {/* Status */}
                     <td className="px-5 py-3.5">
-                      <span className="inline-flex items-center rounded-full bg-emerald-50 dark:bg-emerald-900/30 px-2.5 py-0.5 text-[10px] font-bold uppercase tracking-wider text-emerald-700 dark:text-emerald-400 border border-emerald-200 dark:border-emerald-800">
+                      <span className="inline-flex items-center whitespace-nowrap rounded-full bg-emerald-50 dark:bg-emerald-900/30 px-2.5 py-0.5 text-[10px] font-bold uppercase tracking-wider text-emerald-700 dark:text-emerald-400 border border-emerald-200 dark:border-emerald-800">
                         {item.approval_status}
                       </span>
+                    </td>
+                    {/* Assigned Employee */}
+                    <td className="px-5 py-3.5">
+                      <div className="flex items-center gap-2 whitespace-nowrap">
+                        {item.assigned_employee_name ? (
+                          <span className="inline-flex items-center gap-1 whitespace-nowrap text-[11px] font-medium text-slate-700 dark:text-gray-300 bg-slate-50 dark:bg-gray-800 border border-slate-200 dark:border-white/10 px-2 py-0.5 rounded-md">
+                            <User size={10} /> {item.assigned_employee_name}
+                          </span>
+                        ) : (
+                          <span className="text-[11px] text-gray-400 italic whitespace-nowrap">0 Employees Assigned</span>
+                        )}
+                        <button
+                          onClick={() => openAssignModal(item)}
+                          title={item.assigned_employee_name ? "Reassign employee" : "Assign employee"}
+                          className="inline-flex items-center gap-1 whitespace-nowrap rounded-lg border border-slate-200 dark:border-white/10 bg-white dark:bg-gray-800 px-2 py-1 text-[10px] font-semibold text-slate-600 dark:text-gray-300 hover:bg-brand-50 hover:text-brand-700 hover:border-brand-200 transition-all cursor-pointer"
+                        >
+                          <UserPlus size={11} /> {item.assigned_employee_name ? "Reassign" : "Assign"}
+                        </button>
+                      </div>
                     </td>
                   </tr>
                 ))}
               </tbody>
             </table>
           </div>
-
-          {/* ── UPSELL OVERLAY (exact reference design) ── */}
+<br />
+          {/* ── UPSELL OVERLAY ── */}
           {isLimited && (
             <div
-              className="absolute bottom-0 left-0 right-0 h-48 flex flex-col items-center justify-end pb-6 cursor-pointer"
-              style={{ background: "linear-gradient(to bottom, transparent 0%, rgba(255,255,255,0.92) 40%, white 100%)" }}
+              className="dark:hidden absolute bottom-0 left-0 right-0 h-20 flex flex-col items-center justify-end pb-3 cursor-pointer"
+              style={{ background: "linear-gradient(to bottom, transparent 0%, rgba(255,255,255,0.95) 55%, white 100%)" }}
               onClick={() => setShowUpsellModal(true)}
             >
-              <div className="dark:hidden flex flex-col items-center text-center">
-                <div className="w-12 h-12 rounded-full bg-blue-50 border border-blue-100 flex items-center justify-center mb-3">
-                  <Megaphone size={22} className="text-blue-400" />
-                </div>
-                <p className="text-sm font-bold text-gray-800">Subscribe A Plan To See More!</p>
-                <p className="text-xs text-gray-500 mt-0.5">Upgrade Your Plan And Explore The Full List Of Entries!</p>
+              <div className="flex items-center gap-2 text-center">
+                <Megaphone size={14} className="text-blue-400 flex-shrink-0" />
+                <p className="text-xs font-bold text-gray-800">Subscribe a plan to see more restaurants</p>
               </div>
             </div>
           )}
 
-          {/* Dark mode overlay variant */}
           {isLimited && (
             <div
-              className="hidden dark:flex absolute bottom-0 left-0 right-0 h-48 flex-col items-center justify-end pb-6 cursor-pointer"
-              style={{ background: "linear-gradient(to bottom, transparent 0%, rgba(17,24,39,0.92) 40%, rgb(17,24,39) 100%)" }}
+              className="hidden dark:flex absolute bottom-0 left-0 right-0 h-20 flex-col items-center justify-end pb-3 cursor-pointer"
+              style={{ background: "linear-gradient(to bottom, transparent 0%, rgba(17,24,39,0.95) 55%, rgb(17,24,39) 100%)" }}
               onClick={() => setShowUpsellModal(true)}
             >
-              <div className="flex flex-col items-center text-center">
-                <div className="w-12 h-12 rounded-full bg-blue-900/40 border border-blue-700/40 flex items-center justify-center mb-3">
-                  <Megaphone size={22} className="text-blue-400" />
-                </div>
-                <p className="text-sm font-bold text-white">Subscribe A Plan To See More!</p>
-                <p className="text-xs text-gray-400 mt-0.5">Upgrade Your Plan And Explore The Full List Of Entries!</p>
+              <div className="flex items-center gap-2 text-center">
+                <Megaphone size={14} className="text-blue-400 flex-shrink-0" />
+                <p className="text-xs font-bold text-white">Subscribe a plan to see more restaurants</p>
               </div>
             </div>
           )}
@@ -287,6 +363,78 @@ export default function RestaurantDatabasePage() {
 
             <p className="text-xs text-gray-400 mt-4">Contact your account manager to upgrade.</p>
           </div>
+        </div>
+      )}
+
+      {/* ── ASSIGN EMPLOYEE MODAL ── */}
+      {assigningRestaurant && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 backdrop-blur-xs p-4">
+          <form
+            onSubmit={handleAssignSubmit}
+            className="bg-white dark:bg-gray-900 rounded-2xl border border-black/5 dark:border-white/10 max-w-sm w-full p-6 space-y-4 shadow-xl max-h-[85vh] overflow-y-auto"
+          >
+            <div>
+              <h3 className="text-sm font-bold text-ink-900 dark:text-white">Assign Employee</h3>
+              <p className="text-[11px] text-gray-400 mt-0.5">
+                Only one employee can be assigned to <span className="font-semibold text-slate-700 dark:text-gray-300">{assigningRestaurant.name}</span> at a time.
+              </p>
+            </div>
+
+            {assignError && (
+              <div className="p-3 text-xs font-medium text-red-700 bg-red-50 border border-red-200 rounded-lg">
+                {assignError}
+              </div>
+            )}
+
+            <div className="space-y-1.5 max-h-64 overflow-y-auto">
+              <label className="flex items-center gap-2 rounded-lg border border-slate-200 dark:border-white/10 px-3 py-2 text-xs cursor-pointer hover:bg-slate-50 dark:hover:bg-gray-800">
+                <input
+                  type="radio"
+                  name="employee"
+                  checked={selectedEmployeeId === ""}
+                  onChange={() => setSelectedEmployeeId("")}
+                  className="accent-brand-600"
+                />
+                <span className="text-gray-500 italic">Unassigned</span>
+              </label>
+              {employees.length === 0 ? (
+                <p className="text-xs text-gray-400 italic px-1 py-2">No active employees found. Add employees first.</p>
+              ) : (
+                employees.map((emp) => (
+                  <label
+                    key={emp.id}
+                    className="flex items-center gap-2 rounded-lg border border-slate-200 dark:border-white/10 px-3 py-2 text-xs cursor-pointer hover:bg-slate-50 dark:hover:bg-gray-800"
+                  >
+                    <input
+                      type="radio"
+                      name="employee"
+                      checked={selectedEmployeeId === emp.id}
+                      onChange={() => setSelectedEmployeeId(emp.id)}
+                      className="accent-brand-600"
+                    />
+                    <span className="text-ink-900 dark:text-gray-200 font-medium">{emp.full_name}</span>
+                  </label>
+                ))
+              )}
+            </div>
+
+            <div className="flex justify-end gap-2 text-xs font-semibold pt-3 border-t border-slate-100 dark:border-white/10">
+              <button
+                type="button"
+                onClick={() => setAssigningRestaurant(null)}
+                className="px-3 py-2 bg-slate-50 hover:bg-slate-100 dark:bg-gray-800 dark:hover:bg-gray-700 text-slate-600 dark:text-gray-300 rounded-xl border border-slate-200 dark:border-white/10 cursor-pointer"
+              >
+                Cancel
+              </button>
+              <button
+                type="submit"
+                disabled={assignSubmitting}
+                className="px-4 py-2 bg-brand-600 hover:bg-brand-700 text-white rounded-xl shadow-sm disabled:opacity-50 transition-colors cursor-pointer"
+              >
+                {assignSubmitting ? "Saving…" : "Save Assignment"}
+              </button>
+            </div>
+          </form>
         </div>
       )}
 
