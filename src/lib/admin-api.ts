@@ -133,3 +133,8 @@ export function getScrapeJobs(paramsObj: Record<string, string | number | undefi
 export function bulkApproveScrapeJobs(jobIds: string[]) {
   return request(`/api/admin/scrape-jobs/bulk-approve`, { method: "POST", body: JSON.stringify({ jobIds }) });
 }
+
+export function getGridCells() { return request("/api/admin/grid-scrape"); }
+export function triggerGridScrape(cellId: string) {
+  return request("/api/admin/grid-scrape", { method: "POST", body: JSON.stringify({ cellId }) });
+}

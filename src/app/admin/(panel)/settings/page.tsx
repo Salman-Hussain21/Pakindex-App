@@ -102,9 +102,9 @@ function ProfileTab() {
     <Card>
       <h2 className="mb-4 text-sm font-semibold text-ink-900 dark:text-gray-100">Profile</h2>
       <div className="mb-6 space-y-2 text-sm">
-        <p><span className="text-ink-900/50 dark:text-gray-400">Name: </span>{session?.fullName || "—"}</p>
-        <p><span className="text-ink-900/50 dark:text-gray-400">Email: </span>{session?.email || "—"}</p>
-        <p className="capitalize"><span className="text-ink-900/50 dark:text-gray-400">Role: </span>{session?.role?.replace("_", " ") || "—"}</p>
+        <p className="text-ink-900 dark:text-gray-100"><span className="text-ink-900/50 dark:text-gray-400">Name: </span>{session?.fullName || "—"}</p>
+        <p className="text-ink-900 dark:text-gray-100"><span className="text-ink-900/50 dark:text-gray-400">Email: </span>{session?.email || "—"}</p>
+        <p className="capitalize text-ink-900 dark:text-gray-100"><span className="text-ink-900/50 dark:text-gray-400">Role: </span>{session?.role?.replace("_", " ") || "—"}</p>
       </div>
 
       <h2 className="mb-3 text-sm font-semibold text-ink-900 dark:text-gray-100">Change Password</h2>

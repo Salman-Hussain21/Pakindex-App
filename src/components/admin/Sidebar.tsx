@@ -5,16 +5,17 @@ import { usePathname } from "next/navigation";
 import {
   LayoutDashboard,
   Radar,
+  Map,
   Inbox,
   ClipboardCheck,
   Database,
   Trash2,
   Building2,
-  Users,
   MapPin,
   ScrollText,
   Settings as SettingsIcon,
   Package,
+  Bell,
 } from "lucide-react";
 
 interface NavItem {
@@ -38,6 +39,7 @@ const NAV_GROUPS: NavGroup[] = [
     label: "Data Pipeline",
     items: [
       { href: "/admin/scraping", label: "Scraping Center", icon: Radar },
+      { href: "/admin/grid-scraper", label: "Grid Scraper", icon: Map },
       { href: "/admin/scraped-data", label: "New Scraped Data", icon: Inbox },
       { href: "/admin/pending", label: "Pending Approval", icon: ClipboardCheck },
       { href: "/admin/rejected", label: "Rejected / Trash", icon: Trash2 },
@@ -55,12 +57,12 @@ const NAV_GROUPS: NavGroup[] = [
     items: [
       { href: "/admin/companies", label: "Company Management", icon: Building2 },
       { href: "/admin/packages", label: "Subscription Packages", icon: Package },
-      { href: "/admin/crm", label: "CRM Oversight", icon: Users },
     ],
   },
   {
     label: "System",
     items: [
+      { href: "/admin/notifications", label: "Notifications", icon: Bell },
       { href: "/admin/audit-logs", label: "Audit Logs", icon: ScrollText },
       { href: "/admin/settings", label: "Settings", icon: SettingsIcon },
     ],

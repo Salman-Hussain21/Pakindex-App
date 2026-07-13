@@ -165,15 +165,13 @@ export default function CompanyManagementPage() {
       {error && <p className="mb-3 rounded-lg bg-red-50 px-3 py-2 text-sm text-red-700 dark:bg-red-900/20 dark:text-red-400">{error}</p>}
 
       <BulkActionBar count={selected.size} onClear={() => setSelected(new Set())}>
-        <button disabled={bulkBusy} onClick={() => bulkAction("activate")} className="rounded-lg border border-black/10 px-3 py-1.5 text-xs font-medium hover:bg-gray-50 disabled:opacity-50 dark:border-white/10 dark:hover:bg-gray-800">
-          Activate
-        </button>
-        <button disabled={bulkBusy} onClick={() => bulkAction("suspend")} className="rounded-lg bg-amber-600 px-3 py-1.5 text-xs font-medium text-white hover:bg-amber-700 disabled:opacity-50">
-          Suspend
-        </button>
-        <button disabled={bulkBusy} onClick={() => bulkAction("delete")} className="rounded-lg bg-red-600 px-3 py-1.5 text-xs font-medium text-white hover:bg-red-700 disabled:opacity-50">
-          Cancel Selected
-        </button>
+        {filtered.some(c => selected.has(c.id) && c.status !== "active") && (
+          <button disabled={bulkBusy} onClick={() => bulkAction("activate")} className="rounded-lg border border-black/10 px-3 py-1.5 text-xs font-medium hover:bg-gray-50 disabled:opacity-50 dark:border-white/10 dark:text-gray-200 dark:hover:bg-gray-800">Activate</button>
+        )}
+        {filtered.some(c => selected.has(c.id) && c.status !== "suspended") && (
+          <button disabled={bulkBusy} onClick={() => bulkAction("suspend")} className="rounded-lg bg-amber-600 px-3 py-1.5 text-xs font-medium text-white hover:bg-amber-700 disabled:opacity-50">Suspend</button>
+        )}
+        <button disabled={bulkBusy} onClick={() => bulkAction("delete")} className="rounded-lg bg-red-600 px-3 py-1.5 text-xs font-medium text-white hover:bg-red-700 disabled:opacity-50">Delete Selected</button>
       </BulkActionBar>
 
       <div className="overflow-hidden rounded-2xl border border-black/5 bg-white shadow-sm dark:border-white/10 dark:bg-gray-900">
@@ -227,13 +225,18 @@ export default function CompanyManagementPage() {
                     </span>
                   </td>
                   <td className="px-4 py-3"><StatusBadge status={c.status} /></td>
-                  <td className="px-4 py-3 text-right">
-                    <button
-                      onClick={() => openEdit(c.id)}
-                      className="rounded-lg border border-black/10 px-2.5 py-1 text-xs font-medium hover:bg-gray-50 dark:border-white/10 dark:hover:bg-gray-800"
-                    >
-                      Edit
-                    </button>
+                  <td className="px-4 py-3">
+                    <div className="flex justify-end flex-wrap gap-1.5">
+                      <button onClick={() => openEdit(c.id)} className="rounded-lg border border-black/10 px-2.5 py-1 text-xs font-medium hover:bg-gray-50 dark:border-white/10 dark:text-gray-200 dark:hover:bg-gray-800">Edit</button>
+                      {c.status !== "active" && (
+                        <button onClick={async () => { try { const m = await import("@/lib/admin-api"); await m.updateCompany(c.id, { status: "active" }); load(); } catch {} }}
+                          className="rounded-lg border border-brand-200 bg-brand-50 px-2.5 py-1 text-xs font-medium text-brand-700 hover:bg-brand-100 dark:border-brand-900/40 dark:bg-brand-900/20 dark:text-brand-400">Activate</button>
+                      )}
+                      {c.status === "active" && (
+                        <button onClick={async () => { try { const m = await import("@/lib/admin-api"); await m.updateCompany(c.id, { status: "suspended" }); load(); } catch {} }}
+                          className="rounded-lg border border-amber-200 bg-amber-50 px-2.5 py-1 text-xs font-medium text-amber-700 hover:bg-amber-100 dark:border-amber-900/40 dark:bg-amber-900/20 dark:text-amber-400">Suspend</button>
+                      )}
+                    </div>
                   </td>
                 </tr>
               ))
