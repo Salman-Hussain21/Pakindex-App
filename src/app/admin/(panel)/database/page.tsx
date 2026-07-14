@@ -80,7 +80,7 @@ export default function HorecaDatabasePage() {
                   </div>
                 </td>
                 <td className="px-4 py-3">
-                  <div className="flex justify-end flex-wrap gap-1.5">
+                  <div className="flex flex-row flex-nowrap items-center justify-end gap-1">
                     <PreviewMapButtons business={b} />
                     {selected.has(b.id) && (
                       <button disabled={bulkBusy} onClick={bulkRemove} className="rounded-lg bg-red-600 px-2.5 py-1 text-xs font-medium text-white hover:bg-red-700 disabled:opacity-50">Delete</button>

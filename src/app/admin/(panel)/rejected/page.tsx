@@ -75,7 +75,7 @@ export default function RejectedRecordsPage() {
                 <td className="px-4 py-3 text-ink-900/60 dark:text-gray-400">{b.category_name || b.business_type || "—"}</td>
                 <td className="px-4 py-3 text-ink-900/60 dark:text-gray-400">{b.rejection_reason || "—"}</td>
                 <td className="px-4 py-3">
-                  <div className="flex justify-end flex-wrap gap-1.5">
+                  <div className="flex flex-row flex-nowrap items-center justify-end gap-1">
                     <PreviewMapButtons business={b} />
                     <button disabled={busyId === b.id} onClick={() => restore(b.id)} className="rounded-lg border border-black/10 px-2.5 py-1 text-xs font-medium hover:bg-gray-50 disabled:opacity-50 dark:border-white/10 dark:text-gray-200 dark:hover:bg-gray-800">Restore</button>
                     <button disabled={busyId === b.id} onClick={() => permDelete(b.id)} className="rounded-lg bg-red-600 px-2.5 py-1 text-xs font-medium text-white hover:bg-red-700 disabled:opacity-50">Delete Forever</button>

@@ -1,9 +1,10 @@
+@import 'leaflet/dist/leaflet.css';
 @import "tailwindcss";
 
 @custom-variant dark (&:where(.dark, .dark *));
 
 @theme {
-  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
 
   /* PakIndex brand green, sampled from the logo */
   --color-brand-50:  #e6f3ed;

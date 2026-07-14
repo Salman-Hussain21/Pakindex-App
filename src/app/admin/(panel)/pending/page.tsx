@@ -84,7 +84,7 @@ export default function PendingApprovalPage() {
                 <td className="px-4 py-3 text-ink-900/60 dark:text-gray-400">{b.phone || "—"}</td>
                 <td className="px-4 py-3 text-ink-900/60 dark:text-gray-400">{b.rating ? `★ ${b.rating}` : "—"}</td>
                 <td className="px-4 py-3">
-                  <div className="flex justify-end flex-wrap gap-1.5">
+                  <div className="flex flex-row flex-nowrap items-center justify-end gap-1">
                     <PreviewMapButtons business={b} />
                     <button disabled={busyId === b.id} onClick={() => approve(b.id)} className="rounded-lg bg-brand-600 px-2.5 py-1 text-xs font-medium text-white hover:bg-brand-700 disabled:opacity-50">Approve</button>
                     <button disabled={busyId === b.id} onClick={() => setRejectFor(b.id)} className="rounded-lg bg-red-600 px-2.5 py-1 text-xs font-medium text-white hover:bg-red-700 disabled:opacity-50">Reject</button>
