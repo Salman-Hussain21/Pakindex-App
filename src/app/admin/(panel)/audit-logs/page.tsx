@@ -43,16 +43,25 @@ function summarize(log: AuditLog): string {
 
 export default function AuditLogsPage() {
   const [logs, setLogs] = useState<AuditLog[]>([]);
+  const [total, setTotal] = useState(0);
+  const [page, setPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(1);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [entityType, setEntityType] = useState("");
   const [action, setAction] = useState("");
 
-  const load = useCallback(async () => {
+  const load = useCallback(async (pg = 1) => {
     setLoading(true);
     try {
-      const data: any = await getAuditLogs({ entityType, action, pageSize: 100 });
-      setLogs(data.logs);
+      const data: any = await getAuditLogs({ entityType, action, pageSize: 50, page: pg });
+      const fetchedTotal = data.pagination?.total || data.total || 0;
+      
+      setLogs(data.logs || []);
+      setTotal(fetchedTotal);
+      // Force calculate total pages manually so the buttons always show up if total > 50
+      setTotalPages(Math.ceil(fetchedTotal / 50) || 1);
+      setPage(pg);
     } catch (e: any) {
       setError(e.message);
     } finally {
@@ -61,7 +70,7 @@ export default function AuditLogsPage() {
   }, [entityType, action]);
 
   useEffect(() => {
-    load();
+    load(1);
   }, [load]);
 
   return (
@@ -71,7 +80,7 @@ export default function AuditLogsPage() {
       <div className="mb-4 flex gap-2">
         <select
           value={entityType}
-          onChange={(e) => setEntityType(e.target.value)}
+          onChange={(e) => { setEntityType(e.target.value); load(1); }}
           className="rounded-lg border border-black/10 bg-white px-3 py-2 text-sm text-ink-900 outline-none focus:border-brand-500 dark:border-white/10 dark:bg-gray-800 dark:text-gray-100"
         >
           <option value="">All entities</option>
@@ -83,7 +92,7 @@ export default function AuditLogsPage() {
         </select>
         <select
           value={action}
-          onChange={(e) => setAction(e.target.value)}
+          onChange={(e) => { setAction(e.target.value); load(1); }}
           className="rounded-lg border border-black/10 bg-white px-3 py-2 text-sm text-ink-900 outline-none focus:border-brand-500 dark:border-white/10 dark:bg-gray-800 dark:text-gray-100"
         >
           <option value="">All actions</option>
@@ -136,6 +145,25 @@ export default function AuditLogsPage() {
             )}
           </tbody>
         </table>
+      </div>
+
+      <div className="mt-4 flex items-center justify-between">
+        <p className="text-xs text-ink-900/40 dark:text-gray-500">
+          Showing {total === 0 ? 0 : ((page - 1) * 50) + 1}–{Math.min(page * 50, total)} of {total.toLocaleString()} logs
+        </p>
+        {totalPages > 1 && (
+          <div className="flex items-center gap-1">
+            <button disabled={page <= 1} onClick={() => load(1)}
+              className="rounded-lg border border-black/10 px-2.5 py-1 text-xs text-ink-900 hover:bg-gray-50 disabled:opacity-40 dark:border-white/10 dark:text-gray-200 dark:hover:bg-gray-800">«</button>
+            <button disabled={page <= 1} onClick={() => load(page - 1)}
+              className="rounded-lg border border-black/10 px-2.5 py-1 text-xs text-ink-900 hover:bg-gray-50 disabled:opacity-40 dark:border-white/10 dark:text-gray-200 dark:hover:bg-gray-800">‹ Prev</button>
+            <span className="px-3 text-xs text-ink-900/60 dark:text-gray-400">Page {page} of {totalPages}</span>
+            <button disabled={page >= totalPages} onClick={() => load(page + 1)}
+              className="rounded-lg border border-black/10 px-2.5 py-1 text-xs text-ink-900 hover:bg-gray-50 disabled:opacity-40 dark:border-white/10 dark:text-gray-200 dark:hover:bg-gray-800">Next ›</button>
+            <button disabled={page >= totalPages} onClick={() => load(totalPages)}
+              className="rounded-lg border border-black/10 px-2.5 py-1 text-xs text-ink-900 hover:bg-gray-50 disabled:opacity-40 dark:border-white/10 dark:text-gray-200 dark:hover:bg-gray-800">»</button>
+          </div>
+        )}
       </div>
     </div>
   );

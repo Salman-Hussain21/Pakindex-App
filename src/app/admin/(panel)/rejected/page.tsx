@@ -8,6 +8,9 @@ import PreviewMapButtons from "@/components/admin/PreviewMapButtons";
 
 export default function RejectedRecordsPage() {
   const [rows, setRows] = useState<BusinessDetail[]>([]);
+  const [total, setTotal] = useState(0);
+  const [page, setPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(1);
   const [q, setQ] = useState("");
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -15,33 +18,65 @@ export default function RejectedRecordsPage() {
   const [bulkBusy, setBulkBusy] = useState(false);
   const [selected, setSelected] = useState<Set<string>>(new Set());
 
-  const load = useCallback(async (search: string) => {
+  const load = useCallback(async (search: string, pg = 1) => {
     setLoading(true);
-    try { const d: any = await getBusinesses({ status: "rejected", q: search, pageSize: 100 }); setRows(d.businesses); setSelected(new Set()); }
+    try { 
+      const d: any = await getBusinesses({ status: "rejected", q: search, pageSize: 50, page: pg }); 
+      setRows(d.businesses || []); 
+      setTotal(d.pagination?.total || 0);
+      setTotalPages(d.pagination?.totalPages || 1);
+      setPage(pg);
+      setSelected(new Set()); 
+    }
     catch (e: any) { setError(e.message); } finally { setLoading(false); }
   }, []);
 
-  useEffect(() => { const t = setTimeout(() => load(q), 300); return () => clearTimeout(t); }, [q, load]);
+  useEffect(() => { const t = setTimeout(() => load(q, 1), 300); return () => clearTimeout(t); }, [q, load]);
 
   const toggle = (id: string) => setSelected(p => { const n = new Set(p); n.has(id) ? n.delete(id) : n.add(id); return n; });
   const toggleAll = () => setSelected(p => p.size === rows.length ? new Set() : new Set(rows.map(r => r.id)));
 
   async function restore(id: string) {
-    setBusyId(id); try { await patchBusiness(id, { action: "restore" }); setRows(p => p.filter(r => r.id !== id)); }
+    setBusyId(id); 
+    try { 
+      await patchBusiness(id, { action: "restore" }); 
+      setRows(p => p.filter(r => r.id !== id)); 
+      setTotal(t => Math.max(0, t - 1));
+    }
     catch (e: any) { setError(e.message); } finally { setBusyId(null); }
   }
+  
   async function permDelete(id: string) {
     if (!confirm("Permanently delete? Cannot be undone.")) return;
-    setBusyId(id); try { await deleteBusinessForever(id); setRows(p => p.filter(r => r.id !== id)); }
+    setBusyId(id); 
+    try { 
+      await deleteBusinessForever(id); 
+      setRows(p => p.filter(r => r.id !== id)); 
+      setTotal(t => Math.max(0, t - 1));
+    }
     catch (e: any) { setError(e.message); } finally { setBusyId(null); }
   }
+  
   async function bulkRestore() {
-    setBulkBusy(true); try { await bulkBusinessAction({ action: "restore", ids: Array.from(selected) }); setRows(p => p.filter(r => !selected.has(r.id))); setSelected(new Set()); }
+    setBulkBusy(true); 
+    try { 
+      await bulkBusinessAction({ action: "restore", ids: Array.from(selected) }); 
+      setRows(p => p.filter(r => !selected.has(r.id))); 
+      setTotal(t => Math.max(0, t - selected.size));
+      setSelected(new Set()); 
+    }
     catch (e: any) { setError(e.message); } finally { setBulkBusy(false); }
   }
+  
   async function bulkDeleteForever() {
     if (!confirm(`Permanently delete ${selected.size} record(s)?`)) return;
-    setBulkBusy(true); try { await bulkBusinessAction({ action: "delete", ids: Array.from(selected) }); setRows(p => p.filter(r => !selected.has(r.id))); setSelected(new Set()); }
+    setBulkBusy(true); 
+    try { 
+      await bulkBusinessAction({ action: "delete", ids: Array.from(selected) }); 
+      setRows(p => p.filter(r => !selected.has(r.id))); 
+      setTotal(t => Math.max(0, t - selected.size));
+      setSelected(new Set()); 
+    }
     catch (e: any) { setError(e.message); } finally { setBulkBusy(false); }
   }
 
@@ -53,7 +88,7 @@ export default function RejectedRecordsPage() {
       {error && <p className="mb-3 rounded-lg bg-red-50 px-3 py-2 text-sm text-red-700 dark:bg-red-900/20 dark:text-red-400">{error}</p>}
 
       <BulkActionBar count={selected.size} onClear={() => setSelected(new Set())}>
-        <button disabled={bulkBusy} onClick={bulkRestore} className="rounded-lg border border-black/10 px-3 py-1.5 text-xs font-medium hover:bg-gray-50 disabled:opacity-50 dark:border-white/10 dark:text-gray-200 dark:hover:bg-gray-800">Restore Selected</button>
+        <button disabled={bulkBusy} onClick={bulkRestore} className="rounded-lg border border-black/10 px-3 py-1.5 text-xs font-medium text-ink-900 hover:bg-gray-50 disabled:opacity-50 dark:border-white/10 dark:text-gray-200 dark:hover:bg-gray-800">Restore Selected</button>
         <button disabled={bulkBusy} onClick={bulkDeleteForever} className="rounded-lg bg-red-600 px-3 py-1.5 text-xs font-medium text-white hover:bg-red-700 disabled:opacity-50">Delete Forever</button>
       </BulkActionBar>
 
@@ -77,7 +112,7 @@ export default function RejectedRecordsPage() {
                 <td className="px-4 py-3">
                   <div className="flex flex-row flex-nowrap items-center justify-end gap-1">
                     <PreviewMapButtons business={b} />
-                    <button disabled={busyId === b.id} onClick={() => restore(b.id)} className="rounded-lg border border-black/10 px-2.5 py-1 text-xs font-medium hover:bg-gray-50 disabled:opacity-50 dark:border-white/10 dark:text-gray-200 dark:hover:bg-gray-800">Restore</button>
+                    <button disabled={busyId === b.id} onClick={() => restore(b.id)} className="rounded-lg border border-black/10 px-2.5 py-1 text-xs font-medium text-ink-900 hover:bg-gray-50 disabled:opacity-50 dark:border-white/10 dark:text-gray-200 dark:hover:bg-gray-800">Restore</button>
                     <button disabled={busyId === b.id} onClick={() => permDelete(b.id)} className="rounded-lg bg-red-600 px-2.5 py-1 text-xs font-medium text-white hover:bg-red-700 disabled:opacity-50">Delete Forever</button>
                   </div>
                 </td>
@@ -85,6 +120,25 @@ export default function RejectedRecordsPage() {
             ))}
           </tbody>
         </table>
+      </div>
+
+      <div className="mt-4 flex items-center justify-between">
+        <p className="text-xs text-ink-900/40 dark:text-gray-500">
+          Showing {total === 0 ? 0 : ((page - 1) * 50) + 1}–{Math.min(page * 50, total)} of {total.toLocaleString()} rejected records
+        </p>
+        {totalPages > 1 && (
+          <div className="flex items-center gap-1">
+            <button disabled={page <= 1} onClick={() => load(q, 1)}
+              className="rounded-lg border border-black/10 px-2.5 py-1 text-xs text-ink-900 hover:bg-gray-50 disabled:opacity-40 dark:border-white/10 dark:text-gray-200 dark:hover:bg-gray-800">«</button>
+            <button disabled={page <= 1} onClick={() => load(q, page - 1)}
+              className="rounded-lg border border-black/10 px-2.5 py-1 text-xs text-ink-900 hover:bg-gray-50 disabled:opacity-40 dark:border-white/10 dark:text-gray-200 dark:hover:bg-gray-800">‹ Prev</button>
+            <span className="px-3 text-xs text-ink-900/60 dark:text-gray-400">Page {page} of {totalPages}</span>
+            <button disabled={page >= totalPages} onClick={() => load(q, page + 1)}
+              className="rounded-lg border border-black/10 px-2.5 py-1 text-xs text-ink-900 hover:bg-gray-50 disabled:opacity-40 dark:border-white/10 dark:text-gray-200 dark:hover:bg-gray-800">Next ›</button>
+            <button disabled={page >= totalPages} onClick={() => load(q, totalPages)}
+              className="rounded-lg border border-black/10 px-2.5 py-1 text-xs text-ink-900 hover:bg-gray-50 disabled:opacity-40 dark:border-white/10 dark:text-gray-200 dark:hover:bg-gray-800">»</button>
+          </div>
+        )}
       </div>
     </div>
   );

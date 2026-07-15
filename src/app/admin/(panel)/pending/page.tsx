@@ -8,6 +8,9 @@ import PreviewMapButtons from "@/components/admin/PreviewMapButtons";
 
 export default function PendingApprovalPage() {
   const [rows, setRows] = useState<BusinessDetail[]>([]);
+  const [total, setTotal] = useState(0);
+  const [page, setPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(1);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [busyId, setBusyId] = useState<string | null>(null);
@@ -16,38 +19,65 @@ export default function PendingApprovalPage() {
   const [rejectReason, setRejectReason] = useState("");
   const [selected, setSelected] = useState<Set<string>>(new Set());
 
-  const load = useCallback(async () => {
+  const load = useCallback(async (pg = 1) => {
     setLoading(true);
-    try { const d: any = await getBusinesses({ status: "pending", pageSize: 100 }); setRows(d.businesses); setSelected(new Set()); }
+    try { 
+      const d: any = await getBusinesses({ status: "pending", pageSize: 50, page: pg }); 
+      setRows(d.businesses || []); 
+      setTotal(d.pagination?.total || 0);
+      setTotalPages(d.pagination?.totalPages || 1);
+      setPage(pg);
+      setSelected(new Set()); 
+    }
     catch (e: any) { setError(e.message); } finally { setLoading(false); }
   }, []);
 
-  useEffect(() => { load(); }, [load]);
+  useEffect(() => { load(1); }, [load]);
 
   const toggle = (id: string) => setSelected(p => { const n = new Set(p); n.has(id) ? n.delete(id) : n.add(id); return n; });
   const toggleAll = () => setSelected(p => p.size === rows.length ? new Set() : new Set(rows.map(r => r.id)));
 
   async function approve(id: string) {
     setBusyId(id);
-    try { await patchBusiness(id, { action: "approve" }); setRows(p => p.filter(r => r.id !== id)); }
+    try { 
+      await patchBusiness(id, { action: "approve" }); 
+      setRows(p => p.filter(r => r.id !== id)); 
+      setTotal(t => Math.max(0, t - 1));
+    }
     catch (e: any) { setError(e.message); } finally { setBusyId(null); }
   }
 
   async function reject(id: string, reason: string) {
     setBusyId(id);
-    try { await patchBusiness(id, { action: "reject", reason }); setRows(p => p.filter(r => r.id !== id)); setRejectFor(null); setRejectReason(""); }
+    try { 
+      await patchBusiness(id, { action: "reject", reason }); 
+      setRows(p => p.filter(r => r.id !== id)); 
+      setTotal(t => Math.max(0, t - 1));
+      setRejectFor(null); 
+      setRejectReason(""); 
+    }
     catch (e: any) { setError(e.message); } finally { setBusyId(null); }
   }
 
   async function bulkApprove() {
     setBulkBusy(true);
-    try { await bulkBusinessAction({ action: "approve", ids: Array.from(selected) }); setRows(p => p.filter(r => !selected.has(r.id))); setSelected(new Set()); }
+    try { 
+      await bulkBusinessAction({ action: "approve", ids: Array.from(selected) }); 
+      setRows(p => p.filter(r => !selected.has(r.id))); 
+      setTotal(t => Math.max(0, t - selected.size));
+      setSelected(new Set()); 
+    }
     catch (e: any) { setError(e.message); } finally { setBulkBusy(false); }
   }
 
   async function bulkReject() {
     setBulkBusy(true);
-    try { await bulkBusinessAction({ action: "reject", ids: Array.from(selected), reason: "Bulk rejected by admin" }); setRows(p => p.filter(r => !selected.has(r.id))); setSelected(new Set()); }
+    try { 
+      await bulkBusinessAction({ action: "reject", ids: Array.from(selected), reason: "Bulk rejected by admin" }); 
+      setRows(p => p.filter(r => !selected.has(r.id))); 
+      setTotal(t => Math.max(0, t - selected.size));
+      setSelected(new Set()); 
+    }
     catch (e: any) { setError(e.message); } finally { setBulkBusy(false); }
   }
 
@@ -55,7 +85,7 @@ export default function PendingApprovalPage() {
     <div>
       <div className="mb-4 flex items-center justify-between">
         <h1 className="text-xl font-semibold text-ink-900 dark:text-gray-100">Pending Approval</h1>
-        <span className="text-sm text-ink-900/50 dark:text-gray-400">{rows.length} waiting</span>
+        <span className="text-sm text-ink-900/50 dark:text-gray-400">{total.toLocaleString()} waiting</span>
       </div>
       {error && <p className="mb-3 rounded-lg bg-red-50 px-3 py-2 text-sm text-red-700 dark:bg-red-900/20 dark:text-red-400">{error}</p>}
 
@@ -96,6 +126,25 @@ export default function PendingApprovalPage() {
         </table>
       </div>
 
+      <div className="mt-4 flex items-center justify-between">
+        <p className="text-xs text-ink-900/40 dark:text-gray-500">
+          Showing {total === 0 ? 0 : ((page - 1) * 50) + 1}–{Math.min(page * 50, total)} of {total.toLocaleString()} pending businesses
+        </p>
+        {totalPages > 1 && (
+          <div className="flex items-center gap-1">
+            <button disabled={page <= 1} onClick={() => load(1)}
+              className="rounded-lg border border-black/10 px-2.5 py-1 text-xs text-ink-900 hover:bg-gray-50 disabled:opacity-40 dark:border-white/10 dark:text-gray-200 dark:hover:bg-gray-800">«</button>
+            <button disabled={page <= 1} onClick={() => load(page - 1)}
+              className="rounded-lg border border-black/10 px-2.5 py-1 text-xs text-ink-900 hover:bg-gray-50 disabled:opacity-40 dark:border-white/10 dark:text-gray-200 dark:hover:bg-gray-800">‹ Prev</button>
+            <span className="px-3 text-xs text-ink-900/60 dark:text-gray-400">Page {page} of {totalPages}</span>
+            <button disabled={page >= totalPages} onClick={() => load(page + 1)}
+              className="rounded-lg border border-black/10 px-2.5 py-1 text-xs text-ink-900 hover:bg-gray-50 disabled:opacity-40 dark:border-white/10 dark:text-gray-200 dark:hover:bg-gray-800">Next ›</button>
+            <button disabled={page >= totalPages} onClick={() => load(totalPages)}
+              className="rounded-lg border border-black/10 px-2.5 py-1 text-xs text-ink-900 hover:bg-gray-50 disabled:opacity-40 dark:border-white/10 dark:text-gray-200 dark:hover:bg-gray-800">»</button>
+          </div>
+        )}
+      </div>
+
       {rejectFor && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 p-4">
           <div className="w-full max-w-sm rounded-2xl bg-white p-6 shadow-xl dark:bg-gray-900">
@@ -104,7 +153,7 @@ export default function PendingApprovalPage() {
               className="w-full rounded-lg border border-black/10 bg-white px-3 py-2 text-sm text-ink-900 outline-none focus:border-brand-500 dark:border-white/10 dark:bg-gray-800 dark:text-gray-100"
               placeholder="e.g. Duplicate listing" />
             <div className="mt-4 flex justify-end gap-2">
-              <button onClick={() => { setRejectFor(null); setRejectReason(""); }} className="rounded-lg border border-black/10 px-3 py-1.5 text-sm font-medium hover:bg-gray-50 dark:border-white/10 dark:text-gray-200 dark:hover:bg-gray-800">Cancel</button>
+              <button onClick={() => { setRejectFor(null); setRejectReason(""); }} className="rounded-lg border border-black/10 px-3 py-1.5 text-sm font-medium text-ink-900 hover:bg-gray-50 dark:border-white/10 dark:text-gray-200 dark:hover:bg-gray-800">Cancel</button>
               <button onClick={() => reject(rejectFor, rejectReason || "Rejected by admin")} className="rounded-lg bg-red-600 px-3 py-1.5 text-sm font-medium text-white hover:bg-red-700">Confirm Reject</button>
             </div>
           </div>

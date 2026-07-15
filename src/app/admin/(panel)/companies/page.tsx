@@ -48,12 +48,16 @@ export default function CompanyManagementPage() {
   const [selected, setSelected] = useState<Set<string>>(new Set());
   const [bulkBusy, setBulkBusy] = useState(false);
   const [editTarget, setEditTarget] = useState<CompanyEditData | null | undefined>(undefined); // undefined = closed, null = creating
+  
+  // Pagination State
+  const [page, setPage] = useState(1);
+  const pageSize = 50;
 
   const load = useCallback(async () => {
     setLoading(true);
     try {
       const data: any = await getCompanies();
-      setCompanies(data.companies);
+      setCompanies(data.companies || []);
       setSelected(new Set());
     } catch (e: any) {
       setError(e.message);
@@ -64,6 +68,7 @@ export default function CompanyManagementPage() {
 
   useEffect(() => { load(); }, [load]);
 
+  // Filter companies based on search and dropdowns
   const filtered = companies.filter((c) => {
     if (statusFilter && c.status !== statusFilter) return false;
     if (planFilter && c.plan !== planFilter) return false;
@@ -75,6 +80,16 @@ export default function CompanyManagementPage() {
     }
     return true;
   });
+
+  // Reset to page 1 whenever filters change
+  useEffect(() => {
+    setPage(1);
+  }, [search, statusFilter, planFilter]);
+
+  // Calculate pagination variables based on filtered results
+  const total = filtered.length;
+  const totalPages = Math.ceil(total / pageSize) || 1;
+  const currentRows = filtered.slice((page - 1) * pageSize, page * pageSize);
 
   function toggle(id: string) {
     setSelected((prev) => {
@@ -193,10 +208,10 @@ export default function CompanyManagementPage() {
           <tbody className="divide-y divide-black/5 dark:divide-white/10">
             {loading ? (
               <tr><td colSpan={8} className="px-4 py-6 text-center text-ink-900/40 dark:text-gray-500">Loading…</td></tr>
-            ) : filtered.length === 0 ? (
+            ) : currentRows.length === 0 ? (
               <tr><td colSpan={8} className="px-4 py-6 text-center text-ink-900/40 dark:text-gray-500">No companies match.</td></tr>
             ) : (
-              filtered.map((c) => (
+              currentRows.map((c) => (
                 <tr key={c.id} className={`hover:bg-gray-50 dark:hover:bg-gray-800 ${selected.has(c.id) ? "bg-brand-50/40 dark:bg-brand-900/10" : ""}`}>
                   <td className="px-4 py-3">
                     <input type="checkbox" checked={selected.has(c.id)} onChange={() => toggle(c.id)} className="rounded border-black/20" />
@@ -243,6 +258,25 @@ export default function CompanyManagementPage() {
             )}
           </tbody>
         </table>
+      </div>
+
+      <div className="mt-4 flex items-center justify-between">
+        <p className="text-xs text-ink-900/40 dark:text-gray-500">
+          Showing {total === 0 ? 0 : ((page - 1) * 50) + 1}–{Math.min(page * 50, total)} of {total.toLocaleString()} companies
+        </p>
+        {totalPages > 1 && (
+          <div className="flex items-center gap-1">
+            <button disabled={page <= 1} onClick={() => setPage(1)}
+              className="rounded-lg border border-black/10 px-2.5 py-1 text-xs text-ink-900 hover:bg-gray-50 disabled:opacity-40 dark:border-white/10 dark:text-gray-200 dark:hover:bg-gray-800">«</button>
+            <button disabled={page <= 1} onClick={() => setPage(page - 1)}
+              className="rounded-lg border border-black/10 px-2.5 py-1 text-xs text-ink-900 hover:bg-gray-50 disabled:opacity-40 dark:border-white/10 dark:text-gray-200 dark:hover:bg-gray-800">‹ Prev</button>
+            <span className="px-3 text-xs text-ink-900/60 dark:text-gray-400">Page {page} of {totalPages}</span>
+            <button disabled={page >= totalPages} onClick={() => setPage(page + 1)}
+              className="rounded-lg border border-black/10 px-2.5 py-1 text-xs text-ink-900 hover:bg-gray-50 disabled:opacity-40 dark:border-white/10 dark:text-gray-200 dark:hover:bg-gray-800">Next ›</button>
+            <button disabled={page >= totalPages} onClick={() => setPage(totalPages)}
+              className="rounded-lg border border-black/10 px-2.5 py-1 text-xs text-ink-900 hover:bg-gray-50 disabled:opacity-40 dark:border-white/10 dark:text-gray-200 dark:hover:bg-gray-800">»</button>
+          </div>
+        )}
       </div>
 
       {editTarget !== undefined && (
