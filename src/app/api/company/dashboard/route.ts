@@ -75,12 +75,27 @@ export async function GET() {
       [companyId]
     );
 
-    const [statsResult, recentRestaurantsResult, employeePerformanceResult, crmStatsResult] =
-      await Promise.all([statsPromise, recentRestaurantsPromise, employeePerformancePromise, crmStatsPromise]);
+    // Pipeline stage breakdown — count leads grouped by stage for this company
+    const pipelinePromise = query(
+      `SELECT stage, COUNT(*)::int AS count
+       FROM crm_leads
+       WHERE company_id = $1
+       GROUP BY stage`,
+      [companyId]
+    );
+
+    const [statsResult, recentRestaurantsResult, employeePerformanceResult, crmStatsResult, pipelineResult] =
+      await Promise.all([statsPromise, recentRestaurantsPromise, employeePerformancePromise, crmStatsPromise, pipelinePromise]);
 
     const stats = statsResult.rows[0] || {};
     const crm = crmStatsResult.rows[0] || { total_leads: 0, won_leads: 0, lost_leads: 0, new_leads: 0 };
     const activeLeads = Number(crm.total_leads || 0) - Number(crm.won_leads || 0) - Number(crm.lost_leads || 0);
+
+    // Build a { stage -> count } map
+    const pipelineMap: Record<string, number> = {};
+    for (const row of pipelineResult.rows) {
+      pipelineMap[row.stage] = row.count;
+    }
 
     return NextResponse.json({
       stats: {
@@ -91,6 +106,7 @@ export async function GET() {
         active_leads: String(activeLeads),
         won_leads: String(crm.won_leads || 0),
       },
+      pipeline: pipelineMap,
       recentRestaurants: recentRestaurantsResult.rows,
       employeePerformance: employeePerformanceResult.rows,
     });

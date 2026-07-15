@@ -36,6 +36,14 @@ export function updateCompanyProfile(body: Record<string, any>) {
   return request("/api/company/profile", { method: "PATCH", body: JSON.stringify(body) });
 }
 
+export function getCompanyBilling() {
+  return request("/api/company/billing");
+}
+
+export function getCompanyAnalytics() {
+  return request("/api/company/analytics");
+}
+
 // ==========================================
 // 3. Employee Management & User Directory
 // ==========================================

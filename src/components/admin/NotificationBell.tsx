@@ -119,6 +119,15 @@ export default function NotificationBell() {
               ))
             )}
           </div>
+          <div className="border-t border-black/5 px-4 py-2.5 text-center dark:border-white/10">
+            <Link
+              href="/admin/notifications"
+              onClick={() => setOpen(false)}
+              className="text-xs font-semibold text-brand-600 hover:text-brand-700 dark:text-brand-400 dark:hover:text-brand-300"
+            >
+              View all notifications
+            </Link>
+          </div>
         </div>
       )}
     </div>
