@@ -20,8 +20,10 @@ export async function GET(request: Request) {
       LEFT JOIN areas a ON b.area_id = a.id
       JOIN company_areas ca ON a.id = ca.area_id
       WHERE ca.company_id = $1
+        AND b.status = 'approved'
+        AND b.deleted_at IS NULL
     `;
-    
+
     if (range === "new") {
       sql += ` AND b.created_at >= NOW() - INTERVAL '30 days'`;
     }

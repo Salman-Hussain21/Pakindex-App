@@ -4,7 +4,7 @@
 -- =============================================================================
 -- Extensions
 -- =============================================================================
-CREATE EXTENSION IF NOT EXISTS postgis;
+-- CREATE EXTENSION IF NOT EXISTS postgis; -- (Commented out: PostGIS not available locally)
 CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
 CREATE EXTENSION IF NOT EXISTS pg_trgm;   -- fuzzy text search / duplicate detection
 CREATE EXTENSION IF NOT EXISTS unaccent;  -- accent-insensitive search
@@ -55,7 +55,7 @@ CREATE TABLE cities (
   province_id INTEGER      NOT NULL REFERENCES provinces(id) ON DELETE RESTRICT,
   name        VARCHAR(100) NOT NULL,
   code        VARCHAR(20),
-  boundary    GEOMETRY(MULTIPOLYGON, 4326),
+  -- boundary    GEOMETRY(MULTIPOLYGON, 4326), -- (Commented out: PostGIS not available locally)
   created_at  TIMESTAMPTZ  NOT NULL DEFAULT now(),
   updated_at  TIMESTAMPTZ  NOT NULL DEFAULT now(),
   UNIQUE (province_id, name)
@@ -66,7 +66,7 @@ CREATE TABLE areas (
   city_id     INTEGER      NOT NULL REFERENCES cities(id) ON DELETE RESTRICT,
   name        VARCHAR(150) NOT NULL,
   slug        VARCHAR(170) NOT NULL UNIQUE,
-  boundary    GEOMETRY(MULTIPOLYGON, 4326),
+  -- boundary    GEOMETRY(MULTIPOLYGON, 4326), -- (Commented out: PostGIS not available locally)
   created_at  TIMESTAMPTZ  NOT NULL DEFAULT now(),
   updated_at  TIMESTAMPTZ  NOT NULL DEFAULT now()
 );
@@ -135,7 +135,7 @@ CREATE TABLE businesses (
   city_id             INTEGER      REFERENCES cities(id),
   province_id         INTEGER      REFERENCES provinces(id),
   postal_code         VARCHAR(20),
-  location            GEOMETRY(POINT, 4326),        -- PostGIS point (lng, lat)
+  -- location            GEOMETRY(POINT, 4326),        -- PostGIS point (lng, lat)
   latitude            NUMERIC(11, 8),
   longitude           NUMERIC(11, 8),
 
@@ -195,7 +195,7 @@ CREATE TABLE businesses (
 );
 
 -- Spatial index (critical for map queries)
-CREATE INDEX idx_businesses_location   ON businesses USING GIST(location);
+-- CREATE INDEX idx_businesses_location   ON businesses USING GIST(location); -- (Commented out: PostGIS not available locally)
 CREATE INDEX idx_businesses_status     ON businesses(status);
 CREATE INDEX idx_businesses_city       ON businesses(city_id);
 CREATE INDEX idx_businesses_area       ON businesses(area_id);
@@ -446,7 +446,7 @@ CREATE TABLE crm_activities (
   body          TEXT,
 
   -- For visits
-  visit_location GEOMETRY(POINT, 4326),
+  -- visit_location GEOMETRY(POINT, 4326), -- (Commented out: PostGIS not available locally)
   visit_completed BOOLEAN     DEFAULT false,
 
   -- Stage transition

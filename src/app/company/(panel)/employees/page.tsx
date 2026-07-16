@@ -28,6 +28,7 @@ interface CompanyArea {
 export default function FullyIntegratedEmployeeModule() {
     const [employees, setEmployees] = useState<Employee[]>([]);
     const [maxEmployees, setMaxEmployees] = useState<number>(5);
+    const [totalEmployees, setTotalEmployees] = useState<number>(0); // true count independent of search filter
     const [loading, setLoading] = useState(true);
 
     // Company's assigned areas — sourced from company_areas via /api/company/areas.
@@ -74,6 +75,11 @@ export default function FullyIntegratedEmployeeModule() {
             setEmployees(data.employees || []);
             if (typeof data.maxEmployees === "number") {
                 setMaxEmployees(data.maxEmployees);
+            }
+            // Only update the true total when fetching without a search filter
+            // so the seat counter always shows the real number of seats used.
+            if (!search && !statusFilter) {
+                setTotalEmployees((data.employees || []).length);
             }
         } catch (err: any) {
             console.error("Failed to load employees:", err);
@@ -327,7 +333,7 @@ export default function FullyIntegratedEmployeeModule() {
                 <div>
                     <h1 className="text-xl font-semibold text-ink-900 dark:text-gray-100">Employee Management</h1>
                     <p className="text-sm text-ink-900/50 dark:text-gray-400 mt-0.5">
-                        <span className="font-semibold text-ink-900 dark:text-white">{employees.length}</span> / <span className="font-semibold text-brand-600">{maxEmployees} seats used</span>
+                        <span className="font-semibold text-ink-900 dark:text-white">{totalEmployees}</span> / <span className="font-semibold text-brand-600">{maxEmployees} seats used</span>
                     </p>
                 </div>
                 <button

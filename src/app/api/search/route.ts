@@ -1,5 +1,6 @@
 import type { NextRequest } from "next/server";
 import { NextResponse } from "next/server";
+import { getSession } from "@/lib/auth";
 
 const CITY_COORDS: Record<string, string> = {
   karachi: "@24.8607,67.0011,13z", lahore: "@31.5204,74.3587,13z",
@@ -74,6 +75,11 @@ async function fetchPage(apiKey: string, query: string, ll: string, start: numbe
 const MAX_PAGES = 50;
 
 export async function GET(request: NextRequest) {
+  const session = await getSession();
+  if (!session) {
+    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+  }
+
   const { searchParams } = new URL(request.url);
   const query    = searchParams.get("q") || "restaurants";
   const page     = parseInt(searchParams.get("page") || "0", 10);

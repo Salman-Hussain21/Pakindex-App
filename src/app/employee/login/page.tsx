@@ -31,6 +31,7 @@ export default function EmployeeLoginPage() {
     <div className="flex min-h-screen items-center justify-center bg-gray-50 px-4 dark:bg-gray-950">
       <div className="w-full max-w-md rounded-3xl border border-black/5 bg-white p-8 shadow-2xl dark:border-white/10 dark:bg-gray-900">
         <div className="mb-8 text-center">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
           <img src="/brand/logo-full.png" alt="PakIndex" className="mx-auto mb-4 h-10 w-auto dark:brightness-0 dark:invert" />
           <h1 className="text-xl font-bold text-ink-900 dark:text-gray-100">Field Agent Portal</h1>
           <p className="mt-1 text-sm text-ink-900/60 dark:text-gray-400">Sign in to access your territory</p>

@@ -2,12 +2,21 @@ import { NextResponse } from "next/server";
 import { getSession } from "@/lib/auth";
 import { query } from "@/lib/db";
 
-export async function GET() {
+export async function GET(req: Request) {
   try {
     const session = await getSession();
     if (!session || !session.companyId) {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
+
+    const { searchParams } = new URL(req.url);
+    const range = searchParams.get("range") || "30d";
+    const intervalMap: Record<string, string> = {
+      "30d": "30 days",
+      "90d": "90 days",
+      "1y": "1 year",
+    };
+    const interval = intervalMap[range] || "30 days";
 
     // 1. Total Reachable Market
     // Count businesses that exist within the areas assigned to this company.
@@ -21,23 +30,23 @@ export async function GET() {
     );
     const totalReachableMarket = parseInt(reachRes.rows[0].total_reach, 10) || 0;
 
-    // 2. Active Reps
+    // 2. Active Reps (employees only, excluding soft-deleted)
     const activeRepsRes = await query(
       `SELECT COUNT(*) as active_count
        FROM users
-       WHERE company_id = $1 AND status = 'active'`,
+       WHERE company_id = $1 AND role = 'employee' AND status = 'active' AND deleted_at IS NULL`,
       [session.companyId]
     );
     const activeReps = parseInt(activeRepsRes.rows[0].active_count, 10) || 0;
 
-    // 3. Net Market Growth (Added in last 30 days)
+    // 3. Net Market Growth (Added in selected date range)
     const growthRes = await query(
       `SELECT COUNT(DISTINCT b.id) as growth
        FROM businesses b
        JOIN company_areas ca ON b.area_id = ca.area_id
-       WHERE ca.company_id = $1 
-         AND b.created_at >= NOW() - INTERVAL '30 days'`,
-      [session.companyId]
+       WHERE ca.company_id = $1
+         AND b.created_at >= NOW() - INTERVAL '1 day' * $2::int`,
+      [session.companyId, interval === "30 days" ? 30 : interval === "90 days" ? 90 : 365]
     );
     const netMarketGrowth = parseInt(growthRes.rows[0].growth, 10) || 0;
 
@@ -68,9 +77,9 @@ export async function GET() {
 
     const reps = repsRes.rows.map(r => ({
       name: r.full_name || "Unknown Agent",
-      area: "Assigned Territory", // Fallback text
+      area: "Assigned Territory",
       count: parseInt(r.leads_count, 10) || 0,
-      total: 50 // Mock assigned total
+      total: Math.max(1, parseInt(r.leads_count, 10) || 1) // real count as own baseline
     }));
 
     return NextResponse.json({

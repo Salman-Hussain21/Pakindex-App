@@ -5,7 +5,7 @@ import { verifySessionToken, SESSION_COOKIE } from "@/lib/auth";
 const PUBLIC_ADMIN_PATHS = ["/admin/login"];
 const PUBLIC_API_PATHS = ["/api/admin/login"];
 
-export async function proxy(request: NextRequest) {
+export async function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
   const isAdminPage = pathname.startsWith("/admin");

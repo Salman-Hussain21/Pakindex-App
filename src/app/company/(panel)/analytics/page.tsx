@@ -37,10 +37,12 @@ export default function TerritoryAnalyticsPage() {
   const [mapBusinesses, setMapBusinesses] = useState<MapBusiness[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [range, setRange] = useState("30d");
 
   useEffect(() => {
+    setLoading(true);
     Promise.all([
-      getCompanyAnalytics(),
+      getCompanyAnalytics(range),
       fetch("/api/company/map").then(r => r.json()),
     ])
       .then(([analytics, mapData]) => {
@@ -52,7 +54,7 @@ export default function TerritoryAnalyticsPage() {
         setError(err.message);
         setLoading(false);
       });
-  }, []);
+  }, [range]);
 
   if (error) {
     return <div className="p-6 text-sm font-medium text-red-600">{error}</div>;
@@ -71,10 +73,14 @@ export default function TerritoryAnalyticsPage() {
             Market coverage, performance metrics, and density reports for your assigned zones.
           </p>
         </div>
-        <select className="rounded-lg border border-black/10 bg-white px-3 py-2 text-sm text-ink-900 outline-none focus:border-brand-500 dark:border-white/10 dark:bg-gray-800 dark:text-gray-100">
-          <option>Last 30 Days</option>
-          <option>Last 90 Days</option>
-          <option>This Year</option>
+        <select
+          value={range}
+          onChange={(e) => setRange(e.target.value)}
+          className="rounded-lg border border-black/10 bg-white px-3 py-2 text-sm text-ink-900 outline-none focus:border-brand-500 dark:border-white/10 dark:bg-gray-800 dark:text-gray-100"
+        >
+          <option value="30d">Last 30 Days</option>
+          <option value="90d">Last 90 Days</option>
+          <option value="1y">This Year</option>
         </select>
       </div>
 
