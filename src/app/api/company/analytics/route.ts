@@ -9,6 +9,19 @@ export async function GET() {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
 
+    // Check company plan — Territory Analytics is a Premium+ feature
+    const planRes = await query(
+      `SELECT plan FROM companies WHERE id = $1 AND deleted_at IS NULL LIMIT 1`,
+      [session.companyId]
+    );
+    const plan = planRes.rows[0]?.plan ?? "free";
+    if (plan === "free" || plan === "trial") {
+      return NextResponse.json(
+        { error: "Territory Analytics is available on Premium and Ultra Premium plans. Please upgrade to access this feature.", planRestricted: true },
+        { status: 403 }
+      );
+    }
+
     // 1. Total Reachable Market
     // Count businesses that exist within the areas assigned to this company.
     const reachRes = await query(

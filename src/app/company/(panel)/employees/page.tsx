@@ -28,6 +28,7 @@ interface CompanyArea {
 export default function FullyIntegratedEmployeeModule() {
     const [employees, setEmployees] = useState<Employee[]>([]);
     const [maxEmployees, setMaxEmployees] = useState<number>(5);
+    const [totalCount, setTotalCount] = useState<number>(0); // unfiltered total — used for seat limit checks
     const [loading, setLoading] = useState(true);
 
     // Company's assigned areas — sourced from company_areas via /api/company/areas.
@@ -75,6 +76,10 @@ export default function FullyIntegratedEmployeeModule() {
             if (typeof data.maxEmployees === "number") {
                 setMaxEmployees(data.maxEmployees);
             }
+            // totalCount comes from an unfiltered query so we can always show correct seat usage
+            if (typeof data.totalCount === "number") {
+                setTotalCount(data.totalCount);
+            }
         } catch (err: any) {
             console.error("Failed to load employees:", err);
         } finally {
@@ -114,7 +119,7 @@ export default function FullyIntegratedEmployeeModule() {
     }, []);
 
     function handleTriggerAddModal() {
-        if (employees.length >= maxEmployees) {
+        if (totalCount >= maxEmployees) {
             setShowLimitModal(true);
         } else {
             setFormError(null);
@@ -327,7 +332,7 @@ export default function FullyIntegratedEmployeeModule() {
                 <div>
                     <h1 className="text-xl font-semibold text-ink-900 dark:text-gray-100">Employee Management</h1>
                     <p className="text-sm text-ink-900/50 dark:text-gray-400 mt-0.5">
-                        <span className="font-semibold text-ink-900 dark:text-white">{employees.length}</span> / <span className="font-semibold text-brand-600">{maxEmployees} seats used</span>
+                        <span className="font-semibold text-ink-900 dark:text-white">{totalCount}</span> / <span className="font-semibold text-brand-600">{maxEmployees} seats used</span>
                     </p>
                 </div>
                 <button

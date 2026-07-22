@@ -56,9 +56,18 @@ export async function GET(req: Request) {
 
     const result = await query(queryText, queryParams);
 
+    // Always return the real total (unfiltered) so the front-end can show
+    // accurate seat-usage even when a search or status filter is active.
+    const totalRes = await query(
+      `SELECT COUNT(*)::int AS total FROM users WHERE company_id = $1 AND role = 'employee'::user_role AND deleted_at IS NULL`,
+      [session.companyId]
+    );
+    const totalCount = totalRes.rows[0]?.total ?? 0;
+
     return NextResponse.json({
       employees: result.rows,
       maxEmployees: maxEmployeesLimit,
+      totalCount,
     });
   } catch (error: any) {
     console.error("Employee GET error:", error);
