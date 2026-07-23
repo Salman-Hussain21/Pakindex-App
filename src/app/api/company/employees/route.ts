@@ -3,6 +3,7 @@ import { query } from "@/lib/db";
 import { getSession } from "@/lib/auth";
 import bcrypt from "bcryptjs";
 import { logAudit, notifyCompany } from "@/lib/audit";
+import { autoAssignEmployeeAreaLeads } from "@/lib/auto-assign";
 
 // Shared helper: confirms an areaId actually belongs to this company's
 // assigned areas (company_areas). Prevents assigning an employee to any
@@ -144,6 +145,11 @@ export async function POST(req: Request) {
     );
     const newEmployeeId = inserted.rows[0].id;
 
+    // Auto-assign all restaurants in the assigned area to this employee
+    if (resolvedAreaId) {
+      await autoAssignEmployeeAreaLeads(newEmployeeId, session.companyId, resolvedAreaId);
+    }
+
     await logAudit({
       performedBy: session.userId,
       companyId: session.companyId,
@@ -251,6 +257,11 @@ export async function PUT(req: Request) {
          WHERE id = $8 AND company_id = $9 AND role = 'employee'::user_role`,
         [name, email, username, phone || null, designation || null, department || null, resolvedAreaId, id, session.companyId]
       );
+
+      // Auto-assign all restaurants in the new assigned area to this employee
+      if (resolvedAreaId) {
+        await autoAssignEmployeeAreaLeads(id, session.companyId, resolvedAreaId);
+      }
 
       await logAudit({
         performedBy: session.userId,
