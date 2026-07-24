@@ -240,7 +240,7 @@ export default function CompanyFormModal({
           <button
             type="button"
             onClick={onClose}
-            className="rounded-lg border border-black/10 px-4 py-2 text-sm font-medium text-ink-900 hover:bg-gray-50 dark:border-white/10 dark:text-gray-200 dark:hover:bg-gray-800"
+            className="rounded-lg border border-black/10 px-4 py-2 text-sm font-medium hover:bg-gray-50 dark:border-white/10 dark:hover:bg-gray-800"
           >
             Cancel
           </button>

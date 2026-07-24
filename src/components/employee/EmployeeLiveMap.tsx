@@ -2,6 +2,7 @@
 
 import { useEffect } from "react";
 import { MapContainer, TileLayer, CircleMarker, Popup, Polyline, useMap } from "react-leaflet";
+import "leaflet/dist/leaflet.css";
 
 export interface MapBusiness {
   id: string;

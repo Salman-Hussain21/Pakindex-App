@@ -4,7 +4,6 @@ import { query } from "@/lib/db";
 import { getSession } from "@/lib/auth";
 import { matchGeoFromQuery, matchAreaFromAddress, matchCategoryFromType } from "@/lib/geo-match";
 import { logAudit, notifyAdmins } from "@/lib/audit";
-import { calculatePotentialScore } from "@/lib/scoring";
 
 interface RawBusiness {
   title?: string;
@@ -20,7 +19,7 @@ interface RawBusiness {
   priceDescription?: string;
   gpsCoordinates?: { latitude?: number; longitude?: number };
   serviceOptions?: string[];
-  menu?: { overview?: { menuPhotos?: { url?: string; postedAt?: string }[] } };
+  menu?: { overview?: { menuPhotos?: { url?: string }[] } };
   extensions?: {
     popularFor?: string[];
     offerings?: string[];
@@ -74,39 +73,28 @@ export async function POST(request: NextRequest) {
       const resolvedCityId = perRecordMatch.cityId ?? cityId;
       const lat = biz.gpsCoordinates?.latitude ?? null;
       const lng = biz.gpsCoordinates?.longitude ?? null;
-      // Preserve full photo objects (including postedAt) so determineBusinessStatus
-      // can use the photo dates to infer whether a business is recently active.
       const menuPhotos = (biz.menu?.overview?.menuPhotos || [])
-        .filter((p) => Boolean(p.url))
-        .slice(0, 8)
-        .map((p) => ({ url: p.url!, postedAt: p.postedAt ?? null }));
+        .map((p) => p.url)
+        .filter((u): u is string => Boolean(u))
+        .slice(0, 8);
       const extensionsToStore = {
         popularFor: biz.extensions?.popularFor || [],
         offerings: biz.extensions?.offerings || [],
         highlights: biz.extensions?.highlights || [],
       };
 
-      const potentialScore = calculatePotentialScore({
-        address: biz.address,
-        rating: biz.rating,
-        reviewCount: biz.reviews,
-        phone: biz.phone,
-        website: biz.website,
-        serviceOptions: biz.serviceOptions,
-      });
-
       const result = await query(
         `INSERT INTO businesses (
             name, place_id, category_id, business_type, address,
             area_id, city_id, latitude, longitude, phone, website,
             rating, review_count, price_range, open_state, thumbnail,
-            service_options, images, extensions, ai_potential_score, status, source, scrape_job_id
+            service_options, images, extensions, status, source, scrape_job_id
          )
          VALUES (
             $1, $2, $3, $4, $5,
             $6, $7, $8, $9, $10, $11,
             $12, $13, $14, $15, $16,
-            $17, $18, $19, $20, 'pending', 'google_maps', $21
+            $17, $18, $19, 'pending', 'google_maps', $20
          )
          ON CONFLICT (place_id) DO NOTHING
          RETURNING id`,
@@ -130,7 +118,6 @@ export async function POST(request: NextRequest) {
           biz.serviceOptions && biz.serviceOptions.length > 0 ? biz.serviceOptions : null,
           JSON.stringify(menuPhotos),
           JSON.stringify(extensionsToStore),
-          potentialScore,
           jobId,
         ]
       );

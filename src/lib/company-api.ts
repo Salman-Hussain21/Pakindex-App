@@ -40,8 +40,8 @@ export function getCompanyBilling() {
   return request("/api/company/billing");
 }
 
-export function getCompanyAnalytics(range = "30d") {
-  return request(`/api/company/analytics?range=${range}`);
+export function getCompanyAnalytics() {
+  return request("/api/company/analytics");
 }
 
 // ==========================================

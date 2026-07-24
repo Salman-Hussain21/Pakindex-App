@@ -1,11 +1,17 @@
 import { NextResponse } from "next/server";
 import { getSession } from "@/lib/auth";
 import { query } from "@/lib/db";
+import { autoAssignEmployeeAreaLeads } from "@/lib/auto-assign";
 
 export async function GET() {
   const session = await getSession();
   if (!session || session.role !== "employee") {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+  }
+
+  // Auto-sync all approved restaurants in the employee's assigned area
+  if (session.companyId) {
+    await autoAssignEmployeeAreaLeads(session.userId, session.companyId);
   }
 
   const territoryRes = await query(

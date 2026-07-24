@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { getSession } from "@/lib/auth";
 import { query } from "@/lib/db";
+import { autoAssignEmployeeAreaLeads } from "@/lib/auto-assign";
 
 export async function GET() {
   const session = await getSession();
@@ -8,14 +9,22 @@ export async function GET() {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
 
+  // Auto-sync all approved restaurants in the employee's assigned area
+  if (session.companyId) {
+    await autoAssignEmployeeAreaLeads(session.userId, session.companyId);
+  }
+
   const { rows } = await query(
-    `SELECT cl.id, cl.stage, cl.priority, cl.next_follow_up, cl.expected_value, b.name as business_name, b.address, c.name as category_name
+    `SELECT cl.id, cl.business_id, cl.stage, cl.priority, cl.next_follow_up, cl.expected_value,
+            b.name as business_name, b.address, b.phone, b.rating, b.review_count, b.price_range,
+            b.website, b.facebook_url, b.instagram_url, b.foodpanda_url, b.careem_food_url, b.cheetay_url,
+            c.name as category_name
      FROM crm_leads cl
      JOIN businesses b ON b.id = cl.business_id
      LEFT JOIN categories c ON c.id = b.category_id
-     WHERE cl.assigned_to = $1
+     WHERE cl.assigned_to = $1 AND cl.company_id = $2
      ORDER BY cl.priority DESC, cl.updated_at DESC`,
-    [session.userId]
+    [session.userId, session.companyId]
   );
 
   return NextResponse.json({ leads: rows });

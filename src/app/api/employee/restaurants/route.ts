@@ -1,11 +1,17 @@
 import { NextResponse } from "next/server";
 import { getSession } from "@/lib/auth";
 import { query } from "@/lib/db";
+import { autoAssignEmployeeAreaLeads } from "@/lib/auto-assign";
 
 export async function GET(req: Request) {
   const session = await getSession();
   if (!session || session.role !== "employee") {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+  }
+
+  // Auto-sync all approved restaurants in the employee's assigned area
+  if (session.companyId) {
+    await autoAssignEmployeeAreaLeads(session.userId, session.companyId);
   }
 
   const { searchParams } = new URL(req.url);
@@ -35,7 +41,8 @@ export async function GET(req: Request) {
 
   const sql = `
     SELECT
-      b.id, b.name, b.status AS business_status,
+      b.id, b.name, b.status AS business_status, b.phone, b.rating, b.review_count, b.price_range,
+      b.website, b.facebook_url, b.instagram_url, b.foodpanda_url, b.careem_food_url, b.cheetay_url,
       cat.name AS category_name,
       cl.id AS lead_id, cl.stage, cl.created_at AS assigned_at,
       (SELECT MAX(ca2.completed_at) FROM crm_activities ca2

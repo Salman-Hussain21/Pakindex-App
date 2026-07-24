@@ -57,6 +57,37 @@ export default function EmployeeTerritoryPage() {
     setRouteList((prev) => (prev.includes(id) ? prev.filter((item) => item !== id) : [...prev, id]));
   };
 
+  const optimizeRoute = () => {
+    if (routeList.length <= 1) return;
+    const items = routeList.map((id) => businesses.find((b) => b.id === id)).filter(Boolean) as MapBusiness[];
+    const unvisited = [...items];
+    const optimized: string[] = [];
+
+    let current = unvisited.shift()!;
+    optimized.push(current.id);
+
+    while (unvisited.length > 0) {
+      let nearestIdx = 0;
+      let minDistance = Infinity;
+
+      for (let i = 0; i < unvisited.length; i++) {
+        const dist = Math.hypot(
+          Number(unvisited[i].latitude) - Number(current.latitude),
+          Number(unvisited[i].longitude) - Number(current.longitude)
+        );
+        if (dist < minDistance) {
+          minDistance = dist;
+          nearestIdx = i;
+        }
+      }
+
+      current = unvisited.splice(nearestIdx, 1)[0];
+      optimized.push(current.id);
+    }
+
+    setRouteList(optimized);
+  };
+
   const visitedBusinesses = businesses.filter((b) => b.is_visited);
 
   return (
@@ -114,9 +145,20 @@ export default function EmployeeTerritoryPage() {
 
         {routeMode && (
           <div className="w-80 flex-shrink-0 flex flex-col rounded-2xl border border-black/5 bg-white shadow-sm dark:border-white/10 dark:bg-gray-900 overflow-hidden">
-            <div className="border-b border-black/5 p-4 dark:border-white/10 bg-gray-50 dark:bg-gray-800">
-              <h2 className="font-semibold text-ink-900 dark:text-white">Today's Itinerary</h2>
-              <p className="text-xs text-ink-900/60 dark:text-gray-400 mt-1">Select markers on the map to add them to your route.</p>
+            <div className="border-b border-black/5 p-4 dark:border-white/10 bg-gray-50 dark:bg-gray-800 flex items-start justify-between">
+              <div>
+                <h2 className="font-semibold text-ink-900 dark:text-white">Today's Itinerary</h2>
+                <p className="text-xs text-ink-900/60 dark:text-gray-400 mt-0.5">Select markers on map to build route.</p>
+              </div>
+              {routeList.length > 1 && (
+                <button
+                  onClick={optimizeRoute}
+                  className="inline-flex items-center gap-1 text-[11px] font-bold text-amber-700 bg-amber-50 dark:bg-amber-900/30 border border-amber-200 dark:border-amber-800 px-2 py-1 rounded-lg hover:bg-amber-100 transition-colors"
+                  title="Shortest driving path sequence"
+                >
+                  ⚡ Optimize
+                </button>
+              )}
             </div>
             <div className="flex-1 overflow-y-auto p-4 space-y-3">
               {routeList.length === 0 ? (
@@ -141,7 +183,34 @@ export default function EmployeeTerritoryPage() {
             </div>
             {routeList.length > 0 && (
               <div className="p-4 border-t border-black/5 dark:border-white/10">
-                <button className="w-full rounded-xl bg-brand-600 py-2.5 text-sm font-semibold text-white hover:bg-brand-700">Save Route</button>
+                <button
+                  onClick={async () => {
+                    setLoading(true);
+                    try {
+                      for (const id of routeList) {
+                        const b = businesses.find((item) => item.id === id);
+                        if (b?.lead_id) {
+                          await fetch(`/api/employee/leads/${b.lead_id}/notes`, {
+                            method: "POST",
+                            headers: { "Content-Type": "application/json" },
+                            body: JSON.stringify({ note: `Added to Daily Field Route (${routeList.indexOf(id) + 1} of ${routeList.length})` }),
+                          });
+                        }
+                      }
+                      alert(`Successfully saved itinerary with ${routeList.length} stops!`);
+                      setRouteMode(false);
+                      setRouteList([]);
+                      loadData();
+                    } catch (err: any) {
+                      alert(err.message || "Failed to save route.");
+                    } finally {
+                      setLoading(false);
+                    }
+                  }}
+                  className="w-full rounded-xl bg-brand-600 py-2.5 text-sm font-semibold text-white hover:bg-brand-700 transition-colors cursor-pointer"
+                >
+                  Save Route ({routeList.length} stops)
+                </button>
               </div>
             )}
           </div>

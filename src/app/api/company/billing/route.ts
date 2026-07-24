@@ -23,11 +23,11 @@ export async function GET() {
 
     const company = companyRes.rows[0];
 
-    // 2. Count active employees
+    // 2. Count active employees (role = 'employee' only — excludes the company_admin account)
     const employeesRes = await query(
       `SELECT COUNT(*) as active_count
        FROM users
-       WHERE company_id = $1 AND status = 'active'`,
+       WHERE company_id = $1 AND role = 'employee'::user_role AND status = 'active'::user_status AND deleted_at IS NULL`,
       [session.companyId]
     );
 

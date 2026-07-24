@@ -59,6 +59,7 @@ export default function CompanyAuditLogsPage() {
   const [pagination, setPagination] = useState<Pagination | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [planRestricted, setPlanRestricted] = useState(false);
   const [entityType, setEntityType] = useState("");
   const [action, setAction] = useState("");
   const [page, setPage] = useState(1);
@@ -67,12 +68,15 @@ export default function CompanyAuditLogsPage() {
     setLoading(true);
     setError(null);
     try {
-      const data: any = await getCompanyAuditLogs({
-        entityType,
-        action,
-        page,
-        pageSize: 50,
-      });
+      const res = await fetch(
+        `/api/company/audit-logs?entityType=${encodeURIComponent(entityType)}&action=${encodeURIComponent(action)}&page=${page}&pageSize=50`
+      );
+      const data = await res.json();
+      if (res.status === 403) {
+        setPlanRestricted(true);
+        return;
+      }
+      if (!res.ok) throw new Error(data.error || "Failed to load audit logs");
       setLogs(data.logs ?? []);
       setPagination(data.pagination ?? null);
     } catch (e: any) {
@@ -86,6 +90,26 @@ export default function CompanyAuditLogsPage() {
 
   // Reset to page 1 whenever filters change
   useEffect(() => { setPage(1); }, [entityType, action]);
+
+  if (planRestricted) {
+    return (
+      <div className="flex flex-col items-center justify-center py-24 text-center space-y-4">
+        <div className="w-16 h-16 rounded-full bg-amber-50 border border-amber-200 flex items-center justify-center text-amber-600 text-2xl">📜</div>
+        <div>
+          <h1 className="text-base font-bold text-ink-900 dark:text-gray-100">Audit Logs require a Premium plan</h1>
+          <p className="mt-1.5 text-sm text-ink-900/50 dark:text-gray-400 max-w-md">
+            Upgrade to Premium or Ultra Premium to access full audit logs, tracking all team activity across your company workspace.
+          </p>
+        </div>
+        <a
+          href="/company/billing"
+          className="inline-flex items-center gap-2 rounded-xl bg-brand-600 hover:bg-brand-700 px-5 py-2.5 text-sm font-semibold text-white transition-colors"
+        >
+          View Billing &amp; Upgrade →
+        </a>
+      </div>
+    );
+  }
 
   return (
     <div>

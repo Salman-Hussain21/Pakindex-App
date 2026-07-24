@@ -27,6 +27,7 @@ export default function CompanyHorecaMapPage() {
   const [search, setSearch] = useState("");
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [planRestricted, setPlanRestricted] = useState(false);
 
   useEffect(() => {
     let isMounted = true;
@@ -46,11 +47,16 @@ export default function CompanyHorecaMapPage() {
           if (!contentType || !contentType.includes("application/json")) {
             throw new Error("Server returned a non-JSON response.");
           }
-          if (!res.ok) throw new Error(`HTTP ${res.status}`);
-          return res.json();
+          const json = await res.json();
+          if (res.status === 403) {
+            if (isMounted) setPlanRestricted(true);
+            return null;
+          }
+          if (!res.ok) throw new Error(json?.error || `HTTP ${res.status}`);
+          return json;
         })
         .then((data) => {
-          if (!isMounted) return;
+          if (!isMounted || !data) return;
           if (data.success) {
             setBusinesses(data.businesses || []);
             setAreas(data.areas || []);
@@ -103,11 +109,27 @@ export default function CompanyHorecaMapPage() {
         </div>
       </div>
 
-      {error && (
+      {planRestricted ? (
+        <div className="flex flex-col items-center justify-center py-20 text-center space-y-4">
+          <div className="w-16 h-16 rounded-full bg-amber-50 border border-amber-200 flex items-center justify-center text-amber-600 text-2xl">🗺️</div>
+          <div>
+            <h2 className="text-base font-bold text-ink-900 dark:text-gray-100">HORECA Map requires a Premium plan</h2>
+            <p className="mt-1.5 text-sm text-ink-900/50 dark:text-gray-400 max-w-md">
+              Upgrade your plan to unlock the interactive HORECA Map, showing all approved restaurants and businesses in your assigned territories.
+            </p>
+          </div>
+          <a
+            href="/company/billing"
+            className="inline-flex items-center gap-2 rounded-xl bg-brand-600 hover:bg-brand-700 px-5 py-2.5 text-sm font-semibold text-white transition-colors"
+          >
+            View Billing & Upgrade →
+          </a>
+        </div>
+      ) : error ? (
         <p className="mb-3 rounded-lg bg-red-50 px-3 py-2 text-sm text-red-700 dark:bg-red-900/20 dark:text-red-400">
           {error}
         </p>
-      )}
+      ) : null}
 
       <div className="mb-3 flex gap-4 text-xs text-ink-900/60 dark:text-gray-400">
         <Legend color="#03603d" label="Approved" />

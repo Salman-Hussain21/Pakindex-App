@@ -18,6 +18,20 @@ export async function GET(req: Request) {
     const search = searchParams.get("search") || "";
     const searchPattern = `%${search}%`;
 
+    // Check company plan — map is a Premium+ feature
+    const planRes = await query(
+      `SELECT plan FROM companies WHERE id = $1 AND deleted_at IS NULL LIMIT 1`,
+      [session.companyId]
+    );
+    const plan = planRes.rows[0]?.plan ?? "free";
+    if (plan === "free" || plan === "trial") {
+      return NextResponse.json(
+        { success: false, error: "HORECA Map is available on Premium and Ultra Premium plans. Please upgrade to access this feature." },
+        { status: 403 }
+      );
+    }
+
+
     // Areas assigned to this company — used to populate the filter dropdown.
     // Deliberately scoped to company_areas so the company only ever sees
     // areas it has actually been granted, never the full areas table.

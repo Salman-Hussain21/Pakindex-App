@@ -21,6 +21,7 @@ interface NavItem {
   label: string;
   icon: any;
   exact?: boolean;
+  minPlan?: "premium" | "ultra_premium"; // undefined = available on all plans
 }
 
 interface NavGroup {
@@ -33,14 +34,14 @@ const NAV_GROUPS: NavGroup[] = [
     label: "Overview",
     items: [
       { href: "/company", label: "Dashboard", exact: true, icon: LayoutDashboard },
-      { href: "/company/analytics", label: "Territory Analytics", icon: LineChart },
+      { href: "/company/analytics", label: "Territory Analytics", icon: LineChart, minPlan: "premium" },
     ],
   },
   {
     label: "Directory",
     items: [
       { href: "/company/database", label: "Restaurant Database", icon: Database },
-      { href: "/company/map", label: "HORECA Map", icon: MapPin },
+      { href: "/company/map", label: "HORECA Map", icon: MapPin, minPlan: "premium" },
     ],
   },
   {
@@ -53,9 +54,9 @@ const NAV_GROUPS: NavGroup[] = [
     label: "System",
     items: [
       { href: "/company/notifications", label: "Notifications", icon: Bell },
-      { href: "/company/integrations", label: "Data & Integrations", icon: Download },
+      { href: "/company/integrations", label: "Data & Integrations", icon: Download, minPlan: "premium" },
       { href: "/company/billing", label: "Billing & Plan", icon: CreditCard },
-      { href: "/company/audit-logs", label: "Audit Logs", icon: ScrollText },
+      { href: "/company/audit-logs", label: "Audit Logs", icon: ScrollText, minPlan: "premium" },
       { href: "/company/settings", label: "Settings", icon: SettingsIcon },
     ],
   },
@@ -86,11 +87,14 @@ export default function CompanySidebar({ plan = "free" }: { plan?: string }) {
       {/* Structured Navigation with Admin Subgroup Styling */}
       <nav className="flex-1 overflow-y-auto px-3 py-4">
         {NAV_GROUPS.map((group) => {
-          // Filter out HORECA map for free/trial users
-          const isFree = plan === "free" || plan === "trial";
-          const visibleItems = group.items.filter(
-            (item) => !(isFree && item.label === "HORECA Map")
-          );
+        // Determine which plans are accessible based on the current company plan
+          const isPremiumOrAbove = plan === "premium" || plan === "ultra_premium" || plan === "basic" || plan === "pro" || plan === "enterprise";
+          const visibleItems = group.items.filter((item) => {
+            if (!item.minPlan) return true; // no restriction
+            if (item.minPlan === "premium") return isPremiumOrAbove;
+            if (item.minPlan === "ultra_premium") return plan === "ultra_premium" || plan === "pro" || plan === "enterprise";
+            return true;
+          });
 
           if (visibleItems.length === 0) return null;
 

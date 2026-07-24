@@ -1,40 +1,54 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import { Navigation, CheckCircle2, Circle, Clock } from "lucide-react";
+import LogCheckinModal from "@/components/employee/LogCheckinModal";
+import { getEmployeeVisits } from "@/lib/employee-api";
 
 export default function EmployeeVisitsPage() {
   const [visits, setVisits] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
+  const [checkinModalOpen, setCheckinModalOpen] = useState(false);
 
-  useEffect(() => {
-    fetch("/api/employee/visits")
-      .then((res) => res.json())
+  const loadVisits = useCallback(() => {
+    setLoading(true);
+    getEmployeeVisits()
       .then((data) => {
         setVisits(data.visits || []);
-        setLoading(false);
-      });
+      })
+      .catch((err) => console.error(err))
+      .finally(() => setLoading(false));
   }, []);
+
+  useEffect(() => {
+    loadVisits();
+  }, [loadVisits]);
 
   return (
     <div className="flex h-full flex-col">
       <div className="mb-6 flex items-center justify-between">
         <div>
           <h1 className="text-xl font-bold text-ink-900 dark:text-white">Field Route & Visits</h1>
-          <p className="text-sm text-ink-900/60 dark:text-gray-400">Track your daily physical check-ins and client meetings.</p>
+          <p className="text-sm text-ink-900/60 dark:text-gray-400">
+            Track your daily physical check-ins and client meetings.
+          </p>
         </div>
-        <button className="flex items-center gap-2 rounded-xl bg-brand-600 px-4 py-2 text-sm font-semibold text-white hover:bg-brand-700">
+        <button
+          onClick={() => setCheckinModalOpen(true)}
+          className="flex items-center gap-2 rounded-xl bg-brand-600 px-4 py-2 text-sm font-semibold text-white hover:bg-brand-700 transition-colors shadow-sm cursor-pointer"
+        >
           <Navigation size={16} /> Log Check-in
         </button>
       </div>
 
       <div className="rounded-2xl border border-black/5 bg-white shadow-sm dark:border-white/10 dark:bg-gray-900 overflow-hidden flex-1">
         {loading ? (
-          <div className="flex h-64 items-center justify-center text-gray-500">Loading route history...</div>
+          <div className="flex h-64 items-center justify-center text-gray-500 animate-pulse">Loading route history...</div>
         ) : visits.length === 0 ? (
           <div className="flex h-64 flex-col items-center justify-center text-gray-500">
             <Navigation size={48} className="text-gray-300 dark:text-gray-700 mb-4" />
-            <p>No field visits logged yet.</p>
+            <p className="text-sm font-medium">No field visits logged yet.</p>
+            <p className="text-xs text-gray-400 mt-1">Click "Log Check-in" above to record a visit.</p>
           </div>
         ) : (
           <div className="overflow-x-auto">
@@ -57,21 +71,21 @@ export default function EmployeeVisitsPage() {
                         </span>
                       ) : (
                         <span className="flex items-center gap-1.5 text-amber-600 dark:text-amber-400 font-medium text-xs bg-amber-50 dark:bg-amber-900/20 px-2.5 py-1 rounded-full w-fit">
-                          <Circle size={14} /> Scheduled
+                          <Circle size={14} /> Unvisited / Pending
                         </span>
                       )}
                     </td>
                     <td className="px-6 py-4">
                       <div className="font-medium text-ink-900 dark:text-gray-100">{v.business_name}</div>
-                      <div className="text-xs text-ink-900/50 dark:text-gray-500 mt-0.5">{v.address}</div>
+                      <div className="text-xs text-ink-900/50 dark:text-gray-500 mt-0.5">{v.address || "No address"}</div>
                     </td>
                     <td className="px-6 py-4 text-ink-900/70 dark:text-gray-400">
-                      <div className="flex items-center gap-1.5">
+                      <div className="flex items-center gap-1.5 text-xs">
                         <Clock size={14} className="text-gray-400" />
                         {new Date(v.created_at).toLocaleString()}
                       </div>
                     </td>
-                    <td className="px-6 py-4 max-w-xs truncate text-ink-900/70 dark:text-gray-400">
+                    <td className="px-6 py-4 max-w-xs truncate text-ink-900/70 dark:text-gray-400 text-xs">
                       {v.body || <span className="italic opacity-50">No notes recorded</span>}
                     </td>
                   </tr>
@@ -81,6 +95,16 @@ export default function EmployeeVisitsPage() {
           </div>
         )}
       </div>
+
+      {checkinModalOpen && (
+        <LogCheckinModal
+          onClose={() => setCheckinModalOpen(false)}
+          onSaved={() => {
+            setCheckinModalOpen(false);
+            loadVisits();
+          }}
+        />
+      )}
     </div>
   );
 }

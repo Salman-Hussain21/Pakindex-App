@@ -30,24 +30,16 @@ const STATUS_COLOR: Record<string, string> = {
 
 export default function ScrapedDataPage() {
   const [jobs, setJobs] = useState<ScrapeJob[]>([]);
-  const [total, setTotal] = useState(0);
-  const [page, setPage] = useState(1);
-  const [totalPages, setTotalPages] = useState(1);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [selected, setSelected] = useState<Set<string>>(new Set());
   const [bulkBusy, setBulkBusy] = useState(false);
 
-  const load = useCallback(async (pg = 1) => {
+  const load = useCallback(async () => {
     setLoading(true);
     try {
-      const data: any = await getScrapeJobs({ pageSize: 50, page: pg });
-      const fetchedTotal = data.pagination?.total || data.total || 0;
-      
-      setJobs(data.jobs || []);
-      setTotal(fetchedTotal);
-      setTotalPages(data.pagination?.totalPages || Math.ceil(fetchedTotal / 50) || 1);
-      setPage(pg);
+      const data: any = await getScrapeJobs({ pageSize: 100 });
+      setJobs(data.jobs);
       setSelected(new Set());
     } catch (e: any) {
       setError(e.message);
@@ -56,7 +48,7 @@ export default function ScrapedDataPage() {
     }
   }, []);
 
-  useEffect(() => { load(1); }, [load]);
+  useEffect(() => { load(); }, [load]);
 
   function toggle(id: string) {
     setSelected((prev) => {
@@ -65,7 +57,6 @@ export default function ScrapedDataPage() {
       return next;
     });
   }
-  
   function toggleAll() {
     setSelected((prev) => (prev.size === jobs.length ? new Set() : new Set(jobs.map((j) => j.id))));
   }
@@ -76,7 +67,7 @@ export default function ScrapedDataPage() {
     try {
       const result: any = await bulkApproveScrapeJobs(Array.from(selected));
       alert(`Approved ${result.approved} business(es).`);
-      load(page); // Reload the current page to reflect changes
+      load();
     } catch (e: any) {
       setError(e.message);
     } finally {
@@ -160,7 +151,7 @@ export default function ScrapedDataPage() {
                   <td className="px-4 py-3 text-right">
                     <Link
                       href="/admin/pending"
-                      className="rounded-lg border border-black/10 px-2.5 py-1 text-xs font-medium text-ink-900 hover:bg-gray-50 dark:border-white/10 dark:text-gray-200 dark:hover:bg-gray-800"
+                      className="rounded-lg border border-black/10 px-2.5 py-1 text-xs font-medium hover:bg-gray-50 dark:border-white/10 dark:hover:bg-gray-800"
                     >
                       Review
                     </Link>
@@ -170,25 +161,6 @@ export default function ScrapedDataPage() {
             )}
           </tbody>
         </table>
-      </div>
-
-      <div className="mt-4 flex items-center justify-between">
-        <p className="text-xs text-ink-900/40 dark:text-gray-500">
-          Showing {total === 0 ? 0 : ((page - 1) * 50) + 1}–{Math.min(page * 50, total)} of {total.toLocaleString()} scrape jobs
-        </p>
-        {totalPages > 1 && (
-          <div className="flex items-center gap-1">
-            <button disabled={page <= 1} onClick={() => load(1)}
-              className="rounded-lg border border-black/10 px-2.5 py-1 text-xs text-ink-900 hover:bg-gray-50 disabled:opacity-40 dark:border-white/10 dark:text-gray-200 dark:hover:bg-gray-800">«</button>
-            <button disabled={page <= 1} onClick={() => load(page - 1)}
-              className="rounded-lg border border-black/10 px-2.5 py-1 text-xs text-ink-900 hover:bg-gray-50 disabled:opacity-40 dark:border-white/10 dark:text-gray-200 dark:hover:bg-gray-800">‹ Prev</button>
-            <span className="px-3 text-xs text-ink-900/60 dark:text-gray-400">Page {page} of {totalPages}</span>
-            <button disabled={page >= totalPages} onClick={() => load(page + 1)}
-              className="rounded-lg border border-black/10 px-2.5 py-1 text-xs text-ink-900 hover:bg-gray-50 disabled:opacity-40 dark:border-white/10 dark:text-gray-200 dark:hover:bg-gray-800">Next ›</button>
-            <button disabled={page >= totalPages} onClick={() => load(totalPages)}
-              className="rounded-lg border border-black/10 px-2.5 py-1 text-xs text-ink-900 hover:bg-gray-50 disabled:opacity-40 dark:border-white/10 dark:text-gray-200 dark:hover:bg-gray-800">»</button>
-          </div>
-        )}
       </div>
     </div>
   );

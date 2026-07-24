@@ -15,18 +15,13 @@ interface BillingData {
 
 export default function BillingPage() {
   const [data, setData] = useState<BillingData | null>(null);
-  const [territoriesUsed, setTerritoriesUsed] = useState(0);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    Promise.all([
-      getCompanyBilling(),
-      fetch("/api/company/areas").then(r => r.json()),
-    ])
-      .then(([billing, areasData]) => {
-        setData(billing);
-        setTerritoriesUsed((areasData.areas || []).length);
+    getCompanyBilling()
+      .then((res) => {
+        setData(res);
         setLoading(false);
       })
       .catch((err) => {
@@ -100,10 +95,10 @@ export default function BillingPage() {
                 <div>
                   <div className="mb-1 flex items-center justify-between text-sm">
                     <span className="font-medium text-ink-900 dark:text-gray-200">Territories / Assigned Areas</span>
-                    <span className="text-ink-900/60 dark:text-gray-400">{territoriesUsed} / {data.max_territories} used</span>
+                    <span className="text-ink-900/60 dark:text-gray-400">Up to {data.max_territories}</span>
                   </div>
                   <div className="h-2 w-full overflow-hidden rounded-full bg-gray-100 dark:bg-gray-800">
-                    <div className="h-full rounded-full bg-emerald-500" style={{ width: `${Math.min(100, data.max_territories > 0 ? Math.round((territoriesUsed / data.max_territories) * 100) : 0)}%` }} />
+                    <div className="h-full rounded-full bg-emerald-500" style={{ width: "100%" }} />
                   </div>
                 </div>
               </div>

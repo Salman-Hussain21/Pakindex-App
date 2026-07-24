@@ -1,6 +1,5 @@
 import type { NextRequest } from "next/server";
 import { NextResponse } from "next/server";
-import { getSession } from "@/lib/auth";
 
 // ── City & Area bounding boxes for grid generation ─────────────────────────
 // Each box: [south-lat, west-lng, north-lat, east-lng]
@@ -133,11 +132,6 @@ function deduplicateBusinesses(businesses: any[]): any[] {
 
 // ── Stream-capable deep scan endpoint ──────────────────────────────────────
 export async function GET(request: NextRequest) {
-  const session = await getSession();
-  if (!session) {
-    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
-  }
-
   const { searchParams } = new URL(request.url);
   const query   = searchParams.get("q") || "restaurants";
   const density = Math.min(Math.max(parseInt(searchParams.get("density") || "3", 10), 2), 7);

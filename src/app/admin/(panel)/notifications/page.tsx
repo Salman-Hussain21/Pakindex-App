@@ -44,13 +44,11 @@ export default function NotificationsPage() {
   const [loading, setLoading] = useState(true);
   const [filter, setFilter] = useState<"all" | "unread">("all");
   const [typeFilter, setTypeFilter] = useState("");
-  
-  const pageSize = 50;
 
   const load = useCallback(async (pg: number) => {
     setLoading(true);
     try {
-      const res = await fetch(`/api/admin/notifications?full=true&page=${pg}&pageSize=${pageSize}`);
+      const res = await fetch(`/api/admin/notifications?full=true&page=${pg}`);
       const data = await res.json();
       setItems(data.notifications || []);
       setUnread(data.unreadCount || 0);
@@ -74,14 +72,12 @@ export default function NotificationsPage() {
   }
 
   const filtered = items.filter(n => {
-    if (filter === "unread" && !n.is_read) return false; // Wait, unread means it shouldn't be read
     if (filter === "unread" && n.is_read) return false;
     if (typeFilter && n.type !== typeFilter) return false;
     return true;
   });
 
   const uniqueTypes = [...new Set(items.map(n => n.type))];
-  const totalPages = Math.ceil(total / pageSize) || 1;
 
   return (
     <div>
@@ -170,25 +166,24 @@ export default function NotificationsPage() {
         </div>
       )}
 
-      {/* Standardized Pagination UI */}
-      <div className="mt-6 flex items-center justify-between">
-        <p className="text-xs text-ink-900/40 dark:text-gray-500">
-          Showing {total === 0 ? 0 : ((page - 1) * pageSize) + 1}–{Math.min(page * pageSize, total)} of {total.toLocaleString()} notifications
-        </p>
-        {totalPages > 1 && (
-          <div className="flex items-center gap-1">
-            <button disabled={page <= 1} onClick={() => setPage(1)}
-              className="rounded-lg border border-black/10 px-2.5 py-1 text-xs text-ink-900 hover:bg-gray-50 disabled:opacity-40 dark:border-white/10 dark:text-gray-200 dark:hover:bg-gray-800">«</button>
-            <button disabled={page <= 1} onClick={() => setPage(page - 1)}
-              className="rounded-lg border border-black/10 px-2.5 py-1 text-xs text-ink-900 hover:bg-gray-50 disabled:opacity-40 dark:border-white/10 dark:text-gray-200 dark:hover:bg-gray-800">‹ Prev</button>
-            <span className="px-3 text-xs text-ink-900/60 dark:text-gray-400">Page {page} of {totalPages}</span>
-            <button disabled={page >= totalPages} onClick={() => setPage(page + 1)}
-              className="rounded-lg border border-black/10 px-2.5 py-1 text-xs text-ink-900 hover:bg-gray-50 disabled:opacity-40 dark:border-white/10 dark:text-gray-200 dark:hover:bg-gray-800">Next ›</button>
-            <button disabled={page >= totalPages} onClick={() => setPage(totalPages)}
-              className="rounded-lg border border-black/10 px-2.5 py-1 text-xs text-ink-900 hover:bg-gray-50 disabled:opacity-40 dark:border-white/10 dark:text-gray-200 dark:hover:bg-gray-800">»</button>
+      {/* Pagination */}
+      {total > 100 && (
+        <div className="mt-6 flex items-center justify-between">
+          <p className="text-sm text-ink-900/50 dark:text-gray-400">
+            Page {page} of {Math.ceil(total / 100)}
+          </p>
+          <div className="flex gap-2">
+            <button disabled={page <= 1} onClick={() => setPage(p => p - 1)}
+              className="rounded-lg border border-black/10 px-3 py-1.5 text-sm disabled:opacity-40 dark:border-white/10 dark:text-gray-200">
+              ← Prev
+            </button>
+            <button disabled={page >= Math.ceil(total / 100)} onClick={() => setPage(p => p + 1)}
+              className="rounded-lg border border-black/10 px-3 py-1.5 text-sm disabled:opacity-40 dark:border-white/10 dark:text-gray-200">
+              Next →
+            </button>
           </div>
-        )}
-      </div>
+        </div>
+      )}
     </div>
   );
 }
