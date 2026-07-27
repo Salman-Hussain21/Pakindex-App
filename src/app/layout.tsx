@@ -2,13 +2,21 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "PakIndex — HORECA Intelligence",
+  title: "PakIndex",
   description: "Pakistan's first HORECA Intelligence & Sales Platform.",
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en">
+    // suppressHydrationWarning is required here because the inline script
+    // below intentionally adds/removes the "dark" class on <html> before
+    // React hydrates (reading a saved preference from localStorage). That
+    // makes the client's className legitimately differ from the server-
+    // rendered markup for a moment — this is the exact, documented pattern
+    // Next.js recommends for theme-bootstrap scripts, and it only silences
+    // the warning on this one element, not the rest of the tree.
+    // See: https://nextjs.org/docs/app/api-reference/functions/generate-static-params#suppresshydrationwarning
+    <html lang="en" suppressHydrationWarning>
       <head>
         <script
           dangerouslySetInnerHTML={{
@@ -16,15 +24,21 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           }}
         />
         <link rel="manifest" href="/manifest.json" />
-        <meta name="theme-color" content="#4f46e5" />
+        <meta name="theme-color" content="#070B09" />
         <meta name="mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
       </head>
-      <body className="min-h-screen relative z-10" style={{ fontFamily: "Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" }}>{children}</body>
+      {/*
+        No manual Google Fonts <link> tags here — page.tsx already loads
+        Space Grotesk / Inter / IBM Plex Mono via next/font/google, which
+        self-hosts them and injects the right font automatically (no extra
+        network round trip, no flash of unstyled text, no font-family
+        fight with the CSS variables the page sets on <main>). A second,
+        manually-linked Inter from the Google Fonts CDN plus a hardcoded
+        inline font-family here was fighting that — removed both.
+      */}
+      <body className="min-h-screen relative z-10">{children}</body>
     </html>
   );
 }
