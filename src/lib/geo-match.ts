@@ -37,8 +37,6 @@ const AREA_KEYWORDS: Record<string, string> = {
   "johar town": "Johar Town",
   "f-7": "F-7",
   "f-6": "F-6",
-  "g-11": "G-11",
-  "bahria town": "Bahria Town",
 };
 
 const CITY_KEYWORDS: Record<string, string> = {
@@ -50,6 +48,73 @@ const CITY_KEYWORDS: Record<string, string> = {
   faisalabad: "Faisalabad",
   multan: "Multan",
   quetta: "Quetta",
+};
+
+const SUB_LOCALITY_MAPPING: Record<string, string> = {
+  // Bahadurabad
+  "bahadur yar jang": "Bahadurabad",
+  "byjchs": "Bahadurabad",
+  "sharafabad": "Bahadurabad",
+  "sharfabad": "Bahadurabad",
+  "dhoraji": "Bahadurabad",
+  "kathiawar": "Bahadurabad",
+  "kokan society": "Bahadurabad",
+  "alamgir road": "Bahadurabad",
+  "cp berar": "Bahadurabad",
+  "c p berar": "Bahadurabad",
+  "adamjee nagar": "Bahadurabad",
+
+  // PECHS
+  "delhi mercantile": "PECHS",
+  "dmchs": "PECHS",
+  "block 2 pechs": "PECHS",
+  "block 6 pechs": "PECHS",
+  "bihar muslim": "PECHS",
+  "bmchs": "PECHS",
+  "nursery": "PECHS",
+  "khalid bin waleed": "PECHS",
+  "chaman chowrangi": "PECHS",
+
+  // SMCHS
+  "smchs": "SMCHS",
+  "sindhi muslim": "SMCHS",
+
+  // Tariq Road
+  "tariq road": "Tariq Road",
+
+  // Saddar
+  "saddar": "Saddar",
+  "cantt": "Saddar",
+  "empress market": "Saddar",
+  "lucky star": "Saddar",
+
+  // Garden
+  "burns road": "Garden / Burns Rd",
+  "garden east": "Garden / Burns Rd",
+  "garden west": "Garden / Burns Rd",
+
+  // DHA
+  "defence housing": "DHA",
+  "dha phase": "DHA",
+  "defence phase": "DHA",
+  "khayaban": "DHA",
+  "defence view": "DHA",
+
+  // Clifton
+  "clifton": "Clifton",
+  "boat basin": "Boat Basin",
+  "zamzama": "Zamzama",
+  "kahkashan": "Clifton",
+
+  // Gulshan
+  "gulshan e iqbal": "Gulshan-e-Iqbal",
+  "gulshan-e-iqbal": "Gulshan-e-Iqbal",
+  "gulshan block": "Gulshan-e-Iqbal",
+
+  // Johar
+  "gulistan e johar": "Gulistan-e-Johar",
+  "gulistan-e-johar": "Gulistan-e-Johar",
+  "johar block": "Gulistan-e-Johar",
 };
 
 export interface GeoMatch {
@@ -181,6 +246,16 @@ async function findSimilarArea(candidateName: string, cityId: number) {
 export async function matchAreaFromAddress(address: string | null | undefined): Promise<GeoMatch> {
   if (!address) return { areaId: null, cityId: null };
   const normalized = normalize(address);
+
+  // Intercept sub-localities and map them to parent canonical areas immediately
+  for (const [subLoc, parentArea] of Object.entries(SUB_LOCALITY_MAPPING)) {
+    if (normalized.includes(subLoc)) {
+      const res = await query(`SELECT id, city_id FROM areas WHERE name = $1 LIMIT 1`, [parentArea]);
+      if (res.rows[0]) {
+        return { areaId: res.rows[0].id, cityId: res.rows[0].city_id };
+      }
+    }
+  }
 
   // 1) Fast path — exact-ish match against areas we already know about.
   const areas = await query(`SELECT id, name, city_id FROM areas`);

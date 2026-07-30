@@ -1,7 +1,8 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { X, Phone, Star, MapPin, Globe, Clock, CheckCircle2, XCircle, StickyNote, ScanFace, InspectIcon } from "lucide-react";
+import { X, Phone, Star, MapPin, Globe, Clock, CheckCircle2, XCircle, StickyNote, ScanFace, InspectIcon, Flame, Cpu } from "lucide-react";
+import { calculateB2BLeadScore } from "@/lib/lead-scoring";
 
 interface LeadDetail {
   id: string; stage: string; notes: string | null; priority: number;
@@ -96,19 +97,34 @@ export default function RestaurantLeadModal({
     finally { setSavingNote(false); }
   }
 
-  // Toggle: if currently visited, mark unvisited (completed: false).
-  // If currently not visited, mark visited (completed: true).
   async function handleToggleVisit() {
     const nextCompleted = !lead?.is_visited;
     setMarkingVisit(true);
+
+    let locationData: { lat?: number; lng?: number } | undefined = undefined;
+
+    if (typeof window !== "undefined" && "geolocation" in navigator) {
+      try {
+        const pos = await new Promise<GeolocationPosition>((resolve, reject) => {
+          navigator.geolocation.getCurrentPosition(resolve, reject, { timeout: 4000 });
+        });
+        locationData = { lat: pos.coords.latitude, lng: pos.coords.longitude };
+      } catch (e) {
+        // Geolocation denied or timed out, continue without location
+      }
+    }
+
     try {
       const res = await fetch(`/api/employee/leads/${leadId}/visit`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ completed: nextCompleted }),
+        body: JSON.stringify({ completed: nextCompleted, ...(locationData || {}) }),
       });
       const data = await res.json();
       if (!res.ok) throw new Error(data.error || "Failed to update visit status.");
+      if (data.isGeofencedVerified) {
+        alert("📍 Visit Verified On-Site via GPS!");
+      }
       load();
       onUpdated?.();
     } catch (err: any) { alert(err.message); }
@@ -161,6 +177,25 @@ export default function RestaurantLeadModal({
             </div>
 
             <div className="p-5 space-y-5">
+              {/* GastroIndex B2B Lead Potential Score */}
+              {(() => {
+                const b2b = calculateB2BLeadScore(lead);
+                return (
+                  <div className={`p-3.5 rounded-xl border flex items-center justify-between ${b2b.badgeBg}`}>
+                    <div>
+                      <div className="flex items-center gap-2">
+                        <Flame size={16} className={b2b.color} />
+                        <span className="text-xs font-bold uppercase tracking-wide">
+                          B2B Commercial Score: <span className="text-sm font-black">{b2b.score}/100</span> ({b2b.tier})
+                        </span>
+                      </div>
+                      <p className="text-[11px] opacity-80 mt-1">
+                        Key Strengths: {b2b.reasons.join(" • ")}
+                      </p>
+                    </div>
+                  </div>
+                );
+              })()}
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
                 {lead.address && (
                   <div className="flex items-start gap-2 text-gray-600 dark:text-gray-300">
@@ -168,8 +203,17 @@ export default function RestaurantLeadModal({
                   </div>
                 )}
                 {lead.phone && (
-                  <div className="flex items-center gap-2 text-gray-600 dark:text-gray-300">
-                    <Phone size={14} className="text-gray-400" /> {lead.phone}
+                  <div className="flex items-center gap-2 text-gray-600 dark:text-gray-300 flex-wrap">
+                    <Phone size={14} className="text-gray-400" />
+                    <a href={`tel:${lead.phone}`} className="hover:underline font-medium text-ink-900 dark:text-gray-100">{lead.phone}</a>
+                    <a
+                      href={`https://wa.me/${lead.phone.replace(/[^0-9]/g, "")}`}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="inline-flex items-center gap-1 text-[10px] font-bold text-emerald-700 bg-emerald-50 dark:bg-emerald-900/30 border border-emerald-200 dark:border-emerald-800 px-2 py-0.5 rounded-md hover:bg-emerald-100 dark:hover:bg-emerald-900/50 transition-colors"
+                    >
+                      💬 WhatsApp Chat
+                    </a>
                   </div>
                 )}
                 {lead.website && (

@@ -29,20 +29,20 @@ export default function EmployeeTopbar({
   }
 
   return (
-    <header className="flex h-16 flex-shrink-0 items-center justify-between border-b border-black/5 bg-white px-6 dark:border-white/10 dark:bg-gray-900">
-      <h1 className="text-lg font-semibold text-ink-900 dark:text-gray-100">{title || "Field Dashboard"}</h1>
+    <header className="flex h-16 flex-shrink-0 items-center justify-between border-b border-black/[0.06] bg-white/80 backdrop-blur-xl px-6 dark:border-white/[0.06] dark:bg-[#111827]/80">
+      <h1 className="font-[family-name:var(--font-montserrat)] text-lg font-bold tracking-tight text-ink-900 dark:text-gray-100">{title || "Field Dashboard"}</h1>
       <div className="flex items-center gap-3">
         <ThemeToggle />
-        <div className="mx-1 h-6 w-px bg-black/10 dark:bg-white/10" />
+        <div className="mx-1 h-6 w-px bg-black/[0.06] dark:bg-white/[0.06]" />
         <div className="text-right">
-          <p className="text-sm font-medium text-ink-900 dark:text-gray-100">{fullName}</p>
+          <p className="text-sm font-semibold text-ink-900 dark:text-gray-100">{fullName}</p>
           <p className="text-xs text-ink-900/40 dark:text-gray-500">{email}</p>
         </div>
         <button
           onClick={handleLogout}
           disabled={loggingOut}
           aria-label="Log out"
-          className="flex h-9 w-9 items-center justify-center rounded-lg border border-black/10 text-ink-900/60 hover:bg-gray-50 disabled:opacity-50 dark:border-white/10 dark:text-gray-300 dark:hover:bg-gray-800"
+          className="flex h-9 w-9 items-center justify-center rounded-xl border border-black/[0.08] text-ink-900/50 hover:bg-red-50 hover:text-red-600 hover:border-red-200 transition-all duration-200 disabled:opacity-50 dark:border-white/[0.08] dark:text-gray-400 dark:hover:bg-red-900/20 dark:hover:text-red-400 dark:hover:border-red-800/40"
         >
           <LogOut size={16} />
         </button>

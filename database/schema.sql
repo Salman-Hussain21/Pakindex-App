@@ -181,6 +181,7 @@ CREATE TABLE businesses (
 
   -- Data Quality
   data_completeness   SMALLINT      DEFAULT 0 CHECK (data_completeness BETWEEN 0 AND 100),
+  ai_potential_score  INTEGER       DEFAULT 0,  -- 0-100 heuristic B2B potential score
   last_verified_at    TIMESTAMPTZ,
   verified_by         UUID,         -- FK to users added after users table
 

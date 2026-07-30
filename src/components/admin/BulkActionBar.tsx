@@ -11,10 +11,10 @@ export default function BulkActionBar({
 }) {
   if (count === 0) return null;
   return (
-    <div className="mb-4 flex items-center justify-between rounded-xl border border-brand-200 bg-brand-50 px-4 py-2.5 dark:border-brand-900/40 dark:bg-brand-900/20">
-      <p className="text-sm font-medium text-brand-800 dark:text-brand-300">
+    <div className="mb-4 flex items-center justify-between rounded-2xl border border-brand-200/60 bg-gradient-to-r from-brand-50 to-brand-100/40 px-4 py-3 shadow-sm dark:border-brand-800/30 dark:from-brand-950/40 dark:to-brand-900/10">
+      <p className="text-sm font-semibold text-brand-800 dark:text-brand-300">
         {count} selected
-        <button onClick={onClear} className="ml-2 text-xs font-normal text-brand-700/70 underline dark:text-brand-400/80">
+        <button onClick={onClear} className="ml-2 text-xs font-normal text-brand-600/80 hover:text-brand-800 hover:no-underline underline dark:text-brand-400/70 dark:hover:text-brand-300">
           clear
         </button>
       </p>

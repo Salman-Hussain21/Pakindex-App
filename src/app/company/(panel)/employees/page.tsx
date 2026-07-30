@@ -28,7 +28,7 @@ interface CompanyArea {
 export default function FullyIntegratedEmployeeModule() {
     const [employees, setEmployees] = useState<Employee[]>([]);
     const [maxEmployees, setMaxEmployees] = useState<number>(5);
-    const [totalEmployees, setTotalEmployees] = useState<number>(0); // true count independent of search filter
+    const [totalCount, setTotalCount] = useState<number>(0); // unfiltered total — used for seat limit checks
     const [loading, setLoading] = useState(true);
 
     // Company's assigned areas — sourced from company_areas via /api/company/areas.
@@ -76,10 +76,10 @@ export default function FullyIntegratedEmployeeModule() {
             if (typeof data.maxEmployees === "number") {
                 setMaxEmployees(data.maxEmployees);
             }
-            // Only update the true total when fetching without a search filter
-            // so the seat counter always shows the real number of seats used.
-            if (!search && !statusFilter) {
-                setTotalEmployees((data.employees || []).length);
+            if (typeof data.totalCount === "number") {
+                setTotalCount(data.totalCount);
+            } else if (!search && !statusFilter) {
+                setTotalCount((data.employees || []).length);
             }
         } catch (err: any) {
             console.error("Failed to load employees:", err);
@@ -120,7 +120,7 @@ export default function FullyIntegratedEmployeeModule() {
     }, []);
 
     function handleTriggerAddModal() {
-        if (employees.length >= maxEmployees) {
+        if (totalCount >= maxEmployees) {
             setShowLimitModal(true);
         } else {
             setFormError(null);
@@ -333,7 +333,7 @@ export default function FullyIntegratedEmployeeModule() {
                 <div>
                     <h1 className="text-xl font-semibold text-ink-900 dark:text-gray-100">Employee Management</h1>
                     <p className="text-sm text-ink-900/50 dark:text-gray-400 mt-0.5">
-                        <span className="font-semibold text-ink-900 dark:text-white">{totalEmployees}</span> / <span className="font-semibold text-brand-600">{maxEmployees} seats used</span>
+                        <span className="font-semibold text-ink-900 dark:text-white">{totalCount}</span> / <span className="font-semibold text-brand-600">{maxEmployees} seats used</span>
                     </p>
                 </div>
                 <button
@@ -343,6 +343,55 @@ export default function FullyIntegratedEmployeeModule() {
                     + Add New Employee
                 </button>
             </div>
+
+            {/* Territory Load Balancer — workload distribution visibility */}
+            {companyAreas.length > 0 && employees.length > 0 && (
+                <div className="mb-4 rounded-2xl border border-black/5 dark:border-white/10 bg-white dark:bg-gray-900 p-4 shadow-sm">
+                    <h3 className="text-xs font-bold text-ink-900 dark:text-gray-200 uppercase tracking-wider mb-3 flex items-center gap-2">
+                        📊 Territory Load Balancer
+                    </h3>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+                        {companyAreas.map((area) => {
+                            const areaEmps = employees.filter((e) => e.assigned_area_id === area.id);
+                            const isOverloaded = areaEmps.length > 3;
+                            const isUnderserved = areaEmps.length === 0;
+                            return (
+                                <div
+                                    key={area.id}
+                                    className={`rounded-xl border px-3.5 py-2.5 text-xs transition-colors ${
+                                        isOverloaded
+                                            ? "border-amber-200 bg-amber-50 dark:border-amber-800 dark:bg-amber-900/20"
+                                            : isUnderserved
+                                            ? "border-red-200 bg-red-50 dark:border-red-800 dark:bg-red-900/20"
+                                            : "border-black/5 bg-gray-50 dark:border-white/10 dark:bg-gray-800"
+                                    }`}
+                                >
+                                    <div className="flex items-center justify-between">
+                                        <span className="font-semibold text-ink-900 dark:text-gray-200 truncate">{area.name}</span>
+                                        <span
+                                            className={`font-bold tabular-nums ${
+                                                isOverloaded
+                                                    ? "text-amber-700 dark:text-amber-400"
+                                                    : isUnderserved
+                                                    ? "text-red-600 dark:text-red-400"
+                                                    : "text-emerald-700 dark:text-emerald-400"
+                                            }`}
+                                        >
+                                            {areaEmps.length} rep{areaEmps.length !== 1 ? "s" : ""}
+                                        </span>
+                                    </div>
+                                    {isUnderserved && (
+                                        <p className="text-[10px] text-red-600 dark:text-red-400 mt-1 font-medium">⚠ No reps assigned — territory unserved</p>
+                                    )}
+                                    {isOverloaded && (
+                                        <p className="text-[10px] text-amber-600 dark:text-amber-400 mt-1 font-medium">⚠ High rep density — consider redistribution</p>
+                                    )}
+                                </div>
+                            );
+                        })}
+                    </div>
+                </div>
+            )}
 
             {/* Premium Dynamic Bulk Multi Selection Action Bar */}
             {selectedIds.length > 0 && (

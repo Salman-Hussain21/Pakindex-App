@@ -1,8 +1,9 @@
 "use client";
 
-import { useEffect, useState, useCallback } from "react";
+import { useEffect, useState, useCallback, useRef } from "react";
 import dynamic from "next/dynamic";
 import { getGridCells, triggerGridScrape } from "@/lib/admin-api";
+import { useScraping } from "@/components/providers/ScrapingContext";
 
 interface GridCell {
   id: string;
@@ -35,6 +36,7 @@ const GridMap = dynamic(() => import("@/components/admin/GridScrapeMap"), {
 });
 
 export default function GridScraperPage() {
+  const { state, startScraping, updateProgress, finishScraping, failScraping } = useScraping();
   const [cells, setCells] = useState<GridCell[]>([]);
   const [loading, setLoading] = useState(true);
   const [scraping, setScraping] = useState<string | null>(null);
@@ -42,6 +44,12 @@ export default function GridScraperPage() {
   const [error, setError] = useState<string | null>(null);
   const [selected, setSelected] = useState<string | null>(null);
   const [queuedCells, setQueuedCells] = useState<Set<string>>(new Set());
+
+  // Ref to track latest scraping state and avoid React state closures inside async loops
+  const stateRef = useRef(state);
+  useEffect(() => {
+    stateRef.current = state;
+  }, [state]);
 
   const load = useCallback(async () => {
     setLoading(true);
@@ -55,25 +63,76 @@ export default function GridScraperPage() {
   useEffect(() => { load(); }, [load]);
 
   async function scrapeCell(cellId: string) {
+    const targetCell = cells.find(c => c.id === cellId);
+    const label = targetCell ? targetCell.label : `Cell ${cellId}`;
     setScraping(cellId);
     setError(null);
+    startScraping(label);
+    
+    // Start progress at 15%
+    updateProgress(15, 0, `Initializing Karachi scrape for ${label}...`);
+
+    // Increment progress dynamically every 1.2s up to 95% while API is running
+    let currentProgress = 15;
+    const progressTimer = setInterval(() => {
+      currentProgress += Math.random() * 6 + 2; // Increments by 2% to 8%
+      if (currentProgress >= 95) {
+        currentProgress = 95;
+        clearInterval(progressTimer);
+      }
+      updateProgress(
+        currentProgress,
+        0,
+        `Searching & ingesting outlets in ${label} (${Math.round(currentProgress)}%)...`
+      );
+    }, 1200);
+
     try {
       const result: any = await triggerGridScrape(cellId);
+      clearInterval(progressTimer);
       setResults(prev => ({ ...prev, [cellId]: result }));
-      // Refresh the cell statuses after scraping
+      const foundCount = result.found || result.newRecords || 0;
+      finishScraping(foundCount, `Grid cell ${label} scraped successfully! Saved ${result.newRecords} new, skipped ${result.duplicates} duplicates.`);
       await load();
     } catch (e: any) {
+      clearInterval(progressTimer);
       setError(e.message);
+      failScraping(`Scraping failed for ${label}: ${e.message}`);
     } finally {
       setScraping(null);
     }
   }
 
   async function scrapeQueued() {
-    for (const cellId of queuedCells) {
-      await scrapeCell(cellId);
+    const queueList = Array.from(queuedCells);
+    let totalCount = 0;
+    startScraping(`Batch Scrape (${queueList.length} Karachi Grid Cells)`);
+
+    for (let i = 0; i < queueList.length; i++) {
+      if (stateRef.current.cancelled) break;
+      const cellId = queueList[i];
+      const targetCell = cells.find(c => c.id === cellId);
+      const label = targetCell ? targetCell.label : `Cell ${cellId}`;
+      const pct = Math.round(((i + 1) / queueList.length) * 100);
+      updateProgress(
+        Math.min(99, Math.round((i / queueList.length) * 100) + 5),
+        totalCount,
+        `Scraping cell ${i + 1} of ${queueList.length}: ${label} in progress...`
+      );
+
+      try {
+        const result: any = await triggerGridScrape(cellId);
+        setResults(prev => ({ ...prev, [cellId]: result }));
+        totalCount += (result.found || result.newRecords || 0);
+      } catch (e: any) {
+        console.error(`Failed queuing scrape for ${cellId}`, e);
+      }
+    }
+    if (!stateRef.current.cancelled) {
+      finishScraping(totalCount, `Batch scrape complete! Processed ${queueList.length} cells, saved ${totalCount} outlets.`);
     }
     setQueuedCells(new Set());
+    await load();
   }
 
   const toggleQueue = (id: string) => {

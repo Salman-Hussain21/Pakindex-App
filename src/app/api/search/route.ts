@@ -89,7 +89,10 @@ export async function GET(request: NextRequest) {
   const apiKey = process.env.HASDATA_API_KEY;
   if (!apiKey) return NextResponse.json({ error: "HASDATA_API_KEY not configured." }, { status: 500 });
 
-  const ll = resolveCoords(query);
+  // If an explicit `ll` is provided (e.g. grid scraper sends exact cell coords),
+  // use it directly. Otherwise, fall back to resolving coords from the query text.
+  const explicitLL = searchParams.get("ll");
+  const ll = explicitLL || resolveCoords(query);
 
   try {
     if (fetchAll) {

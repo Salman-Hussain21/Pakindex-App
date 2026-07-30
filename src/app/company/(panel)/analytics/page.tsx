@@ -4,7 +4,6 @@ import { useEffect, useState } from "react";
 import { MapPin, TrendingUp, Users, Activity } from "lucide-react";
 import dynamic from "next/dynamic";
 import StatCard from "@/components/company/StatCard";
-import { getCompanyAnalytics } from "@/lib/company-api";
 import type { MapBusiness } from "@/components/admin/LiveMap";
 
 // Leaflet touches `window` at import time — never run during SSR
@@ -38,16 +37,25 @@ export default function TerritoryAnalyticsPage() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [range, setRange] = useState("30d");
+  const [planRestricted, setPlanRestricted] = useState(false);
 
   useEffect(() => {
     setLoading(true);
     Promise.all([
-      getCompanyAnalytics(range),
-      fetch("/api/company/map").then(r => r.json()),
+      fetch(`/api/company/analytics?range=${range}`).then(async (res) => {
+        const json = await res.json();
+        if (res.status === 403 && json?.planRestricted) {
+          setPlanRestricted(true);
+          return null;
+        }
+        if (!res.ok) throw new Error(json?.error || "Failed to load analytics");
+        return json;
+      }),
+      fetch("/api/company/map").then((r) => r.json()),
     ])
       .then(([analytics, mapData]) => {
-        setData(analytics);
-        if (mapData.success) setMapBusinesses(mapData.businesses || []);
+        if (analytics) setData(analytics);
+        if (mapData?.success) setMapBusinesses(mapData.businesses || []);
         setLoading(false);
       })
       .catch((err) => {
@@ -58,6 +66,30 @@ export default function TerritoryAnalyticsPage() {
 
   if (error) {
     return <div className="p-6 text-sm font-medium text-red-600">{error}</div>;
+  }
+
+  if (planRestricted) {
+    return (
+      <div className="flex flex-col items-center justify-center py-24 text-center space-y-4">
+        <div className="w-16 h-16 rounded-full bg-amber-50 border border-amber-200 flex items-center justify-center text-amber-600 text-2xl">
+          📈
+        </div>
+        <div>
+          <h1 className="text-base font-bold text-ink-900 dark:text-gray-100">
+            Territory Analytics requires a Premium plan
+          </h1>
+          <p className="mt-1.5 text-sm text-ink-900/50 dark:text-gray-400 max-w-md">
+            Upgrade to Premium or Ultra Premium to access full territory analytics, market density maps, and sales rep performance tracking.
+          </p>
+        </div>
+        <a
+          href="/company/billing"
+          className="inline-flex items-center gap-2 rounded-xl bg-brand-600 hover:bg-brand-700 px-5 py-2.5 text-sm font-semibold text-white transition-colors"
+        >
+          View Billing &amp; Upgrade →
+        </a>
+      </div>
+    );
   }
 
   if (loading || !data) {
@@ -92,7 +124,6 @@ export default function TerritoryAnalyticsPage() {
       </div>
 
       <div className="grid grid-cols-1 gap-6 lg:grid-cols-3">
-        {/* Market Density Heatmap Placeholder */}
         <div className="col-span-1 lg:col-span-2 overflow-hidden rounded-2xl border border-black/5 bg-white shadow-sm dark:border-white/10 dark:bg-gray-900">
           <div className="border-b border-black/5 px-5 py-4 dark:border-white/10 flex items-center justify-between">
             <h2 className="text-sm font-semibold text-ink-900 dark:text-gray-100">Market Density Map</h2>
@@ -103,7 +134,6 @@ export default function TerritoryAnalyticsPage() {
           </div>
         </div>
 
-        {/* Rep Performance */}
         <div className="overflow-hidden rounded-2xl border border-black/5 bg-white shadow-sm dark:border-white/10 dark:bg-gray-900">
           <div className="border-b border-black/5 px-5 py-4 dark:border-white/10">
             <h2 className="text-sm font-semibold text-ink-900 dark:text-gray-100">Sales Rep Performance</h2>

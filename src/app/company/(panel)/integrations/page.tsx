@@ -8,11 +8,14 @@ export default function IntegrationsPage() {
   const [plan, setPlan] = useState<string>("trial");
   const [loading, setLoading] = useState(true);
   const [exportRange, setExportRange] = useState("all");
+  const [planRestricted, setPlanRestricted] = useState(false);
 
   useEffect(() => {
     getCompanyBilling()
       .then((res) => {
         setPlan(res.plan);
+        const isFree = res.plan === "free" || res.plan === "trial";
+        setPlanRestricted(isFree);
         setLoading(false);
       })
       .catch(() => {
@@ -21,9 +24,33 @@ export default function IntegrationsPage() {
   }, []);
 
   const handleExport = () => {
-    // Trigger download by setting window.location or creating an anchor tag
     window.location.href = `/api/company/export?range=${exportRange}&format=csv`;
   };
+
+  if (loading) {
+    return <div className="p-6 text-sm text-ink-900/50 dark:text-gray-400 animate-pulse">Loading...</div>;
+  }
+
+  if (planRestricted) {
+    return (
+      <div className="flex flex-col items-center justify-center py-24 text-center space-y-4">
+        <div className="w-16 h-16 rounded-full bg-amber-50 border border-amber-200 flex items-center justify-center text-amber-600 text-2xl">🔗</div>
+        <div>
+          <h1 className="text-base font-bold text-ink-900 dark:text-gray-100">Data &amp; Integrations require a Premium plan</h1>
+          <p className="mt-1.5 text-sm text-ink-900/50 dark:text-gray-400 max-w-md">
+            Upgrade to Premium or Ultra Premium to export territory data and connect PakIndex to your CRM/ERP systems.
+          </p>
+        </div>
+        <a
+          href="/company/billing"
+          className="inline-flex items-center gap-2 rounded-xl bg-brand-600 hover:bg-brand-700 px-5 py-2.5 text-sm font-semibold text-white transition-colors"
+        >
+          View Billing &amp; Upgrade →
+        </a>
+      </div>
+    );
+  }
+
   return (
     <div className="space-y-6">
       <div className="flex items-center justify-between">

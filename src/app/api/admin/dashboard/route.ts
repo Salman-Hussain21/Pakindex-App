@@ -2,19 +2,29 @@ import { NextResponse } from "next/server";
 import { query } from "@/lib/db";
 
 export async function GET() {
-  // We compute the counters directly with COUNT() queries rather than the
-  // vw_admin_dashboard SQL view, so this keeps working even if the view
-  // definition changes later.
+  // Single-pass aggregation — one table scan instead of 8 correlated sub-SELECTs.
   const statsPromise = query(`
     SELECT
-      (SELECT COUNT(*) FROM businesses WHERE deleted_at IS NULL)                                AS total_businesses,
-      (SELECT COUNT(*) FROM businesses WHERE status = 'pending' AND deleted_at IS NULL)          AS pending_approvals,
-      (SELECT COUNT(*) FROM businesses WHERE status = 'approved' AND deleted_at IS NULL)         AS approved_records,
-      (SELECT COUNT(*) FROM businesses WHERE status = 'rejected' AND deleted_at IS NULL)         AS rejected_records,
-      (SELECT COUNT(*) FROM companies WHERE deleted_at IS NULL)                                  AS total_companies,
-      (SELECT COUNT(*) FROM users WHERE role = 'employee' AND deleted_at IS NULL)                AS total_employees,
-      (SELECT COUNT(*) FROM businesses WHERE created_at >= date_trunc('day', now()))             AS scraped_today,
-      (SELECT COUNT(*) FROM businesses WHERE created_at >= date_trunc('week', now()))            AS scraped_this_week
+      COUNT(*) FILTER (WHERE deleted_at IS NULL)                                   AS total_businesses,
+      COUNT(*) FILTER (WHERE status = 'pending'  AND deleted_at IS NULL)           AS pending_approvals,
+      COUNT(*) FILTER (WHERE status = 'approved' AND deleted_at IS NULL)           AS approved_records,
+      COUNT(*) FILTER (WHERE status = 'rejected' AND deleted_at IS NULL)           AS rejected_records,
+      COUNT(*) FILTER (WHERE created_at >= date_trunc('day',  now()))              AS scraped_today,
+      COUNT(*) FILTER (WHERE created_at >= date_trunc('week', now()))              AS scraped_this_week
+    FROM businesses
+  `);
+
+  // These three queries are independent — run all four in parallel.
+  const companiesPromise = query(`
+    SELECT
+      COUNT(*) FILTER (WHERE deleted_at IS NULL)                                   AS total_companies
+    FROM companies
+  `);
+
+  const employeesPromise = query(`
+    SELECT COUNT(*) AS total_employees
+    FROM users
+    WHERE role = 'employee' AND deleted_at IS NULL
   `);
 
   const recentScrapesPromise = query(`
@@ -40,17 +50,34 @@ export async function GET() {
     LIMIT 5
   `);
 
-  const [stats, recentScrapes, recentApprovals, recentCompanies] = await Promise.all([
-    statsPromise,
-    recentScrapesPromise,
-    recentApprovalsPromise,
-    recentCompaniesPromise,
-  ]);
+  const [stats, companies, employees, recentScrapes, recentApprovals, recentCompanies] =
+    await Promise.all([
+      statsPromise,
+      companiesPromise,
+      employeesPromise,
+      recentScrapesPromise,
+      recentApprovalsPromise,
+      recentCompaniesPromise,
+    ]);
 
-  return NextResponse.json({
-    stats: stats.rows[0],
-    recentScrapes: recentScrapes.rows,
-    recentApprovals: recentApprovals.rows,
-    recentCompanies: recentCompanies.rows,
-  });
+  const mergedStats = {
+    ...stats.rows[0],
+    total_companies: companies.rows[0]?.total_companies ?? 0,
+    total_employees: employees.rows[0]?.total_employees ?? 0,
+  };
+
+  return NextResponse.json(
+    {
+      stats: mergedStats,
+      recentScrapes: recentScrapes.rows,
+      recentApprovals: recentApprovals.rows,
+      recentCompanies: recentCompanies.rows,
+    },
+    {
+      headers: {
+        // Fresh for 30s, serve stale while revalidating for another 30s.
+        "Cache-Control": "public, s-maxage=30, stale-while-revalidate=30",
+      },
+    }
+  );
 }

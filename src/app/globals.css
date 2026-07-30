@@ -4,7 +4,8 @@
 @custom-variant dark (&:where(.dark, .dark *));
 
 @theme {
-  --font-sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  --font-sans: var(--font-poppins), -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  --font-heading: var(--font-montserrat), sans-serif;
 
   /* PakIndex brand green, sampled from the logo */
   --color-brand-50:  #e6f3ed;
@@ -21,6 +22,16 @@
   --color-ink-900: #252422;
 }
 
+/* Force Poppins globally and Montserrat on headings */
+html, body {
+  font-family: var(--font-poppins), -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+h1, h2, h3, h4, h5, h6, .font-heading {
+  font-family: var(--font-montserrat), sans-serif !important;
+  letter-spacing: -0.015em;
+}
+
 /* <option> elements render natively in most browsers and ignore Tailwind's
    text-color utilities on the parent <select> — this is what causes select
    dropdown text to stay black even when everything else has switched to
@@ -32,3 +43,62 @@
   background-color: #1f2937;
   color: #f3f4f6;
 }
+
+/* ── Admin Panel Premium Styles ─────────────────────────────────────── */
+
+/* Smooth scrollbar for the admin panel */
+.overflow-y-auto::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+.overflow-y-auto::-webkit-scrollbar-track {
+  background: transparent;
+}
+.overflow-y-auto::-webkit-scrollbar-thumb {
+  background-color: rgba(0, 0, 0, 0.1);
+  border-radius: 999px;
+}
+.dark .overflow-y-auto::-webkit-scrollbar-thumb {
+  background-color: rgba(255, 255, 255, 0.08);
+}
+
+/* Smooth transition for table row hover states */
+tbody tr {
+  transition: background-color 0.15s ease, transform 0.15s ease;
+}
+
+/* Classy landing page gradient backgrounds */
+.dark-landing-glass {
+  background: rgba(12, 18, 15, 0.7);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+/* Global landing page dark-skin overrides for admin & company panels */
+.dark {
+  --color-gray-800: #131b17;
+  --color-gray-900: #0c120f;
+  --color-gray-950: #070b09;
+}
+
+.dark .dark\:bg-gray-850,
+.dark .dark\:bg-gray-900 {
+  background-color: #0c120f !important;
+}
+
+.dark .dark\:bg-gray-950 {
+  background-color: #070b09 !important;
+}
+
+.dark .dark\:bg-gray-800 {
+  background-color: #131b17 !important;
+}
+
+.dark .dark\:border-white\/10 {
+  border-color: rgba(255, 255, 255, 0.08) !important;
+}
+
+.dark .dark\:border-white\/5 {
+  border-color: rgba(255, 255, 255, 0.04) !important;
+}
+

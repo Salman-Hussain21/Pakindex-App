@@ -9,6 +9,22 @@ export async function GET(req: Request) {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
 
+    // Check company plan — Territory Analytics is a Premium+ feature
+    const planRes = await query(
+      `SELECT plan FROM companies WHERE id = $1 AND deleted_at IS NULL LIMIT 1`,
+      [session.companyId]
+    );
+    const plan = planRes.rows[0]?.plan ?? "free";
+    if (plan === "free" || plan === "trial") {
+      return NextResponse.json(
+        {
+          error: "Territory Analytics is available on Premium and Ultra Premium plans. Please upgrade to access this feature.",
+          planRestricted: true,
+        },
+        { status: 403 }
+      );
+    }
+
     const { searchParams } = new URL(req.url);
     const range = searchParams.get("range") || "30d";
     const intervalMap: Record<string, string> = {
@@ -19,7 +35,6 @@ export async function GET(req: Request) {
     const interval = intervalMap[range] || "30 days";
 
     // 1. Total Reachable Market
-    // Count businesses that exist within the areas assigned to this company.
     const reachRes = await query(
       `SELECT COUNT(DISTINCT b.id) as total_reach
        FROM businesses b
@@ -28,18 +43,18 @@ export async function GET(req: Request) {
        WHERE ca.company_id = $1`,
       [session.companyId]
     );
-    const totalReachableMarket = parseInt(reachRes.rows[0].total_reach, 10) || 0;
+    const totalReachableMarket = parseInt(reachRes.rows[0]?.total_reach, 10) || 0;
 
-    // 2. Active Reps (employees only, excluding soft-deleted)
+    // 2. Active Reps
     const activeRepsRes = await query(
       `SELECT COUNT(*) as active_count
        FROM users
        WHERE company_id = $1 AND role = 'employee' AND status = 'active' AND deleted_at IS NULL`,
       [session.companyId]
     );
-    const activeReps = parseInt(activeRepsRes.rows[0].active_count, 10) || 0;
+    const activeReps = parseInt(activeRepsRes.rows[0]?.active_count, 10) || 0;
 
-    // 3. Net Market Growth (Added in selected date range)
+    // 3. Net Market Growth
     const growthRes = await query(
       `SELECT COUNT(DISTINCT b.id) as growth
        FROM businesses b
@@ -48,23 +63,23 @@ export async function GET(req: Request) {
          AND b.created_at >= NOW() - INTERVAL '1 day' * $2::int`,
       [session.companyId, interval === "30 days" ? 30 : interval === "90 days" ? 90 : 365]
     );
-    const netMarketGrowth = parseInt(growthRes.rows[0].growth, 10) || 0;
+    const netMarketGrowth = parseInt(growthRes.rows[0]?.growth, 10) || 0;
 
-    // 4. Pinned Businesses (For Penetration)
+    // 4. Pinned Businesses
     const pinnedRes = await query(
       `SELECT COUNT(DISTINCT business_id) as pinned
        FROM company_pinned_businesses
        WHERE company_id = $1`,
       [session.companyId]
     );
-    const pinnedCount = parseInt(pinnedRes.rows[0].pinned, 10) || 0;
-    
+    const pinnedCount = parseInt(pinnedRes.rows[0]?.pinned, 10) || 0;
+
     let marketPenetration = "0%";
     if (totalReachableMarket > 0) {
       marketPenetration = ((pinnedCount / totalReachableMarket) * 100).toFixed(1) + "%";
     }
 
-    // 5. Rep Performance (Mocking actual leads assigned to reps for now, fallback to generic query)
+    // 5. Rep Performance
     const repsRes = await query(
       `SELECT u.id, u.full_name, 
          (SELECT COUNT(*) FROM crm_leads l WHERE l.assigned_to = u.id AND l.company_id = u.company_id) as leads_count
@@ -75,11 +90,11 @@ export async function GET(req: Request) {
       [session.companyId]
     );
 
-    const reps = repsRes.rows.map(r => ({
+    const reps = repsRes.rows.map((r) => ({
       name: r.full_name || "Unknown Agent",
       area: "Assigned Territory",
       count: parseInt(r.leads_count, 10) || 0,
-      total: Math.max(1, parseInt(r.leads_count, 10) || 1) // real count as own baseline
+      total: Math.max(1, parseInt(r.leads_count, 10) || 1),
     }));
 
     return NextResponse.json({
@@ -87,7 +102,7 @@ export async function GET(req: Request) {
       active_reps: activeReps,
       net_market_growth: netMarketGrowth,
       market_penetration: marketPenetration,
-      reps
+      reps,
     });
   } catch (error: any) {
     console.error("GET /api/company/analytics error:", error);

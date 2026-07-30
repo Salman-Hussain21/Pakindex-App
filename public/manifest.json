@@ -1,0 +1,17 @@
+{
+  "name": "PakIndex Field CRM",
+  "short_name": "PakIndex",
+  "description": "B2B Restaurant Intelligence & Field Sales CRM for Pakistan",
+  "start_url": "/employee",
+  "display": "standalone",
+  "background_color": "#0f172a",
+  "theme_color": "#4f46e5",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "/favicon.ico",
+      "sizes": "64x64",
+      "type": "image/x-icon"
+    }
+  ]
+}

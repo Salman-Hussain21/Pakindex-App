@@ -1,8 +1,9 @@
 "use client";
 
 import { useState } from "react";
-import { ImageOff, X } from "lucide-react";
+import { ImageOff, X, Sparkles } from "lucide-react";
 import StatusBadge from "./StatusBadge";
+import AIPitchModal from "@/components/company/AIPitchModal";
 
 export interface BusinessDetail {
   id: string;
@@ -77,29 +78,41 @@ export default function BusinessDetailModal({
   onClose: () => void;
   actions?: React.ReactNode;
 }) {
+  const [showAiModal, setShowAiModal] = useState(false);
   const menuPhotos = (business.images || []).filter(Boolean);
 
   return (
-    <div
-      className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 p-4"
-      onClick={onClose}
-    >
+    <>
       <div
-        className="max-h-[90vh] w-full max-w-2xl overflow-y-auto rounded-2xl bg-white shadow-xl dark:bg-gray-900"
-        onClick={(e) => e.stopPropagation()}
+        className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 p-4"
+        onClick={onClose}
       >
-        <div className="flex items-start justify-between border-b border-black/5 px-6 py-4 dark:border-white/10">
-          <div>
-            <h2 className="text-lg font-semibold text-ink-900 dark:text-gray-100">{business.name}</h2>
-            <div className="mt-1"><StatusBadge status={business.status} /></div>
+        <div
+          className="max-h-[90vh] w-full max-w-2xl overflow-y-auto rounded-2xl bg-white shadow-xl dark:bg-gray-900"
+          onClick={(e) => e.stopPropagation()}
+        >
+          <div className="flex items-start justify-between border-b border-black/5 px-6 py-4 dark:border-white/10">
+            <div>
+              <div className="flex items-center gap-2">
+                <h2 className="text-lg font-semibold text-ink-900 dark:text-gray-100">{business.name}</h2>
+                <button
+                  onClick={() => setShowAiModal(true)}
+                  className="inline-flex items-center gap-1.5 rounded-full bg-gradient-to-r from-brand-600 to-indigo-600 px-3 py-1 text-[11px] font-bold text-white shadow hover:opacity-95 transition-all"
+                  title="Generate AI Lead Score & Sales Script"
+                >
+                  <Sparkles size={12} />
+                  AI Intelligence
+                </button>
+              </div>
+              <div className="mt-1"><StatusBadge status={business.status} /></div>
+            </div>
+            <button
+              onClick={onClose}
+              className="text-ink-900/40 hover:text-ink-900 dark:text-gray-500 dark:hover:text-gray-100"
+            >
+              <X size={18} />
+            </button>
           </div>
-          <button
-            onClick={onClose}
-            className="text-ink-900/40 hover:text-ink-900 dark:text-gray-500 dark:hover:text-gray-100"
-          >
-            <X size={18} />
-          </button>
-        </div>
 
         <div className="space-y-6 px-6 py-5">
           {business.thumbnail && <Thumbnail src={business.thumbnail} alt={business.name} />}
@@ -198,6 +211,24 @@ export default function BusinessDetailModal({
         )}
       </div>
     </div>
+
+    <AIPitchModal
+      isOpen={showAiModal}
+      onClose={() => setShowAiModal(false)}
+      business={{
+        id: business.id,
+        name: business.name,
+        category: business.category_name || business.business_type || undefined,
+        area: business.area_name || undefined,
+        city: business.city_name || "Karachi",
+        rating: business.rating,
+        review_count: business.review_count,
+        price_range: business.price_range,
+        phone: business.phone || undefined,
+        address: business.address || undefined,
+      }}
+    />
+  </>
   );
 }
 

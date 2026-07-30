@@ -20,6 +20,19 @@ export async function GET(request: NextRequest) {
     const pageSize   = Math.min(100, Number(searchParams.get("pageSize") || 50));
     const offset     = (page - 1) * pageSize;
 
+    // Check company plan — Audit Logs is a Premium+ feature
+    const planRes = await query(
+      `SELECT plan FROM companies WHERE id = $1 AND deleted_at IS NULL LIMIT 1`,
+      [session.companyId]
+    );
+    const plan = planRes.rows[0]?.plan ?? "free";
+    if (plan === "free" || plan === "trial") {
+      return NextResponse.json(
+        { error: "Audit Logs are available on Premium and Ultra Premium plans. Please upgrade to access this feature.", planRestricted: true },
+        { status: 403 }
+      );
+    }
+
     // Scope: only logs from users in this company — a company must never
     // be able to see another company's or the platform's audit trail.
     const where: string[] = ["al.company_id = $1"];

@@ -11,7 +11,9 @@ export const pool =
   global._pgPool ??
   new Pool({
     connectionString: process.env.DATABASE_URL,
-    max: 10,
+    max: 20,
+    idleTimeoutMillis: 30_000,
+    connectionTimeoutMillis: 3_000,
   });
 
 if (!global._pgPool) {

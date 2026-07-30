@@ -13,6 +13,16 @@ export async function GET(request: Request) {
     const range = searchParams.get("range") || "all";
     const format = searchParams.get("format") || "csv"; // Only csv supported for MVP
 
+    // Data export is a Premium+ feature
+    const planRes = await query(
+      `SELECT plan FROM companies WHERE id = $1 AND deleted_at IS NULL LIMIT 1`,
+      [session.companyId]
+    );
+    const plan = planRes.rows[0]?.plan ?? "free";
+    if (plan === "free" || plan === "trial") {
+      return new NextResponse("Data export is available on Premium and Ultra Premium plans. Please upgrade.", { status: 403 });
+    }
+
     let sql = `
       SELECT b.id, b.name, b.address, b.phone, b.status, c.name as category, a.name as area
       FROM businesses b

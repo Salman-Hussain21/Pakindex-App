@@ -68,7 +68,7 @@ export default function NotificationBell() {
   }
 
   return (
-    <div className="relative" ref={ref}>
+    <div className="relative z-999" ref={ref}>
       <button
         onClick={() => setOpen((v) => !v)}
         aria-label="Notifications"
