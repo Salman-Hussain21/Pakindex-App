@@ -1,0 +1,4391 @@
+{
+  "requestMetadata": {
+    "id": "7ddf81fc-935a-4023-b3b9-e3df21268a0e",
+    "status": "ok",
+    "html": "https://files.hasdata.com/7ddf81fc-935a-4023-b3b9-e3df21268a0e.html",
+    "json": "https://files.hasdata.com/7ddf81fc-935a-4023-b3b9-e3df21268a0e.json",
+    "preview": "https://files.hasdata.com/7ddf81fc-935a-4023-b3b9-e3df21268a0e.preview",
+    "url": "https://www.google.com/maps/search/restaurants/@24.8682,67.0624,15z?hl=en&gl=us"
+  },
+  "localResults": [
+    {
+      "position": 1,
+      "title": "Zeytin",
+      "placeId": "ChIJA_ehxI0_sz4RPxf8LaZmcJc",
+      "dataId": "0x3eb33f8dc4a1f703:0x977066a62dfc173f",
+      "kgmid": "/g/11hythlkdg",
+      "thumbnail": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAEim_lsfmBGKXLXFyZbSPdKZd0liCNGB4s5Mcsb4-0O1DpJ6_h6cqv2yjTa5OhxvI6dcxKmKQalBkctu0PKK5Jr-9_bX0NzBH1AWDEOj9tizvUiejDYYyohJ6VkLKlaFvkcNKu5=s1024-v1",
+      "phone": "+92 331 0223333",
+      "address": "Safa Residency, Shaheed-e-Millat Rd, Maniya Society Maniya CHS (MCHS) P.E.C.H.S., Karachi, 75400, Pakistan",
+      "website": "https://www.zeytin.pk/",
+      "workingHours": {
+        "timezone": "Asia/Karachi",
+        "days": [
+          {
+            "day": "Thursday",
+            "time": "12 PM–12 AM",
+            "date": "2026-6-18"
+          },
+          {
+            "day": "Friday",
+            "time": "12 PM–12 AM",
+            "date": "2026-6-19"
+          },
+          {
+            "day": "Saturday",
+            "time": "12 PM–12 AM",
+            "date": "2026-6-20"
+          },
+          {
+            "day": "Sunday",
+            "time": "12 PM–12 AM",
+            "date": "2026-6-21"
+          },
+          {
+            "day": "Monday",
+            "time": "12 PM–12 AM",
+            "date": "2026-6-22"
+          },
+          {
+            "day": "Tuesday",
+            "time": "12 PM–12 AM",
+            "date": "2026-6-23"
+          },
+          {
+            "day": "Wednesday",
+            "time": "12 PM–12 AM",
+            "date": "2026-6-24"
+          }
+        ]
+      },
+      "openState": "Open · Closes 12 AM",
+      "rating": 4.4,
+      "reviews": 7839,
+      "type": "Turkish restaurant",
+      "types": [
+        "Turkish restaurant",
+        "Restaurant"
+      ],
+      "price": "Rs 2,000–6,000",
+      "priceDescription": "Rs 2,000 to Rs 6,000",
+      "gpsCoordinates": {
+        "latitude": 24.8808233,
+        "longitude": 67.0623402
+      },
+      "serviceOptions": [
+        "Delivery",
+        "Onsite services",
+        "Takeout",
+        "Dine-in"
+      ],
+      "extensions": {
+        "serviceOptions": [
+          "Delivery",
+          "Onsite services",
+          "Takeout",
+          "Dine-in"
+        ],
+        "highlights": [
+          "Great dessert"
+        ],
+        "popularFor": [
+          "Lunch",
+          "Dinner",
+          "Solo dining"
+        ],
+        "accessibility": [
+          "Wheelchair accessible restroom",
+          "Wheelchair accessible seating"
+        ],
+        "offerings": [
+          "Coffee",
+          "Healthy options",
+          "Late-night food",
+          "Quick bite",
+          "Small plates"
+        ],
+        "diningOptions": [
+          "Lunch",
+          "Dinner",
+          "Dessert",
+          "Seating",
+          "Table service"
+        ],
+        "amenities": [
+          "Restroom"
+        ],
+        "atmosphere": [
+          "Casual",
+          "Cozy",
+          "Quiet",
+          "Romantic",
+          "Trendy",
+          "Upscale"
+        ],
+        "crowd": [
+          "Groups",
+          "Tourists"
+        ],
+        "planning": [
+          "Lunch reservations recommended",
+          "Dinner reservations recommended",
+          "Accepts reservations",
+          "Usually a wait"
+        ],
+        "payments": [
+          "Debit cards"
+        ],
+        "children": [
+          "Good for kids",
+          "Good for kids birthday",
+          "High chairs"
+        ],
+        "parking": [
+          "Free parking lot",
+          "Free street parking",
+          "Paid parking lot",
+          "Paid street parking",
+          "Valet parking"
+        ]
+      },
+      "menu": {
+        "overview": {
+          "menuPhotos": [
+            {
+              "url": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAEnjMR_iqHgVsARyQkv2kmLXOD2fVrEHiJNnQwESC8z604Y19YGqK-Xz5LURRREz7ZW1jx0-TUo2GrO3uMYJV75Zp0TVaGlMRQRnaqkRtd0r-7V15KJ3Jsz2CaNXbgOppxMca2Fkj-nFfNm=s1024-v1",
+              "postedAt": "2025-12-27"
+            },
+            {
+              "url": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAGcjgjwJCLz3otkLfW1arZnh6NbqL2kg0o34F3oYgzBRQUOECtQEVsq-zONQArd3A0bH1-IHzPGjQCE51VhdNsLedo6BZPYxvcNsKiTCwodcN9XTWdw8el01XV43N2ZZXKVkHN74waq0yDq=s1024-v1",
+              "postedAt": "2025-12-27"
+            },
+            {
+              "url": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAFGkvmxshZbejc9uVTsxnCifi2A0J-xqYNXeojNQZ5x7llo8QJ8raGwMX9GJXSwSadeRPjZOrQyNr2TlpWcqQushxahn3ZVZXwk2SlcdYbkeQxfFOOHK1pDbiT46WZKG2e0kBW-y15lfopl=s1024-v1",
+              "postedAt": "2025-10-22"
+            },
+            {
+              "url": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAEDB0ydkZFsueIrjS2CIRBtQiF4ZKTUP-G1WRgyGrdULbkBtrNQeL5o74sPgdG-l-0Rjv3LRDDqlGK2tQI_fyAT-xbxhVlkE64b2XYenjEFMHSMada4z6zReGQWevz8dyF3btKplf8yrA72=s1024-v1",
+              "postedAt": "2025-12-27"
+            },
+            {
+              "url": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAHbkw0ewf9lWS276HanyeI6R6Zj0L85NH-7Dgy8LNZwoaKUvdhVKSLSFlUcakweGIZ-cQjZLkwzze8qATFtlX4PJzGCjB2AocNswGYGHe1LoAjFe5Dsv4v6CSrCiUrNl0KIBXoWBFYDhZXv=s1024-v1",
+              "postedAt": "2025-12-27"
+            },
+            {
+              "url": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAH0yHd3k0rEso_MQjb-pUV3KEQKuOtcVDssCA_Qt5Qn3mc6LeUySCmSIwdrGPIX4-r2HVlcXCjsWlJGm9elbz-uNcdyzxQv5EfmYol_wgJN9Jp_n2GCuQPbeZl_621bEjpRET_ipzfDs-k=s1024-v1",
+              "postedAt": "2025-12-27"
+            },
+            {
+              "url": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAFgg8CHkMgdIi3QIKbdHU1AOHaGT4wBeH3CcRSrkL5MQ2PEhl4VGt5cxLwBgD35vJyN6yDhrdCcaKC8gJMFFsKGo7ZmV9_c4yIljGiNK2pcteLy53Z9v3s3xyWc458KPhWc2hDUw5I92lY=s1024-v1",
+              "postedAt": "2025-12-27"
+            },
+            {
+              "url": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAFN2MpXp5SssYbC6vLVC8TM8FM4i49mzILocybRGFVO85TbPLkxnwFKHSPzhcKmr-4vMW3IHiOh13DNHxJM7BWTc3c-FKV3an1E4QwyD3KWTcf_mOsEJ8VnngU0hqCReu-tr_xYJWyBVs1B=s1024-v1",
+              "postedAt": "2025-12-27"
+            },
+            {
+              "url": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAFv7Lh1N4HCEDVvEDAdBwGvfjVryQ_7A7Ae9phgnNGOALY5nGkUNo_eY0SG9GAZ7XpevxcY2hea5Td9AHiDGthe4399vk-EgnnafGmdHqEvE88IArpiFBf5j3Idi3Z_uLgI-GEpymfeodA=s1024-v1",
+              "postedAt": "2025-10-22"
+            },
+            {
+              "url": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAHvMKpChjmlvt2xv-Zvda2jzMrCiMTt9tNAk0_KJwbgEx_Kjj5KrEiacWOOUXKVXFnv8zdy0tMfQyjl4qc8QxVVm8MhFVWc82__wHW4fCVB4j0gNBs7w1URcK67SI53EJHhPppNOimE5Ovm=s1024-v1",
+              "postedAt": "2025-12-27"
+            },
+            {
+              "url": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAFoLb9z3yQNMqIQU3mg944-nR6shndt6oiCJs1TV8mXwCyMp8vnh2cf3uvYZDXOZ0Lu_4X1aRYitVGeqrgrJNGR4e8rHesmYSgHdqHJc3YYaS93UcUP9Hjy1H9ceohmUAi0Ir5myOd7bB0D=s1024-v1",
+              "postedAt": "2025-12-27"
+            },
+            {
+              "url": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAF9wRyZvlEApn29w7BO6lMNMi3AEHBnBItZ2S0Hk178xKJVnRvxok2cT66fBKc2wWQPEBg4R3hW-gvtMWxmBgREG0daYCJlQ_xkHWjh5su-awfGkLNYGoT6NZxCSWjNuSLx6BeAud8FbKR7=s1024-v1",
+              "postedAt": "2025-12-27"
+            },
+            {
+              "url": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAHjQMxTQFIBFAefgGQgwGdSLFlL2oVjtr9Nb1gfy8CT9DgDBwTXZ7loIsSuWE4pGUFmS9zcCtoI0Ggv_LtxoJenH_oAtw5Dctaimr-8A3Qu1V0xkTPbyvxU4d9xmCsl0MmbCfR9baF-gsUa=s1024-v1",
+              "postedAt": "2025-12-27"
+            },
+            {
+              "url": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAGzA0-lPYDbT9YDZq9fpN-PxOX8BPS8CZoh92C067cK6d0JGFaYwmi2I4WzSR1k7vltHY2eoEDghHU33Av_1hd1X8SwaPaOHCNAO9q6aoULWYWoLd8GlInQk7aGwAmvROdIVEuIxw=s1024-v1",
+              "postedAt": "2023-12-19"
+            },
+            {
+              "url": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAGjOcAQna8OOEBs0kmARBCQOiLdGjHT6E4owbX5GvPx8_5O5m_gn1pQgR_-qHC95BViki5UCs4aS-OekwdXZJvf1920UPF9bXuAMfwLHHbYWW-86rphRSPMSp-EvyAXnZXVM-NrYR8qIKs=s1024-v1",
+              "postedAt": "2025-12-9"
+            },
+            {
+              "url": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAHxjSHOOQ3jldrUK3zAb1Io13wnTfBd31b-_6d46bwlzGZyYN1Zwy7hc_7XuaNkcLMaHIgzglm0WSWIh1K2bBBcgNHDnpuP7NhubRVlDV6n0fII1j2HBRdTE68wjj1Ho_EKpEKVDQ=s1024-v1",
+              "postedAt": "2021-6-20"
+            },
+            {
+              "url": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAG4XWu58lOQhNjOoKTzjuvtbKB8lMaGMYg218AvoGBw3h1AgRX6XRwjlBul1db6I-Hy0WqKAH77iYdkwxj_TaiwBLE5UDlUnhYQ7PYvG1Zu0ZCw4hebesncg-qgGWWOIag_8RngJqNvvpUR=s1024-v1",
+              "postedAt": "2025-12-27"
+            },
+            {
+              "url": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAGkfqijEJ8Tq3z1vWuW-oTkD5BbKWgYtcYwFnkXLc5peGKjEobhDEXyDbuDsbXQaHzyU3RwOn1rZWfkq9GF_Y9rRvVNpROvmUcyVrWYPbiqFdGJETD-qSJ_l8FO3KUDaI2RHsxbwF7erKc=s1024-v1",
+              "postedAt": "2025-10-22"
+            },
+            {
+              "url": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAE5aXyhqZUhWi4EJq38qsAbea5vTc7RTf9ltAXolWsLkyOM3r1wst29AZoRkrfuJdyQ-v-tLmT2fxg7AO7jShhsdXjZBNGZ_rkkwbtke8gWQBmr_Y8427-NOovEuqw7Jn3WBUqKMOLR4bk=s1024-v1",
+              "postedAt": "2025-12-27"
+            },
+            {
+              "url": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAHAwWJK8ZMI5dsCS6ONUjc8if9n67c9d9s_L_BlU5g86vTFQ-Dwzza9xCH22RqHxh3PGKGV5LVSOVLQrxnSQ8M0lsq90Hy5xoYoR008GPy-UHC4uKuUYV1Wu5_fqa3x-6Zhb-0Sfg=s1024-v1",
+              "postedAt": "2023-12-19"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "position": 2,
+      "title": "Real Spice - Tariq Road ریئل اسپائس - طارق روڈ",
+      "placeId": "ChIJg9L_zY8-sz4RAFEVZF-Zb2s",
+      "dataId": "0x3eb33e8fcdffd283:0x6b6f995f64155100",
+      "kgmid": "/g/11c57md24j",
+      "thumbnail": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAEQLuEa2eSMmfHUKWgstdao_tI_VIEAxYbZs_OsCbYO4CEx9owLq1VvbmpzPe6kCxHFqH-fPDdrB768DU0TSj2RAY6yFnP6MBBY059ogwLgJoAy-EmoWOdPmBlLXmn5fM0hQesKuA=s1024-v1",
+      "phone": "+92 21 111 734 628",
+      "address": "124-M, Block 2 P.E.C.H.S., Karachi, 75400, Pakistan",
+      "website": "http://realspice.com.pk/",
+      "workingHours": {
+        "timezone": "Asia/Karachi",
+        "days": [
+          {
+            "day": "Thursday",
+            "time": "12 PM–1 AM",
+            "date": "2026-6-18"
+          },
+          {
+            "day": "Friday",
+            "time": "12 PM–1 AM",
+            "date": "2026-6-19"
+          },
+          {
+            "day": "Saturday",
+            "time": "12 PM–1 AM",
+            "date": "2026-6-20"
+          },
+          {
+            "day": "Sunday",
+            "time": "12 PM–1 AM",
+            "date": "2026-6-21"
+          },
+          {
+            "day": "Monday",
+            "time": "12 PM–1 AM",
+            "date": "2026-6-22"
+          },
+          {
+            "day": "Tuesday",
+            "time": "12 PM–1 AM",
+            "date": "2026-6-23"
+          },
+          {
+            "day": "Wednesday",
+            "time": "12 PM–1 AM",
+            "date": "2026-6-24"
+          }
+        ]
+      },
+      "openState": "Open · Closes 1 AM",
+      "rating": 4.8,
+      "reviews": 3831,
+      "type": "Restaurant",
+      "types": [
+        "Restaurant"
+      ],
+      "price": "Rs 1,000–6,000",
+      "priceDescription": "Rs 1,000 to Rs 6,000",
+      "gpsCoordinates": {
+        "latitude": 24.8682058,
+        "longitude": 67.0574839
+      },
+      "serviceOptions": [
+        "No-contact delivery",
+        "Delivery",
+        "Onsite services",
+        "Takeout",
+        "Dine-in"
+      ],
+      "extensions": {
+        "serviceOptions": [
+          "No-contact delivery",
+          "Delivery",
+          "Onsite services",
+          "Takeout",
+          "Dine-in"
+        ],
+        "highlights": [
+          "Great coffee",
+          "Great dessert",
+          "Great tea selection"
+        ],
+        "popularFor": [
+          "Lunch",
+          "Dinner",
+          "Solo dining"
+        ],
+        "accessibility": [
+          "Wheelchair accessible seating"
+        ],
+        "offerings": [
+          "Coffee",
+          "Halal food",
+          "Healthy options",
+          "Late-night food",
+          "Quick bite",
+          "Small plates",
+          "Vegan options",
+          "Vegetarian options"
+        ],
+        "diningOptions": [
+          "Brunch",
+          "Lunch",
+          "Dinner",
+          "Catering",
+          "Counter service",
+          "Dessert",
+          "Seating",
+          "Table service"
+        ],
+        "amenities": [
+          "Gender-neutral restroom",
+          "Restroom",
+          "Wi-Fi"
+        ],
+        "atmosphere": [
+          "Casual",
+          "Cozy",
+          "Quiet",
+          "Romantic",
+          "Trendy",
+          "Upscale"
+        ],
+        "crowd": [
+          "College students",
+          "Groups",
+          "Tourists"
+        ],
+        "planning": [
+          "Lunch reservations recommended",
+          "Dinner reservations recommended",
+          "Accepts reservations"
+        ],
+        "payments": [
+          "Credit cards",
+          "Debit cards",
+          "NFC mobile payments"
+        ],
+        "children": [
+          "Good for kids",
+          "Good for kids birthday",
+          "High chairs",
+          "Kids' menu"
+        ],
+        "parking": [
+          "Free street parking",
+          "Paid street parking"
+        ]
+      },
+      "menu": {
+        "overview": {
+          "menuPhotos": [
+            {
+              "url": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAGaaHkNUyy2V8Y6Y2UYIXwz9BGfBxDU0j-_3_nM7rCfJLWCQ_YldYqZGsqkrWBSudMSjpI4mZg24igL0wYWw_RUSdYSFM0IqphhcAkLpbp0xINqtwkgTpiRP-OaMk0Op7U_RO1UyUoLVv1B=s1024-v1",
+              "postedAt": "2026-1-13"
+            },
+            {
+              "url": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAF9lrYrjllHI3KZi7joQjghs4hv2u7lB0eVUR0FocXqyE8O4WUwMNAoJ4xf0IV-udUCigXa8ZvLVtrAzWtyr8-qwQD1LKZfD4dHuFUWvCMcFGMXyjLnB_I4aAvt5C5X_hXtaH5B6P9_OAo=s1024-v1",
+              "postedAt": "2026-3-7"
+            },
+            {
+              "url": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAGQwMyJIGtZVZq1IZSjD2BlO6O7dDgCoZOWTvbl2VkaNi0I6YZvg8ysexSKkqYv3gk4xkdEjjtq56mzpY2f2ds5j3Nud-Y3R_SfruRNa7aAKErQT1NkogOyuJBzxYpA9mG8poN78S1N0yHy=s1024-v1",
+              "postedAt": "2026-4-13"
+            },
+            {
+              "url": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAFPKpdJSICPvSUNs54VpG2-loCcRoM4fVW1opEPirJqJsx4cdN7IYlmTd-aFdsXJrZUK9sS4edphpu47vR4fBp5d9hcwNmoO_2PzDYvF3pJjOjS9ThHGI8AkMGFyeBXYbpSfgUYa5aAbZxa=s1024-v1",
+              "postedAt": "2025-10-24"
+            },
+            {
+              "url": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAFyXuayawWWpoO2ZLnvpjdALLFsQdAJEDLBKUGMI2C8YkCBCPaDQWAcSCYP9Xa9TOqovcVgemSaTdR7Psc5qDpR-OpDtPt1HTHnEZs8CBbg8crZBwx8M_mdYlFQ7-yIcPYiU62T6ZEWdzE4=s1024-v1",
+              "postedAt": "2025-4-19"
+            },
+            {
+              "url": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAERXjtcURkIu-w0jACbvD_Hv59fC8K9qV-fgw-cyt-KJYJmm_Yd_GlOtZ8gKCPAzO8wV3wXEYIk_TOga3mWhvuZGoaAgk_4Re5Eo36m4xKXYTvGp63Xgg6VV9slFY7RiiHrN_ZrrdWlQOYI=s1024-v1",
+              "postedAt": "2026-1-14"
+            },
+            {
+              "url": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAG3KPJEn1o7j3LMkNB4CoiiozdsgPgrkCeqDiqyJavkid9hRW3ULOL5vk5E9wquW530uQRIYE_J6JCEAugR7mBEUp2b6mEl2Ty-gV4W79KLH11PUfdLE20TmChSqb0QAgepMTJcizd00k-o=s1024-v1",
+              "postedAt": "2026-1-13"
+            },
+            {
+              "url": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAFEF688SfPOH4pnO5GmZ_FVzczcO0IlcsO5AkEUh995Izi3WULSb5X-qg-nIwpk5AQGqTXptB1qJUPNewPU-LGNQfVcsED3OQsCSXUGHoIvTlU4AOTZrtIt0rle1-c1nKAkfEw=s1024-v1",
+              "postedAt": "2025-1-15"
+            },
+            {
+              "url": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAG9IISsHK16JUFP6AkvU2FG_RbNXTCtYeaJjJFOLFd9MAuBUu8TZbn_J-Lt_QaKlQRQd3j2sAb72dizfWUUeTMNcR66TSWcY_oD9UXnkpO7cLctHh-lopNlODSiPXHZlg1VqB9pfj3s2kIk=s1024-v1",
+              "postedAt": "2026-3-7"
+            },
+            {
+              "url": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAE5aVpd1NVDTUtFbT90P7MXDZyE8MVM6uCyjXNSnLrIixBAs3rwQFYS_w9WrDyw-RVWSPDYgnyH4nZWS7gkSU6Fzar5JD4OeDHXW0qnVYdmgiHH1aA8VeWckZsLrIAM10xNbkmq=s1024-v1",
+              "postedAt": "2025-3-6"
+            },
+            {
+              "url": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAHATVgIKZqzvbXqKxy4Rf70x4nL6QR8Th4Ly7LNMBUrcmxqS5eGhwzTnwAncywdSn2vpaw9OavFZT4DRqyr6s-YEBplfwg1b2TAoTScKKvcf9CTY1zCYZ5DZCeN_hYT5Oxcio_wmccia98D=s1024-v1",
+              "postedAt": "2026-1-13"
+            },
+            {
+              "url": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAHbSwQA_x860aW3g7TnWShyOHnJEGY4MRY5abGnFhNSNSblie4enDZRSBh9fpbThVRSR3cTg5Q7Fes0iSrCOtmLIzLlAWBN-9UWJuOr_lTDdlL5hqQY8HZmSwoJJjt1PqJy4iU=s1024-v1",
+              "postedAt": "2025-3-6"
+            },
+            {
+              "url": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAFtamoGVwatng3-haMQUpYLqVnPcotuwT54sc4fI324ywk5MVanaDxp3p-EUKMQHOf7nhNxB0MOZZ7eX42q0ZfD84ieA_xeei_DzwuD595JX34g4Ra7ShhFvlb9P2n3KpUYKXvK=s1024-v1",
+              "postedAt": "2025-3-6"
+            },
+            {
+              "url": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAFAwdbyV3TWZ-FN8o2IqGx0TpMVBoXhp2nbdsbiXRDgJnBMIoVKT5dkRkCpJPxbG17s2K9tHLNX9URxMX-2w4vctHhCizzl-RyCkq6zzeE6tnKuAS1KcTBCV-UPAUzBoGpmAxYrVv_u-sYh=s1024-v1",
+              "postedAt": "2026-1-13"
+            },
+            {
+              "url": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAHlEK7gxSAR9Uv5T8EWlfMJ8jLGEmmt-edTSfuTQkTglYW1-He4sgRudxKFJVRXC1SgDFvW8ie4CXmtTy9A1qhNvIVDCOULc9hQV1QtK4T6lo3-fRtW9-6AScccJnSJHODis-Oyucf4EOyV=s1024-v1",
+              "postedAt": "2026-3-7"
+            },
+            {
+              "url": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAGRtUacjXbPm4oMmNLGvO9hFwMkn5IXyRUxqIVcwkakzZxlMUfRvIJr_hiF7TKCA_DmgTELCsqWcaTZDUNX3u3Rccfqxk6NlYFO6GY8UGLVrysqXGfBgrZ7MWm1JJzWxulzUKG84ygB-go=s1024-v1",
+              "postedAt": "2026-1-13"
+            },
+            {
+              "url": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAGs5iBkPDm0SaVASmvkWA-JcHkvKTyuvc6FRKram_kiM3d3eyFkQ49oVCg-NGismP0DF6A61dXEGuEpg_MZUtokbh5TPKM8k0ikgAw40bKeusGP9rFhnWIlHjB6oWUV0oegvVE=s1024-v1",
+              "postedAt": "2025-3-6"
+            },
+            {
+              "url": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAEghVbQo2JOXcTWC3GZ7xwpaYZYo8CV0rz1k-8rH2ew8tqRHn0m8-mVlCACsfgUqTFXUoQtpqtnqOv9jc7Mi29gbEqxEXTPqSRjtTA4nBtyo5QrfRravbrSG8IvxF3rJmezcbaP=s1024-v1",
+              "postedAt": "2025-3-6"
+            },
+            {
+              "url": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAEcfSqWJc-NE_RBVUcNpplqdm0nY0jH6upnAo2kjzExmpxPwO5xf9x2N_DePzS509SJWmNmRbAddlMfkC2DQR2zwEAXC0oKDDRL7P_YIzpTqpo4N8oFqEaA9NvddB7hL1cbtqRxvts7c1Y=s1024-v1",
+              "postedAt": "2026-3-7"
+            },
+            {
+              "url": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAETTrfBiiL5M1VF7OxPxLZ2bA6AflrUbqn8GLE2zdRUdkxqh7Er4i1b2CXWVGhL3giWnSutJ7ZCaARUkDa-Cs3t_BxQKKdsuhQX__YwISmLswfj7BKc0NkvMVgG6gctpHSv9OCMVKu9zbna=s1024-v1",
+              "postedAt": "2026-1-13"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "position": 3,
+      "title": "Xander's",
+      "placeId": "ChIJX8sX2iU_sz4RkQSMFLN8lng",
+      "dataId": "0x3eb33f25da17cb5f:0x78967cb3148c0491",
+      "kgmid": "/g/11gdym_3l2",
+      "thumbnail": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAHpj09Ak8P2whQOozGZSmKtqE4NGtviUcGcDy4jAxkX0ZuAahsDoeMbbHoEk1cTj4505z3kPxCVRUHoWEOR1q8UeiuZrgHdPaMyRjhiLF4YvtKruvlsABVbeQ_9aK3_Q660m-AWJw=s1024-v1",
+      "phone": "+92 21 111 926 337",
+      "address": "Tipu Sultan Rd, Karachi Memon Co-operative Housing Society Jinnah Housing Society P.E.C.H.S., Karachi, 74200, Pakistan",
+      "website": "http://www.xanders.pk/",
+      "workingHours": {
+        "timezone": "Asia/Karachi",
+        "days": [
+          {
+            "day": "Thursday",
+            "time": "8 AM–12 AM",
+            "date": "2026-6-18"
+          },
+          {
+            "day": "Friday",
+            "time": "8 AM–1 AM",
+            "date": "2026-6-19"
+          },
+          {
+            "day": "Saturday",
+            "time": "8 AM–1 AM",
+            "date": "2026-6-20"
+          },
+          {
+            "day": "Sunday",
+            "time": "8 AM–12 AM",
+            "date": "2026-6-21"
+          },
+          {
+            "day": "Monday",
+            "time": "8 AM–12 AM",
+            "date": "2026-6-22"
+          },
+          {
+            "day": "Tuesday",
+            "time": "8 AM–12 AM",
+            "date": "2026-6-23"
+          },
+          {
+            "day": "Wednesday",
+            "time": "8 AM–12 AM",
+            "date": "2026-6-24"
+          }
+        ]
+      },
+      "openState": "Open · Closes 12 AM",
+      "rating": 4.2,
+      "reviews": 8662,
+      "type": "Restaurant",
+      "types": [
+        "Restaurant",
+        "Breakfast restaurant",
+        "Cafe"
+      ],
+      "price": "Rs 2,000–3,000",
+      "priceDescription": "Rs 2,000 to Rs 3,000",
+      "gpsCoordinates": {
+        "latitude": 24.8663903,
+        "longitude": 67.07778739999999
+      },
+      "serviceOptions": [
+        "Outdoor seating",
+        "Onsite services",
+        "Takeout",
+        "Dine-in"
+      ],
+      "extensions": {
+        "serviceOptions": [
+          "Outdoor seating",
+          "Onsite services",
+          "Takeout",
+          "Dine-in"
+        ],
+        "highlights": [
+          "Great coffee",
+          "Great dessert",
+          "Great tea selection"
+        ],
+        "popularFor": [
+          "Breakfast",
+          "Lunch",
+          "Dinner",
+          "Solo dining"
+        ],
+        "accessibility": [
+          "Wheelchair accessible entrance",
+          "Wheelchair accessible restroom",
+          "Wheelchair accessible seating"
+        ],
+        "offerings": [
+          "Coffee",
+          "Halal food",
+          "Healthy options",
+          "Late-night food",
+          "Quick bite",
+          "Small plates",
+          "Vegan options",
+          "Vegetarian options"
+        ],
+        "diningOptions": [
+          "Breakfast",
+          "Brunch",
+          "Lunch",
+          "Dinner",
+          "Catering",
+          "Counter service",
+          "Dessert",
+          "Seating",
+          "Table service"
+        ],
+        "amenities": [
+          "Restroom"
+        ],
+        "atmosphere": [
+          "Casual",
+          "Cozy",
+          "Romantic",
+          "Trendy",
+          "Upscale"
+        ],
+        "crowd": [
+          "College students",
+          "Groups",
+          "Tourists"
+        ],
+        "planning": [
+          "Brunch reservations recommended",
+          "Lunch reservations recommended",
+          "Dinner reservations recommended",
+          "Accepts reservations"
+        ],
+        "payments": [
+          "Credit cards",
+          "Debit cards",
+          "NFC mobile payments"
+        ],
+        "children": [
+          "Good for kids",
+          "High chairs",
+          "Kids' menu"
+        ],
+        "parking": [
+          "Free street parking",
+          "Paid parking lot",
+          "Paid street parking",
+          "Valet parking"
+        ]
+      },
+      "menu": {
+        "overview": {
+          "menuPhotos": [
+            {
+              "url": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAF75EwMe2UYT3KMhOp-SO9hTYO30kGZMN0uRyUj5JqbhMfclPvMNDy4MBqQpuSHwyVdnL7TGaZVLH3GGqMODcJFxS7jTU5bNAkdZba6R8ZdPehkRM25OtZ4Hz0J_EMP_C9U46LruqeDmz6c=s1024-v1",
+              "postedAt": "2025-11-20"
+            },
+            {
+              "url": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAGVMQgcmNbWsgvJgS-pxvIk0_fZycRcPnKFS9cWp368qhdiKa3UEUo7wZlHeWvId-a9uaaOZdlneqi2JBO211LVjZeJFTMNnjnOXaf802bKG6X35jIHdGHkYkzqY7bSlFspZqpBvc1z59pY=s1024-v1",
+              "postedAt": "2025-9-10"
+            },
+            {
+              "url": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAF1a73lBquP_8MO1j6i6CF_IZ1CsuRfe5xZiBvXKmZzzo5hLHHH9ISn5MHIetnPM5imba9f-bKcG4Hp-jcn02vv38dShgnbA4_RUVCqLbjQu2qyFnWrWmWy6OVGgAiMU_ypz_7a7VaVjsAe=s1024-v1",
+              "postedAt": "2026-1-6"
+            },
+            {
+              "url": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAEip_oTPHEjAaS1-AV9KTvAvX4BBceZ0GzR6pVJzHonETT-HelzPsziv16D4DsynqHfo4Vz9VuH6AjCrtkdF_UyV9k3X9qXKB7e5cAkiSi05WqyXdHcaC9biNdi6WjBvkXYPSRszA=s1024-v1",
+              "postedAt": "2025-4-28"
+            },
+            {
+              "url": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAGzxkfvqOYHpx84950RyoT0H9izhcr5MeOQkFuVonlNevxwMfMpluPN2r1SV_9RxwAZ5MoYmwiLXuN8CHQ3IwFFrSCD8vvwSJTSXeJzkzacyMaKxllLhY13vce1hRw60qATcc_QFBOqLwiL=s1024-v1",
+              "postedAt": "2026-4-21"
+            },
+            {
+              "url": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAEjOGWHR-ySYyQPj1LpliCzS7Rzslx0AzHMlSLJYDk6Y-6-DMkAW2Q1XL9kKZWB3q0Y3Vy-mZN9AT_7L_GaJ6sb-z0JPeNpXgHM3X8cqrklb_drJRRZzbW-7GygrrgoPFGejn4vQAoNk8g=s1024-v1",
+              "postedAt": "2026-5-23"
+            },
+            {
+              "url": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAEmVj2EnvikgrcdYz31aM_YQKpbObZXgliBQVUoPcDFo3lRvFX_uMfJphtd1LFFzaSOBVqSEvHGAew1utLVU4Ab54Ir3pNpR3lDU9K3_q9T0-OWCR7onsu4uvuyj2lP7NKR7IlA=s1024-v1",
+              "postedAt": "2025-4-28"
+            },
+            {
+              "url": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAGQKY3_I3HBKJGbVOJ81Rnh4v8Hlcu8BUbqEvu4Mw6y-l3o7m_a7RZpM9eF1sW7a9j1zwqGQhijBIKiMqlnXBCcPkn3B-uqsOuAvlv25fqgYvscOlxFuCiY4B2t0KYQpr-RAQElPWtyFGzD=s1024-v1",
+              "postedAt": "2025-8-17"
+            },
+            {
+              "url": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAF9EqiV3Bol46sI5QnXIDLJ57DUu5MexUwPWT39PJScxl0kzV5FulXUxUj96ytEPCa_a9fKAhMbPeyOIDYNec5aUZ_jiBsN8IDh1GZOTHpMhBUvPp17ELmKbr5wLN1mh1lEGmDR=s1024-v1",
+              "postedAt": "2025-1-22"
+            },
+            {
+              "url": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAH7teh4ZBA6uOoGnUqHFSTend1BYIzP4Td-JeTlCTN5soAiHV9m0HNyHoLqky55mK1xmHqtII_aiJdTHW-ajQk_4pinoeh-wGoCwPXcPNWE7yZwHCiU7lgVErkVdkJVU6WhqmBeKQ=s1024-v1",
+              "postedAt": "2025-4-28"
+            },
+            {
+              "url": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAGXycVMF0FJ0zz7hiX33eL6gMU885mi3JmwdToK6giKbd2SQf-MT_irkIH2rE_uBAhy5WleFc1f4hiTIofe-edvBoObFf2cobBjHnmClWNy8k7D7zG5AAdMUSfFeKBMJ2HBZCtZHQ=s1024-v1",
+              "postedAt": "2024-12-7"
+            },
+            {
+              "url": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAHNyqietJtB2zLuAb1yDVPaQu7c1aDrSEdTLzEN0QI6bmsiKk1_7fwXGWzuBdMKeooz934_TJRipMS6CX3cs3GatPSGahIMx7irbw-ME7ikgK9pfIkRrwn4WBvhsWAG9ayBBeXQLOxEMYAU=s1024-v1",
+              "postedAt": "2026-4-21"
+            },
+            {
+              "url": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAGuw3lNwxLSF5-mrMtgsu-zH8PaxR2PtTKsV0kYwrdIat6X94nbNTWmFzYXCIFVChtWmN8rsj5XlKbxfXdwIc1AJpM9d81hb-LVNifOKS-bCalQn5rGHDI6mU1B7DUabQkp94s5sa-9dWx5=s1024-v1",
+              "postedAt": "2026-5-23"
+            },
+            {
+              "url": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAH_1hXyKfwj3ffwWGQS1v01hYA52yo_UZ6XCsLayXqFmK_UIeX3-Vz5bgFMkSqDnN0cDUZxMJNJlyRlEx5wH7Ie0FLaI0AdlX_za-j9AQRl-Zl_6NLSg7v2vXDPjjjTCRACUDkJ=s1024-v1",
+              "postedAt": "2022-10-13"
+            },
+            {
+              "url": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAFbwDxc_2E_UFi2k6UEunLMq0suieWZP3XNOSnz9_WQC4ieVvioZTerRxHABGXuy2RERZxk7K9qsolWzGt6XiD_0LACrIGv_L4wduIhGIeJtOemPbZ4EFFjJXpkgoU4bVRDN9RODA=s1024-v1",
+              "postedAt": "2023-4-29"
+            },
+            {
+              "url": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAG6WTJ7JOXzR2p3yRUz3a23jBYqcMe2fG4hxItlnK1TjczElzjH7U2uywTOC0DQdkxAEI6xLFPswJZzLOg70e8oeXmH2iioHUUJai4Y8b9dXBb_8jgUR4XxZknDChU5Vwhfjrx3gE6XdIJ2=s1024-v1",
+              "postedAt": "2026-5-23"
+            },
+            {
+              "url": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAG1VXs-wvFobP8auHapL4goePSV0aNSIDv23QE8oMHm1uGKaGx4YC1J17doqn_2SuWKmn1oWKQ1GWwCF53L_uX7prL9RnT2tc6QMK0w6z6_ptAC8nLnIan0Sp5KqcTorTkZvNj3Wp0tesfz=s1024-v1",
+              "postedAt": "2026-5-23"
+            },
+            {
+              "url": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAHv1pw_KAmOPDiU42zsUd8HtcongzjGofzsc7tMymePzHZaUKd-IRlyg1kyobEKm0qF2kDPsau27wYTDvVm7mB1h9iWacKzxDfQZZegBt1uACwhCOS6SGsVw1OKKdfjLAhW63YqQg=s1024-v1",
+              "postedAt": "2024-2-10"
+            },
+            {
+              "url": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAHKsteiG9H2o1mU4EZe2tFZHkbtsmTE9GZNJ5aG8mskRTXbSI-l4nFr1wYDofXogMNm96i2ODc7EQhPvSeoPNuz3GEzwBoAB01OdQ1Qn1KlmUinsyXwTiBJ-QzTvkA5KIdsihuHKQ=s1024-v1",
+              "postedAt": "2024-7-7"
+            },
+            {
+              "url": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAE1CUjGN5uoKIPxhBNSvnZnzLuJN0MA23uel-csbXMZ5e1UusujsZFCJMzYpHK49B2rOaT19p0fyAuLhhZvwZLUzqttAAG3D_5iDUmmLPHnnW3KtBw83aZDbGjmalmPpj6V2g0=s1024-v1",
+              "postedAt": "2025-4-28"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "position": 4,
+      "title": "Mandi House",
+      "placeId": "ChIJ6Zn3R-s-sz4R7B4PYNbBVGM",
+      "dataId": "0x3eb33eeb47f799e9:0x6354c1d6600f1eec",
+      "kgmid": "/g/11g9q8ssbj",
+      "thumbnail": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAF2jllOAWbieCKDtWDa8WV_J37zdV6fEBnVMteZ9P_UKx5OP4iCCOMb1nIn9iPj9V-vgpvO8yaWHQtHW7FeezFoZdjX4phWPxFOV2c7kvpmzqPUacG4nNtFf-UOwTt8u1Khaz2ubg=s1024-v1",
+      "phone": "+92 331 0222233",
+      "address": "Shaheed-e-Millat Rd, Delhi Mercantile Society P.E.C.H.S., Karachi, 75400, Pakistan",
+      "website": "https://mandihouse.pk/",
+      "workingHours": {
+        "timezone": "Asia/Karachi",
+        "days": [
+          {
+            "day": "Thursday",
+            "time": "12 PM–12:30 AM",
+            "date": "2026-6-18"
+          },
+          {
+            "day": "Friday",
+            "time": "12 PM–12:30 AM",
+            "date": "2026-6-19"
+          },
+          {
+            "day": "Saturday",
+            "time": "12 PM–12:30 AM",
+            "date": "2026-6-20"
+          },
+          {
+            "day": "Sunday",
+            "time": "12 PM–12:30 AM",
+            "date": "2026-6-21"
+          },
+          {
+            "day": "Monday",
+            "time": "12 PM–12:30 AM",
+            "date": "2026-6-22"
+          },
+          {
+            "day": "Tuesday",
+            "time": "12 PM–12:30 AM",
+            "date": "2026-6-23"
+          },
+          {
+            "day": "Wednesday",
+            "time": "12 PM–12:30 AM",
+            "date": "2026-6-24"
+          }
+        ]
+      },
+      "openState": "Open · Closes 12:30 AM",
+      "rating": 4.4,
+      "reviews": 9880,
+      "type": "Arab restaurant",
+      "types": [
+        "Arab restaurant",
+        "Middle Eastern restaurant"
+      ],
+      "price": "$$",
+      "priceDescription": "Moderately expensive",
+      "gpsCoordinates": {
+        "latitude": 24.878719099999998,
+        "longitude": 67.0659379
+      },
+      "serviceOptions": [
+        "Onsite services",
+        "Takeout",
+        "Dine-in"
+      ],
+      "extensions": {
+        "serviceOptions": [
+          "Onsite services",
+          "Takeout",
+          "Dine-in"
+        ],
+        "highlights": [
+          "Great dessert"
+        ],
+        "popularFor": [
+          "Lunch",
+          "Dinner",
+          "Solo dining"
+        ],
+        "accessibility": [
+          "Wheelchair accessible parking lot",
+          "Wheelchair accessible restroom",
+          "Wheelchair accessible seating"
+        ],
+        "offerings": [
+          "Healthy options",
+          "Late-night food",
+          "Private dining room",
+          "Small plates"
+        ],
+        "diningOptions": [
+          "Lunch",
+          "Dinner",
+          "Dessert",
+          "Seating",
+          "Table service"
+        ],
+        "amenities": [
+          "Restroom",
+          "Wi-Fi"
+        ],
+        "atmosphere": [
+          "Casual",
+          "Cozy",
+          "Trendy",
+          "Upscale"
+        ],
+        "crowd": [
+          "College students",
+          "Family-friendly",
+          "Groups",
+          "Tourists"
+        ],
+        "planning": [
+          "Lunch reservations recommended",
+          "Dinner reservations recommended",
+          "Accepts reservations",
+          "Usually a wait"
+        ],
+        "payments": [
+          "Debit cards"
+        ],
+        "children": [
+          "Good for kids",
+          "High chairs"
+        ],
+        "parking": [
+          "Free parking lot",
+          "Free street parking",
+          "Paid parking lot",
+          "Paid street parking",
+          "Valet parking"
+        ]
+      },
+      "menu": {
+        "overview": {
+          "menuPhotos": [
+            {
+              "url": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAG2Zi8GGlKZQv4Q6ZQeP20zSADhg57Ruorn69TsoSiOvvQfBkaCyxp3p42gPwfEhJbkLYXMl4iEWK3Ci_C8AeydXCst4GMjHG4Y_tEIzT5AQtDENP47Hes1WVYWuf3E6yNF0HKAdsGvB6Yg=s1024-v1",
+              "postedAt": "2025-7-21"
+            },
+            {
+              "url": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAEZRQXH9NXA0eQZz3mkrCMqArv7ti0-lHSqLfeUvzktzQfxsZIcMu62AaPQOsveR5g9WDgfZrSGBq83QiGpa9NINKKoSBWHkJugZsMfz_2GN8vNC4_1F1lipAMd3fNBNt3c4jV5EnmWZrdF=s1024-v1",
+              "postedAt": "2025-8-27"
+            },
+            {
+              "url": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAGRs3wR48FNlOE0bc93chWoPlFvxwOmHst4jNM5iHi8OIa9ciKZWwdUuoN3W2lHtzPZyjD0LhcxgVw3nHwhiGQr3R60iBYTHyoFz10_dQbl5aZeI7jgqsmC0Qtfznqrhlo_ACLKEI4T1n4=s1024-v1",
+              "postedAt": "2025-7-21"
+            },
+            {
+              "url": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAG4tKFCpGcQC4c77nNk1ElMimV9ZnLH-C-IazYJyOVovuh1xnRUB71kMMvF-M_EhXgEN9nxbzJG7LxOp_igdSMLZl7QnNWlv1hGbvXVMA1JSWbM954ch2UxfP54D4z55RCk_h6x=s1024-v1",
+              "postedAt": "2023-1-8"
+            },
+            {
+              "url": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAGIuU8MWdSVUXNM7Zaa0L4l_XtUKW7NRvnCdP5ZzOQo_DzL8ZkrMmNY6hVMJSASWR7LvvV8MCV3divivgMQFxMythCkCCfoQMuF6akLFTEvnJRhcWOPDobUTa8hkgpg5FXAZwNq9iDNdIOh=s1024-v1",
+              "postedAt": "2025-7-21"
+            },
+            {
+              "url": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAEsY53yHMZTzrNQFUoVkGJSu4RuH7plnmQPnoqh04C-h15LmOhcaP6l4CCRmQAUX2xfbbhFL7QMVLB38e9KfBxTheKBXYrPkXImdK1pZczmJHu96JAOkH9zcO35ElFoA6oG5XDGly8K0H8=s1024-v1",
+              "postedAt": "2025-7-21"
+            },
+            {
+              "url": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAH0RyQj4eBcm2qiocPt_DrBzKiHFOVnNixuSjFIvELHBrq0Uof3PjQ_hno5XsW5C19_5vxP3ABoRPLnRfHjGWyFcaocpnw1DnO14VLNKhwhyyWA_-9UWABjJtyqBJB6wZ0U5VZx=s1024-v1",
+              "postedAt": "2020-3-7"
+            },
+            {
+              "url": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAHLs5i4i1OTdFx7SnlH4N2SXvITBvaZGwWR8dXPmst_w2YJi7z7HBgZ5kOYssnrWBp37nUN2V0LCtIdES5THvDBEJR65Ndem5kD-MnqraHRfmUaafyISBNgSBH0sxF7hNGnFnG_FMqp9H5Z=s1024-v1",
+              "postedAt": "2025-7-21"
+            },
+            {
+              "url": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAE_7ZQ2xyk4h0a6ttHBuxrXO2V-lMLOwRnHBmQbFGJ_6lkuDIpZh6r0RLtALSn1EM7KXSdMBgt-XNbpBwliEIsqWA38--5jo_qZTdwt-VrwwR8XK0pg9ewmycS55gefXEJwLaU=s1024-v1",
+              "postedAt": "2020-3-7"
+            },
+            {
+              "url": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAFlE06dJWFasVXFFaDhFNngNNOMgzCKRNBemDPtcmZLeAtrZDP98ABLBc293wVkdvOtIcVv1MPf38W7zeAFI28HCIAxx91YR7TvT_6bI8_mbbtq2r2IbQDeT8UQ21kUv_cVOmhG=s1024-v1",
+              "postedAt": "2023-9-17"
+            },
+            {
+              "url": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAEB9-_Kmg7lUdMgQL5wq6PNxL41ERcv07eoyX9Oa3K9W3aSund9uVgRaarBXQcP-00JEAB0kq3uHIpKA_-B9D5DYWlNsbs7I1X6ljFpYtolDY3YGHFNF4V8PX3WOx3OxeeX6b4OeA=s1024-v1",
+              "postedAt": "2023-1-8"
+            },
+            {
+              "url": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAFF-0shOJP4lJ2x4u4m-TI4dUwtywZ9vVcNuFaW01qHRMIYJyCY6g5nPz9ooPdgeSoTgYqYYzOSSwkAenCLeH0sLHRwoUQfjA0eyjc4bx50_6ppj4c0ZQXdQRcriAs-eY2EGNdp=s1024-v1",
+              "postedAt": "2023-9-17"
+            },
+            {
+              "url": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAHCfZe_alu1yvyLSw4o1O5D-cBVpEjYyS2F_N6QCYr1PoJBpmnFMa6wrDh6cssN9bZByDML-0L16XfQRSvUl8o6gC6ol0au-JogYo1O_k_b0K2Hdt-bkmCJttipAdn2oGCEIJkkiA=s1024-v1",
+              "postedAt": "2023-1-8"
+            },
+            {
+              "url": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAE8J2v7u28NeViGZ3tCzwgm7uxGSeFfOm53iMxgSF-O3FXFTgcqGsK41G4QOi2tXCKPgTirWlgsuBkE3bIbIXmn7yZ5Hgt-XpLuqW-ggjgEYfPFSbSslarWeiSnHrByn5YO9cJKYWG3el0=s1024-v1",
+              "postedAt": "2025-7-21"
+            },
+            {
+              "url": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAF7BGUnZrZT7012L7CqaxlfLJvKzCgOkCvR8aso6f_jh6Lm3Brt6ZZkdJXuyBpqsjUb1Aj5O5MYwdhIntRDW6nfhg0TwV60tgqqD4WrNXHGJWnz63zdwisSzULdxHZRnv9Z7XU-UQ=s1024-v1",
+              "postedAt": "2024-5-22"
+            },
+            {
+              "url": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAHqE8yj5pb_sEacl6oADrW-fi2tqQOpz13-f9PgwhSsX5DyzqAHVCyEB8gbUeDVA9gAGnI7a2qEOPOsJ9oPhQX4qZKyfAZgYPoyW7E_WAiMbwqIBTYS24SvG28-rkMq59rCnRuB=s1024-v1",
+              "postedAt": "2023-9-17"
+            },
+            {
+              "url": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAHo77XLjaXL4fNmC_buZ14ptvFOZcY1Pmf3k1UF6N6t0vX0A6M4W4Vqo51vmLCaQjLRsEsTycjilKZNxg3uIq3xa4UJMGUceAi-IiZ3e5uBTGZDbX1sU8gUl3itwD_rGw8Wpg550Q=s1024-v1",
+              "postedAt": "2020-3-7"
+            },
+            {
+              "url": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAHPGhTunxCsSW_zS8S2VFOm7GBp8TvW9GRgbi9oxK8__EprhNu5ksE-WaMbLiqwfzw7wtp_wTqoku3OYn0x43OrkpomSz0MUhpVTp5UgNWGM29WAmUeCIGgsPF-CQddMGOgjbdfOA=s1024-v1",
+              "postedAt": "2020-3-7"
+            },
+            {
+              "url": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAFjsBRun0O653V--I_76jIXIWMQGpyCn6PcW_lhKRwxjMRLnUdGBEXouNOpaYwV4bIuT9dxyP6XiFXN04Kkq66GvyMiz29HeaQL83bII1LMeZKg6CrVV4tt-fMe5nqvEbsLxXk4=s1024-v1",
+              "postedAt": "2023-9-17"
+            },
+            {
+              "url": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAFB3DBp9HIW-6CUFJw8nfqR3nV6p36ufFg-AeaKNMeo2k1eSkhoeI-4KYx53-gtMqf2P6gWQztaV3EKQfM9BD4oj4y-bFysnw41v_2InypoOsnGnw8N7rVgFvjZZLgsMdjcZ34-5Bf_MVE=s1024-v1",
+              "postedAt": "2025-4-22"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "position": 5,
+      "title": "Ginsoy - SMCHS Branch",
+      "placeId": "ChIJ8Tu9m4U-sz4RUH9CH_9GXWk",
+      "dataId": "0x3eb33e859bbd3bf1:0x695d46ff1f427f50",
+      "kgmid": "/g/11b63rj_c5",
+      "thumbnail": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAEOVWxPVOAAtDgS3MWvLh7yHKA5SiAB-BMWU1fyOPhDrAdTgztNkTUy8pMrrNmEcUvzZO0l5EYfe1_JiHCHq0Sx53S-EsIreJRkDmGzS4gFnJ6RL39Asb8QBrsWAPfQP5Z48E4LqQ=s1024-v1",
+      "phone": "+92 21 34398831",
+      "address": "Captain Fareed Bukhari Shaheed Rd, Sindhi Muslim Cooperative Housing Society Block A Sindhi Muslim CHS (SMCHS), Karachi, Pakistan",
+      "website": "http://www.ginsoy.com/",
+      "workingHours": {
+        "timezone": "Asia/Karachi",
+        "days": [
+          {
+            "day": "Thursday",
+            "time": "12:30 PM–12 AM",
+            "date": "2026-6-18"
+          },
+          {
+            "day": "Friday",
+            "time": "12:30 PM–12 AM",
+            "date": "2026-6-19"
+          },
+          {
+            "day": "Saturday",
+            "time": "12:30 PM–12:30 AM",
+            "date": "2026-6-20"
+          },
+          {
+            "day": "Sunday",
+            "time": "12:30 PM–12:30 AM",
+            "date": "2026-6-21"
+          },
+          {
+            "day": "Monday",
+            "time": "12:30 PM–12 AM",
+            "date": "2026-6-22"
+          },
+          {
+            "day": "Tuesday",
+            "time": "12:30 PM–12 AM",
+            "date": "2026-6-23"
+          },
+          {
+            "day": "Wednesday",
+            "time": "12:30 PM–12 AM",
+            "date": "2026-6-24"
+          }
+        ]
+      },
+      "openState": "Open · Closes 12 AM",
+      "rating": 4.4,
+      "reviews": 8288,
+      "type": "Chinese restaurant",
+      "types": [
+        "Chinese restaurant",
+        "Asian restaurant",
+        "Cantonese restaurant",
+        "Family restaurant",
+        "Restaurant",
+        "Seafood restaurant"
+      ],
+      "price": "Rs 1,000–7,000",
+      "priceDescription": "Rs 1,000 to Rs 7,000",
+      "gpsCoordinates": {
+        "latitude": 24.8640325,
+        "longitude": 67.0549276
+      },
+      "serviceOptions": [
+        "Delivery",
+        "Takeout",
+        "Dine-in"
+      ],
+      "extensions": {
+        "serviceOptions": [
+          "Delivery",
+          "Takeout",
+          "Dine-in"
+        ],
+        "highlights": [
+          "Great dessert"
+        ],
+        "popularFor": [
+          "Lunch",
+          "Dinner",
+          "Solo dining"
+        ],
+        "offerings": [
+          "All you can eat",
+          "Coffee",
+          "Happy hour food",
+          "Healthy options",
+          "Late-night food",
+          "Organic dishes",
+          "Quick bite",
+          "Salad bar",
+          "Small plates",
+          "Vegetarian options"
+        ],
+        "diningOptions": [
+          "Breakfast",
+          "Brunch",
+          "Lunch",
+          "Dinner",
+          "Catering",
+          "Counter service",
+          "Dessert",
+          "Seating",
+          "Table service"
+        ],
+        "amenities": [
+          "Gender-neutral restroom",
+          "Restroom"
+        ],
+        "atmosphere": [
+          "Casual",
+          "Cozy",
+          "Romantic",
+          "Trendy",
+          "Upscale"
+        ],
+        "crowd": [
+          "College students",
+          "Family-friendly",
+          "Groups",
+          "Tourists"
+        ],
+        "planning": [
+          "Brunch reservations recommended",
+          "Lunch reservations recommended",
+          "Dinner reservations recommended",
+          "Accepts reservations",
+          "Usually a wait"
+        ],
+        "payments": [
+          "Checks",
+          "Credit cards",
+          "Debit cards",
+          "NFC mobile payments"
+        ],
+        "children": [
+          "Good for kids",
+          "Good for kids birthday",
+          "High chairs",
+          "Kids' menu"
+        ],
+        "parking": [
+          "Free parking lot",
+          "Free street parking",
+          "Paid parking lot",
+          "Valet parking"
+        ]
+      },
+      "menu": {
+        "overview": {
+          "menuPhotos": [
+            {
+              "url": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAHGsyOFyKodqtQu3wbWDx_gtgWTUVS4q2_UydqUFKz067galSD8TPZkwnB0cNhp657u1sWevG2qCVS2vhgLjKLe67fEZTNIet6EU6IvidpUgu6gJXl9RF0TOivmcoLZepiZMfFe4g=s1024-v1",
+              "postedAt": "2023-12-13"
+            },
+            {
+              "url": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAE8DGMN2xlZD2Dqfe4vFbN-pBB2qi3W_tJpGY-Ouqi7XLgHQQqoRCArYWLI2O_jXnC_reVAfiJa3MU-tG53HueSyOULeqw1yrmM8R4bbNcYFnbWskd7du2GdVCMuxI3ABjjKmWDJA=s1024-v1",
+              "postedAt": "2023-12-13"
+            },
+            {
+              "url": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAHuR7bJN-vSckFkEE0zh8Q7sBCpdtJ98Q4FN5g-Upe1NL2zl1bZPcnvZJ2N6isa5KGu78U1T_EhU6vtl-AtQGCycQjaX7MXk7zkXgquP2cDrqgq6MpkRStE_OhUScJuasFdkX9W=s1024-v1",
+              "postedAt": "2024-7-2"
+            },
+            {
+              "url": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAH_s1gL8r2G5UNpItLAYIdw-TAgDN0ABeHtO_r6l6TjGh0D57NDTnwSHxyyMZlfGLKM7riMuAbYXAZ7b6tWMWf2SGw56CeazREcP9caF4Oyua1MWyprx1j3JXMwoSpLUbx5vJIw=s1024-v1",
+              "postedAt": "2023-12-13"
+            },
+            {
+              "url": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAH-4jRNaGMpVxbLzLfMwpz6KuaovWG-HVrQdtP3q9J-UKRMou_tZqK4-MgDMC4o5M5FLYrX20q7y2epn8nUbszjMYoG32xRQ8hIDCaNlaAZe12rJhDPYEHkbVJVJjA29e8ecRAh=s1024-v1",
+              "postedAt": "2023-12-13"
+            },
+            {
+              "url": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAF7BvcRdVeA8qV4JDvEE_uPJPhkS-yr3e2FqP0BT-bNFfcYCeOkbJwQkvpTWUhJiW4wF9bwkwgRJtQX1WT1bFJPJwzRuLRb2NbSKkbpSFcML1QR70VavwqCPhl8lgdZaD1Qij4=s1024-v1",
+              "postedAt": "2025-1-17"
+            },
+            {
+              "url": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAHhiQUhjk7Vjhyl5VpQKHwShfHW4tPFQlA5i2TB6vF9KaJ_jNWtshkwyyBB0H9gtRCOx857JK_rZDuD2exF43b8SnjKirI8eX8YbRl4twT-z0vjc_5p0ynR-niCYUnXG4mcvpzC=s1024-v1",
+              "postedAt": "2024-7-2"
+            },
+            {
+              "url": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAFwH4zpr22r-GI2DmhglUs6he31ZmtEUYb0aVU6zaUMfsZS7fA56l1Cyo5jP1TcT5mAy1fVyWN3uCH0ICM0j7Yk4jwZF8wzZgj0rTtsGNa3gHVEsTItmXW0GsF-KdEqVg7QTuND=s1024-v1",
+              "postedAt": "2023-12-13"
+            },
+            {
+              "url": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAHYv-7k8ch5CS1_UTURWqFq3hola2WDwKfhmYvPlkMsH0yXpxrs08Eg0FLurVw9mSZGgDcvYDQ1DMdyNaKGbcsHIvmKR2oJcz3MxhG_fKfHjc7hdtxt45UfCZwKfakJCisDqoxmWQ=s1024-v1",
+              "postedAt": "2024-1-21"
+            },
+            {
+              "url": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAECS_mXByYQxv-xJPuQvu35ykkuwgNak3Gal6iZogbPDeJvMoWORB69dL1hUW8-BwkvgNoCBIr_eEAeiuzlTpl2NuPNIrgCpEeWC5VBduvMkNajLcInmUNaT1tjn6hBC4wrlz4=s1024-v1",
+              "postedAt": "2024-7-2"
+            },
+            {
+              "url": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAHw_P6Fe7R4GQNNhsC54EZC1N18ZOAAH4LA1rNq6PwMd8WNi8Z2zP0adI-4Q41U3YLwo-aIwXWlwdJJ1-bkLfZC2obvF3v_CQlVhSdgA973BLMnybiMDBpI9Gfl8PDQlCi0mF4V=s1024-v1",
+              "postedAt": "2024-1-21"
+            },
+            {
+              "url": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAEcU9AQYTfz7taNEJ_2otBHaLexv0OAFGMN2axEMM_ab-ytFTsW8cCXmYVQGb9MRW4bKYhr1KgRHOT7g5maX-rZiLzBmMElv194qeezHyD-B-kQ-l3Y9JszbRYZgfYVTZ6FkEI=s1024-v1",
+              "postedAt": "2024-7-2"
+            },
+            {
+              "url": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAHWrFGYN6DixTjBuj1r7KsYm6Rma2hUSsKLK70md_HvKwHSMqUPKxizUVOb8EvnFBT13aOrm-32fIdCawN_N9rve5lvZohegh88B5F3riWVCDolyAvzVTWCPkvzxMwN5hfvSAFNBQ=s1024-v1",
+              "postedAt": "2024-7-2"
+            },
+            {
+              "url": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAHo4mS3lDb48RhhAVAqjAgTILjizstsjAro0DQLZyZp4jLOoPpeDUkjXaeT5v4AZMrW-JGPT-qmbwDTMJf1W3hsCRJqEJXN8XWegCtPT8zuBmMG0pJgHXRxWxf1OrToQCNWuqM0=s1024-v1",
+              "postedAt": "2020-8-26"
+            },
+            {
+              "url": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAFSE1KW4yE4OpXSYeKFunoGq_2erYkApCCuPklG8oyVDJSLO9tN3_EITg7dMkTTPnmzuZjRrQUQ-cRKbUAEFYZ42-CTYolvosOLIQi5T0JHvNf6YIniFoYCRkm6bNBGZiYMh7WxHQ=s1024-v1",
+              "postedAt": "2024-1-21"
+            },
+            {
+              "url": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAFTzEvX45I2EMjfw6D0j9Mz4yBsZcIh17MGQfw71OcNb9_uWftze6GjO1AgFx8r8Zw2-iXi2XsVpYsXqank0ysAyPl-nq83NrZ3P0Bf60HLl5-ISuyL6_3EOJs9t0oDRGRuwpAN=s1024-v1",
+              "postedAt": "2023-1-10"
+            },
+            {
+              "url": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAFp0qKYMB5ClLFz9IVVRiWjI49SkCiQowZWCtmiEF4CzivWxmvR0x40e2hN702KtRoM8_jrLuvy-OB50VVDl0iYwNOkjuidnRUs4YiGmzaCfcoDkiXGYTQR72is_RFqkOMVZ2rq=s1024-v1",
+              "postedAt": "2023-7-4"
+            },
+            {
+              "url": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAGrOMyk_uX5needs9t4ZzHWE1EFl23Q4FdJDApJzwtV3RZROFtHxe3mfeqX0VbiYLWRL0n8uGQ0OJtV54q9B-k6HZe1C6W61lxLaP3bEci_7KBbGpL-UcjLlSI-RkPHbsaxi7sE=s1024-v1",
+              "postedAt": "2023-1-10"
+            },
+            {
+              "url": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAGUtJcfMsktugSlearyTrsUJ5uqhhkJN1yhISIsCeYY_rCb-JFdifFuBjj34hztHUVXfM2IEAOQ5DB_mVrLxpJQ4gcG0IaKsPWNwnxzpgk3Su1mMTHEhau3jh2D2o8O2YKNvqbF=s1024-v1",
+              "postedAt": "2024-1-21"
+            },
+            {
+              "url": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAFK1KRND1-Tm4veTPsL-YI4Oo27bx_EvMiQmjNKd6xtjKbm_Vg0C7Ifi4orpLe_uhvTfkFGdCIXCJmdpXBs4h0xaOC8TvdAk5Mxv1sLuFJK5vSpleSQaiFchGeGvdvaNDG-AXgR_w=s1024-v1",
+              "postedAt": "2025-1-17"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "position": 6,
+      "title": "New Zahid Restaurant",
+      "placeId": "ChIJD1jCLY4-sz4RISsNTUhfupM",
+      "dataId": "0x3eb33e8e2dc2580f:0x93ba5f484d0d2b21",
+      "kgmid": "/g/1tcx5h5m",
+      "thumbnail": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAGgH7bfU_JrgEOmbkLuyERiVPhE2K1uDoSlR0fKHOZe0iUOb1t0V6pTzWU3_AS8mfgZfMPYftyDW3CZfH4BQ5PnOGYez9SDU1xeM4VJLodGEo4jgVU-__Q97V_aHwJi_4COtyeK=s1024-v1",
+      "phone": "+92 301 2636546",
+      "address": "Tariq Rd, Block 2 P.E.C.H.S., Karachi, 74600, Pakistan",
+      "website": "https://zahidnihari.pk/",
+      "workingHours": {
+        "timezone": "Asia/Karachi",
+        "days": [
+          {
+            "day": "Thursday",
+            "time": "7:30 AM–11 PM",
+            "date": "2026-6-18"
+          },
+          {
+            "day": "Friday",
+            "time": "7:30 AM–11 PM",
+            "date": "2026-6-19"
+          },
+          {
+            "day": "Saturday",
+            "time": "7:30 AM–11 PM",
+            "date": "2026-6-20"
+          },
+          {
+            "day": "Sunday",
+            "time": "7:30 AM–11 PM",
+            "date": "2026-6-21"
+          },
+          {
+            "day": "Monday",
+            "time": "7:30 AM–11 PM",
+            "date": "2026-6-22"
+          },
+          {
+            "day": "Tuesday",
+            "time": "7:30 AM–11 PM",
+            "date": "2026-6-23"
+          },
+          {
+            "day": "Wednesday",
+            "time": "7:30 AM–11 PM",
+            "date": "2026-6-24"
+          }
+        ]
+      },
+      "openState": "Open · Closes 11 PM",
+      "rating": 4.2,
+      "reviews": 15654,
+      "type": "Pakistani restaurant",
+      "types": [
+        "Pakistani restaurant",
+        "Restaurant"
+      ],
+      "price": "Rs 1–1,000",
+      "priceDescription": "Rs 1 to Rs 1,000",
+      "gpsCoordinates": {
+        "latitude": 24.8685902,
+        "longitude": 67.0577299
+      },
+      "serviceOptions": [
+        "Onsite services",
+        "Takeout",
+        "Dine-in"
+      ],
+      "extensions": {
+        "serviceOptions": [
+          "Onsite services",
+          "Takeout",
+          "Dine-in"
+        ],
+        "popularFor": [
+          "Breakfast",
+          "Lunch",
+          "Dinner",
+          "Solo dining"
+        ],
+        "offerings": [
+          "Late-night food",
+          "Quick bite",
+          "Small plates"
+        ],
+        "diningOptions": [
+          "Breakfast",
+          "Brunch",
+          "Lunch",
+          "Dinner",
+          "Counter service",
+          "Table service"
+        ],
+        "amenities": [
+          "Restroom"
+        ],
+        "atmosphere": [
+          "Casual",
+          "Trendy"
+        ],
+        "crowd": [
+          "College students",
+          "Groups",
+          "Tourists"
+        ],
+        "planning": [
+          "Usually a wait"
+        ],
+        "payments": [
+          "Cash-only"
+        ],
+        "children": [
+          "Good for kids"
+        ],
+        "parking": [
+          "Free parking lot",
+          "Free street parking",
+          "Paid parking lot",
+          "Paid street parking"
+        ]
+      },
+      "menu": {
+        "overview": {
+          "menuPhotos": [
+            {
+              "url": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAGZ-49D73aM3P3RG_cSDEwybc46MJZtzqB6vfQEVj0bHduH_TNVqqB29AUOOqO8hjjaU1J8BZVcKk1C_6i2kp6nkoBtJ1wu_dvdlZb-j3HExNcDvYq1jXnZvimLr6YkLVWFeKMBgEShLH1j=s1024-v1",
+              "postedAt": "2026-3-28"
+            },
+            {
+              "url": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAFPHyNwkXSbN-nBOT8G4e6UhW9iEbuZjyNqAVpdSljewg7kN1xqB9BvTc1_uidDgcmPM3sw4CdI98R5Yf-OzcGQb2wCzJFaZDm4cZ1_MeW2VyM6qeB4v7xyoYXdS89wnPb0SYuRKy-fj1jj=s1024-v1",
+              "postedAt": "2026-2-7"
+            },
+            {
+              "url": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAFiO3JNuMgdd7MyHl2FpocQfiLi1Mif13NUtt1GIwV6PIkMRV6bjiboBYEZQ_MOJIieAuHGN7yCQrfreQGcP54EHyBmWL-EPqeg4HaTdGjmShrtnuSWWksl80GRsYgJkXT813gm3WyqNuS7=s1024-v1",
+              "postedAt": "2026-4-24"
+            },
+            {
+              "url": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAFPrqibbzKEwZlZYzavE8ngOVjB-BEOieLl7CXAny0sEvpWClMJA-lwK6VH6buUXDA3CpSsrbLncr4cKoC4H8CCQVNlk8oYScptgF1V33v1-HQ3fcWy-D-qB6VGqhvvalifUmLXaw=s1024-v1",
+              "postedAt": "2024-1-31"
+            },
+            {
+              "url": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAHT5a_DegSUoUbpJO-rfTNTMUKsCj7zJIL00e_vCBMbzU-eGUsPa5tg5rh7AXHdeFeGm-m35BU2x3oxZV-rFVmJNi_wk3Prytt9C6ZTBGyPF5cho7-tGiQXfFoQoD5WfzmRKZp9pQ=s1024-v1",
+              "postedAt": "2024-4-21"
+            },
+            {
+              "url": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAGqlpbGlxzco9Mc6ld5g_a4eonMSzPJUY0cZKng84SqMgV3QVZ0h8OKHKwxONo3DaJSnRIJxJeQLmNS9EI-R8iexRIFKaI4MQkvkrw7hquMDR89nHaGjs4KHrHucOxae6UwOy72=s1024-v1",
+              "postedAt": "2024-5-31"
+            },
+            {
+              "url": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAEHYVv5eR4woDl-6I8TQPAtT57ymxagjp0S63UaMRI3-tD9n8oodoGWEVGm6ZWcvclPdt3pYOxK9UtVagw8qnlk5TAybhtNNY5TyE7aekQMyP0RK1nG0x08UEsokpXcAe44s_sajQ=s1024-v1",
+              "postedAt": "2021-12-19"
+            },
+            {
+              "url": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAFKxsk7bR7NsRqg8kprGX4bVxqG0hMJZJzL6zCIz9nRdDEGQsMhPvg3RlKM30TSWO35cRSYA1_6BswUtok7bbWhFA4ObO5KK85_u_QLUxpYRFVGrdLophXMeYrBoU1-xO49ssB8dA=s1024-v1",
+              "postedAt": "2022-2-16"
+            },
+            {
+              "url": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAHfzICSYmaoz3lmGbVoYYm_ce1qtpMVy97uaCl0Ihz6NF0qzuyvU8YtYwrNMFBlFvdlivwSO5hMNoeW3SLpX6pK1J_v8OPE1kj9ouw7JOxyNjZnehUfpkUSxc79ME_0Nhg625IHaQ=s1024-v1",
+              "postedAt": "2024-1-13"
+            },
+            {
+              "url": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAG7g32yVABl_ZL8P_jLtdYSBOXDSroq6PVMeC3trcGCvb2C1NORN_ykezjs5g_S8u_8Ww9jtEDYEiuAdWyY-x4-JtNGngt92aAPSE3FLlZEc4X4vjCG7sswwc0oysPfyisP-2vZUoY6LPM=s1024-v1",
+              "postedAt": "2025-6-21"
+            },
+            {
+              "url": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAErFc4n5so-NBfIrd3Uw0GUvx6j6-P75yKcJx5CkBnsJbBqvS0sYR0hNTyuZqvrjm8mkYLja3M0B8CTiFar0wlJyTeEOkaO3ffCijHQvBHXpozDT7P7PUI55bhS7bCFZmpgqODD=s1024-v1",
+              "postedAt": "2024-10-30"
+            },
+            {
+              "url": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAHfO1BBbsAlCCo4GuTjJodfhdNt97KHJ4PQd_mV-D8-L2oDaa84hTheOad-Jz8ph5Bdk7TBXnbma-qCVkMU1RH1fGGiYsWFySWP7OCLjO4li-_CB7ryzb3F4IRsuwk7PwuGrTQsNg=s1024-v1",
+              "postedAt": "2024-10-23"
+            },
+            {
+              "url": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAGmjPt5Cb53qnj4OVnyacEB9OIg7wLeYCjzcpCU-NDYFJJEb0M0pxt2LXw1jNBnRlEDhvp7e30oZxqmAovRSR6-eB8utRQpLMbnRM_bF_fvFnfq-UOKWgcbQ_1VqJFVo_0MqW3X=s1024-v1",
+              "postedAt": "2021-6-14"
+            },
+            {
+              "url": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAHRYT5894HX6gBDKRKjyaa1iofx86ZP1rQE7QquSjLhAnPDJ6BqLbCylB1bUzp76kEJ9Nv5_ZCELykPHhx33K6Vpm-7_7PgjP15_zPXOHRmu9x-mGGHiiELBbAggzuD0or5NcfPQQ=s1024-v1",
+              "postedAt": "2024-4-18"
+            },
+            {
+              "url": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAFmSqZdLHVXQP2cuKFCm197Kg78p8Xrv-qkIaY2pZv6Qe_gSfA-W15nDen08tiOoCM-rdMzC0W5YfIK6s5QXhHmyHRR4B9Fw6c1e1NNqFPnXWhev3YSUpX-GywQzPYY7L15Rhp2=s1024-v1",
+              "postedAt": "2022-10-14"
+            },
+            {
+              "url": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAGrPnUf78OCgcQ-oE10jMFaRCf-5nQqp37KpNqrfLoW23F9fyt1YAsmnrPvGIjfzV-C_3sA48lMZodqZN_6V1CTYjIDgflvJG7uNl7W5jRXWDI8jKP2aD5SVc2Vz7waJtW86SpbGg=s1024-v1",
+              "postedAt": "2022-6-19"
+            },
+            {
+              "url": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAHHNiRR_P0-riUe1O2kRXRGRgc7MAskpbhMRV3Se28pDYDIw26x9spa1Y6zsUUhExWByp4WxMw4a540pBnR-5SwcBI7FYxMUKUqNfonPaAWXRihc4lHcF7zv4h6kRvXS1cedFKK=s1024-v1",
+              "postedAt": "2020-11-21"
+            },
+            {
+              "url": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAFVyiJJ7s1OZlz6qgQlJy_guvVlevWE_9dRyAOU1HV5YnAqVkC31AJk3z_3TofRQ8E-ARSNxDdfNYO-qp6cTwR7K78sN7t-t-kDmRKzip7EQo_WsdYlmp91nFfH4VQobTh-oVFB9g=s1024-v1",
+              "postedAt": "2020-2-3"
+            },
+            {
+              "url": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAF1Y8bhv1DEhMWjKUbsEAevBFx3U-Yj77kyV9ZSizhlh4pOGpD2JLzB8kTjmB55DHiA5drw_bUvmk-Z3UQclElmvSrlzPtHigyKOGCH47oXu6tt7ir13PjbR6f-JiQj14JVfEDEOA=s1024-v1",
+              "postedAt": "2022-1-24"
+            },
+            {
+              "url": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAHpGrxj91Nl0p-trP_li1zz8YDXEAjF4xTh2qMPvb5zgYtdStJKW_mOt5af27DE6zxEC9Ylxq1uOgQnaSZKqOwFTxwyedtCD7_6r26jpJrZ1jHW8OiXnqRsoVmib3QIB3AYDIpSIg=s1024-v1",
+              "postedAt": "2025-1-29"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "position": 7,
+      "title": "Coconut Grove",
+      "placeId": "ChIJsezbVWE_sz4RMjL2wXm0lxw",
+      "dataId": "0x3eb33f6155dbecb1:0x1c97b479c1f63232",
+      "kgmid": "/g/11p06x2xy4",
+      "thumbnail": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAHW_1V3XSt_Q71wxV0Myus935ynzQg9t9PJK9zYY3DzHq_MoWUYQY3TtwCqwIcT0yLCwavF2SexYAysrRNAOO2HWFhOsUgriYmlbdiqyVET6iq6WUoQMPiZ34VxWOlL__lATUQ=s1024-v1",
+      "phone": "+92 305 7774444",
+      "address": "Plot #36, Block 7/8, Modern Cooperative Housing Society, Main Tipu Sultan Rd, Jinnah Housing Society Karachi, 75350, Pakistan",
+      "website": "https://onlinemenu.pk/coconut-grove-menu/",
+      "workingHours": {
+        "timezone": "Asia/Karachi",
+        "days": [
+          {
+            "day": "Thursday",
+            "time": "12:30–11:30 PM",
+            "date": "2026-6-18"
+          },
+          {
+            "day": "Friday",
+            "time": "12:30 PM–12 AM",
+            "date": "2026-6-19"
+          },
+          {
+            "day": "Saturday",
+            "time": "12:30 PM–12 AM",
+            "date": "2026-6-20"
+          },
+          {
+            "day": "Sunday",
+            "time": "6 PM–12 AM",
+            "date": "2026-6-21"
+          },
+          {
+            "day": "Monday",
+            "time": "12:30–11:30 PM",
+            "date": "2026-6-22"
+          },
+          {
+            "day": "Tuesday",
+            "time": "12:30–11:30 PM",
+            "date": "2026-6-23"
+          },
+          {
+            "day": "Wednesday",
+            "time": "12:30–11:30 PM",
+            "date": "2026-6-24"
+          }
+        ]
+      },
+      "openState": "Open · Closes 11:30 PM",
+      "rating": 4.2,
+      "reviews": 5271,
+      "type": "Restaurant",
+      "types": [
+        "Restaurant"
+      ],
+      "price": "Rs 2,000–8,000",
+      "priceDescription": "Rs 2,000 to Rs 8,000",
+      "gpsCoordinates": {
+        "latitude": 24.8684101,
+        "longitude": 67.0781137
+      },
+      "serviceOptions": [
+        "Outdoor seating",
+        "Delivery",
+        "Onsite services",
+        "Takeout",
+        "Dine-in"
+      ],
+      "extensions": {
+        "serviceOptions": [
+          "Outdoor seating",
+          "Delivery",
+          "Onsite services",
+          "Takeout",
+          "Dine-in"
+        ],
+        "highlights": [
+          "Great coffee",
+          "Great dessert",
+          "Great tea selection"
+        ],
+        "popularFor": [
+          "Lunch",
+          "Dinner",
+          "Solo dining"
+        ],
+        "accessibility": [
+          "Wheelchair accessible entrance",
+          "Wheelchair accessible parking lot",
+          "Wheelchair accessible restroom",
+          "Wheelchair accessible seating"
+        ],
+        "offerings": [
+          "Coffee",
+          "Halal food",
+          "Happy hour food",
+          "Late-night food",
+          "Private dining room",
+          "Small plates",
+          "Vegan options",
+          "Vegetarian options"
+        ],
+        "diningOptions": [
+          "Brunch",
+          "Lunch",
+          "Dinner",
+          "Counter service",
+          "Dessert",
+          "Seating",
+          "Table service"
+        ],
+        "amenities": [
+          "Restroom"
+        ],
+        "atmosphere": [
+          "Casual",
+          "Cozy",
+          "Quiet",
+          "Romantic",
+          "Trendy",
+          "Upscale"
+        ],
+        "crowd": [
+          "College students",
+          "Groups",
+          "Tourists"
+        ],
+        "planning": [
+          "Brunch reservations recommended",
+          "Lunch reservations recommended",
+          "Dinner reservations recommended",
+          "Accepts reservations",
+          "Usually a wait"
+        ],
+        "payments": [
+          "Credit cards",
+          "Debit cards",
+          "NFC mobile payments"
+        ],
+        "children": [
+          "Good for kids",
+          "Good for kids birthday",
+          "High chairs"
+        ],
+        "parking": [
+          "Free parking lot",
+          "Free street parking",
+          "Paid parking lot",
+          "Valet parking"
+        ]
+      },
+      "menu": {
+        "overview": {
+          "menuPhotos": [
+            {
+              "url": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAF7nNMGGMg88V9wUWjxwnz5tRYo88flIbG9w75rO07Eddz08sSwF7ItUCv3U9FjW-Ln1i7H16WLkqRx1qnmraz0RaJJckYjPaZFnhOqyCo6Cj6wkV8bq4oyg8JovX8qdd_cclxa=s1024-v1",
+              "postedAt": "2025-5-29"
+            },
+            {
+              "url": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAHYIvkRYRFmcZiMNHunlbfhLWbKyj7ehZWVHRxFHygf7nHcBISmMu6bbKC03uGeSGr6Rhtw6TBmLlBeRUMPZk7SU_mYWqCJBocgsCJImsHiAFQbpmCXZMFaRHEUDCGfJh0nlxJtnI-9s1f9=s1024-v1",
+              "postedAt": "2026-1-11"
+            },
+            {
+              "url": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAHarB38Z-UqjQ5Kho1q5HEwnztLcuZNtqI803UCQcytPwxQropRzBIqRASy1F-Xsx3WhSzrySqy4MJQsJVgq7HmtH-yKeUAS2MaQTEZV1HCep2VR2dOcwxcZqHANHSbuiUiAE3l=s1024-v1",
+              "postedAt": "2024-3-27"
+            },
+            {
+              "url": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAFGn7nUQOuTanppojhtdxKCQBzkzITp4Q0mLAJ-MxUNNxXTLvNZko0exDGNU2HJr1SWqUS6V-H5n2ZiZNicTfVvknHVJL56JtBGTw_yf8clDTDwzd8j0C05K0eZ2EFLOIx09_9aRcxB_QQq=s1024-v1",
+              "postedAt": "2026-1-9"
+            },
+            {
+              "url": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAGIHBk664qh3jjlxUyGg43yw7roPbPO8Q3pV21IuyfxTYcw98Vym25dphT5jGrVNgRvwwH39wZx_1ePlVltSi9Mb-pQLb3O1pLQs6ZASSbEWatcvObduz9TNh9IZ_B5GVT-WdRy1BShZQpL=s1024-v1",
+              "postedAt": "2025-6-23"
+            },
+            {
+              "url": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAFfVy_hZApGqc86VMYBr7NIV9mZPJI5ThcMC2u5LNqDTJwtCJMBm4nMlWztGb8KEXBWy2Vym4guBaZvCkYatJD40S1hTNFJTsAJ2ymCHQCzw1hGGC1wLuyvtGx7Ofu2PH7RYej2=s1024-v1",
+              "postedAt": "2025-5-29"
+            },
+            {
+              "url": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAE-vSos6XXEm6cK7krUiVvUZ1zGQFjN1aR9s7_ibZ1IfZS8DEsrexXwRsW5n_oUjr3J11wL_UEoxXpW1fv6ZohO7JoELvkaD1JdYbUFQ_MJqIoGtxtnebJ-nGQF5hMeJd9rgwhWCL_w19g2=s1024-v1",
+              "postedAt": "2025-6-23"
+            },
+            {
+              "url": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAH_wlO47BNhI7ZifJzVMQcbgIF-ogFNeI2pewYmjHDM4zp4Hx-OyBW2fTX25oYdIy5m0r-ZRy0C9GrKksferEmSLoRvaHDvM8pBTO5DMR2YUHPj7lxzhRE1JqribZiyQrPcnVUDsvLshZE=s1024-v1",
+              "postedAt": "2026-1-9"
+            },
+            {
+              "url": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAFFezEd-hLXlAPj8euh42UR7L7jMcAA0Zrh0atgBHhIAFWslRsagCAOX6h6tclYBNKUVLdu2cG-h4Hrr-Lbum7XlQw8iDEGV3voUH30Su7-EDetE5NieA05L94PZtINhfzrJZDA=s1024-v1",
+              "postedAt": "2023-1-31"
+            },
+            {
+              "url": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAFbbeRoqvlqtmjUXrZDWPa3ZvSciGNp07sqJmrQn_eJZyW10sBrhd65wQM3cNmhF0-TW1tYqQ4u5S08fx9PoaFypSnzvfHjJSgT-OJ6dp57467EqvTrXHIZf9LiVxQJV3CIZOWl=s1024-v1",
+              "postedAt": "2024-11-17"
+            },
+            {
+              "url": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAHXVOZ4w-ROumuY44NEWEz06k1jo-hnB11C36bhYEQVB__wY-ySDUW3k9ewLkQKjHyuCZmTlJvhEK2aPV9mhufb8pfDfQxtICmRq4WfR3BIs719uNJzG1avZ9X6zv0RBsTUGeEEGA=s1024-v1",
+              "postedAt": "2024-8-26"
+            },
+            {
+              "url": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAFztxyPQ98QI2lfcBCHL7_c1ZtF8JiGUtHjRmasXmm7La-14X4OK9NF10g77VFRTZnoZloHc_9OK9pjnl8YGCBBLoGtz2QOmGv1xInz73ea9CpvvZXJHjlf_p53baH-AP2Xv3XeTsYEmmSJ=s1024-v1",
+              "postedAt": "2026-1-9"
+            },
+            {
+              "url": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAHrA8V4ZifuOVYAe3jZM672ZJf5VAhg3Zmrn5CfxJrfZv1IlRBSkg6e8Vr3k17o1OhAfuh4TLYWq8sw-406TcMr4axTQQZ8ZG6mZvFWxTnc4pZ2R0_m1q-KsGmSX1q3JxABQcJB3ShI2Rsk=s1024-v1",
+              "postedAt": "2025-12-4"
+            },
+            {
+              "url": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAExcAmriRz-EPlUb48e7FuNTHeeWOWpPctV-51cvQYBs8_tg1BN_l_H-L6IARmM6EZsWef1nSrUQMWErkNTc0GCsEFp6mX_yG-0ae2tYC2O4vbD-wY1h1ANtfT-awYBVrR20I0tZHP-ll8=s1024-v1",
+              "postedAt": "2025-12-28"
+            },
+            {
+              "url": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAG_imw9ZPNEKP6Fx-FgGmwizqd68cymn8e2CYYl89ONEuXmwJjZI3FKhiE3Ci3_dTzxM2chRvVsNYoq3QgRABPCUrmff95P1HitG6E1ZTT298k0hDC_g0qkvNOX4rVK-ShM3z8=s1024-v1",
+              "postedAt": "2024-6-11"
+            },
+            {
+              "url": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAHZrF9uUMc-h2-a-S-YYbuh-0yxhOeP7t1eEJ8Y6z3A0MozWI4sz_lQcXlxrEitgV5wlLJ1L9PjyuQuDEOVKq5IlCxPFrbRYoLRJ0aoOy7UErPp_-mxdxJaLGHxGiuLCRYjkzrWlriotzgw=s1024-v1",
+              "postedAt": "2025-6-23"
+            },
+            {
+              "url": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAFOPtX57mv57vf2VFU8qob8DgUxq0T2HO4lx9RBe5NVLNS87ZE8Lq25skoGd-607ED9E0juMQWLCR_S-FSqELkk0ur6ReQs6HiIlD5x3YAzWr9_u2B0-iGXU1OqtpsTqnvvr-WZyg=s1024-v1",
+              "postedAt": "2025-5-29"
+            },
+            {
+              "url": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAEGyKX5O72o9RNfkGsHgYUMejyd3aLXbS7GGv9P2hb3KfdFl2y9vojCNhSYVchcyPjdkbV-RlQff0QHNlmzqQPDfjGZzauZSgPS9GEey9gMFLpsWro7ThH_rNRHZESELPTSedZB=s1024-v1",
+              "postedAt": "2024-8-26"
+            },
+            {
+              "url": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAGKri0ShHmJ9fD5CbL91DmTD0p4kCN6hsicBMLK1N3zZfZ-F15NzrQqlhUeQS6psqYd_97WKHmhwfKZ2FHYZFZ40FZz2JnhXRRQTG7WeuTMzN2FLz0ydwQ7WETr7PZbH3MAlY3a=s1024-v1",
+              "postedAt": "2023-1-31"
+            },
+            {
+              "url": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAFMYrqL_MC_F1ngt5GO2v4brFUPPWYlavb6yLX12ApzAx3xjqRLXhqKdA_WUwn466rLAokkn4j-9xB6aHXkzBHsZKG2XHZQOxXlqzzmAZvXOFqCn9Br9gzY1UST-mIpZMWDyDTvOHmuixI=s1024-v1",
+              "postedAt": "2026-1-11"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "position": 8,
+      "title": "Karachi Foods",
+      "placeId": "ChIJDdXnApw-sz4RG3r1Hnq3HoQ",
+      "dataId": "0x3eb33e9c02e7d50d:0x841eb77a1ef57a1b",
+      "kgmid": "/g/1tp1x90l",
+      "thumbnail": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAGog4kB4oEu7KZvQsVaAg5IjXxsfcwssQpHHc9XqzbCoxquBU8GJXKI4fRLnsV-9ikNAkduWCHJG_ntN8DbPmIEJXrW4bsYHUAypF3WbQ0rtm56NlGW9Z63lGw-7wu5qlk9_Q3dqg=s1024-v1",
+      "phone": "+92 21 111 536 637",
+      "address": "Plot 12A, Al Rasheed Chamber, Shahra-e-Faisal, Block 6 P.E.C.H.S., Karachi, 75400, Pakistan",
+      "website": "http://www.karachifoods.pk/",
+      "workingHours": {
+        "timezone": "Asia/Karachi",
+        "days": [
+          {
+            "day": "Thursday",
+            "time": "11 AM–2 AM",
+            "date": "2026-6-18"
+          },
+          {
+            "day": "Friday",
+            "time": "11 AM–2 AM",
+            "date": "2026-6-19"
+          },
+          {
+            "day": "Saturday",
+            "time": "11 AM–2 AM",
+            "date": "2026-6-20"
+          },
+          {
+            "day": "Sunday",
+            "time": "11 AM–2 AM",
+            "date": "2026-6-21"
+          },
+          {
+            "day": "Monday",
+            "time": "11 AM–2 AM",
+            "date": "2026-6-22"
+          },
+          {
+            "day": "Tuesday",
+            "time": "11 AM–2 AM",
+            "date": "2026-6-23"
+          },
+          {
+            "day": "Wednesday",
+            "time": "11 AM–2 AM",
+            "date": "2026-6-24"
+          }
+        ]
+      },
+      "openState": "Open · Closes 2 AM",
+      "rating": 4,
+      "reviews": 7436,
+      "type": "Restaurant",
+      "types": [
+        "Restaurant"
+      ],
+      "price": "Rs 1–2,000",
+      "priceDescription": "Rs 1 to Rs 2,000",
+      "gpsCoordinates": {
+        "latitude": 24.860278899999997,
+        "longitude": 67.0642064
+      },
+      "serviceOptions": [
+        "Drive-through",
+        "Onsite services",
+        "Takeout",
+        "Dine-in"
+      ],
+      "extensions": {
+        "serviceOptions": [
+          "Drive-through",
+          "Onsite services",
+          "Takeout",
+          "Dine-in"
+        ],
+        "highlights": [
+          "Great dessert",
+          "Rooftop seating"
+        ],
+        "popularFor": [
+          "Lunch",
+          "Dinner",
+          "Solo dining"
+        ],
+        "accessibility": [
+          "Wheelchair accessible entrance",
+          "Wheelchair accessible parking lot",
+          "Wheelchair accessible seating"
+        ],
+        "offerings": [
+          "Halal food",
+          "Healthy options",
+          "Late-night food",
+          "Organic dishes",
+          "Quick bite",
+          "Small plates",
+          "Vegan options",
+          "Vegetarian options"
+        ],
+        "diningOptions": [
+          "Breakfast",
+          "Brunch",
+          "Lunch",
+          "Dinner",
+          "Catering",
+          "Counter service",
+          "Dessert",
+          "Seating",
+          "Table service"
+        ],
+        "amenities": [
+          "Restroom",
+          "Wi-Fi"
+        ],
+        "atmosphere": [
+          "Casual",
+          "Cozy",
+          "Quiet",
+          "Trendy"
+        ],
+        "crowd": [
+          "College students",
+          "Family-friendly",
+          "Groups",
+          "Tourists"
+        ],
+        "planning": [
+          "Brunch reservations recommended",
+          "Lunch reservations recommended",
+          "Dinner reservations recommended",
+          "Accepts reservations",
+          "Usually a wait"
+        ],
+        "payments": [
+          "Debit cards",
+          "NFC mobile payments"
+        ],
+        "children": [
+          "Good for kids",
+          "Good for kids birthday",
+          "High chairs",
+          "Kids' menu"
+        ],
+        "parking": [
+          "Free parking lot",
+          "Free street parking",
+          "Paid parking lot"
+        ]
+      },
+      "menu": {
+        "overview": {
+          "menuPhotos": [
+            {
+              "url": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAFH2OgPDZkQ4b2sw-wDlGHgcBFHWnwh4Sn08NQu6qwiK4xB17vO4j8o5WdKSXG1Y32Ry-ifwaIUDATeUMc-KOGySkXdtqxiHmAE3i8CZuqyrEjlHY5upidA8OjeWmHrolNtVoVgdry1Htyl=s1024-v1",
+              "postedAt": "2026-4-12"
+            },
+            {
+              "url": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAEu_RfNwoiY8QwhLLY9wsCiEmp9JLNGF--46WAm15WQn01mSIDq5YwCQueJwtsKWsKQxqiwTP2xMLrxpoXhniETmuf5J7xkMcKI2-iNEIi_W-8UMsl9r4YPBaJVKBbZXO0cJucDQuORs9fn=s1024-v1",
+              "postedAt": "2026-4-12"
+            },
+            {
+              "url": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAEpWaUB1gT-V080IMUisVJ5bys7kbf1nhOtRSmkBLljRdye8zA-o9mwg9rTc3lyaRJWClx8XPFwd1UmEceYqjnRy11D12KD73uFJa1iParkfm2yg7KlMGpPqsgCniLF2r8wR3TnMDMcXEyt=s1024-v1",
+              "postedAt": "2025-9-12"
+            },
+            {
+              "url": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAGyBSvoI3cg5kmOSvVxR41KCgR8qdXNi-ZVBUy1RYmeiwv1y6i7FK-Te8Usxqkt3ReJjvESOK-LnHjY8NAGgPA_5QKDgNknBKs7zLM3hDG_bFQs6Jhy8OGFoHXPIuKlhLtGhhD1Uw=s1024-v1",
+              "postedAt": "2025-1-23"
+            },
+            {
+              "url": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAEzZaTe0Ve6JJUXY8VpSRbMFodyGj74Sof6gsiHqtqkepRN38Kb5TfA_7VRSIjgtjl3I6HLqtiYj3VYTGDWwq2fKnW1ZG-w9UB9chvXvKqnV1KJ0wLZCebCta6wspaQ0iKe-VB9ix6m6H8=s1024-v1",
+              "postedAt": "2025-6-22"
+            },
+            {
+              "url": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAH5QufcSnBJSIdeW53SVU0PdNn3gLe-9yq0N4xKgrBu2Ww1xNuEKH7JfCAPBuHO_95Rhuk6rW3VtsUKRyHHHsrhAussFk1hOWLROERvXQN7Au_SXNaDurQ-nthVTXZubVe2CglZ3u7uRIVN=s1024-v1",
+              "postedAt": "2025-9-12"
+            },
+            {
+              "url": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAH39LSGbR-V-tfSVc0Xs1mGfxxzrb9su4Dz9iNexjczbFinL21wLjCRISOQLxowTP2LRjyt8W9MkLwgScIkMkvsOTEGKPpf5T6AOPlPAEXoCLmHsTL7nfW7A_P0zTHnoDZECqjUKfY8pFYi=s1024-v1",
+              "postedAt": "2025-6-22"
+            },
+            {
+              "url": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAFzreJ62jABQ8xdaB_98zSk9t0gSzH6HC4t7OFVXd6T-f3MQfSJoGldEFnQw2a4xd4Y8bsqMHiUzNRIgzFTEsgScoGORvp6R-lkFSDAFE301b1eyzdS7wNl7ckJj1j3TIuUgLeDrYaluB6-=s1024-v1",
+              "postedAt": "2026-3-15"
+            },
+            {
+              "url": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAF-hAh6H-ihlXM6Fb7h_TasTDFG0uYpgMm0JfIshi5Ze9SYYGW3DVA0p2AsYocvbwYp-4Sw-P9reloC1qgBatDGR23nGoOTICDX9BqRT8Cgt-7E8eQIS0SzOMvPGoK0AXDuWeRR-g=s1024-v1",
+              "postedAt": "2024-7-22"
+            },
+            {
+              "url": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAH0NDXI4rZyy1xmIny8lZ5Y0XgbcUGEvDByl8NdRwl9KygmgKCanDQ85G0YfVdCqeruiODvs9_o_qok32JBrnbRGcU2TP788asOc0QlHZOica0jxEKlZ5kEaZ5frQ2LJd4l4s7HFao365rM=s1024-v1",
+              "postedAt": "2026-1-10"
+            },
+            {
+              "url": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAGJdE18EFf8yw72bu7pdCdoy7s2-dObVuRg1qZijcywMlNPUY4L3jBInHYeNRMDdPz6Sz9dvJ3BHiGgxSt4yLDw8EDUaGIdUyVhJ9PxfsqBKMtj-xcpksnv5p7jkMPnXSX-7vE=s1024-v1",
+              "postedAt": "2024-7-22"
+            },
+            {
+              "url": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAEyvFE7kTNPXJJX3UuS3Yss5Cw36VR2Vout84dDSv5ezSkLG0COWOIlQjG86UBWw5HbjHKpt45x379K57HOL8AxVs1azrZ7CzxQlVOjLqr5PmyGnp8E0wBu6EpGL2HPolP35SzuWe1_jQ9N=s1024-v1",
+              "postedAt": "2026-1-10"
+            },
+            {
+              "url": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAGM4l4d2aZcy89n-PllpXNEkMJzUX5KxJSR8fOMcTYEghR2f6KxVfqGn16Rrz2mAoCclWT3FowWxecOFQFQ5aJCOS7StJTPUPbpM8TapJwA8-zT0RDW_2Of2OwaUQTkwC2S95UejA=s1024-v1",
+              "postedAt": "2022-7-9"
+            },
+            {
+              "url": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAFrWHcj1Plwah6RW9Wgh6Z8v4D3Nk4Le24cae6eBI_soDiy39O-J7mLyD0i7LgjNIkIc85BMXVjiTnh8gVPx9k7VZdqHYF3EHlb52cKmla8VjDKLB8qEKZvzT3T-_MSJsWA0Z_a=s1024-v1",
+              "postedAt": "2022-4-2"
+            },
+            {
+              "url": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAE-x6GTdOQJKVkfeU64o55i3F1407zReAn6MkVyN-fNKM8FRcl2Y87NUZRuwrBXYOEse8FrXxF9YmHeuj2-_-Y9plxiUqZ1U4UV-ab3hdUoN429H7V_L45HDAEMSIddc4xgN3Ve=s1024-v1",
+              "postedAt": "2023-6-10"
+            },
+            {
+              "url": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAHSzuBQiSCILrEv0iHz7kYky9kSKTR6kbxtG5e8Xg-Hhf8MwNzSIVI8vGyg-PXterPvrCkbMCWkBGgplUUHKYHoSFWK6UxwV8LmYZAYSXNo7Dj6fkAM29vEQ5o5uiLvnB3g2JlFeg=s1024-v1",
+              "postedAt": "2022-4-2"
+            },
+            {
+              "url": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAFqLk5MowiMqzs608YT235ZQ9aRPrMmsjhWB0G-qlrdy02EhguC8AoXwAiGzPqCuWpIzKsvlS1CHdGJ639AUUOwg8aHzwzBbt7i9VQRtEPEbYwJH1tJ4Pc17fTd1AKI6y6HHF-G=s1024-v1",
+              "postedAt": "2023-3-2"
+            },
+            {
+              "url": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAEXCQm5jAkEwDJTtZAsLzm4UTkROoCIyf0PCTnqyoriErhzFAEoKUkJsF31WpSPLSMDJaU7qPoHKpZBnjhDZOu0NJTOPrdZibcJJdgLZ81DRdCfNRenTueBqrFCoEh_2XTbydQ=s1024-v1",
+              "postedAt": "2022-2-26"
+            },
+            {
+              "url": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAEenqXdcBa1Q-GMoqvgJFUdw_f55qP_BnCGV3aB5UjV0EPi4-bjXSozOsv_uX8FZAogklcNtLbSRkGZ4kddwklsCAahSFoTqLt-5sMPI30RQRbhf2z07wyrh54FOFCJN--2LdXndg=s1024-v1",
+              "postedAt": "2023-5-14"
+            },
+            {
+              "url": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAGgCkCdwV_YRB8K5LspC_-vx5A9MoABfjTsoYMplijuLVjmPoJTj__cxMPiJINHFJW51M5HQIlJaQr8wVZZZMqx7mvug1zsEafNYvctYzZk9SoMDlPEbJkO53R0aAhyoNqFx-w=s1024-v1",
+              "postedAt": "2022-2-26"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "position": 9,
+      "title": "USA FOOD",
+      "placeId": "ChIJpyowZws_sz4RzoH6B2nh4pU",
+      "dataId": "0x3eb33f0b67302aa7:0x95e2e16907fa81ce",
+      "kgmid": "/g/11kj3d_mhw",
+      "thumbnail": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAFXUaqaT827-UOzhEWQ1yjA24nlgYffIX-PuWuBhCKZdR7G_Cot9w2MtjJRD8rzKDV3o8R_ZKmchp7OTV_T-2urg8q3yMQNJ8jpqywh8IvPJIFSYvrmTSTOdjTxo8yd149rMCnrOBvHKjan=s1024-v1",
+      "phone": "+92 312 2139263",
+      "address": "SHOP # 4/390NEAR, ERUM BAKERY, 4, Block 2 P.E.C.H.S., Karachi, 75400, Pakistan",
+      "workingHours": {
+        "timezone": "Asia/Karachi",
+        "days": [
+          {
+            "day": "Thursday",
+            "time": "9 AM–5 PM",
+            "date": "2026-6-18"
+          },
+          {
+            "day": "Friday",
+            "time": "9 AM–5 PM",
+            "date": "2026-6-19"
+          },
+          {
+            "day": "Saturday",
+            "time": "9 AM–5 PM",
+            "date": "2026-6-20"
+          },
+          {
+            "day": "Sunday",
+            "time": "9 AM–5 PM",
+            "date": "2026-6-21"
+          },
+          {
+            "day": "Monday",
+            "time": "9 AM–5 PM",
+            "date": "2026-6-22"
+          },
+          {
+            "day": "Tuesday",
+            "time": "9 AM–5 PM",
+            "date": "2026-6-23"
+          },
+          {
+            "day": "Wednesday",
+            "time": "9 AM–5 PM",
+            "date": "2026-6-24"
+          }
+        ]
+      },
+      "openState": "Open · Closes 5 PM",
+      "rating": 4.6,
+      "reviews": 155,
+      "type": "Restaurant",
+      "types": [
+        "Restaurant"
+      ],
+      "price": "Rs 1–500",
+      "priceDescription": "Rs 1 to Rs 500",
+      "gpsCoordinates": {
+        "latitude": 24.8677839,
+        "longitude": 67.05249119999999
+      },
+      "serviceOptions": [
+        "Outdoor seating",
+        "No-contact delivery",
+        "Delivery",
+        "Takeout",
+        "Dine-in"
+      ],
+      "extensions": {
+        "serviceOptions": [
+          "Outdoor seating",
+          "No-contact delivery",
+          "Delivery",
+          "Takeout",
+          "Dine-in"
+        ],
+        "highlights": [
+          "Fireplace",
+          "Great coffee",
+          "Great dessert",
+          "Great tea selection",
+          "Live music",
+          "Rooftop seating",
+          "Sports"
+        ],
+        "popularFor": [
+          "Lunch",
+          "Dinner",
+          "Solo dining"
+        ],
+        "accessibility": [
+          "Wheelchair accessible entrance",
+          "Wheelchair accessible parking lot",
+          "Wheelchair accessible restroom",
+          "Wheelchair accessible seating"
+        ],
+        "offerings": [
+          "All you can eat",
+          "Coffee",
+          "Halal food",
+          "Happy hour food",
+          "Late-night food",
+          "Private dining room",
+          "Quick bite",
+          "Small plates",
+          "Vegan options",
+          "Vegetarian options"
+        ],
+        "diningOptions": [
+          "Lunch",
+          "Dinner",
+          "Catering",
+          "Dessert",
+          "Seating",
+          "Table service"
+        ],
+        "amenities": [
+          "Restroom"
+        ],
+        "atmosphere": [
+          "Casual",
+          "Cozy",
+          "Historic",
+          "Quiet",
+          "Romantic",
+          "Trendy",
+          "Upscale"
+        ],
+        "crowd": [
+          "College students",
+          "Groups",
+          "Tourists"
+        ],
+        "planning": [
+          "Lunch reservations recommended",
+          "Reservations required",
+          "Dinner reservations recommended",
+          "Accepts reservations",
+          "Usually a wait"
+        ],
+        "payments": [
+          "Credit cards",
+          "Debit cards",
+          "NFC mobile payments"
+        ],
+        "children": [
+          "Good for kids",
+          "Good for kids birthday",
+          "Has changing table(s)",
+          "High chairs",
+          "Kids' menu"
+        ],
+        "parking": [
+          "Free parking lot",
+          "Free street parking"
+        ]
+      }
+    },
+    {
+      "position": 10,
+      "title": "Foods Inn",
+      "placeId": "ChIJ7xoI5YU-sz4R9djkyoxCJx0",
+      "dataId": "0x3eb33e85e5081aef:0x1d27428ccae4d8f5",
+      "kgmid": "/g/11ck9q4qjh",
+      "thumbnail": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAGmhyIZ6MQuDSz5j4LuzemTRIbNpkhA1PAKfEVVLUYbTecBuQWLHmoOiRmMm1EE-MmVSWeYOGydGkS_2i803SFfNqe8kdtTBLo5jkOirvrpavkbyufTH_k8gsXHoO_o9LmPA9tOZZXfxsNu=s1024-v1",
+      "phone": "+92 21 38899998",
+      "address": "Plot # 21-22, Allama I. I. Qazi Chowk, Block A Sindhi Muslim CHS (SMCHS), Karachi, 75500, Pakistan",
+      "website": "http://www.foodsinn.co/",
+      "workingHours": {
+        "timezone": "Asia/Karachi",
+        "days": [
+          {
+            "day": "Thursday",
+            "time": "11 AM–1:30 AM",
+            "date": "2026-6-18"
+          },
+          {
+            "day": "Friday",
+            "time": "11 AM–1:30 AM",
+            "date": "2026-6-19"
+          },
+          {
+            "day": "Saturday",
+            "time": "11 AM–1:30 AM",
+            "date": "2026-6-20"
+          },
+          {
+            "day": "Sunday",
+            "time": "12 PM–2 AM",
+            "date": "2026-6-21"
+          },
+          {
+            "day": "Monday",
+            "time": "11 AM–1:30 AM",
+            "date": "2026-6-22"
+          },
+          {
+            "day": "Tuesday",
+            "time": "11 AM–1:30 AM",
+            "date": "2026-6-23"
+          },
+          {
+            "day": "Wednesday",
+            "time": "11 AM–1:30 AM",
+            "date": "2026-6-24"
+          }
+        ]
+      },
+      "openState": "Open · Closes 1:30 AM",
+      "rating": 4.3,
+      "reviews": 12163,
+      "type": "Family restaurant",
+      "types": [
+        "Family restaurant",
+        "Fast food restaurant",
+        "Restaurant"
+      ],
+      "price": "Rs 1,000–3,000",
+      "priceDescription": "Rs 1,000 to Rs 3,000",
+      "gpsCoordinates": {
+        "latitude": 24.8631004,
+        "longitude": 67.0549176
+      },
+      "serviceOptions": [
+        "Onsite services",
+        "Takeout",
+        "Dine-in"
+      ],
+      "extensions": {
+        "serviceOptions": [
+          "Onsite services",
+          "Takeout",
+          "Dine-in"
+        ],
+        "highlights": [
+          "Great coffee",
+          "Great dessert",
+          "Great tea selection",
+          "Rooftop seating"
+        ],
+        "popularFor": [
+          "Lunch",
+          "Dinner",
+          "Solo dining"
+        ],
+        "accessibility": [
+          "Wheelchair accessible entrance",
+          "Wheelchair accessible parking lot",
+          "Wheelchair accessible restroom",
+          "Wheelchair accessible seating"
+        ],
+        "offerings": [
+          "Coffee",
+          "Happy hour food",
+          "Healthy options",
+          "Late-night food",
+          "Quick bite",
+          "Small plates"
+        ],
+        "diningOptions": [
+          "Breakfast",
+          "Brunch",
+          "Lunch",
+          "Dinner",
+          "Counter service",
+          "Dessert",
+          "Seating",
+          "Table service"
+        ],
+        "amenities": [
+          "Restroom"
+        ],
+        "atmosphere": [
+          "Casual",
+          "Cozy",
+          "Quiet",
+          "Romantic",
+          "Trendy",
+          "Upscale"
+        ],
+        "crowd": [
+          "College students",
+          "Groups",
+          "Tourists"
+        ],
+        "planning": [
+          "Lunch reservations recommended",
+          "Dinner reservations recommended",
+          "Accepts reservations",
+          "Usually a wait"
+        ],
+        "payments": [
+          "Credit cards",
+          "Debit cards",
+          "NFC mobile payments"
+        ],
+        "children": [
+          "Good for kids",
+          "Good for kids birthday",
+          "High chairs",
+          "Kids' menu"
+        ],
+        "parking": [
+          "Free parking lot",
+          "Free street parking",
+          "Paid parking lot",
+          "Paid street parking",
+          "Valet parking"
+        ]
+      },
+      "menu": {
+        "overview": {
+          "menuPhotos": [
+            {
+              "url": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAFL_rrqXeTZHb4C-ki65ZNmr1tRxrEp0oJXG3K0AepUSee63dmfeGW3AsJb0MdQmafFu-wXQ6SVXOsOCKYswc8qns2f8nBuozw3oA9wsOFUCCPOK8tlzZBtpKB3cgCr-H4XGus=s1024-v1",
+              "postedAt": "2019-3-28"
+            },
+            {
+              "url": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAFd1rs5Rq2djlDi8jtPyDAoJ0OrSXOYOvqXohqGA3G8xWhXC4q88451bz96TB5PTjCp0YHtaxdt2eyTjmdF0-VOSc3zCRAL4hemOfGejYebrXG1WZG9-0OmId0-Q6mG4YW_Mzib=s1024-v1",
+              "postedAt": "2023-5-2"
+            },
+            {
+              "url": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAEqkJIVMllJcxug-tk9vIe0tex91CEOQhRBanraJn7FT2_uZ-58-Blw0bXD9BzAwN5JEfYR1XhR7p1L6FMkSSdPZdYwmyz7QRojJySyeuNqd-0NOic5nl60VQOPc-5_pk2DvlPr6w=s1024-v1",
+              "postedAt": "2019-3-28"
+            },
+            {
+              "url": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAHXC_uWhO-GD049CqMobN7hxCiGd6386lJxBbepn_o5lzIKIJBWAQ61Puh6EjK1cSBKgrm1zEHpfo7xsRv8q863qVgOhqn2uddLiNIYhZMjTLpTVwuFWF4NzSJnkUNqeUHpO690VQ=s1024-v1",
+              "postedAt": "2023-5-2"
+            },
+            {
+              "url": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAHjsxHckgzJecAE03mhCE-KB7W9B0wmSDvXHthvUYZTeCO3IbdbQSI21sUaE2mgwJC3NrpEt32Xk_T_a_LAoHN8bSjFU3bu3teeU7AKtjES26rKWpsJftkRAABsEqXvbf3nod0bow=s1024-v1",
+              "postedAt": "2023-5-2"
+            },
+            {
+              "url": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAGaCA4BkrbmNcyex8S9Y9Yx6Rkx6dsk3bpgFcdIPJR5mKn8J71Kn-wWWUattVzOP-5tcxwdLdLL-5WmyT22JzCaZrbSgnIU95g0xMNHJizZWOpn11eFewe72JTngjt5yyrkFvY=s1024-v1",
+              "postedAt": "2020-2-25"
+            },
+            {
+              "url": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAFzu9Tj9U0KWW-S_aT-70S-4JgV0DMj2OkmtKMRevEHSM9F1Opd_meqBOdgcEMh87K5BdgUNMjuvgyDDT6ATFagqL8kUdpFl9ZTOLni4NGyoP6kEGJI7sG1aeCnffHmD_dSg9ye4w=s1024-v1",
+              "postedAt": "2019-3-28"
+            },
+            {
+              "url": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAG5oM3n8iN1b2mH5KcPoSfiuQXV4iv0iVQ7_kOXnnxG2lTRI1LwaVHgOVMJkeJKwpcvRVmgXY3C5LD7IrDBsrJ-NYLF48QpUCRGql_jBq2a7gejeFDlp-BiIH-sxgh5_NbhA48w2g=s1024-v1",
+              "postedAt": "2023-5-2"
+            },
+            {
+              "url": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAGo-Puy4fSBfesNfAqHK4SuWhwYJwZOBZSwcNqjOBc0vTODGD4XLS5yAsiK5sIE43Q0VGVBp7y2lFQ5jrPHEuMTS3mQb0q9M4WP2zErwhYLMj5IZwa6kYr5g5j8B3wW4ZqKFj7r=s1024-v1",
+              "postedAt": "2021-12-7"
+            },
+            {
+              "url": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAG4GojhwkHrHJA0A1PqID1JwgK3ouDpTH-F4qQTKsBisDYQd1ajspIvOgTqrfNT5ITDIFmg46-BwJOfosfTfzd2SP0sDw20XVk5CGJoJ-A5LnNi6FoBbG_A5EvkfZrC0CNWGMM=s1024-v1",
+              "postedAt": "2023-5-2"
+            },
+            {
+              "url": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAGKKeX2JfM5Qn30E4RfIFhaH1Y0h-93iI0LgivfA91tpRAEt4mb0k2jQWo4IotJeTx_NA5z2ZN_fH6RDP7D-hz0EwSFfEKImGNjMyHsNIzLWhFXrzkQrki-yxHUaC5h1ESG6NjO=s1024-v1",
+              "postedAt": "2023-5-2"
+            },
+            {
+              "url": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAH-h-uz_LuFx9u3iI_-pD5htVNz4oMulUeWIx4I4bGzzYG2PnpaP1A8ufkLLMBfkkdU_QeeVJS8zUxlO7BggMaxSjNr0fmbZS7_DKoLXMGOVHYY4RcDyreRm2pihsyftmXlzRwqkA=s1024-v1",
+              "postedAt": "2023-5-2"
+            },
+            {
+              "url": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAHK2M7dIEM4vV6siL8L39Au3co5NJvGtDFlZoxNOAfTDWHcVvPdQj8eJ1MmhzaeQAW3O0qSagCEfLXZgsEem-9ZJXamjbZUZ_3oibN6ttJJphk-P131yViEiQMrGbWbkWu6r5nv=s1024-v1",
+              "postedAt": "2023-5-2"
+            },
+            {
+              "url": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAEhmxWS1pO5NxHeitz1ok8xpoFNwRJdEGcArng5xO9riGGNIg3o-A8hCPdEt4NgAEwQK5pq5MAdFmhR7lYkrXZKrUOii_6KNQjp_MEyPaR1WOd1CbCWswWU2qrKatabuSZ27F4=s1024-v1",
+              "postedAt": "2021-12-7"
+            },
+            {
+              "url": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAHsZZGmACoMrzMQej04dgMHszTU0g_EfjW3iUg0S_oEcNo0bkUkJKaDjhwW9890PKz-T105XgwaMEnZRqkLKPTxJ7QuXR8GXo9xCX8ZEL7qSKxB_6ClcfiVVZWYhUvOPmOVfUvJ=s1024-v1",
+              "postedAt": "2021-12-7"
+            },
+            {
+              "url": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAG2-QcSAp6cM4OQrVnvH5OKbCpR6G_warS5CyhXzlZr78GSPpq1nIELZZxGft1l3UEGnKaqHR7lJiMli7jrtcTVMpqXjQZbltOcujOxYUZDZ1m6z4mwpdwK8mXyXeWklmQmi16f=s1024-v1",
+              "postedAt": "2021-12-7"
+            },
+            {
+              "url": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAHnwarFfBRkDWXDO8PisQ3EXb-8Bks5xL-3Y8UdTtelZMXKmdJsEdUVEjKrUBc4gKUZqS431OrfcTOgsrFq4SIWEoCz45-09u-gEk_Mku1fbxiLixrUQyWLalzNAXBA7Aq4FBbZQw=s1024-v1",
+              "postedAt": "2021-12-7"
+            },
+            {
+              "url": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAECNO_Y6txV-Je6qqoAdqFw2wcR-qy3h6bvbwDcfU9qgVNCUHJQhrKJSMqUx8Yvia1a7POD48bq7xwqJVBzSSaMft6QKAahbUFsAxoWLDBDR9yGAV5ZgPE5uDJc2GTLhEn0Gr4COA=s1024-v1",
+              "postedAt": "2020-2-25"
+            },
+            {
+              "url": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAGOPUq1nFv_DYwi5f8IQlXPGftutcaTqw5c3JrXFL9rHHGfFfrww0d984yrymGH2cIHMiiuEoak6a0EcFT84TfVRCbWKcbQuYezRZ_acRn8qOjNU4BhxC0Ew6Z36e-1EDZGrY_-pA=s1024-v1",
+              "postedAt": "2021-12-7"
+            },
+            {
+              "url": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAGfRJomjdtV5bktuBMBe-KUAAhqgt5tltbDfim2qE2Xtv66qE57sxF_Md9TyPL3DC7wobTqQbVtgp29EExgw25NXuoy6BIEmbSIVXlBb8w-AZyABKef-bVnAyb1o7BJ4kg73FQlrw=s1024-v1",
+              "postedAt": "2023-5-2"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "position": 11,
+      "title": "New Sadabahar Restaurant",
+      "placeId": "ChIJXS3rues-sz4RfjJi1so_fjk",
+      "dataId": "0x3eb33eebb9eb2d5d:0x397e3fcad662327e",
+      "kgmid": "/g/11cmr4fy_w",
+      "thumbnail": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAH4ePRY2hE6YcH3ilS-oK6JTxVZzuYn_phsp24EAvcGuyezuFBTjY5IG2W35cIWwXGEcLOK5rDrKftfgyIndDZk3KLXXumxu6ScZkDGs6zsXvVauTf76sQUXLQ338oDSjMfR9SrSv3G6PVG=s1024-v1",
+      "phone": "+92 21 34215869",
+      "address": "V3J8+QHF, Bahadurabad BMCHS Sharafabad, Karachi, Pakistan",
+      "workingHours": {
+        "timezone": "Asia/Karachi",
+        "days": [
+          {
+            "day": "Thursday",
+            "time": "12 PM–12 AM",
+            "date": "2026-6-18"
+          },
+          {
+            "day": "Friday",
+            "time": "12 PM–12 AM",
+            "date": "2026-6-19"
+          },
+          {
+            "day": "Saturday",
+            "time": "12 PM–12 AM",
+            "date": "2026-6-20"
+          },
+          {
+            "day": "Sunday",
+            "time": "12 PM–12 AM",
+            "date": "2026-6-21"
+          },
+          {
+            "day": "Monday",
+            "time": "12 PM–12 AM",
+            "date": "2026-6-22"
+          },
+          {
+            "day": "Tuesday",
+            "time": "12 PM–12 AM",
+            "date": "2026-6-23"
+          },
+          {
+            "day": "Wednesday",
+            "time": "12 PM–12 AM",
+            "date": "2026-6-24"
+          }
+        ]
+      },
+      "openState": "Open · Closes 12 AM",
+      "rating": 4.4,
+      "reviews": 1205,
+      "type": "Pakistani restaurant",
+      "types": [
+        "Pakistani restaurant"
+      ],
+      "price": "Rs 1–1,000",
+      "priceDescription": "Rs 1 to Rs 1,000",
+      "gpsCoordinates": {
+        "latitude": 24.8819411,
+        "longitude": 67.066419
+      },
+      "serviceOptions": [
+        "Outdoor seating",
+        "Onsite services",
+        "Takeout",
+        "Dine-in"
+      ],
+      "extensions": {
+        "serviceOptions": [
+          "Outdoor seating",
+          "Onsite services",
+          "Takeout",
+          "Dine-in"
+        ],
+        "popularFor": [
+          "Lunch",
+          "Dinner",
+          "Solo dining"
+        ],
+        "offerings": [
+          "Late-night food",
+          "Quick bite",
+          "Small plates"
+        ],
+        "diningOptions": [
+          "Breakfast",
+          "Lunch",
+          "Dinner",
+          "Seating",
+          "Table service"
+        ],
+        "atmosphere": [
+          "Casual"
+        ],
+        "crowd": [
+          "College students",
+          "Groups"
+        ],
+        "payments": [
+          "Cash-only"
+        ],
+        "parking": [
+          "Free parking lot",
+          "Free street parking"
+        ]
+      },
+      "menu": {
+        "overview": {
+          "menuPhotos": [
+            {
+              "url": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAFI0X3_PmTPwbz78gWn5VSsvpnEM9TG10R_ML1WqY_xcSxlDJB-i80tUinRTpVusQPKjjDjHXR8ZVD9v7f-cTWWVY6D8Z1uTGdNzPrzc9KIypnoNvJB2PTKTFkP3EhB7_mc5XX0418-w8Sk=s1024-v1",
+              "postedAt": "2026-5-26"
+            },
+            {
+              "url": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAEk4MCX7EISAf1LTqlxUej2gpqIq5KUGaP4AGe2YgDSgpA8MVhuRUGgjdVY51vrUysWbFYjwVYLmNP_RZhCy78F2hzn0vulVoMkZ0mmSpf0IychV8RYk7owX0_EaXsGrn5H1CEfqvA9oVM=s1024-v1",
+              "postedAt": "2025-12-21"
+            },
+            {
+              "url": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAHeUJOKJlLEG0OSF-mlflDIXsICgG2SqAZlTip8aUhtgSr7rjZ5CjxeDPsDxngY9jwUniOruzobLrwXvXH3f6zmUXvpLqZ9BnJoPhfh1Jl2aloZskiXM_r_uqmJhgQf-S4xXe3l9g=s1024-v1",
+              "postedAt": "2023-1-3"
+            },
+            {
+              "url": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAHOXz4qTYhWVhxV789optKkXrOWDEqhOh2HL_XfElm4rpN1ael8kZZvsAOzQYtQl43qMDQkMBsIc3usHVUZg9AhLoXg-rLaHI4BY2t6iy8GrADoZGd2MQkkioUpD9J0ls7kosG1L9xriJBq=s1024-v1",
+              "postedAt": "2025-12-21"
+            },
+            {
+              "url": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAGJIDvU4e6D87iasJzwqJ7KhenZNulq4IBndrJAeigfUyGuarhwlfQ0lLSFfvQxPIHTg3mWiPUroyg1AsDQhZ7ueNFb3OK_1n-68kq0wS7yy3lSFxGKgRzOQLfnb9mTvzluI2BjVzwrtvav=s1024-v1",
+              "postedAt": "2026-1-2"
+            },
+            {
+              "url": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAHAtSypl8kG19pivsjT1oxCZopW8YD7OdI-sjYKDF2pavu6sV53uawSRyj-ar7JCYg9oxZH9wpV9KFflsPuFrduuASobsqiZ3vXinqfqWUF8MDJk4Y2UC7Gj9UPkLSN=s1024-v1",
+              "postedAt": "2024-12-29"
+            },
+            {
+              "url": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAH-YSPa5-isq2Moiw-WicE9gtsMBCnQ9dOXy8XBGrRDZUy9WXFnjNnjTiifnQGwcGMdozif7RFUPyKpgUvCmEo14PGdpm92Ww0cLkiNpIUbDyPgKOs4U_bCq8EjhT92C-PXoWrU=s1024-v1",
+              "postedAt": "2022-4-23"
+            },
+            {
+              "url": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAE-kTr-qnYY5doJFfP_cU5TY-gyL9GutD168Wy06fHJt-ggVyOGyO1zL9QaB552nWmqPsm2ao3TKAJTkcSMGQt9dbYKDKDSELJxA7QMUjP5dyfhEA_RVSa35EeUNTUYcBxAKyLeHg=s1024-v1",
+              "postedAt": "2024-5-7"
+            },
+            {
+              "url": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAG-Ll-VVaP0WIU-25N6R8fiBP96IiO0kRphyD_OvJ58yCj0LPh_D59rf2FYOtXeZkjEePfHQqeTdA73xldLRebr13lJDL3Ybm2DdKh-VuRmuetJ1a-uq3afDBRD21Xk0YOs3T2D1w=s1024-v1",
+              "postedAt": "2024-5-7"
+            },
+            {
+              "url": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAEBfIDrP_ZG7rqX8WiG0i5wSS0AHJLNL4KpU4xfEIWijw-_CdCLh-mfxJ_KEpoV0vzt6sMA7nxRkJdBbw58dNlTuL5GZBPXIvXrZpcooneM8h2RBwwJqbIlYdXIDbnBipf1O9A_=s1024-v1",
+              "postedAt": "2023-8-21"
+            },
+            {
+              "url": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAH7PAbRUPGXJhDArTKt6Cf4T9DC8tkM-FQLkkhf3cFlcu2RG3IzXVVGikLMTCVqOdslyrC-tLrdgW_CGc_cYkuDFUpWki8jtaOVFLTTg1doA-vDnCSLjVUYi4ANMJqJirezs2xlqw=s1024-v1",
+              "postedAt": "2023-8-21"
+            },
+            {
+              "url": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAGdp8yYPS1af5ZcNGgVGgb8krFd3FnN3GyKQGTaiJZhXwN3LhrpfX1xK11vMM9ta8e6h9B_4BcMosk3fYi3dDUOLbXz_huN5Kui33_-myYH78AhBadw6lA21G1aRjEaKB46MP-L=s1024-v1",
+              "postedAt": "2022-3-25"
+            },
+            {
+              "url": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAEnBnQk-GXHORhGqKk9K3wOWvvkNJbGOrVjGcCi0dmcleETskF-q4hT8n8_FebotT6DMse2dQPyqkSfmKBCBApXGMnSrUXEMh4Wy20ffLIYl_vZ1-qGwUV8KDEJQZsbAhmMvMsm=s1024-v1",
+              "postedAt": "2023-1-3"
+            },
+            {
+              "url": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAHbkGWHBjhK3yruMAbesYKyxZNduUHypLczuOiHxAae43J_NAy5wO23kb9h3ciEAJckrY1UD7Dh5vMu-YI-VgXJmYdcC-639cNLY3vUwkzCx87IiPzk3cLWd-qH3HTVe249SjUJPA=s1024-v1",
+              "postedAt": "2020-2-11"
+            },
+            {
+              "url": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAGzQANGV5lrjX6qdvQrRdqRgO7kZkS4jH_cBD7EOVk5E6Flnys00nF1O_8AC-HHTlbYZ98wrN-QHgita50rU9YG1d8U5B1S7k_ERnXf37MYbp3nuyX_6-V5n2NB28vXrKYZSolL=s1024-v1",
+              "postedAt": "2021-10-11"
+            },
+            {
+              "url": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAEbp9wFUYfWbOR_9eI8BQbVJ1jJGsUosxlEm-1Wy0Js7CDfx9htIpjXmBn9xd-6MiAzp4IB5Je8QOPoIb7G80HXUjFKfnw-ctXUxptw081z42lk98uVSl_jLv_pEv3up2LQF6M=s1024-v1",
+              "postedAt": "2023-3-25"
+            },
+            {
+              "url": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAHTPb5HrYgoWPX1DV61sfUfnVekWzXur9GHqqo3A1Wc0hnF9RZTgeO73keqA4OE5HyE5ddqRxXIwu8W1fvUwgtkwzej9VFWm1LuvkKDQLuoH90qcF2lFDKtnGXGpnZb0-7wd9d2QQ=s1024-v1",
+              "postedAt": "2024-6-16"
+            },
+            {
+              "url": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAFeWAVhig2kFDozC8tTqhsDCn4Bq4xyb1Ei8gz3nKL69lxuPx52Xg2-18B3eBhZQ5ZffsRV7hNfSKE3x1hcBwNp-1tX0aEN5HMmPmkuew8AM1Y4Y_myGLAwXuR0z3jliBXn_gw=s1024-v1",
+              "postedAt": "2023-3-25"
+            },
+            {
+              "url": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAEcR8fem1P6TOJ_siwvkkMDHcrLKWd6Uhy_cddDiY3hzr2FKDHcT6N1-Y_XXb9fh36jC_4dNqajxVWO47yKTPWazGx_Fwbni6irrNPRaQO0SkP2iobI7vp4j3VejadJjP_-c72K0g=s1024-v1",
+              "postedAt": "2024-1-19"
+            },
+            {
+              "url": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAE0bnAL7S4_IX33Scnyv5YIY-l2fijkibBkgHtwgWL7T8ozpL7fMYzXjiBHlNEK84z5aX2Hw1oI0MvNKmZGtwH87n8D5CTJnSMULi8bSvaoxthThGVEzXw8SMSy-oRyhwqQ-Iyj=s1024-v1",
+              "postedAt": "2024-1-19"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "position": 12,
+      "title": "Cocochan - Tipu Sultan",
+      "placeId": "ChIJO1g1i6Q-sz4R7Y6JMVcxyxA",
+      "dataId": "0x3eb33ea48b35583b:0x10cb315731898eed",
+      "kgmid": "/g/11dfxdqb3j",
+      "thumbnail": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAE6xl-QQo_2Pg6JLc-q5qkcePfqghHdAR66vI-PJZ0IM1Bzof0Zj-SCaaWmSK8xz3Gmg8X_dmbBHSKwXHsSanKJZtmWsulUUOIGmbcGVbbCiDjascJZh-nTIzttTZRi0ZGi=s1024-v1",
+      "phone": "+92 21 34552695",
+      "address": "1A Tipu Sultan Rd, next to Xanders, Karachi Memon Co-operative Housing Society Jinnah Housing Society P.E.C.H.S., Karachi, Pakistan",
+      "website": "https://www.cocochan.com.pk/",
+      "workingHours": {
+        "timezone": "Asia/Karachi",
+        "days": [
+          {
+            "day": "Thursday",
+            "time": "12 PM–12 AM",
+            "date": "2026-6-18"
+          },
+          {
+            "day": "Friday",
+            "time": "12 PM–12 AM",
+            "date": "2026-6-19"
+          },
+          {
+            "day": "Saturday",
+            "time": "12 PM–12 AM",
+            "date": "2026-6-20"
+          },
+          {
+            "day": "Sunday",
+            "time": "12 PM–12 AM",
+            "date": "2026-6-21"
+          },
+          {
+            "day": "Monday",
+            "time": "12 PM–12 AM",
+            "date": "2026-6-22"
+          },
+          {
+            "day": "Tuesday",
+            "time": "12 PM–12 AM",
+            "date": "2026-6-23"
+          },
+          {
+            "day": "Wednesday",
+            "time": "12 PM–12 AM",
+            "date": "2026-6-24"
+          }
+        ]
+      },
+      "openState": "Open · Closes 12 AM",
+      "rating": 4.2,
+      "reviews": 5139,
+      "type": "Pan-Asian restaurant",
+      "types": [
+        "Pan-Asian restaurant"
+      ],
+      "price": "Rs 2,000–7,000",
+      "priceDescription": "Rs 2,000 to Rs 7,000",
+      "gpsCoordinates": {
+        "latitude": 24.866185599999998,
+        "longitude": 67.077822
+      },
+      "serviceOptions": [
+        "Delivery",
+        "Onsite services",
+        "Takeout",
+        "Dine-in"
+      ],
+      "extensions": {
+        "serviceOptions": [
+          "Delivery",
+          "Onsite services",
+          "Takeout",
+          "Dine-in"
+        ],
+        "highlights": [
+          "Great dessert"
+        ],
+        "popularFor": [
+          "Lunch",
+          "Dinner",
+          "Solo dining"
+        ],
+        "accessibility": [
+          "Wheelchair accessible entrance",
+          "Wheelchair accessible restroom",
+          "Wheelchair accessible seating"
+        ],
+        "offerings": [
+          "Coffee",
+          "Healthy options",
+          "Late-night food",
+          "Small plates"
+        ],
+        "diningOptions": [
+          "Breakfast",
+          "Lunch",
+          "Dinner",
+          "Counter service",
+          "Dessert",
+          "Seating",
+          "Table service"
+        ],
+        "amenities": [
+          "Restroom"
+        ],
+        "atmosphere": [
+          "Casual",
+          "Cozy",
+          "Romantic",
+          "Trendy",
+          "Upscale"
+        ],
+        "crowd": [
+          "Groups",
+          "Tourists"
+        ],
+        "planning": [
+          "Lunch reservations recommended",
+          "Reservations required",
+          "Dinner reservations recommended",
+          "Accepts reservations",
+          "Usually a wait"
+        ],
+        "payments": [
+          "Credit cards",
+          "Debit cards",
+          "NFC mobile payments"
+        ],
+        "children": [
+          "Good for kids",
+          "High chairs"
+        ],
+        "parking": [
+          "Free parking lot",
+          "Free street parking",
+          "Paid parking lot",
+          "Paid street parking",
+          "Valet parking"
+        ]
+      },
+      "menu": {
+        "overview": {
+          "menuPhotos": [
+            {
+              "url": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAEf36lsch2fsOVGiIgX6dXifRxFyp_5OT13Ijhvya_YGBJTDbKzKFGxrVEw84Vz9mj8FFym9LFKlfVvaHn5geav4WX7Pws44UGnQ1Hhf8CyNX9LsgdJDmF8orgZwbRjfbluHTMvznvajr5a=s1024-v1",
+              "postedAt": "2025-9-17"
+            },
+            {
+              "url": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAH2dz7Y76X0rvKINbXNJ5qGiisLgLrw-aXXqJ425JCs9eUIYoI1iLN4M9UU7IkQxon-fmMLUv7Tijcu5oladXiVMne2K9oAimDjFa69A2OFtHjxSJoriTD_vhfuEV5YOJgctScB7R-Xm6w=s1024-v1",
+              "postedAt": "2025-9-17"
+            },
+            {
+              "url": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAHULjlcWYNt8U4_CW_4cClGF-_fRzZWhYQ-BkirP7bwTPfsx3staxImASQViAByZYNfT-58KZQzfKvZ18Wo7EesAq3HSYHOXudbv4jK2___Z4pq7scf1kMXwC5jrbjSTcq1Bi0lHZ3QOzT3=s1024-v1",
+              "postedAt": "2025-9-17"
+            },
+            {
+              "url": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAFXAVCeHgXBgj3uvfh5bQUAzBpstPPR9whocr3v89GkoW8-PturJTbe14gCKLQkY327P3vzGNpyb7cj6VVHb50yNHXF3kFc_jRerRaZRqZ0YeIsCKWY5FotajMVSsvuwxh3JPA=s1024-v1",
+              "postedAt": "2024-4-4"
+            },
+            {
+              "url": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAEYIGssf6xVhOFJvZqJodVZPjBrTkxxawVJ0ucykba99M1ul2J7j2AJ-5r5Itz3FAX8Bcm1gtkWzJADHd9XJ2veLCLYAkC6QvyympZp0L6dBDa-HNHqxgSlBH-zO8P5V6Dy67-J=s1024-v1",
+              "postedAt": "2022-11-7"
+            },
+            {
+              "url": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAEnYHynS6ifbi03RG3eefVZfY0L4cjHYiV20VjLmOEKXgKJUEKEA-7fJigHzfGqAb5R3p2b7mJnXZr1nHIzmkR-o0mCdZk54UT9qvFafHNDGACQCfdrPAEkiurDQzxgbPPm5eO8Cd3bUgFc=s1024-v1",
+              "postedAt": "2025-9-17"
+            },
+            {
+              "url": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAHkGatJ9eMLS_oDCfyrpZAc48A6Gn2MTsReIBbVBHxfvAwVMrRw77s2hdIYzABKdmFU-X6XnfEUJOy5gc20NqQtZrfrTyNwF0NMkKWscwVu18gheLR0Im7bsjE1qAYBGMJHftIO_EfDzQGU=s1024-v1",
+              "postedAt": "2025-9-17"
+            },
+            {
+              "url": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAEsiwAnuIDAQ1VhXFO3Q9tAzkM4qLHvtiyoStml-AxeCB2NIDP553U06D6Q38MoVWUqzgCzHbpd2ir6DJtMSF3w1kU5hJYnxCkeRMeOTHSDGwsmmBh1q3HWUIq4EGaMWlx1ysXN4Ecvgdxr=s1024-v1",
+              "postedAt": "2025-9-17"
+            },
+            {
+              "url": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAGrkFqa4nXYnwT5lL8NByYU0wGWvVlriZgnmaMBJ2F12jQec0WpVyNFGhGCi2KfcM1nsNndHAq0Bs6wmR75ntXuDKjpquUR3i73TZyEuqqCceFmEfGiP7SRUf4tFDMNB1oN0WEpOBiViThL=s1024-v1",
+              "postedAt": "2025-5-20"
+            },
+            {
+              "url": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAFhCq8yApm1d6JnRU97_tPkD2Y2d07Btr6Ue_rRurABvaCPI9hlZPWQM9fEuZCMX-7F9tKJ5KqL7WSvQSpIwxDuQV-S6hpF0JHfm2dHP-MY0ijXGKjfDhErs8UC-2fT_TwRFj4TKQ=s1024-v1",
+              "postedAt": "2024-4-4"
+            },
+            {
+              "url": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAFbBf4tlYQPGQ81jqcWJge43Suj5HQCQq9cg3YMsgRvxvk2bh8XusMP1XIDKqDO5Mf2muMr0M9CKB9uWuOvvnrQwL6bpMkce205jVCZeQaLwhO3krz2-tUL_hSmoLk5M_CwWwDV02_Lp5zd=s1024-v1",
+              "postedAt": "2025-2-9"
+            },
+            {
+              "url": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAGv_ZAREGkbysGU7eBefN5mBenuDw7TKH8wMWlFzciJym5xkBAJXg1WIbbVkw4Ze2RTTwRuTDERiql8udbPfSWFI7xDd7nCFCpeMaIa-qtTnZPGk18UADEsbBKQIAPbJ8FRzOo-OIHW2YUQ=s1024-v1",
+              "postedAt": "2025-9-17"
+            },
+            {
+              "url": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAEGK3K_DI07tynD1ILv8juGQMvTGfy0HVmwXRUXWTyx8uS6G-A1tQbs6D0EhSB_fcJQZ5yPeFNkeF_UGeZWc36QfHhQW00u7Yl-qWpV_iKY1l1tvnczp78xxnzTrisORC2qcerdwA=s1024-v1",
+              "postedAt": "2022-11-7"
+            },
+            {
+              "url": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAHzUH452Tf6lb4WeGq67EuoH_igiSUuTNlUwzcWUeKkq_ctpy4oVvajlUfO1UeWBDEhIZT5Is5dLEubXrDQpBqLLPDVZO2kCUHRPbqIxu8jSUJEcTICS4c_4j8s5KmDKiL9KEw=s1024-v1",
+              "postedAt": "2024-4-4"
+            },
+            {
+              "url": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAFZ6MItxia30FM4NZf2Z6bnfE0qqJDcLsqEmqoCCPGsFAxDEn2gjKvmEgAx2cfEiRuMmLu7PA8MmZWFo89msVr41B6BcHVEQpbzRJBaP78nrglXt34RlmNXzEB1MszZK-N2C9Q=s1024-v1",
+              "postedAt": "2024-4-4"
+            },
+            {
+              "url": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAGxbtQazIGEkq_u3iGYJNhZoB8yFVHyrGLNyZDZ-ZKDw2s7nL2Mr9QUNBKrpx_S0QAxf5R-I21xl01hlva_EvDTDsteN0LPQSd6qaTOLykto1E5QseydT3auXjaGcnXOSkuxxbm=s1024-v1",
+              "postedAt": "2022-11-7"
+            },
+            {
+              "url": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAHKGSzC_rhrRuHlU55ikfmoD_tojQ98B858c4_370rrgmqz7EeHkufXoTA9919RD6tIt-i_AaXL8tpRfWK7D2-diY71BsSdS96puwRRB1nsfIpCKhj3UA9kw1Kd9u0O9-ngMPd3=s1024-v1",
+              "postedAt": "2024-4-4"
+            },
+            {
+              "url": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAH9e62dNQzZ-e5BGnfi3vHS2F6JyHiEmjln8wTuGW3fJrc0Ouuychrp4K47NDrCSAr-dTaYQmo510UCyGmMb2GZNBaGBbBGu65pnBhK64zHTKoK_ytNkp8i_08_hNCXSgVc3fsFIA=s1024-v1",
+              "postedAt": "2022-11-7"
+            },
+            {
+              "url": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAGmKcTBK2LGhz2aH7SDLU5_l1pAz9jXpq86tfXHPc_svAL-aiv4SVO8x5kB8fqh51j69SBdTOqKWlWZ8nxk3qm7zyf27VbNuhF2lf_BM7UrRfRkJ7KFav7m00miLfa2Ust2OCuXkd4PrDCf=s1024-v1",
+              "postedAt": "2025-5-20"
+            },
+            {
+              "url": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAEcKxWluAVckSMpS4p04WrvfvuVa6bN3b9gZUdKKuxQRGD7YwmZXMkOLuVtLxrjPFk7WkFqbiGahO1l09tXvnPIKzwcXjYnEGPflVz7nSmhYArRVRiGUUZKqC5CLhrmqVyg-dBP-Q=s1024-v1",
+              "postedAt": "2022-11-7"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "position": 13,
+      "title": "Burger O'Clock - SMCHS",
+      "placeId": "ChIJVwshFMo_sz4RmOwlei26DRU",
+      "dataId": "0x3eb33fca14210b57:0x150dba2d7a25ec98",
+      "kgmid": "/g/11jrccn742",
+      "thumbnail": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAFn4FahnYH52zqDSP9dcutlLmruExuL04neoyKeRfpCKuAXvV7xbO9FjPeZcBIkxGtovQhp-ZLwLncxpV5Ebq-4A0TdhBpzTSDvJomN_22XmZyw1pLnu0WiUJNCn-0aQ92UrH5e=s1024-v1",
+      "phone": "+92 21 111 432 532",
+      "address": "Plot # 104-A, Ground floor, S.M.C.H.S Capt, Captain Fareed Bukhari Shaheed Road, Sindhi Muslim Cooperative Housing Society Block A Sindhi Muslim CHS (SMCHS), Karachi, Pakistan",
+      "website": "https://burgeroclock.com.pk/",
+      "workingHours": {
+        "timezone": "Asia/Karachi",
+        "days": [
+          {
+            "day": "Thursday",
+            "time": "11:30 AM–3 AM",
+            "date": "2026-6-18"
+          },
+          {
+            "day": "Friday",
+            "time": "11:30 AM–5 AM",
+            "date": "2026-6-19"
+          },
+          {
+            "day": "Saturday",
+            "time": "11:30 AM–5 AM",
+            "date": "2026-6-20"
+          },
+          {
+            "day": "Sunday",
+            "time": "12 PM–3 AM",
+            "date": "2026-6-21"
+          },
+          {
+            "day": "Monday",
+            "time": "11:30 AM–3 AM",
+            "date": "2026-6-22"
+          },
+          {
+            "day": "Tuesday",
+            "time": "11:30 AM–3 AM",
+            "date": "2026-6-23"
+          },
+          {
+            "day": "Wednesday",
+            "time": "11:30 AM–3 AM",
+            "date": "2026-6-24"
+          }
+        ]
+      },
+      "openState": "Open · Closes 3 AM",
+      "rating": 4.5,
+      "reviews": 3228,
+      "type": "Fast food restaurant",
+      "types": [
+        "Fast food restaurant"
+      ],
+      "price": "Rs 1,000–2,000",
+      "priceDescription": "Rs 1,000 to Rs 2,000",
+      "gpsCoordinates": {
+        "latitude": 24.863721899999998,
+        "longitude": 67.0546773
+      },
+      "serviceOptions": [
+        "Outdoor seating",
+        "Delivery",
+        "Onsite services",
+        "Takeout",
+        "Dine-in"
+      ],
+      "extensions": {
+        "serviceOptions": [
+          "Outdoor seating",
+          "Delivery",
+          "Onsite services",
+          "Takeout",
+          "Dine-in"
+        ],
+        "popularFor": [
+          "Lunch",
+          "Dinner",
+          "Solo dining"
+        ],
+        "offerings": [
+          "Late-night food",
+          "Quick bite"
+        ],
+        "diningOptions": [
+          "Lunch",
+          "Dinner",
+          "Counter service",
+          "Dessert",
+          "Seating",
+          "Table service"
+        ],
+        "amenities": [
+          "Restroom"
+        ],
+        "atmosphere": [
+          "Casual"
+        ],
+        "crowd": [
+          "Family-friendly",
+          "Groups"
+        ],
+        "payments": [
+          "Credit cards",
+          "Debit cards",
+          "NFC mobile payments"
+        ],
+        "children": [
+          "Good for kids",
+          "Good for kids birthday",
+          "High chairs",
+          "Kids' menu"
+        ],
+        "parking": [
+          "Free street parking",
+          "Paid street parking",
+          "Valet parking"
+        ]
+      },
+      "menu": {
+        "overview": {
+          "menuPhotos": [
+            {
+              "url": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAExRrMMMXX_rRCg7MgOnqRu_fOP-nMfSblt8V5nFxwehFoyecrIvAsmSfL-dHYMxhQdptpY1hDp2jAvOOwl4-4fJAzYRHY80QOJmc_Rg0eBv8BfKnVi4HEDzqlzPUgma4mFH5EqPY3td4db=s1024-v1",
+              "postedAt": "2025-11-20"
+            },
+            {
+              "url": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAEmW3DJUB__EFYwFeIuLZDGFEN8qcjoKx9h2FloT6_1L_9ZNQcNjTS3vj7ffCJ_tzM_vxt1n8EmuFUW_ZxVU76lVbx6G9M0W2wi5O3UnDaus5DH86bnwXcu7UEbEwHJWHiY-nac=s1024-v1",
+              "postedAt": "2023-10-24"
+            },
+            {
+              "url": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAEXB4V94GsOgx6KZK542ZSAv4P4xdK10L8kyU1yGxlmOtgKC3mPXmx2hdlevm9WPm6XzMj-10Y4N4j4htLDPFoemGSJ3LBCRh0DTEwlRYHUHJ07NPt9ejQDYAm3VmJ3i1NGTAOEPQ=s1024-v1",
+              "postedAt": "2020-8-12"
+            },
+            {
+              "url": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAH5ogEF37VrRVUrjkGh1Q9Qz2pRFTgzfV5r7t8IBlEA_2-e9gm5PQl_2tW-Km-KMoWNKe_PqXDdsxPo4N4-zz3MaKP9eANbVybVm2KXrsMApbwwYTS6hvWl3xWR6KgRZYTYLetknA=s1024-v1",
+              "postedAt": "2022-10-24"
+            },
+            {
+              "url": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAGglEgUHsvRsqQeRmFPVGyaqbuU432teNbL4isr9U5xcEgTcUoyeZT5VhksUVw7q3BXhAH88qFt7NTpqUs0EV9gTtBzOnkxJpwHNw6zxhZ6GrLmW7hG0xyS1DWYUxI4d6Y7nrfH=s1024-v1",
+              "postedAt": "2022-10-24"
+            },
+            {
+              "url": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAG2Jf0q7Qe0SO7IPSqTU6ynf9wP_N-AtrxJ3CFpxc40Ed9wozln3qQdSb3hpna7Ovboo1LerPWSDSsPknG9c3WLYG5kMTCu0Q8d5PkKoATWO6f4tBegkuVxluEnKZbMABmQVhri=s1024-v1",
+              "postedAt": "2020-8-12"
+            },
+            {
+              "url": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAEf-VtyUh9wR-K0YS9nhajo2Z2OILhKqVl-5ppZx9XeFrY5cYlfzTOsqMp9smN6O35nzpNYi20MTOdyjiyjS1nL-iRXLVDaN4rteEF9bdALJGoZhLy4_LHq7K-vXTvRocKvRpG0=s1024-v1",
+              "postedAt": "2022-8-16"
+            },
+            {
+              "url": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAG83ppf3EwQ3Xs-KquS1gNs2ysYBX1LRab8tCkKwJlSmnJz2dnuf2mGFGfxYbUWo3c9rt35IhrEaGbawQzraIKC7ie4VCIs9CKf-D439YKUutAmGKGXUNkg6KPZF2U27lmuKJ7D=s1024-v1",
+              "postedAt": "2021-3-6"
+            },
+            {
+              "url": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAECPWW2o00gwXEzCFSMKhy_yQWr_SvOOIzQXoJC45S1M1KOZIRQrHRXcRKpz79sK3OBczQeorVX7H6LQM_K8fDUa1ykPSSer2EKU5Q-pbXjlUSvA70Zpu4Q37dDghVMMVvZOX4p=s1024-v1",
+              "postedAt": "2023-4-16"
+            },
+            {
+              "url": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAEel7en8dvcg5PD-fFO3__OzdBnkqWpcSCU7ujsjByJ4U_XJ5kVxslh755s6MriOja0_SZW0qdryukmo6YDRSGMaPXeKO2aG5aPQ1IVc4I1Ulp3btOAhUepo4W-a-IM_Ttajif_=s1024-v1",
+              "postedAt": "2023-10-24"
+            },
+            {
+              "url": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAFt33tNC4F4ZWF9_gEq5WPSYBxIDQ7-UauiyHicqv1b6smR6VeOYcQ7qR7VuogSaKe-gKZnX2ltneXx2GxoAlzzsBLQ2yIIIPw-rCQyYYODLvGm_gmqG6bMcKa13Iv-YsyV2D4=s1024-v1",
+              "postedAt": "2023-4-16"
+            },
+            {
+              "url": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAHmt4vO0BAVirGgWxVJ6FKeNDQLphsIahj_qwLKzBwWUnVgKkw57QsQtuMeeBQ_uSd-on-m2jRV5hJ4EX3zJihmySmgI1aNs0OTEtpTEB5YjkGipTZvsVrOvsdjGoXsJATCpf8=s1024-v1",
+              "postedAt": "2023-4-16"
+            },
+            {
+              "url": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAEmPq5hWuQKjV5S6BOrBHNC3Mbd9yBjIuvJb75iPj_QpNTMlJ5UKjPAihwKoFcP11Mcvdvqdw8h9JzjU7YWCIjUuiIHG_Jnp3cJ85Zg5ldknKcXP3_x3s_0glZH_7tFNbNdxbA=s1024-v1",
+              "postedAt": "2022-8-16"
+            },
+            {
+              "url": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAEiUt0ZaF8UY2XEcDtSeBPY9ipP88FyZ6wkQAEbx4BgJofQya6VnHXptWbWy9Wyp383SDgTVKoBcAJYnGsj5-dFOSf0eki9HtnSn1Q1eSRrArVSEAr26WH025LCg7L31nUfAfkO=s1024-v1",
+              "postedAt": "2022-10-24"
+            },
+            {
+              "url": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAHFCgPQjH2t8Kp4sM30As7J2_HHD21ucaFKT23Uz13zSymi2utGA_4lBnrB8UStTIFWqlu8aA1HpdWoX4ef0U12jC1UEeWdk3haoZFiSTb7mkWrXmOov14987tZgG_zs4XPiyZRkw=s1024-v1",
+              "postedAt": "2021-10-16"
+            },
+            {
+              "url": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAE-cOaijLIqtM8W4w4Mlk5o5fdm4CeBft3lE_BCiQy8zq3yM0HSmrxSYbLvJD7pNruGaI6gjgj9hGM0tlSIhOqb5TEEIjQ32Kj0ZMot49_ug2KaU4LX9fmGlmSnUaOvns45BDM=s1024-v1",
+              "postedAt": "2022-5-16"
+            },
+            {
+              "url": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAEamQJTiwZVOJESPsgkq6ZtGOfS3K-RVUfMBO7gy9_0sVkHGaQ47Ho_EEQ3vMkW1J2spY6eOP2F5r5TvpdpyjK3M3osXxkueH-c8NZN3WorzIkJQPaO-gsaZzbVjxc2ZjNi49Yl_g=s1024-v1",
+              "postedAt": "2023-10-24"
+            },
+            {
+              "url": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAHY53sVakjzx2Len0fxVO_qLXOB6EF8VZEciyjruHuZ3uCBn19cH-3h9sC-YEiE651waw8FRYSjLLKUW4rdZJyidCW0twwTrBAz4lZUE8k3LZ1lFYTchaqtHnbE-cVPpnD7Vb1t=s1024-v1",
+              "postedAt": "2023-4-16"
+            },
+            {
+              "url": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAGaODstMTEa02U69-aUYllzrFVl0w7axE9G8WBdE8LNBWcsQ9t9OgwtOJ26b9tT58ZZMXfuL7OzVbjsDv8F6Pv3XaBIrIKnCW9MkxrXHy-OsvoDNZczIJXTixgeZtzfAE3P_ON7mQ=s1024-v1",
+              "postedAt": "2023-4-16"
+            },
+            {
+              "url": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAGOx8FAYyphTW61ubyqz7RAiQqRf82i6fs8USB7cRdflZbVnsHm8CizQkhgqQHfNXVHbAe5LvUVOqpISMwT14EvakrModWXhQ2hWc--8lXKFapn-k5ibbuddnJ-8t3d8sPuADI=s1024-v1",
+              "postedAt": "2023-4-16"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "position": 14,
+      "title": "Mizaaj Restaurant",
+      "placeId": "ChIJp-50KVY_sz4RfoJZa5IwWa0",
+      "dataId": "0x3eb33f562974eea7:0xad5930926b59827e",
+      "kgmid": "/g/11w23ftlhg",
+      "thumbnail": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAFlYKJSjI0Xb-_HbsxbJwVlSh9B7AAV2y8jIoBegL_506aOCb5legxRNzyEGv4XzIvSTOnKflyERr45RusoUavQSw2qp1fYjstDHi70Ld4_A26NA-OAANJXslv0HHH4GEHA5GzevNFu30EJ=s1024-v1",
+      "phone": "+92 301 9025777",
+      "address": "Plot 6 A, Main Shahra-e-Faisal, Sindhi Muslim Cooperative Housing Society Block A Sindhi Muslim CHS (SMCHS), Karachi, Pakistan",
+      "website": "http://www.mizaajrestaurant.com/",
+      "workingHours": {
+        "timezone": "Asia/Karachi",
+        "days": [
+          {
+            "day": "Thursday",
+            "time": "6 PM–12 AM",
+            "date": "2026-6-18"
+          },
+          {
+            "day": "Friday",
+            "time": "6 PM–1 AM",
+            "date": "2026-6-19"
+          },
+          {
+            "day": "Saturday",
+            "time": "6 PM–1 AM",
+            "date": "2026-6-20"
+          },
+          {
+            "day": "Sunday",
+            "time": "6 PM–1 AM",
+            "date": "2026-6-21"
+          },
+          {
+            "day": "Monday",
+            "time": "6 PM–12 AM",
+            "date": "2026-6-22"
+          },
+          {
+            "day": "Tuesday",
+            "time": "6 PM–12 AM",
+            "date": "2026-6-23"
+          },
+          {
+            "day": "Wednesday",
+            "time": "6 PM–12 AM",
+            "date": "2026-6-24"
+          }
+        ]
+      },
+      "openState": "Closed · Opens 6 PM",
+      "rating": 4.6,
+      "reviews": 6172,
+      "type": "Restaurant",
+      "types": [
+        "Restaurant"
+      ],
+      "price": "Rs 2,000–8,000",
+      "priceDescription": "Rs 2,000 to Rs 8,000",
+      "gpsCoordinates": {
+        "latitude": 24.8600969,
+        "longitude": 67.0544738
+      },
+      "serviceOptions": [
+        "Outdoor seating",
+        "Onsite services",
+        "Takeout",
+        "Dine-in"
+      ],
+      "extensions": {
+        "serviceOptions": [
+          "Outdoor seating",
+          "Onsite services",
+          "Takeout",
+          "Dine-in"
+        ],
+        "highlights": [
+          "Great coffee",
+          "Great dessert",
+          "Great tea selection",
+          "Rooftop seating"
+        ],
+        "popularFor": [
+          "Dinner",
+          "Solo dining"
+        ],
+        "accessibility": [
+          "Wheelchair accessible entrance",
+          "Wheelchair accessible parking lot",
+          "Wheelchair accessible restroom",
+          "Wheelchair accessible seating"
+        ],
+        "offerings": [
+          "Coffee",
+          "Halal food",
+          "Happy hour food",
+          "Healthy options",
+          "Late-night food",
+          "Private dining room",
+          "Small plates",
+          "Vegan options",
+          "Vegetarian options"
+        ],
+        "diningOptions": [
+          "Dinner",
+          "Counter service",
+          "Dessert",
+          "Seating",
+          "Table service"
+        ],
+        "amenities": [
+          "Restroom",
+          "Wi-Fi"
+        ],
+        "atmosphere": [
+          "Casual",
+          "Cozy",
+          "Romantic",
+          "Trendy",
+          "Upscale"
+        ],
+        "crowd": [
+          "College students",
+          "Groups",
+          "Tourists"
+        ],
+        "planning": [
+          "Reservations required",
+          "Dinner reservations recommended",
+          "Accepts reservations",
+          "Usually a wait"
+        ],
+        "payments": [
+          "Credit cards",
+          "Debit cards",
+          "NFC mobile payments"
+        ],
+        "children": [
+          "Good for kids",
+          "Good for kids birthday",
+          "High chairs",
+          "Kids' menu"
+        ],
+        "parking": [
+          "Free parking lot",
+          "Free street parking",
+          "Valet parking"
+        ]
+      },
+      "menu": {
+        "overview": {
+          "menuPhotos": [
+            {
+              "url": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAHp8s8AIhLYvYsOSzUWeJYY8idNrYfGpnZ8_XjRjKiMmExk5Yipymqq20gX1s8OZ0Cht_97-66TxpAriVZKvkGx9OOwBJ-51bbILVwwhOdUuT3gFN6OB4KQB0Po2CIqZL7SAs0nRjGb3_k=s1024-v1",
+              "postedAt": "2026-3-29"
+            },
+            {
+              "url": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAGNzX1ltTVosIRQ5SHgdo9ct6OjJm0Y6h2aZg1uMtyAIVweU3Dz7o6X5ueqwz3um6-ZLsHM45qzOAZM5WJJczG1R7XMGmKytM81Sg_JdBytuwTR2jzHSb3NM4Xo0XvSifsxEFbOXW1uYjoD=s1024-v1",
+              "postedAt": "2026-3-29"
+            },
+            {
+              "url": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAFyDVdC--gnPk02Mj2vVTHdWYBBp1L5M-4tLDo2N_7304KT_DG3asbgvjnkCJAz1nPVLgo1ETRJZ2agOvTBOCjyWa0J80Qmcl_2sabWEMGH4fh6wpplU7yPr2EUQhBndrGqqsCEAmO0RFJJ=s1024-v1",
+              "postedAt": "2026-3-29"
+            },
+            {
+              "url": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAH-F7ShPy1qXpM4-U5ohY0VC1xCabQqInNqAXMaOrKFCktTeRwPB9-9M9eCLxaWfrzLv33wTvxd-qcbKcdZM_u01CVew9hilWdI7ONCP6Mo90ll1qaZciIh6oaVN3p2oygw8mqsU5g6uynb=s1024-v1",
+              "postedAt": "2026-3-29"
+            },
+            {
+              "url": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAGJxlijblIrtbUDhIvoXFIqojUv1J4ivFNvbtJmJ_Cbi4C8_4T3Myh7eC_EYXqsUGpiaJ54QL6QQKmNiUeo4AoavHRkzosWcmrNBduLlVbhXppZ0tQVXMvpGW2beOMYwgy9AkTE5z6vjmVx=s1024-v1",
+              "postedAt": "2026-3-29"
+            },
+            {
+              "url": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAGOVZLd7XmCSr5SUMLxx53RsXXjt77sab1ZiLz4cdSJcjArIgfG3AliejGmIZOGvVYySNhCNLDZUZnrPV1eFksJRoUCaH9TcL6XwAflYs0wVqpbOoMSLwl9h-gC6Gwys2qzxLjqXye2HvA=s1024-v1",
+              "postedAt": "2026-3-29"
+            },
+            {
+              "url": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAF1zRe_qs_cGnWdjPtM4SuT6259hgkBOoF9yvqT6IO5GFbKalZYT1D-XiEz3z1QJcPQ-gYVk6I-qA7m6YYJpCCZBm6kgq2_AGpgnazUISSyCCU-syBOIyJjlxcmIYtGgFGczvPiNh2dcgNi=s1024-v1",
+              "postedAt": "2026-3-29"
+            },
+            {
+              "url": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAHdCZ5KeQqeoO3Ubj4WiT6DpknjzyofHqDRnz77VbgRwNcnYkszUzmJXyMEGOyjLatht_OM-PCIXBQMPX-0HNf8GqHquyeqMCjyenw0B9cawFTRM0Iebw5AF8U_yPAU0HZr9UC3xqMQgI4f=s1024-v1",
+              "postedAt": "2026-3-29"
+            },
+            {
+              "url": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAETOxPVKnLAQv4Gdv_7yKpJf5abG7ITq0zcClxp7wfyY5Z4aX33fsGK_U25RH8FK9KBSPDf2gGva-_CvarzYzCJvh7ZWmsoK3esjHzdQTMW28gKfCAIWvJwHOr20MZdWuJbpTyFfi3enRQ=s1024-v1",
+              "postedAt": "2026-3-29"
+            },
+            {
+              "url": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAFvEAkfprvTBfBwcYWFTwJaDVMBYB67hjCozr0HpudobRlUG6FE3Efg-BRrmO2cp3fbVj7BJkPU7BzaOlS_n6f_NHT_s9-N9cgwWbc7huIeuyVl6sBDFWBxGGuCh9AqfRBfTRW8dvfrdxE=s1024-v1",
+              "postedAt": "2026-3-29"
+            },
+            {
+              "url": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAEcw7sFiCk9TmDrzGSLURgJQpXrgUkNlnOB9nRW6RKX8FkPZGGysT-NUQDqYQaLSSliz_kdW1EOhZ6RrYF-ERe-ZmoVpSY32gmDkJULZaiSlscb1Snk9T97TlQzk9LFLOrrIBVqHsI9pJIT=s1024-v1",
+              "postedAt": "2026-3-29"
+            },
+            {
+              "url": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAGxC50MPk-ZD1c1WXUVa-qen4dy00h6gTA7PdC2mlnSHjNe2qSD5tL4hrgJkH4pROKgN1RFZ9pheow7VOiJkfTKlKiUmD6i42acbEXh06LvdMZPngyDlE_Dl0tJ-Mez8HPZ3VFcKn5tEBc=s1024-v1",
+              "postedAt": "2026-3-29"
+            },
+            {
+              "url": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAGXBomad0T4z64mQj7gM_wuAI5imwVd_Yd_Ybl5oolMjyo2Dvw5BrdFujOCHNYpoGSXQvYgTNSdg5-jUHni7VhfZkHJ_VOwgaW6EpGg3buIcbYmsPIJlaFwi0UUmamzM398p_eUi0pcwNs=s1024-v1",
+              "postedAt": "2026-3-29"
+            },
+            {
+              "url": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAGi1iww7MtdZTZ7mUYMpVPDgiYrm8UwK9hcfx6ngJzMR0PyUbwMTryXDISP5OM6hpNIpBDYvUojXp1R79VZpag6g13g6QR6N023DJ4gboSaq0p59XTLtGc7bvdbHAnCPgEyfre0=s1024-v1",
+              "postedAt": "2025-4-16"
+            },
+            {
+              "url": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAFbdbvOjSchcnAbz-VZEOMmO7UnZkRBQffbctlcFtSCnORUOGhZwnXTmOWdWPeW3GzHCQqfFIl4hShVA-g8Dj6vS3tiR3pQME0O8smEM5EZXLB_bs4wSs2-tEwddb1_2N1x5OeFIA=s1024-v1",
+              "postedAt": "2025-4-16"
+            },
+            {
+              "url": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAE9g9bmwK-VxSDzxtkbGvl702hs-TpslLhhujiDnFj01LXfWwT3SpMfTVsMtlu1wGhVgfoLPfKTJBN_gKqOUA1KJSLGlvPT28i0BkVjYKhN6TlsMrxtALqLOcaXOotIIDYug44ipTzYS5sl=s1024-v1",
+              "postedAt": "2025-2-9"
+            },
+            {
+              "url": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAHdr3dGd5wjkZ9m6JPi4coUfnuPGYtnA3VfXc9rdFll8jTxmvARrkWJF5yh8Y3bZhZiMXclLDPJcQxEPB9yh8R11N3jzBlDPpevs6nGwUOnT5TtayB9TKhVx4xblidi1vpS01NFhF72VGXF=s1024-v1",
+              "postedAt": "2025-2-28"
+            },
+            {
+              "url": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAFYN3TyeJDbmp1B_tbvpOgqmXN8Eb70zVu5D7Z9xlNjmfPPweVDGQbtfPRMiWrO_df7ijR87qXZOm31oVkXnQr32t4je1fe9Py9dtGFdjjb21QlhMVYWO2tdE4Kj1J77TjuOs18e_Ii9Y5g=s1024-v1",
+              "postedAt": "2025-2-28"
+            },
+            {
+              "url": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAFgNPGNyUzcIcTPCxRkn3JjzAhvDO2vyISNavNgn5BHD_MFA1FBkuLxOIry5ioA8B6Zz7siTJrey9Bia3yPlJrJpeJXU0ft1Nwt9uJVApse_0BEowasiEFKsTQYQ0YzwlyYgH_UqXCnxklm=s1024-v1",
+              "postedAt": "2025-7-27"
+            },
+            {
+              "url": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAFw6qwYCetuSTqhQZ1uy5VM6h7Gs2lyzpwSybuIWsran6EPPz6zp5UUN3no-FJYLbPZ13yx9GpwbDBvv9UcGaaQ7bgBbydS52Y6TsNdtopO1b8CThbidcJO22ANBr2gdZuh8EJ6WT9eeS0=s1024-v1",
+              "postedAt": "2025-2-28"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "position": 15,
+      "title": "Bella Vita - Tipu Sultan",
+      "placeId": "ChIJvWgwrPc8sz4RZuYF4GvAYt0",
+      "dataId": "0x3eb33cf7ac3068bd:0xdd62c06be005e666",
+      "kgmid": "/g/11df6682yd",
+      "thumbnail": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAHa1zTj0q_ALdr87iPPo-1cBjhUA5u9ekIsOwftiqVesLuPVvFGj0IP6xLVjML_3R0L9arVx--ImAifdee2fnDT_EOhsyWBYUuAK1o-uyqzmhZWBd7_IsCw3ZQXLQCF0SpSRSgRHA=s1024-v1",
+      "phone": "+92 21 111 435 286",
+      "address": "1A Tipu Sultan Rd, Karachi Memon Co-operative Housing Society Jinnah Housing Society P.E.C.H.S., Karachi, Pakistan",
+      "website": "http://bellavita.com.pk/",
+      "workingHours": {
+        "timezone": "Asia/Karachi",
+        "days": [
+          {
+            "day": "Thursday",
+            "time": "8 AM–12 AM",
+            "date": "2026-6-18"
+          },
+          {
+            "day": "Friday",
+            "time": "8 AM–12 AM",
+            "date": "2026-6-19"
+          },
+          {
+            "day": "Saturday",
+            "time": "8 AM–12 AM",
+            "date": "2026-6-20"
+          },
+          {
+            "day": "Sunday",
+            "time": "8 AM–12 AM",
+            "date": "2026-6-21"
+          },
+          {
+            "day": "Monday",
+            "time": "8 AM–12 AM",
+            "date": "2026-6-22"
+          },
+          {
+            "day": "Tuesday",
+            "time": "8 AM–12 AM",
+            "date": "2026-6-23"
+          },
+          {
+            "day": "Wednesday",
+            "time": "8 AM–12 AM",
+            "date": "2026-6-24"
+          }
+        ]
+      },
+      "openState": "Open · Closes 12 AM",
+      "rating": 4,
+      "reviews": 2870,
+      "type": "Restaurant",
+      "types": [
+        "Restaurant"
+      ],
+      "price": "Rs 2,000–3,000",
+      "priceDescription": "Rs 2,000 to Rs 3,000",
+      "gpsCoordinates": {
+        "latitude": 24.866111,
+        "longitude": 67.0778193
+      },
+      "serviceOptions": [
+        "Delivery",
+        "Takeout",
+        "Dine-in"
+      ],
+      "extensions": {
+        "serviceOptions": [
+          "Delivery",
+          "Takeout",
+          "Dine-in"
+        ],
+        "highlights": [
+          "Great coffee",
+          "Great dessert",
+          "Great tea selection"
+        ],
+        "popularFor": [
+          "Breakfast",
+          "Lunch",
+          "Dinner",
+          "Solo dining"
+        ],
+        "accessibility": [
+          "Wheelchair accessible restroom",
+          "Wheelchair accessible seating"
+        ],
+        "offerings": [
+          "Coffee",
+          "Halal food",
+          "Healthy options",
+          "Late-night food",
+          "Quick bite",
+          "Small plates"
+        ],
+        "diningOptions": [
+          "Breakfast",
+          "Brunch",
+          "Lunch",
+          "Dinner",
+          "Dessert",
+          "Seating",
+          "Table service"
+        ],
+        "amenities": [
+          "Restroom"
+        ],
+        "atmosphere": [
+          "Casual",
+          "Cozy",
+          "Romantic",
+          "Trendy",
+          "Upscale"
+        ],
+        "crowd": [
+          "College students",
+          "Groups",
+          "Tourists"
+        ],
+        "planning": [
+          "Brunch reservations recommended",
+          "Lunch reservations recommended",
+          "Accepts reservations"
+        ],
+        "payments": [
+          "Credit cards",
+          "Debit cards"
+        ],
+        "children": [
+          "Good for kids",
+          "High chairs",
+          "Kids' menu"
+        ],
+        "parking": [
+          "Free parking lot",
+          "Free street parking",
+          "Paid parking lot",
+          "Valet parking"
+        ]
+      },
+      "menu": {
+        "overview": {
+          "menuPhotos": [
+            {
+              "url": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAGz-mHH2Usj2PuiNoM0xr0G6kpAg51ckIIKGQifuk9VVDnIcBIUdgXILG6bV2udXDHXXtbc-hydJB0JpZS7ziAc1erPcaNCOJlNb0lEAzxgaoT3z_3a_AIwgE-O3BRyOu8Dqi73NuVtwXc1=s1024-v1",
+              "postedAt": "2025-11-22"
+            },
+            {
+              "url": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAHT1PsTBN-KuE0rNtpEuThHtAGkAXw0yytahL-iIcFQGr8WFAw_1n5nSBphEdAITXvv8jRZZ6J6LCR1KHa-Mb8QgumHhuGbFAp5Q3jEA8L5sBKHAtogbXMv7gYQm5W5JXgxQAoAU0cu5Pw=s1024-v1",
+              "postedAt": "2025-11-22"
+            },
+            {
+              "url": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAGDBQ5kxTO1z_PW5ce6Zg3E9kSuO0apXSPn9GYRVpTV4EjFUVEBkaHfTuCUgVMUJRBOnXCBqkgLZmx6NTELRyH5nJN2rSq24DOTdTfEnAx76IbpQ0Xafeiu4eQDaj0aBcw4reAWZLU5OJeV=s1024-v1",
+              "postedAt": "2025-11-22"
+            },
+            {
+              "url": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAHyKmrqHX3y9AYHO6b9du5i1ZeGus65gfvq2plrSDh0v8tTermDuD-zI2lFAyeKXPURpRDpv--bQu_7sWJmcshGgmdhaQpYP9wgsq8vlisYomdEJJnpEfQuYsBdrEqWy62p7dWTOnrhYofI=s1024-v1",
+              "postedAt": "2025-12-1"
+            },
+            {
+              "url": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAHYYV6s2ZRir7X8yqB4yd7Mw-H2SA8jOqGzd2NgjreGwhts7urwwyQgp1fsms0hwt29-qH-A00l5W8L4Naj6zzGV-WJpDUZ_wvuEykEP2hA8xbFnPgVqMTalrXauaDEHWxfaABSjjIiD6Y=s1024-v1",
+              "postedAt": "2025-11-22"
+            },
+            {
+              "url": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAH1rqYUuwTVuKdGaOo31lAo7zEB87b1WGsSBQtni-rnCCW3Z0XNIeiuMh-mzwLhzpYaKVWLCczRSMIFJRFZh_dhvCEQnBDkTWFqTZgPWkHfu1IqN5FDePkJ5S77eC6Z2yuIWPL3j2rIZB8S=s1024-v1",
+              "postedAt": "2025-11-22"
+            },
+            {
+              "url": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAGu_XgNmY3--QsGqPX5_S08t-eUJXMlXZd9775tnj-jIkeCtWYDHE3LOdz9RwzkTcO1K8dsOawwWZQmkPxIKuYs3Y13FFYuXn6aSKA1l-6cPcdE9GiRbJXmPBu5taQQXresunnT=s1024-v1",
+              "postedAt": "2025-3-15"
+            },
+            {
+              "url": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAFdiyZdnq4kna3uRJyWt-cdyj-1UJGO8qIQnwdnxouqWyhxY_LLyekFva3qVuQW1_v62fR2LuGcs0-dNBy1M_YpQU3AKI8sM-jnvDXHSWkLgFYziXKeGww8ev-QiWmALMwWw_sjszeKlMq-=s1024-v1",
+              "postedAt": "2026-3-22"
+            },
+            {
+              "url": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAH05wXwlL7IaVe8ch1K5LyyU0-k2G6RfLS8f5f61Vh7rcarhly4D1gE4XUhoZi5cXRpmKD7lCiFc6DG06hJXPb0u3dQRjDuKKF8nwne9V0eBzUNYC2B9qqEpO_wvXVsYERrp6ucaV78jWEH=s1024-v1",
+              "postedAt": "2026-3-22"
+            },
+            {
+              "url": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAFt_s5cMuHxrszLpPX865Bj2nGSjtZxzqoqD1c9a5stQbYb1rGgHZsSc4C7Iq27AbVVrMO6IeXOPuTlVXCnwKAutv3O_HSyy5thViyGxtzYlB4MpmclmvH_OnE6_zIk8br2WaP0=s1024-v1",
+              "postedAt": "2025-3-15"
+            },
+            {
+              "url": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAEZATy4lXhJR9kK2_y87yL2C5qvSAcT74KKV_Z389uu3SobSfq2_Vwp7Ho-RnPo9_4KJa8ZwzJDptLCze_3miHdC-DQLKVsR1CgXyniiP8Eu8idp80TFpHkR0ZWTOt1agHiE0xGfBDpz6a8=s1024-v1",
+              "postedAt": "2026-3-22"
+            },
+            {
+              "url": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAFTpBt9VN9O5J2P0UQeKahO0b3XPu5d6sPY-b9KdybT2NnUNgagJSrT4yGogrcaVq86N4-t_eiulVytT5YQJ5abfq2teUHkK6vbXanhv63RQK_-jEc_dElZz0zrQRbvidVuv40P17m6GTDz=s1024-v1",
+              "postedAt": "2026-3-22"
+            },
+            {
+              "url": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAF8H7x_zUvtq2c-CadOo60_MFtfIaYq5qDv87EIcZxn2ppFusu65kO8Sas7lm5FURsicF7Y5woQoHV9FAFZnpdQ-uk5-2gCE7DWXYhvXkB_h_Ml6AhXpVOB60AfKf_4euHSQj4sniH_Yio=s1024-v1",
+              "postedAt": "2026-3-22"
+            },
+            {
+              "url": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAHMLM1YeALV4MESinpm09xy3gupREzcz7qZRSjWxv7akFgjaeht3a6wb-dS9rDKRdBCW5nAjCsDcQdfNmUcaXhtetgV3wQ1MgRY6aZ7cZ5wh-U0rx6N6EynOzQ2F_hm-xQoVXHynSy46x1v=s1024-v1",
+              "postedAt": "2026-3-22"
+            },
+            {
+              "url": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAEX0WEpW0SfkFFamvshVgN5VHo6EL7hzKwFfbQP-SnYDotHTscqcJm3MV9jLVLCzAxt_E8Gf_4VuShJdiaNOh-iNpQaB8wuvb3_cMRojioMJ7k76dD05hI4Ogbdopf4f1LJWIw=s1024-v1",
+              "postedAt": "2023-1-1"
+            },
+            {
+              "url": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAFiWFsC9mAB-XuHZRKNBbNAcMGeHNq-lZedgrghSeNIqPNWeZNQUTIFePFLs8MrFS7JEuYY8OUDW9hTlkavXoIL9WONTf83DHGneq83go2PajDZBp3tW71z_YvtCTR339te0vqd=s1024-v1",
+              "postedAt": "2023-10-13"
+            },
+            {
+              "url": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAGTpF7UMaujqaIJ4dJWVvbX0YM44FFCLBM2FarI83hl4Gwlun7f_a_1GxjhMOFk8FgGGN0ZOamPWeoQn2q05kd14WjMN_sbF0FqiGad-2NjiSa9ro36IFENFnF3Vbb64PcoEz9QEw=s1024-v1",
+              "postedAt": "2023-10-13"
+            },
+            {
+              "url": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAGR5vfQwRIqjgDTJvAojwsWKfJCaf-IhgaDPol1y9SmJs5rLLd4UeCC4pAqe1zmOQLaIYJye5O9sDQkX-uWElf2jT8MJdjZFWHm8rx35Ls47u1NZMuPMVjBfgBLqzLN44vwGWKV9g=s1024-v1",
+              "postedAt": "2023-9-23"
+            },
+            {
+              "url": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAEyoCg-N0BzF2i_aFCTUHDLWOgfnq5XBZ07qTA9uEeG4S2ZmBYLxtQ_JwUlaFlVBBmyHl4cce6oWqtol6OfFz-uXGZhGK6pgC6z_RuttUOyF37NTC_qss49ynBIbdhEdNE-PJ8S1yr2G3fn=s1024-v1",
+              "postedAt": "2026-3-22"
+            },
+            {
+              "url": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAGFefpeFBkB6OZPuPEM9s2JjSykuCInAeQzi7oeNLrCSo36s77Ra4KhZwgbizAe2qTa6gXfn6JXhzvRyJR4lRkC-dr6__K995vP29GUDCT2rMmKcxWrg3k-Hq2fgB4l00G_hbOLCA=s1024-v1",
+              "postedAt": "2023-10-13"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "position": 16,
+      "title": "LEVEL2 by Espresso",
+      "placeId": "ChIJKTLI3-Y_sz4RO9YEHnTwftg",
+      "dataId": "0x3eb33fe6dfc83229:0xd87ef0741e04d63b",
+      "kgmid": "/g/11ss7mbd63",
+      "thumbnail": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAE0EVlpdfkbbdyRGl8Ad0PH8-k8bkuNNxlaPEQrCri9-mJFudt5RYR6a7P63JuBfoixyULXS-l9KQeJTPE6FQMiVMIOQL2vCEKciYSP9Q45f60z4xW1IhtsUW_a1EeY9KlIMrcsJA=s1024-v1",
+      "phone": "+92 348 2099235",
+      "address": "93 Tipu Sultan Rd, Karachi Memon Co-operative Housing Society Karachi Memon Society P.E.C.H.S., Karachi, Pakistan",
+      "website": "https://www.espressocoffeehouses.com/level2",
+      "workingHours": {
+        "timezone": "Asia/Karachi",
+        "days": [
+          {
+            "day": "Thursday",
+            "time": "12 PM–1 AM",
+            "date": "2026-6-18"
+          },
+          {
+            "day": "Friday",
+            "time": "12 PM–2 AM",
+            "date": "2026-6-19"
+          },
+          {
+            "day": "Saturday",
+            "time": "12 PM–2 AM",
+            "date": "2026-6-20"
+          },
+          {
+            "day": "Sunday",
+            "time": "12 PM–1 AM",
+            "date": "2026-6-21"
+          },
+          {
+            "day": "Monday",
+            "time": "12 PM–1 AM",
+            "date": "2026-6-22"
+          },
+          {
+            "day": "Tuesday",
+            "time": "12 PM–1 AM",
+            "date": "2026-6-23"
+          },
+          {
+            "day": "Wednesday",
+            "time": "12 PM–1 AM",
+            "date": "2026-6-24"
+          }
+        ]
+      },
+      "openState": "Open · Closes 1 AM",
+      "rating": 4.7,
+      "reviews": 385,
+      "type": "Western restaurant",
+      "types": [
+        "Western restaurant"
+      ],
+      "price": "Rs 1,000–5,000",
+      "priceDescription": "Rs 1,000 to Rs 5,000",
+      "gpsCoordinates": {
+        "latitude": 24.867736299999997,
+        "longitude": 67.0775621
+      },
+      "serviceOptions": [
+        "Takeout",
+        "Dine-in"
+      ],
+      "extensions": {
+        "serviceOptions": [
+          "Takeout",
+          "Dine-in"
+        ],
+        "highlights": [
+          "Great coffee",
+          "Great dessert",
+          "Great tea selection",
+          "Rooftop seating"
+        ],
+        "popularFor": [
+          "Solo dining"
+        ],
+        "offerings": [
+          "Coffee",
+          "Quick bite",
+          "Small plates"
+        ],
+        "diningOptions": [
+          "Dinner",
+          "Dessert",
+          "Table service"
+        ],
+        "amenities": [
+          "Restroom"
+        ],
+        "atmosphere": [
+          "Casual",
+          "Cozy",
+          "Trendy"
+        ],
+        "crowd": [
+          "College students",
+          "Groups"
+        ],
+        "planning": [
+          "Accepts reservations"
+        ],
+        "payments": [
+          "Credit cards",
+          "Debit cards",
+          "NFC mobile payments"
+        ],
+        "children": [
+          "Good for kids"
+        ],
+        "parking": [
+          "Valet parking"
+        ]
+      },
+      "menu": {
+        "overview": {
+          "menuPhotos": [
+            {
+              "url": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAEB-HzUN7CAseKFJT15Eh1DafnFOlXW7EV_hijkb_4PuyJcKV4Sx72D1xzlnuaSuBZ_xGqI1hm7xt-SY0Yw98lqB-NGqf5nAfM8LOaJMQ_fr6wrO06Q1fIT0XWlnzh4Cph_KNMv9w=s1024-v1",
+              "postedAt": "2024-1-11"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "position": 17,
+      "title": "Nando's SMCHS",
+      "placeId": "ChIJBdOCqYU-sz4RQz1wyXuquHM",
+      "dataId": "0x3eb33e85a982d305:0x73b8aa7bc9703d43",
+      "kgmid": "/g/1tcvmrlk",
+      "thumbnail": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAHijb-4bv_PKa1fUwHmFiaBcbzc5iGCxb_4lqZfO7smUysec49OPHWbjgSMC45NRrbmEsliX_WdYk6k7ytq2sz3V_ROfaxQf3PUTFwNIoHQsboOYbhkSkBmgNmfQGgUZlZsrpZo=s1024-v1",
+      "phone": "+92 21 111 626 367",
+      "address": "Block D, Sub, Plot 8, Ghulam Ali Memon Rd, Block A Sindhi Muslim CHS (SMCHS), Karachi, 72500, Pakistan",
+      "website": "http://www.nandos.pk/",
+      "description": "Spicy Afro-Portuguese chicken chain. Afro-Portuguese chain restaurant serving flame-grilled chicken in spicy chilli sauce.",
+      "workingHours": {
+        "timezone": "Asia/Karachi",
+        "days": [
+          {
+            "day": "Thursday",
+            "time": "12 PM–1 AM",
+            "date": "2026-6-18"
+          },
+          {
+            "day": "Friday",
+            "time": "12 PM–2 AM",
+            "date": "2026-6-19"
+          },
+          {
+            "day": "Saturday",
+            "time": "12 PM–2 AM",
+            "date": "2026-6-20"
+          },
+          {
+            "day": "Sunday",
+            "time": "12 PM–1 AM",
+            "date": "2026-6-21"
+          },
+          {
+            "day": "Monday",
+            "time": "12 PM–1 AM",
+            "date": "2026-6-22"
+          },
+          {
+            "day": "Tuesday",
+            "time": "12 PM–1 AM",
+            "date": "2026-6-23"
+          },
+          {
+            "day": "Wednesday",
+            "time": "12 PM–1 AM",
+            "date": "2026-6-24"
+          }
+        ]
+      },
+      "openState": "Open · Closes 1 AM",
+      "rating": 4.2,
+      "reviews": 6129,
+      "type": "Restaurant",
+      "types": [
+        "Restaurant"
+      ],
+      "price": "Rs 1,000–6,000",
+      "priceDescription": "Rs 1,000 to Rs 6,000",
+      "gpsCoordinates": {
+        "latitude": 24.8625848,
+        "longitude": 67.0551949
+      },
+      "serviceOptions": [
+        "Onsite services",
+        "Takeout",
+        "Dine-in"
+      ],
+      "extensions": {
+        "serviceOptions": [
+          "Onsite services",
+          "Takeout",
+          "Dine-in"
+        ],
+        "highlights": [
+          "Great dessert"
+        ],
+        "popularFor": [
+          "Lunch",
+          "Dinner",
+          "Solo dining"
+        ],
+        "accessibility": [
+          "Wheelchair accessible restroom",
+          "Wheelchair accessible seating"
+        ],
+        "offerings": [
+          "Coffee",
+          "Halal food",
+          "Healthy options",
+          "Late-night food",
+          "Organic dishes",
+          "Quick bite",
+          "Small plates",
+          "Vegetarian options"
+        ],
+        "diningOptions": [
+          "Lunch",
+          "Dinner",
+          "Dessert",
+          "Seating",
+          "Table service"
+        ],
+        "amenities": [
+          "Restroom",
+          "Wi-Fi"
+        ],
+        "atmosphere": [
+          "Casual",
+          "Cozy",
+          "Trendy",
+          "Upscale"
+        ],
+        "crowd": [
+          "College students",
+          "Family-friendly",
+          "Groups",
+          "Tourists"
+        ],
+        "planning": [
+          "Lunch reservations recommended",
+          "Dinner reservations recommended",
+          "Accepts reservations"
+        ],
+        "payments": [
+          "Credit cards",
+          "Debit cards",
+          "NFC mobile payments"
+        ],
+        "children": [
+          "Good for kids",
+          "High chairs",
+          "Kids' menu"
+        ],
+        "parking": [
+          "Free parking lot",
+          "Free street parking",
+          "Paid parking lot",
+          "Paid street parking"
+        ]
+      },
+      "menu": {
+        "overview": {
+          "menuPhotos": [
+            {
+              "url": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAGryt5WRherZXcWcQIR3WnxpLKG1WYgab58gzQ7zjCZ0snoiOlOKCSDBmn1eNck0zwccpFBYCq8CjCOOiN6HMkwABt7DDNVMR1NuozBlBiqTagnWAcJQJnAtp3ulO8lrn3bR6vszw=s1024-v1",
+              "postedAt": "2025-5-1"
+            },
+            {
+              "url": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAFpvzWypgwlynp6CpUoECeiM9k3STP5iw_nl4TXLwVm7JJlI6Xtv7ulMWCnljHZi5lytb_DW1uWT-5QU4yYIdh8TfsOIOwBhB3ErG4gDjMG-1YMvExIkeRvHvZaaJkGHfXKhEU=s1024-v1",
+              "postedAt": "2024-6-18"
+            },
+            {
+              "url": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAE9TEL_lRm4iMjpDCJs-PgaGcJ0vsSp0CDn2-GkdtlL0tww-8qSjgdMfTr1SGyQ15mC45ZIRKwGhyQT-BdUj1rZSmMU9dvKt2355v7r5VVF1BvFuQYGfYmf0j8Y0d0O_171bHCZUFniErCn=s1024-v1",
+              "postedAt": "2025-5-25"
+            },
+            {
+              "url": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAFSrYokiOGbic13E0gXp46GYjgEJpCDjjl_y22Oe1k-Beju7LDTpzlJkbFy4-mFShAaP5dLegZgyyO9uJ6zdC2vXgfJIXuSxLfxiLEY6Lqfp2ZBnwdFjv469BunnQRGoOaDezb-=s1024-v1",
+              "postedAt": "2025-5-1"
+            },
+            {
+              "url": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAHQd650ipuDdQHduFV_4pEA97ZGltFuObwu1J5sR-MIHp0xgdo8gGfTMJv3D2ouXX-pU1fmdLBb_2JE_Kj5KQkYFXV1B1W4ArgCaPx7qLjTU4_X8MKz7bFpRxz66mimNrAvbKwBgpAljO1c=s1024-v1",
+              "postedAt": "2025-5-25"
+            },
+            {
+              "url": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAFpBS4NwdNGPd_1L_aFC3sd_5td3hOXhZtvVgmx3hzuD1Pdrtzz88bSPjs9K23NgUvLH7KmZp2Y6uQXJmnmClxTNx9UuI6dmkGdfhFVcwA-WgD4BWmZZd2ckjqWxpfu0C78s0gSPVVcptEt=s1024-v1",
+              "postedAt": "2025-5-25"
+            },
+            {
+              "url": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAHR-sc2GY2NKTteUPhuohuHfRcpEBZ5OIFHuJb82ADdEpOpbbDvX0G6rlvwccjoTVw2tEXU537nO_laYWNUgcT_XY02Vg093NGw6efKoqgmBZm39jYHSlqgkSZB8S4NYmJqOxdg=s1024-v1",
+              "postedAt": "2021-10-7"
+            },
+            {
+              "url": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAHthq8ipxGeD0yNQPDaqOPV7VUUoOYJxc0I-mkDF1P127bNvBJh13aDeLFSqK0kJD0p5lMYevEtIP0fi6BXOIOZ9jBVnXgo0BC2uEITUPA3B8tgN348AFD2noEJbfTgSujF5R0GLd59J-Ym=s1024-v1",
+              "postedAt": "2025-7-31"
+            },
+            {
+              "url": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAE53RRSZL-D4KWDwK8YeOMKNDfB_uSc8Rt7HE82kihGvQJK4tg4uQeFnH2xLfyenURIFs7Ryv7ct8GftSNFlX9gvEtorbGx39p5tTB5epzDY_bI_9pLHIjUtSZcdS-dLL48u1yZNQ=s1024-v1",
+              "postedAt": "2023-9-22"
+            },
+            {
+              "url": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAEhu9JSEYrXIAyPu1idFtgHT9FfnWZu6bIhxJ6E9TN9553a3MYd8eUyuFFw7PR9OwLX_vMXeHh7gAgaQlR0wES5U7xIZ5PcOPeESQz1EjpFlSIu1vCwwpusAt8xpnyOUlLflHq-3-xuO1OD=s1024-v1",
+              "postedAt": "2025-5-25"
+            },
+            {
+              "url": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAE-XqRfYnALx0Zc1tFU3Xba6g9xgxefbpeGGS7NIiAWrjYsevlSPUgcRUrwkR-S3Ao2mw8fttVbNtA59vCptxRLzg6EdCHx_t2uofv-OrC3cyITTVqTy--93iSkUDsqNr5thh5Op3OSrsal=s1024-v1",
+              "postedAt": "2025-10-25"
+            },
+            {
+              "url": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAEuVDSthtQm_GrLw9etjLsur5RbFYTddoHaRRLFMQN9vJBwqboeyc5lmYFv42jHJ1zr1zN8dbZNlw8D69zl8WDz8KDkabLvNBrOxUI5E4F96LMU2XwqMdbApzttQgmfQ_sNK00=s1024-v1",
+              "postedAt": "2023-10-14"
+            },
+            {
+              "url": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAHh--ZHqt1AxDN7WMMbLymsjbKjX0z9n27-QLQrsnLWSblm6NNbdIK4pcUXIvcS9FI6nQMDCymuHm3dib0bTpH7Vtmnjy2Y7otg_HWOmbauySID595OO_rdunf8SKe-7m3er1k=s1024-v1",
+              "postedAt": "2022-10-11"
+            },
+            {
+              "url": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAEPaSigKtMEfdF-GEpYd77yGyAMhZtWqmbxxi8scgWqLIFYcz_ILREjSOXVX_MXRj853GV7eQnd395TxKZ9Km7K-xwqaz4V0S8xrv9NnwbjoA0kGZ0RATVqQ8tnI2IH01XyVxvrZ1-UgWjV=s1024-v1",
+              "postedAt": "2025-5-25"
+            },
+            {
+              "url": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAGb8eSdDv80Nczh7rkdVemUuvpWviNDRIt4L6KsohnRFnKYqnRI0TwEuZn-aDx5i3ry7c0u5q8xUdWc5xNXgvoZc6YqQRvMBwA5P4HF1Tjzr0JpdQ-vt_EYa1Xrc_-Vh5PuVUo=s1024-v1",
+              "postedAt": "2021-10-7"
+            },
+            {
+              "url": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAHlvgTE5zLrqo4qOyqWJX82BEUnBn64azyNzbZP7MGrFPf1Z-YlNPN0ZmteuoH35YEDkXeWvcVgVwK3mqVbYBM_MMVW-mCXZHIuiDh_Oud49LuO6AMIzc2c8plkR6m6KL73HSXvH4F_8j_F=s1024-v1",
+              "postedAt": "2025-5-25"
+            },
+            {
+              "url": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAGOMEL7tPjQKVmhaCtjA-y3JakNwZR6SHXKOL0Ae1IZpVOnFi3e6uF3hEmZ8qnITQtACA23R_5zCLWSI-mw0hifulpk9k7m88WjaqlNuVAEPwP9sMOeso2NK2whg6zRsm-W9ksd=s1024-v1",
+              "postedAt": "2022-10-30"
+            },
+            {
+              "url": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAFHWkzHJpjXCeYJqnvBkQ1Mo4fs1wHhinEv2ihaH2nt78XPSWQx33v7uqbiIycsScDsrafVNPSxG5fyFlDO5RbtCInAS7N1nPWZPRcd7IY9VFbpfWOxjqaBwnWgIKSERVWeUhvttw=s1024-v1",
+              "postedAt": "2023-9-22"
+            },
+            {
+              "url": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAFdpqCyN1XcwpzPtnXfE7BfljCPbkrsPCpxy68wSDgUXA1-N0-ClHFnvpAyETTb6P1ca6uOfc_AvLy8XqLHYWA3DS7gnk0wZlOi5j3gKV8sXP7A0sF5TG3qbE-yUMhbh-uLIFOe=s1024-v1",
+              "postedAt": "2020-1-30"
+            },
+            {
+              "url": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAFM8rUu7KvJZhaye3Zy2-jhvEpvfRA0oi09TzjVODx9frGkHJViah_3F4BJ0jbm-LoDo6DUVikgHRYa4uGAqZs3ZBBCIWGITZe32TpoiOjI6uDb8Q9GiIBBdECekRwOl0h1n1xP=s1024-v1",
+              "postedAt": "2020-1-30"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "position": 18,
+      "title": "Ghalib Restaurant Karachi",
+      "placeId": "ChIJk_wHXRo_sz4Rd9MSaWGi_1M",
+      "dataId": "0x3eb33f1a5d07fc93:0x53ffa2616912d377",
+      "kgmid": "/g/11rtlryzj2",
+      "thumbnail": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAHP-pQsd_LuzTALI2KXgUULU6jhdGRAqvMgcHYNpQ3uGNZ45BvdeX__VWYtCCl60zzlPJ3y5g2bMWLTpS_Z8Yf3jqCuUTyAcf6PF0xzkexLXX8ESihUKE2VP-naYkCl9EbWH9-jFQ=s1024-v1",
+      "phone": "+92 21 111 442 542",
+      "address": "Shahrah-e-Faisal Service Rd N, Karachi Memon Co-operative Housing Society Karachi Memon Society P.E.C.H.S., Karachi, Pakistan",
+      "website": "http://www.ghalib.com.pk/",
+      "workingHours": {
+        "timezone": "Asia/Karachi",
+        "days": [
+          {
+            "day": "Thursday",
+            "time": "12 PM–12 AM",
+            "date": "2026-6-18"
+          },
+          {
+            "day": "Friday",
+            "time": "12 PM–1 AM",
+            "date": "2026-6-19"
+          },
+          {
+            "day": "Saturday",
+            "time": "12 PM–1 AM",
+            "date": "2026-6-20"
+          },
+          {
+            "day": "Sunday",
+            "time": "12 PM–1 AM",
+            "date": "2026-6-21"
+          },
+          {
+            "day": "Monday",
+            "time": "12 PM–12 AM",
+            "date": "2026-6-22"
+          },
+          {
+            "day": "Tuesday",
+            "time": "12 PM–12 AM",
+            "date": "2026-6-23"
+          },
+          {
+            "day": "Wednesday",
+            "time": "12 PM–12 AM",
+            "date": "2026-6-24"
+          }
+        ]
+      },
+      "openState": "Open · Closes 12 AM",
+      "rating": 3.9,
+      "reviews": 3703,
+      "type": "Restaurant",
+      "types": [
+        "Restaurant"
+      ],
+      "price": "$$$",
+      "priceDescription": "Expensive",
+      "gpsCoordinates": {
+        "latitude": 24.8655992,
+        "longitude": 67.0770678
+      },
+      "serviceOptions": [
+        "Outdoor seating",
+        "No-contact delivery",
+        "Delivery",
+        "Onsite services",
+        "Takeout",
+        "Dine-in"
+      ],
+      "extensions": {
+        "serviceOptions": [
+          "Outdoor seating",
+          "No-contact delivery",
+          "Delivery",
+          "Onsite services",
+          "Takeout",
+          "Dine-in"
+        ],
+        "highlights": [
+          "Great coffee",
+          "Great dessert",
+          "Great tea selection",
+          "Rooftop seating"
+        ],
+        "popularFor": [
+          "Breakfast",
+          "Lunch",
+          "Dinner",
+          "Solo dining"
+        ],
+        "accessibility": [
+          "Wheelchair accessible entrance",
+          "Wheelchair accessible parking lot",
+          "Wheelchair accessible restroom",
+          "Wheelchair accessible seating"
+        ],
+        "offerings": [
+          "Coffee",
+          "Halal food",
+          "Happy hour food",
+          "Late-night food",
+          "Private dining room",
+          "Quick bite",
+          "Small plates",
+          "Vegan options",
+          "Vegetarian options"
+        ],
+        "diningOptions": [
+          "Breakfast",
+          "Brunch",
+          "Lunch",
+          "Dinner",
+          "Counter service",
+          "Dessert",
+          "Seating",
+          "Table service"
+        ],
+        "amenities": [
+          "Gender-neutral restroom",
+          "Restroom",
+          "Wi-Fi"
+        ],
+        "atmosphere": [
+          "Casual",
+          "Cozy",
+          "Quiet",
+          "Romantic",
+          "Trendy",
+          "Upscale"
+        ],
+        "crowd": [
+          "College students",
+          "Family-friendly",
+          "Groups",
+          "Tourists"
+        ],
+        "planning": [
+          "Brunch reservations recommended",
+          "Lunch reservations recommended",
+          "Reservations required",
+          "Dinner reservations recommended",
+          "Accepts reservations",
+          "Usually a wait"
+        ],
+        "payments": [
+          "Credit cards",
+          "Debit cards",
+          "NFC mobile payments"
+        ],
+        "children": [
+          "Good for kids",
+          "Good for kids birthday",
+          "High chairs",
+          "Kids' menu"
+        ],
+        "parking": [
+          "Free street parking",
+          "Paid parking lot",
+          "Paid street parking",
+          "Valet parking"
+        ]
+      },
+      "menu": {
+        "overview": {
+          "menuPhotos": [
+            {
+              "url": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAF0C5iUZpPijBGM3AyK78AY6bSTIx6PXxy-9p8sjcDbHdXMs-nVj6CafOJ4QwxEueFPFNIgNgEYGzavCLNQ17-xpXLpeYSNFXT5ZRX0fUngoGdJ0fBULIHD9lxbm_ZczeQU0GYP0p26ySUP=s1024-v1",
+              "postedAt": "2026-2-17"
+            },
+            {
+              "url": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAHSrkvdSYZntyCp31vK72cAoq4BN5Gh1YAqL7Qoq-t2hn5EqhPC2Sil11tFS7HtRlW9KEB509YEL9ueC3c40qaH9jY9buTs4rEaLd8rCaJ6BuhrzSUlZJTA4G3BkxpBVBSknSX7A1-pVDzp=s1024-v1",
+              "postedAt": "2026-2-17"
+            },
+            {
+              "url": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAHcyobtSVmop3-_Jp9J0pzstsYjf8sjF0WYAcXj8cIQ2WSRvAwJgccuPpvxJVDFWIxFDFaVWoosxa4guYciaX3-c04-mcTUTKreAw7pc5ur48s1HvK5hBoTPZXRK0UjE4CYYc8YJm8GyO2V=s1024-v1",
+              "postedAt": "2026-3-13"
+            },
+            {
+              "url": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAEsfMeaMAB2aB85KL-5mbZ8md3Ixmr5VbUAYuK23qgRZ8i8oOKyiakqEyicMyaZ7GuFn7ahaCiXtcOgNb1qAbQhD1-TUpVe6_j1Z694T3Bh-y9UOJbzofL0ysodW71Wsw-S4Mm5xpXuMI1y=s1024-v1",
+              "postedAt": "2026-2-17"
+            },
+            {
+              "url": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAEXk5S7zBYek-ZTPQQBqli2OnZXQBeADhIt7wiV2zc3EfdCPzRpozc4qt5R77g8ng6xoHQXxyia1VDq5y8v6tqNok_vARQGktynRHLqs6CEcsE9feRo2BT6zvaXww_R45kxan5A=s1024-v1",
+              "postedAt": "2024-11-4"
+            },
+            {
+              "url": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAHCQntP9-DGtVkHX2GOkCURKHI8SiiVPaUPg2r4C3My-NF2S8p6nn3IzbbB-gACNLr1woL1vBZ5jGVVEuXiVf2AyEOFF-_4LLcRpQsTSTh0Jc3128rBvsNlqf8LQV77f3lJluVicQ=s1024-v1",
+              "postedAt": "2025-4-9"
+            },
+            {
+              "url": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAGlxmIUDnxQMRHoo-c7vVl1dcT_V2boTfNK9enY2Onq4wo4Jgt8KOyNci017k3GQI-dUfVd_7yX1xO1RjuEjWPMFY9F0OO3b7wxupl0Cr4puUyCO4ixw-Q32a3O6Ax3Wio1_xZ-wiDU72I=s1024-v1",
+              "postedAt": "2026-1-20"
+            },
+            {
+              "url": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAGVkeEo9sTcB6OmxkH6y-J6PIx2M3F0cws8c3GTJ9IaCMGQhbPtO75x2s2PR5OCatDMAx4TDI3Br7EqrUEWAjTTjLJMZ3Uyea0CKL9baOmvAYppORI0O0bIjuEUJZPDBvPgBKPC=s1024-v1",
+              "postedAt": "2024-11-4"
+            },
+            {
+              "url": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAF_-oBC_BVubSUbFsJL1zsu8_EfRbpbgtB7hURO1v6XeF-Xhga8Rv42_X1Gv4H2AT18Ga2nCs_EL5QOPAT5z6XNRlbdvWWy54EV1l4rFADbXD8etQfmLJ2aeC-M0YmqFPyNRMXAShqOxGSK=s1024-v1",
+              "postedAt": "2026-2-17"
+            },
+            {
+              "url": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAEn1u-hInwLbeJFEIDjR-E6AsSh_LVAnG_UGdlnkjd9A63TntGtIs0MsRaFcq0x3mjJKNZK99mxZp1cw2vmfjcOwMWt-KP6gRUv6zYVm_0ZKifmgXZG8PDhWU3bTPnoISc6r-Qbyw=s1024-v1",
+              "postedAt": "2024-1-19"
+            },
+            {
+              "url": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAEOXQBxB0Wts3bT6qNajvS3HiyQlo8h7HrM29Bj3yVHWBHY8BmiHcM3iysN8Xy_FasmyqgBa25KZnucaJqUKRl83O5gmXE_7ZlFrZVCbmyyDPBHqnCwcMCMnhXbJsKGyTCEVWT1=s1024-v1",
+              "postedAt": "2025-4-9"
+            },
+            {
+              "url": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAHS5OiL04CdRQlb43RYvDM75gwINLv3i8fHLvx8F-7HBqQFuKwcgdd9A9I2Bk1yDCPkwDZHo2VZsexyPM0HmzO5ymqxDMYsKyVFwI8Jwi9COt7TgbjnKiVNP96f-Acj1EVTPfdn=s1024-v1",
+              "postedAt": "2024-11-4"
+            },
+            {
+              "url": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAE63Vy6Q4hy_5X4jBiF3Ywq2p6vB3BA3fGlzzSXIFe7jyBmvA-2tO_U0WM99QhN-ziWL-R-VwrFaSv-ermqmdnKBNJpmWdulA1xc1X1luWuSpna04PS5u32r6Sguco6Vqsm4UoFkDhmIS-s=s1024-v1",
+              "postedAt": "2026-2-17"
+            },
+            {
+              "url": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAHW3J0hDV2EH8lGoVc_6FeYrqhMuRWyN-B0B2GOZgr5fy8A8O0s9Eqa-dM2-i6p1KoQ9O7qTdpU6zx0qVUFpt5Zdiyvt1TG0TivLGfYi6ytBnRn7YO56MQXS4Iw-g_wovZqmrk=s1024-v1",
+              "postedAt": "2024-11-29"
+            },
+            {
+              "url": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAGsDfZt5u2RSDWGyfQeN8GFRkpZ7QCCtECvzWxE57qNtImKjwwu9tMAqZgcJG3dGt-f2bs-aU3y0tQbOeET_sh7EqwDNa3UeWdZkeAVECnZRaCggyFcQiwX2fYAJG-wnCR1RsMh=s1024-v1",
+              "postedAt": "2024-12-1"
+            },
+            {
+              "url": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAEfVU3pUBDJT-ax2Cpq0RWEQfsprbw0XomcZjRW-c5eY07cerkDqeVUX1bk7Ls0_7ZVOKH7wa3v1s5ol5tYSmTt5yJ6rKEzkrjeejyQMfI6jyDiZaZUe7A9x3zHHQme9tRqxB4=s1024-v1",
+              "postedAt": "2024-8-13"
+            },
+            {
+              "url": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAE-VdnCoJqEHzy0UB2h15w182uUKJvXCVt5TcZ4d_BWHYAShu4fNHVln-wmUkDA-f257Vzw1AKG_Dv_dS0Wr4vSLj1QBQGT6Pf75eCZimVwpia36p6uo81A5slgdfH4LKo1h51D=s1024-v1",
+              "postedAt": "2024-12-1"
+            },
+            {
+              "url": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAEPLN8eXmknzw8BVKAVfro-x52bP09p_5Nrq83RIQsnm39wxZDve4DK640TAzFoV-__znggpGIPigxaDDGiPbceIOT8jGE8YiIZ10sEUqz7cO6uwianRxoseoi1hb6DKUEiJNW6=s1024-v1",
+              "postedAt": "2025-4-9"
+            },
+            {
+              "url": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAGxGOPzhyEzpDQXHfjNVVOLTz6rD58v3BmUXpZaHptp-xnpf8nZ6b3HUJenshhBvZorr0LdBbdZUexrGGe38RHG1b9MIhEXlTLi68odkME5YCScz4v1j6tcinWIB-nCplpOVzOZlgFX7pXV=s1024-v1",
+              "postedAt": "2026-1-20"
+            },
+            {
+              "url": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAE64l7Ykhyk4eeKVP9Bqj61AMHUnOQl16ZoDaCfyb8V6MczlJAzSVYDJ0m0bE_E-akjFK70W8t0qRrF4Qd_YjVfk6yb500FkWVaimswZ4I04FBMOgwqzqWqNpsz_xPCgXrq5r3A5g=s1024-v1",
+              "postedAt": "2024-11-4"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "position": 19,
+      "title": "Mamu Fish Grill Original",
+      "placeId": "ChIJdTYkmic_sz4R980q4NAA4vU",
+      "dataId": "0x3eb33f279a243675:0xf5e200d0e02acdf7",
+      "kgmid": "/g/11c52rkfnl",
+      "thumbnail": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAGIRZFnCfbVXdtQ54wRf2V-ujR_1rBkLw25IhAAgwad7Qxy9bOsepFJJechkDKsjmQWh2lhRZNQK3Eiyguh7mNqA_T9aE7liR3ztmIOm1ok-6U63zYaUg53PUiceaYu7rMr7qfR=s1024-v1",
+      "phone": "+92 301 2222690",
+      "address": "Library Signal, Main Tariq Rd, opposite to UBL bank، near silver spoon II، Block 2 P.E.C.H.S., Karachi, Pakistan",
+      "workingHours": {
+        "timezone": "Asia/Karachi",
+        "days": [
+          {
+            "day": "Thursday",
+            "time": "5:30 PM–2:30 AM",
+            "date": "2026-6-18"
+          },
+          {
+            "day": "Friday",
+            "time": "5:30 PM–2:30 AM",
+            "date": "2026-6-19"
+          },
+          {
+            "day": "Saturday",
+            "time": "5:30 PM–2:30 AM",
+            "date": "2026-6-20"
+          },
+          {
+            "day": "Sunday",
+            "time": "5:30 PM–2:30 AM",
+            "date": "2026-6-21"
+          },
+          {
+            "day": "Monday",
+            "time": "5:30 PM–2:30 AM",
+            "date": "2026-6-22"
+          },
+          {
+            "day": "Tuesday",
+            "time": "5:30 PM–2:30 AM",
+            "date": "2026-6-23"
+          },
+          {
+            "day": "Wednesday",
+            "time": "5:30 PM–2:30 AM",
+            "date": "2026-6-24"
+          }
+        ]
+      },
+      "openState": "Closed · Opens 5:30 PM",
+      "rating": 4.4,
+      "reviews": 1345,
+      "type": "Restaurant",
+      "types": [
+        "Restaurant"
+      ],
+      "price": "Rs 2,000–3,000",
+      "priceDescription": "Rs 2,000 to Rs 3,000",
+      "gpsCoordinates": {
+        "latitude": 24.871326999999997,
+        "longitude": 67.0600259
+      },
+      "serviceOptions": [
+        "Outdoor seating",
+        "Delivery",
+        "Drive-through",
+        "Onsite services",
+        "Takeout",
+        "Dine-in"
+      ],
+      "extensions": {
+        "serviceOptions": [
+          "Outdoor seating",
+          "Delivery",
+          "Drive-through",
+          "Onsite services",
+          "Takeout",
+          "Dine-in"
+        ],
+        "popularFor": [
+          "Lunch",
+          "Dinner",
+          "Solo dining"
+        ],
+        "offerings": [
+          "Halal food",
+          "Healthy options",
+          "Late-night food",
+          "Quick bite",
+          "Small plates"
+        ],
+        "diningOptions": [
+          "Lunch",
+          "Dinner",
+          "Catering",
+          "Seating",
+          "Table service"
+        ],
+        "amenities": [
+          "Gender-neutral restroom",
+          "Wi-Fi"
+        ],
+        "atmosphere": [
+          "Casual",
+          "Trendy"
+        ],
+        "crowd": [
+          "College students",
+          "Groups"
+        ],
+        "planning": [
+          "Usually a wait"
+        ],
+        "payments": [
+          "Credit cards",
+          "Debit cards",
+          "NFC mobile payments"
+        ],
+        "children": [
+          "Good for kids"
+        ],
+        "parking": [
+          "Free street parking"
+        ]
+      },
+      "menu": {
+        "overview": {
+          "menuPhotos": [
+            {
+              "url": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAFBYK-vv5Iy2bsrt05X2-cO9bqznaprQArwQlzx7dhCIYeWRmh_NP90JMYtk2tCyIlvRU5vn5EwrLLqrUurDJ8bNVcMsv3of9o2vXSUipwHqmTBSBh6NMN-rwxxqSNfpH9PzvrX=s1024-v1",
+              "postedAt": "2023-8-15"
+            },
+            {
+              "url": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAHxYVRJLC9bM54TF3wEBVxCmpHwydCbNIKI7rZlelh3XC44D43SdfDnGWNkSFiDOngitWdAK1ueEI9ON0F9dCTgqXYnNmGPX6iBs_6bHtLB_4Qs0bEdoZoqmeJdHjFMMDUKcpoiNA=s1024-v1",
+              "postedAt": "2023-10-4"
+            },
+            {
+              "url": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAG_UAcN3rB10UCYu-D-L0GlrHntiQsz9nuSnajSdjB_75HgKDjShxlxgbqkR5B4azi-HLvYrDtKNMsOhveH08DQ4RdEgOQ65SnfUsaw42kpUtudCxcm037xpYKxu_EH487IJCs=s1024-v1",
+              "postedAt": "2023-8-15"
+            },
+            {
+              "url": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAGiIgkMGdW8flcRZx35k5DTIbd6TCMshCbShp4yxVkXTDd-BUZLmrgOSs-zqF5dKD6D3Q8K76RfXKEs0o1SOa0oxmbEZ5nf073WEpr1v3Ew7bzpXFlV6VO5VxO4V2j01VjBeAeE=s1024-v1",
+              "postedAt": "2023-10-4"
+            },
+            {
+              "url": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAH4QRL_jhyOzGTahShXQx7ypMQLXWNwxdv-zUf-u7gyRoTsPaSkJ6G1kSHA2lYIWSv6xxG2rqPLON4PFabuQ-O_xRPx9JacfDu6Vq9G9Py_nrWLDfCUjFWqAB1LE0OAmsvEn8bj=s1024-v1",
+              "postedAt": "2023-10-4"
+            },
+            {
+              "url": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAGPpbHpGc4i0YUWS0oOyZWFW1QbVUjdcijOvzw8LRuOLm0Ny3P6NOsOXrn6rXgkBbb-Mo4bfLP8TnSKIENXIom5vBFBE4bUBEWaZ6hgOgYnhEjMwcBQup1txe3zyUcwh9px3avU=s1024-v1",
+              "postedAt": "2023-10-4"
+            },
+            {
+              "url": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAFBM3kPlI36AsXwaGuqVs4FjJjTMRA1kWD0yX-o5QtWXFO5ngHbWolupCWjaQwXnJEaWfDbF-Z--ka1EjLT7hQB2MLvJPWjer_wSD_fvP5Vz2Mzy5IsDB4Pl6vq4k3LtVQDTMZT=s1024-v1",
+              "postedAt": "2023-10-4"
+            },
+            {
+              "url": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAHYvf3TXOSCLqmKeTiabB_HaEtRj-T59gtnJbEL9Rb4NKVo_j3F0Efu6EF55quxsRHs7zyj9c6TbpvQ1mfJf17uFhL3XEIFWQmvs8IFQHTtzMuYaplJuQkYCOoxsTqdfL5n8w9KGQ=s1024-v1",
+              "postedAt": "2023-10-4"
+            },
+            {
+              "url": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAHlh34ju4lzBjuF3Vaz4IRBSZWZ8TRCGcWsyGWph5gaGz5VDNlIvS80hxMpMwVvw5_ItgPuuBVXoz5eY86PsBN3DXwBpNdeob-55ZGn14fKPuDOWbexbJXY8nsfzbJW3JgU9u23=s1024-v1",
+              "postedAt": "2023-10-4"
+            },
+            {
+              "url": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAGbSpx8XAIqFxEl8L0g4cAOfD6YzIin9Ttp2G4J7Hmo8F2WfdyD4a2R4B8kJOyyUoSKzgvvVvzAuvwyhoE6Uhtch21_fJ_QhDNl0XWazYXg8Rq65QcOc1tZ3NfIq5Nf4KpbJPPb=s1024-v1",
+              "postedAt": "2023-12-26"
+            },
+            {
+              "url": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAGTociS1QoTUi7R9b8ffNjm1_YzB5O098c7pkeEzuGDZMqD6sFEoifgD23bEV2Q-EKJfExsde6SF02yI4ZAuCKr_8BQ1XQti6pSkFEzw9xlpaHIn_Uvn5zt68qEtu9Mq0UEsssK=s1024-v1",
+              "postedAt": "2024-1-27"
+            },
+            {
+              "url": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAHYZXc5ij_CTJ6dtGy7bVXI8FKfh5vDEH7fpibrl3J3yBT382TDe1RAJTZ82AotvzVwG22JiqICukJXn4rci1K2PteHMJGe-6pJ2exSuqdfdQN0jYjAEuoboUb5tRtUOlQ3Ps7M=s1024-v1",
+              "postedAt": "2023-7-25"
+            },
+            {
+              "url": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAGKjvlKnQysyWCzjK_17bC5nyHSSEY_yYrJvj38SsHF0BCVkCbAjUSENutFMK-GwB8n9kA4AyPFPpFWdblY7hEcc_th5EdfW3FZ0JIQMjIXrth1yBepRV65dvh1-eUFVsgCcreP=s1024-v1",
+              "postedAt": "2023-10-4"
+            },
+            {
+              "url": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAH94Mwbep9v8rCWP7FLtpW4RKMkSuG0CSWCmBc3jDMedfcwlTfOnrR3Y2AIzxHpvyQy1yu-6j7PvZssVHB7wEXaCIq2KIr4VL_fOAYxidvvJJ9zXOkICMUHEcV1qUfu0cdqYRYY=s1024-v1",
+              "postedAt": "2022-9-26"
+            },
+            {
+              "url": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAHR_tlTpHyIRofu0QbsAdmqIB95bG_S0lEGFh_iTVDOLXXjqFQP4VVa4IbAGYnzzkgKhItvhMU2K11_F7MMEfbknj45XF1Uwp4-Ha2AN8kaLgZFrh2gV43H-8eEES6N3SuZYR6d=s1024-v1",
+              "postedAt": "2023-11-3"
+            },
+            {
+              "url": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAG9Ff1qXy0ZK-QRhMN9wgaqt0lNnzTcluxWzxmi6DZaHimYfUChRRhxJe_hOk48eEMqBvnyMx1ZbXBPdiNqw24S6wBBOJ_yvKsE1IWUNKCYIoUAMxUWdpFCKOLnrgkeUwzY1hN5lA=s1024-v1",
+              "postedAt": "2022-9-3"
+            },
+            {
+              "url": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAGZ_TdCi68QgOMKfbSVg1vEu1ydiJ7EoRvC-Yls_X-gIGl0dV-Q4mjx6p0u2Q1l8dGIg4cbcTShIG9hrxKakPTH5eSlRQOHbAjYlYMMgaHsu2Z6q4-1ceGoJ3P-xDfSghNgJ1nH=s1024-v1",
+              "postedAt": "2023-10-4"
+            },
+            {
+              "url": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAFBD84nOyOf9n8Vb3kgOoncCVGYmT0EtjZg-RonAje-bO0IxQBGBnSuBxIZo-WD2V8OGKJUaEWyu9ij_1Uoj1rKnzFESXLu2LTdHOMmo4QZ8mQVZqQ0vdXq3Z8ufB0wOBSjVEV82g=s1024-v1",
+              "postedAt": "2023-12-26"
+            },
+            {
+              "url": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAE_IjXyDfKo1BXd-WPDiZ8bhJE3507kRxHooL9XCJUuycF_ACAgQBLGUGizEKRu6Fp9oEBdvylpScGpc0ddZEFfGXPwK9GlE86ZqXLLXdorU0FRhgA4nrkgTwHSIOZkPYoUVBK7=s1024-v1",
+              "postedAt": "2023-10-4"
+            },
+            {
+              "url": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAE8XQRys3rdPwhvb8pBYq3IpF7AtJTpajAzNRbpO3d7H-zcUDs8xYfNIw9DYOl0wYqTzVl-pGzfR8Tf3iDBVHpbhSMb_veTU35PNENGiGCxLxwHtn4PQQfHFbTHzJwDfFfiWiU=s1024-v1",
+              "postedAt": "2023-10-4"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "position": 20,
+      "title": "Oh My Grill - Bahadurabad.",
+      "placeId": "ChIJ17EmTHA_sz4RWTHnohEvemU",
+      "dataId": "0x3eb33f704c26b1d7:0x657a2f11a2e73159",
+      "kgmid": "/g/11h2q71b1q",
+      "thumbnail": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAF1ccWfE7XJWvTTIVZERPs9GrHsADFOhkt9rzuO5YmUde-g9pxB2656XWTlIOk81vBv_AETS1ZNq3Fr_lPF23-INM28YEozDh1ZI47AL-s3qOwuQ_E4eEGV45b_0leHYak3Xas=s1024-v1",
+      "phone": "+92 311 1664664",
+      "address": "Bahadur Shah Zafar Road, BMCHS Sharafabad, Karachi, Pakistan",
+      "website": "http://www.ohmygrill.pk/",
+      "workingHours": {
+        "timezone": "Asia/Karachi",
+        "days": [
+          {
+            "day": "Thursday",
+            "time": "12 PM–12 AM",
+            "date": "2026-6-18"
+          },
+          {
+            "day": "Friday",
+            "time": "12 PM–12 AM",
+            "date": "2026-6-19"
+          },
+          {
+            "day": "Saturday",
+            "time": "12 PM–12 AM",
+            "date": "2026-6-20"
+          },
+          {
+            "day": "Sunday",
+            "time": "12 PM–12 AM",
+            "date": "2026-6-21"
+          },
+          {
+            "day": "Monday",
+            "time": "12 PM–12 AM",
+            "date": "2026-6-22"
+          },
+          {
+            "day": "Tuesday",
+            "time": "12 PM–12 AM",
+            "date": "2026-6-23"
+          },
+          {
+            "day": "Wednesday",
+            "time": "12 PM–12 AM",
+            "date": "2026-6-24"
+          }
+        ]
+      },
+      "openState": "Open · Closes 12 AM",
+      "rating": 4.3,
+      "reviews": 2758,
+      "type": "Restaurant",
+      "types": [
+        "Restaurant"
+      ],
+      "price": "Rs 1,000–2,000",
+      "priceDescription": "Rs 1,000 to Rs 2,000",
+      "gpsCoordinates": {
+        "latitude": 24.8836363,
+        "longitude": 67.0681105
+      },
+      "serviceOptions": [
+        "Onsite services",
+        "Takeout",
+        "Dine-in"
+      ],
+      "extensions": {
+        "serviceOptions": [
+          "Onsite services",
+          "Takeout",
+          "Dine-in"
+        ],
+        "popularFor": [
+          "Lunch",
+          "Dinner",
+          "Solo dining"
+        ],
+        "accessibility": [
+          "Wheelchair accessible seating"
+        ],
+        "offerings": [
+          "Halal food",
+          "Late-night food",
+          "Quick bite",
+          "Small plates"
+        ],
+        "diningOptions": [
+          "Lunch",
+          "Dinner",
+          "Counter service",
+          "Seating"
+        ],
+        "amenities": [
+          "Restroom"
+        ],
+        "atmosphere": [
+          "Casual",
+          "Trendy",
+          "Upscale"
+        ],
+        "crowd": [
+          "College students",
+          "Groups"
+        ],
+        "payments": [
+          "Credit cards",
+          "Debit cards",
+          "NFC mobile payments"
+        ],
+        "children": [
+          "Good for kids",
+          "High chairs"
+        ],
+        "parking": [
+          "Free parking lot",
+          "Free street parking",
+          "Paid parking lot"
+        ]
+      },
+      "menu": {
+        "overview": {
+          "menuPhotos": [
+            {
+              "url": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAEIpZf7K4ZGNa-nY8LMp7NlO_lM_0GyydOIC9YR5RNr0cczXVdpqgxrSt6OO9WtlJTIuIKUmV5BxOhorkc7L0y_XsWedqx-CAVD9aR2O36IzLTZR5o4-87mnCE81VmKtSFesxwK=s1024-v1",
+              "postedAt": "2024-5-2"
+            },
+            {
+              "url": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAFn2_PorEtWRfxkC3D5R2CiURxZWRfik4IiBT6D5jTJ8j8-E9qYf1w9_vt8BiZHT6VrAXoEOpwaCtCrr26oyRIiWPGjWmObGII-5RlI6GLiP8algyHD8jrw0Xt4J6VpXPvdTbDHBQ=s1024-v1",
+              "postedAt": "2023-3-10"
+            },
+            {
+              "url": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAFPqCR7RPKF8Md7mW11VKgUWkhlXQoBdKz4Y1UIZVF5fR-VhMVwo9tqvRuQd2MhKd0ymZR_hKRbmZm7cWf3g7pV0TT81Km6wMazCTFk8m_xAN5oN30auf8RZcteU0uKpil2cRLsN2KA_9Bv=s1024-v1",
+              "postedAt": "2025-12-2"
+            },
+            {
+              "url": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAHZGS-povuXrDQPLLjVoRbnH7iU-MkNRftBsm5GccLCMMcQQne32Ufa1cyAOZ427SO9LBQ5ewEV5M7qHOGX-ARLBg18jhgToazYIZv2anHR6UkLzOXN03OiweBR1W6jTLDSlXOh7A=s1024-v1",
+              "postedAt": "2022-3-27"
+            },
+            {
+              "url": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAFSRT5mIoS-BdnWM1TLCIi4w1jOOrMelFG0szZ5jmcEOCBWzWKpI3m9OfEKLyGO1bgrVHd3ygdWH98PDHuYN498vPozaPjiqGqc-aAtGYcFwvdIEE70JwgLdkbLljm0IjG55fTt=s1024-v1",
+              "postedAt": "2024-5-2"
+            },
+            {
+              "url": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAGGKHQoQIckpmDfHUAPC_hlWROABKwPL3Es_FpVjceIYm5hBVisiQ2bo0Xa7sdoB8VS49w8MXSqQh2bP9URJAY4Vnl-yWsLYuxEi1XJpUwFZbuXmh5scs7GJKXr3O-ejeLLU4i4Jw=s1024-v1",
+              "postedAt": "2020-11-12"
+            },
+            {
+              "url": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAEfTXIYxWqgb85_2YP8cQOK_dJHSjnV5995SP1bNzlFgFP_2anUHbL656qm6JjHpv3YR0669r2hjri1CzFJwVuUzKIMBP-TAIM1ZBGCT9QjWmSUqtSWlaMNgKHRfa5h_VWQDIbiSg=s1024-v1",
+              "postedAt": "2023-3-16"
+            },
+            {
+              "url": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAEJUOrxqAUfqCkDYW6dvvc3B4PcJJTqhsufVclSkD_lbHf7E84EqrkPkiyqBLyTxrdYM4gdHIL81ACNzsUiU8a_fm7kRmYbKM5LrLLhRzuYCiOWwpICecNiRxbXfM368fLf_DzI=s1024-v1",
+              "postedAt": "2022-8-5"
+            },
+            {
+              "url": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAHdDmjrb3IXT5GQ8WKTrL5bvNfxCNZMjBI29Xxv2NXvbnYAMZoSWmkvi7bRg8OPWoSPzwpuv6dR-tACF_eAqUlpZfnIIOX74XDvjRj-knJ90DgJTzfbt6LVOQoXdkV035VX9QA=s1024-v1",
+              "postedAt": "2024-7-18"
+            },
+            {
+              "url": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAEaW9parohua1Ye7X4xdHRjMVQ6Y6KGVWtJm--ZoyKuwU71vPWpNFavasj7BnRTo48bP98sEw50SLJPTUrzskd4XOd0fb2wt1oGY_et2s3jM8zaDrMqOLjYeW41U75Hv7NxLt3o=s1024-v1",
+              "postedAt": "2022-11-4"
+            },
+            {
+              "url": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAH5HGSH3g-CylOddgow2XVbNTRqRcBfr7nmGLzuLanUnju70MAonSIYkrfNS02iHmDG4amcV4O_wgd9qChhj_LlHozZogRVUUWY0EEOBB9bgeryqcok6rQn8OWkqWvg4Q4kdksO9Q=s1024-v1",
+              "postedAt": "2024-7-18"
+            },
+            {
+              "url": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAE9-NEXiCvIdtIhyqe8oePrEbRmkh8XddntdcR1ILUkFWTOKoQg7qJ2Z9FlhDa35hBjhLjqyi7DVNt5SFDVnvRSBXGg3bjHBifqJ699OlF35RR_Ddd7WFaOxYRbS6oZEEPXc4SN=s1024-v1",
+              "postedAt": "2022-9-16"
+            },
+            {
+              "url": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAHhkkvw54rWrPbRKX1cnkymgmempgqisbX8tZy84T_5HNgD566gZ4OoE9KdaqZC62abHV8ARN0bLHiLkUzstIIDukgyQ-aVI4PVAX_4MRAc2NEkOj3ylA8TkEOD-DrakvMMfkkN=s1024-v1",
+              "postedAt": "2022-7-12"
+            },
+            {
+              "url": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAGM_62vngTtS5KM3r2u5HSnS9fTGINgoCU22B0u_tv-tv8-iDWfbFveMJGNvWmrllJIa6v-FmvGJU8-LPXnfx92a2pxnhrhL34t-FAUqTZuZ5jBJ3O0MKxeyl3GHZ01Yz1UKqOGhg=s1024-v1",
+              "postedAt": "2023-2-28"
+            },
+            {
+              "url": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAE1ExxnHa9H7PbJxYuT-7nzetVE1X-kU13wOIbrVmEFl0wMXCjlwX4dpre63bl-L9o-5wnJnyXbnkiJFkSt3Dk7C586sRg3Y7o-h2rKwwj0hlRhO2uYaeNETAW7p5BaMYCHiNYX=s1024-v1",
+              "postedAt": "2024-5-2"
+            },
+            {
+              "url": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAFf9k6wC0sfGR6BDzXMZWuV3lztkuvBJ6H6Ua59sRNvmUFR3mQ960wLyF0LzKvrzKiGZxKT0uaZQlH0Bkxbs6QJApqjAC2ngPw_RSY_SacC10sZeaHol2Vu0H_58VxlyH3Jixs=s1024-v1",
+              "postedAt": "2024-7-18"
+            },
+            {
+              "url": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAE0GLp0IRFyGjvuF15qewgILpRszt5Byd8-SvtKsg_zhCLWnx5aqKXhWI1lW70Su56RX3rTV1CzcVFHmPfhgDlXhN-rZ_PcHndeYR6p474yRvvNBgm49f_g1HugR24fYAA786wP1g=s1024-v1",
+              "postedAt": "2022-6-6"
+            },
+            {
+              "url": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAH0rdY3RiyKCxUlUexHnN79P31kgiFkArY-iqw2griLcxx8m2AsOqQEHrdEGCOMv49f1q1OXx5UYAOLxu8AwF3iwIgyIGMQBGW4Iowo1GlKqiQtWEL_Zuk0oWJaz4ctrhz4m7gWew=s1024-v1",
+              "postedAt": "2024-5-2"
+            },
+            {
+              "url": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAEVnVhGGzO68agrGF_imVi1EpYO2ZsCwwSwPpCnVhu6dTX4h6g_0Wok3-0rwrlcFTbF16D_11dm88vsg1Q0WI_UASnx8ykwhgnQdfnafkmXWg_eye3aFtHZluNJ0UMFb6zxyi6q=s1024-v1",
+              "postedAt": "2021-11-20"
+            },
+            {
+              "url": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAGH2MG21w_MCuiH6ONI8ZeWUFH0M9J-5ExjArCP6t2kHRnB_92HUNRbuRLQuJ7T77uw4bpzymy5sGXSSZPySzxM-ihgVXi3sFvQLspE0H1QfTqewebrvnRVJncTMuW_Jl4Vxb1b=s1024-v1",
+              "postedAt": "2022-1-6"
+            }
+          ]
+        }
+      }
+    }
+  ]
+}
