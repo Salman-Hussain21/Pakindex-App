@@ -106,7 +106,7 @@ export async function POST(request: NextRequest) {
       const sd = await sr.json();
       if (!sr.ok || !sd.businesses?.length) continue;
 
-      // Filter out businesses that are geolocated too far from the cell's center (1.2 km threshold)
+      // Filter out businesses that are geolocated too far from the cell's center (1.8 km threshold)
       const filteredBusinesses = [];
 
       for (const biz of (sd.businesses || [])) {
@@ -114,17 +114,34 @@ export async function POST(request: NextRequest) {
         const lng = biz.gpsCoordinates?.longitude;
         if (lat && lng) {
           const dist = getDistanceKm(cell.lat, cell.lng, lat, lng);
-          if (dist > 1.2) {
+          if (dist > 1.8) {
             continue; // Filter out if too far
           }
         }
 
-        // Strict Area Guard: Resolve the business's area from its address.
-        // If it resolves to another known area that is NOT the cell's area, discard it.
+        // Smarter Area Guard: Resolve the business's area from its address.
+        // Only reject if it resolves to a DIFFERENT grid cell (has coordinates)
+        // AND its name does NOT contain the target cell's label.
+        // This allows sub-localities like "Bahadurabad Market", "Bahadurabad Block 3"
+        // while still rejecting genuinely foreign areas like "PECHS" or "Clifton".
         if (biz.address) {
           const resolved = await matchAreaFromAddress(biz.address);
           if (resolved.areaId && resolved.areaId !== cellIdNum) {
-            continue;
+            const resolvedAreaRes = await query(
+              `SELECT name, latitude, longitude FROM areas WHERE id = $1`,
+              [resolved.areaId]
+            );
+            const resolvedArea = resolvedAreaRes.rows[0];
+            // Only discard if:
+            // 1. The resolved area is a proper grid cell (has coordinates), AND
+            // 2. Its name does NOT contain the target cell's label (not a sub-area)
+            if (
+              resolvedArea &&
+              resolvedArea.latitude !== null &&
+              !String(resolvedArea.name).toLowerCase().includes(cell.label.toLowerCase())
+            ) {
+              continue;
+            }
           }
         }
 
