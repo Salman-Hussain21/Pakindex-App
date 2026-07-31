@@ -79,8 +79,12 @@ export function getAreas() {
   return request("/api/admin/areas");
 }
 
-export function createArea(body: { name: string; cityId: number }) {
+export function createArea(body: { name: string; cityId: number; latitude?: number; longitude?: number }) {
   return request("/api/admin/areas", { method: "POST", body: JSON.stringify(body) });
+}
+
+export function deleteArea(id: number) {
+  return request(`/api/admin/areas?id=${id}`, { method: "DELETE" });
 }
 
 export function getCities() {
@@ -89,6 +93,10 @@ export function getCities() {
 
 export function createCategory(name: string) {
   return request("/api/admin/categories", { method: "POST", body: JSON.stringify({ name }) });
+}
+
+export function deleteCategory(id: number) {
+  return request(`/api/admin/categories?id=${id}`, { method: "DELETE" });
 }
 
 export function getAuditLogs(paramsObj: Record<string, string | number | undefined>) {

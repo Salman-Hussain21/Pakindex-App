@@ -9,9 +9,9 @@ function slugify(s: string) {
 }
 
 export async function GET() {
-  // Only ever return Karachi areas — matches the Karachi-only cities filter.
+  // Return Karachi areas — including latitude and longitude columns
   const result = await query(
-    `SELECT a.id, a.name, a.slug, a.city_id, c.name AS city_name
+    `SELECT a.id, a.name, a.slug, a.city_id, a.latitude, a.longitude, c.name AS city_name
      FROM areas a JOIN cities c ON c.id = a.city_id
      WHERE c.name = 'Karachi'
      ORDER BY a.name ASC`
@@ -21,17 +21,21 @@ export async function GET() {
 
 export async function POST(request: NextRequest) {
   const session = await getSession();
-  if (!session) return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+  if (!session || session.role !== "super_admin") {
+    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+  }
 
   const body = await request.json();
-  const { name, cityId } = body as { name?: string; cityId?: number };
+  const { name, cityId, latitude, longitude } = body as {
+    name?: string;
+    cityId?: number;
+    latitude?: number;
+    longitude?: number;
+  };
   if (!name || !cityId) {
     return NextResponse.json({ error: "name and cityId are required" }, { status: 400 });
   }
 
-  // Guard: reject creating an area under any city other than Karachi, even
-  // if a stale client or direct API call sends one. This is the enforcement
-  // point — the dropdown filter above is just UX, this is the real rule.
   const cityCheck = await query(`SELECT name FROM cities WHERE id = $1`, [cityId]);
   if (cityCheck.rows[0]?.name !== "Karachi") {
     return NextResponse.json(
@@ -42,16 +46,53 @@ export async function POST(request: NextRequest) {
 
   const slug = slugify(`${cityId}-${name}-${Date.now()}`);
   const result = await query(
-    `INSERT INTO areas (city_id, name, slug) VALUES ($1, $2, $3) RETURNING id, name, city_id`,
-    [cityId, name, slug]
+    `INSERT INTO areas (city_id, name, slug, latitude, longitude)
+     VALUES ($1, $2, $3, $4, $5)
+     RETURNING id, name, city_id, latitude, longitude`,
+    [cityId, name, slug, latitude || null, longitude || null]
   );
 
   await logAudit({
     performedBy: session.userId,
     entityType: "territory",
     action: "create",
-    newValues: { areaId: result.rows[0].id, name, cityId },
+    newValues: { areaId: result.rows[0].id, name, cityId, latitude, longitude },
   });
 
   return NextResponse.json({ area: result.rows[0] }, { status: 201 });
+}
+
+export async function DELETE(request: NextRequest) {
+  const session = await getSession();
+  if (!session || session.role !== "super_admin") {
+    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+  }
+
+  const { searchParams } = new URL(request.url);
+  const idStr = searchParams.get("id");
+  if (!idStr) {
+    return NextResponse.json({ error: "id parameter is required" }, { status: 400 });
+  }
+
+  const id = parseInt(idStr, 10);
+  if (isNaN(id)) {
+    return NextResponse.json({ error: "invalid id parameter" }, { status: 400 });
+  }
+
+  const before = await query(`SELECT name FROM areas WHERE id = $1`, [id]);
+  if (before.rows.length === 0) {
+    return NextResponse.json({ error: "Area not found" }, { status: 404 });
+  }
+
+  // Delete the area (cascades or sets null in dependent tables depending on FK constraint)
+  await query(`DELETE FROM areas WHERE id = $1`, [id]);
+
+  await logAudit({
+    performedBy: session.userId,
+    entityType: "territory",
+    action: "delete",
+    oldValues: { areaId: id, name: before.rows[0].name },
+  });
+
+  return NextResponse.json({ ok: true });
 }

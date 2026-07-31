@@ -26,12 +26,21 @@ export async function GET(request: NextRequest) {
     where.push(`c.status = $${values.length}`);
   }
   if (plan) {
-    values.push(plan);
-    where.push(`c.plan = $${values.length}`);
+    // Support filtering by package_id (numeric) or by plan slug (legacy)
+    const planNum = parseInt(plan, 10);
+    if (!isNaN(planNum)) {
+      values.push(planNum);
+      where.push(`c.package_id = $${values.length}`);
+    } else {
+      values.push(plan);
+      where.push(`c.plan = $${values.length}`);
+    }
   }
 
   const { rows } = await query(
     `SELECT c.id, c.name, c.legal_name, c.industry, c.email, c.phone, c.status, c.plan,
+            c.package_id, sp.name AS package_name, sp.price AS package_price,
+            sp.data_limit_type, sp.max_employees AS package_max_employees,
             c.max_employees, c.created_at,
             u.full_name AS admin_name, u.email AS admin_email,
             (SELECT COUNT(*) FROM users e WHERE e.company_id = c.id AND e.role = 'employee' AND e.deleted_at IS NULL) AS employee_count,
@@ -49,6 +58,7 @@ export async function GET(request: NextRequest) {
             ) AS categories
      FROM companies c
      LEFT JOIN users u ON u.id = c.admin_user_id
+     LEFT JOIN subscription_packages sp ON sp.id = c.package_id
      WHERE ${where.join(" AND ")}
      ORDER BY c.created_at DESC`,
     values
@@ -67,6 +77,7 @@ export async function POST(request: NextRequest) {
     maxEmployees?: number;
     industry?: string;
     plan?: string;
+    package_id?: number;
     areaIds?: number[];
     categoryIds?: number[];
   };
@@ -83,9 +94,9 @@ export async function POST(request: NextRequest) {
     email,
     phone,
     password,
-    maxEmployees,
     industry,
     plan,
+    package_id,
     areaIds = [],
     categoryIds = [],
   } = body;
@@ -101,6 +112,22 @@ export async function POST(request: NextRequest) {
       { error: "Assign at least one area — a company with no area sees no data." },
       { status: 400 }
     );
+  }
+
+  // Resolve max_employees and plan slug from the linked package when provided.
+  // Fallback to the body values for backward compat.
+  let resolvedMaxEmployees = body.maxEmployees ?? 5;
+  let resolvedPlan = plan ?? "free";
+
+  if (package_id) {
+    const pkgRes = await query(
+      `SELECT slug, max_employees FROM subscription_packages WHERE id = $1`,
+      [package_id]
+    );
+    if (pkgRes.rows.length > 0) {
+      resolvedMaxEmployees = pkgRes.rows[0].max_employees;
+      resolvedPlan = pkgRes.rows[0].slug;
+    }
   }
 
   const existingUser = await query(`SELECT id FROM users WHERE LOWER(email) = LOWER($1)`, [email]);
@@ -119,8 +146,8 @@ export async function POST(request: NextRequest) {
     await client.query("BEGIN");
 
     const companyResult = await client.query(
-      `INSERT INTO companies (name, legal_name, slug, industry, email, phone, status, plan, max_employees)
-       VALUES ($1, $2, $3, $4, $5, $6, 'active', $7, $8)
+      `INSERT INTO companies (name, legal_name, slug, industry, email, phone, status, plan, max_employees, package_id)
+       VALUES ($1, $2, $3, $4, $5, $6, 'active', $7, $8, $9)
        RETURNING id`,
       [
         companyName,
@@ -129,8 +156,9 @@ export async function POST(request: NextRequest) {
         industry || null,
         email,
         phone || null,
-        (plan as any) || "free",
-        maxEmployees || 5,
+        resolvedPlan,
+        resolvedMaxEmployees,
+        package_id ?? null,
       ]
     );
     const companyId = companyResult.rows[0].id;
@@ -168,12 +196,12 @@ export async function POST(request: NextRequest) {
       entityType: "company",
       entityId: companyId,
       action: "create",
-      newValues: { companyName, email, plan, areaCount: areaIds.length, categoryCount: categoryIds.length },
+      newValues: { companyName, email, plan: resolvedPlan, package_id, areaCount: areaIds.length, categoryCount: categoryIds.length },
     });
     await notifyAdmins({
       type: "company_activity",
       title: `New company created: ${companyName}`,
-      body: `Admin login: ${email} · Plan: ${plan || "free"}`,
+      body: `Admin login: ${email} · Plan: ${resolvedPlan}`,
       link: "/admin/companies",
     });
 

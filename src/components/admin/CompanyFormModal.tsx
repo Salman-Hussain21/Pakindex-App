@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { getAreas, getCategories, createCompany, updateCompany } from "@/lib/admin-api";
+import { Loader2 } from "lucide-react";
 
 const INDUSTRIES = [
   "FMCG Distribution",
@@ -17,11 +18,14 @@ const INDUSTRIES = [
   "Other",
 ];
 
-const PLANS = [
-  { value: "free", label: "Free", hint: "Limited to 5 rows total" },
-  { value: "premium", label: "Premium", hint: "Half of their assigned area's data" },
-  { value: "ultra_premium", label: "Ultra Premium", hint: "Full access to their assigned area" },
-];
+interface SubscriptionPackage {
+  id: number;
+  name: string;
+  slug: string;
+  price: number;
+  max_employees: number;
+  data_limit_type: string;
+}
 
 export interface CompanyEditData {
   id: string;
@@ -31,6 +35,7 @@ export interface CompanyEditData {
   phone: string | null;
   industry: string | null;
   plan: string;
+  package_id: number | null;
   max_employees: number;
   status: string;
   areaIds: number[];
@@ -50,6 +55,8 @@ export default function CompanyFormModal({
 
   const [areas, setAreas] = useState<{ id: number; name: string; city_name: string }[]>([]);
   const [categories, setCategories] = useState<{ id: number; name: string }[]>([]);
+  const [packages, setPackages] = useState<SubscriptionPackage[]>([]);
+  const [packagesLoading, setPackagesLoading] = useState(true);
 
   const [companyName, setCompanyName] = useState(company?.name || "");
   const [legalName, setLegalName] = useState(company?.legal_name || "");
@@ -59,17 +66,53 @@ export default function CompanyFormModal({
   const [password, setPassword] = useState("");
   const [maxEmployees, setMaxEmployees] = useState(company?.max_employees || 5);
   const [industry, setIndustry] = useState(company?.industry || INDUSTRIES[0]);
-  const [plan, setPlan] = useState(company?.plan && PLANS.some((p) => p.value === company.plan) ? company.plan : "free");
+  // selectedPackageId drives everything — plan slug and max_employees are derived
+  const [selectedPackageId, setSelectedPackageId] = useState<number | null>(
+    company?.package_id ?? null
+  );
   const [areaIds, setAreaIds] = useState<Set<number>>(new Set(company?.areaIds || []));
   const [categoryIds, setCategoryIds] = useState<Set<number>>(new Set(company?.categoryIds || []));
 
   const [saving, setSaving] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
+  // Fetch reference data on mount
   useEffect(() => {
-    getAreas().then((d: any) => setAreas(d.areas)).catch(() => {});
+    getAreas().then((d: any) => {
+      const activeGridAreas = (d.areas || []).filter((a: any) =>
+        (a.latitude !== null && a.longitude !== null) || (company?.areaIds || []).includes(a.id)
+      );
+      setAreas(activeGridAreas);
+    }).catch(() => {});
     getCategories().then((d: any) => setCategories(d.categories)).catch(() => {});
-  }, []);
+
+    fetch("/api/admin/packages")
+      .then((r) => r.json())
+      .then((d) => {
+        const pkgs: SubscriptionPackage[] = d.packages || [];
+        setPackages(pkgs);
+
+        // Auto-select: for a new company pick the cheapest package;
+        // for an edit, keep whatever is already set (or fall back to cheapest).
+        if (pkgs.length > 0) {
+          const initialId = company?.package_id ?? pkgs[0].id;
+          const match = pkgs.find((p) => p.id === initialId) ?? pkgs[0];
+          setSelectedPackageId(match.id);
+          // Only override maxEmployees when not editing (or when no package was set)
+          if (!company?.package_id) {
+            setMaxEmployees(match.max_employees);
+          }
+        }
+      })
+      .catch(() => {})
+      .finally(() => setPackagesLoading(false));
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+
+  // When the user picks a different package, sync max_employees automatically
+  function handleSelectPackage(pkg: SubscriptionPackage) {
+    setSelectedPackageId(pkg.id);
+    setMaxEmployees(pkg.max_employees);
+  }
 
   function toggleArea(id: number) {
     setAreaIds((prev) => {
@@ -93,6 +136,16 @@ export default function CompanyFormModal({
       setError("Assign at least one area — a company with no area sees no data.");
       return;
     }
+    if (!selectedPackageId) {
+      setError("Please select a subscription package.");
+      return;
+    }
+
+    // Derive the plan slug from the selected package so the companies.plan
+    // column stays backward-compatible.
+    const selectedPkg = packages.find((p) => p.id === selectedPackageId);
+    const planSlug = selectedPkg?.slug ?? "free";
+
     setSaving(true);
     try {
       const payload = {
@@ -103,7 +156,8 @@ export default function CompanyFormModal({
         phone: phone || undefined,
         maxEmployees: Number(maxEmployees),
         industry,
-        plan,
+        plan: planSlug,
+        package_id: selectedPackageId,
         areaIds: Array.from(areaIds),
         categoryIds: Array.from(categoryIds),
         ...(password ? { password } : {}),
@@ -126,6 +180,12 @@ export default function CompanyFormModal({
     }
   }
 
+  const DATA_LIMIT_LABEL: Record<string, string> = {
+    limited: "Limited (preview rows)",
+    half: "Half database (50%)",
+    full: "Full access (100%)",
+  };
+
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 p-4" onClick={onClose}>
       <form
@@ -138,7 +198,9 @@ export default function CompanyFormModal({
         </h2>
 
         {error && (
-          <p className="mb-3 rounded-lg bg-red-50 px-3 py-2 text-sm text-red-700 dark:bg-red-900/20 dark:text-red-400">{error}</p>
+          <p className="mb-3 rounded-lg bg-red-50 px-3 py-2 text-sm text-red-700 dark:bg-red-900/20 dark:text-red-400">
+            {error}
+          </p>
         )}
 
         <div className="grid grid-cols-2 gap-3">
@@ -160,6 +222,7 @@ export default function CompanyFormModal({
             value={String(maxEmployees)}
             onChange={(v) => setMaxEmployees(Number(v) || 1)}
             required
+            hint="Auto-filled from selected package"
           />
           {!isEdit && (
             <Field
@@ -184,25 +247,49 @@ export default function CompanyFormModal({
           </div>
         </div>
 
+        {/* Dynamic Package Selection */}
         <div className="mt-4">
-          <label className="mb-1.5 block text-xs font-medium text-ink-900/60 dark:text-gray-400">Package</label>
-          <div className="grid grid-cols-3 gap-2">
-            {PLANS.map((p) => (
-              <button
-                key={p.value}
-                type="button"
-                onClick={() => setPlan(p.value)}
-                className={`rounded-xl border p-3 text-left text-sm ${
-                  plan === p.value
-                    ? "border-brand-500 bg-brand-50 dark:bg-brand-900/20"
-                    : "border-black/10 dark:border-white/10"
-                }`}
-              >
-                <p className={`font-semibold ${plan === p.value ? "text-brand-700 dark:text-brand-400" : "text-ink-900 dark:text-gray-100"}`}>{p.label}</p>
-                <p className="mt-0.5 text-xs text-ink-900/50 dark:text-gray-500">{p.hint}</p>
-              </button>
-            ))}
-          </div>
+          <label className="mb-1.5 block text-xs font-medium text-ink-900/60 dark:text-gray-400">
+            Subscription Package
+          </label>
+          {packagesLoading ? (
+            <div className="flex items-center gap-2 text-xs text-ink-900/40 dark:text-gray-500 py-3">
+              <Loader2 size={14} className="animate-spin" />
+              Loading packages…
+            </div>
+          ) : packages.length === 0 ? (
+            <p className="text-xs text-amber-600 dark:text-amber-400 py-2">
+              No packages found. Create one in Admin → Subscription Packages first.
+            </p>
+          ) : (
+            <div className="grid grid-cols-3 gap-2">
+              {packages.map((pkg) => {
+                const isSelected = selectedPackageId === pkg.id;
+                return (
+                  <button
+                    key={pkg.id}
+                    type="button"
+                    onClick={() => handleSelectPackage(pkg)}
+                    className={`rounded-xl border p-3 text-left text-sm transition-colors ${
+                      isSelected
+                        ? "border-brand-500 bg-brand-50 dark:bg-brand-900/20"
+                        : "border-black/10 hover:border-black/20 dark:border-white/10 dark:hover:border-white/20"
+                    }`}
+                  >
+                    <p className={`font-semibold truncate ${isSelected ? "text-brand-700 dark:text-brand-400" : "text-ink-900 dark:text-gray-100"}`}>
+                      {pkg.name}
+                    </p>
+                    <p className="mt-0.5 text-xs text-ink-900/50 dark:text-gray-500">
+                      Rs {Number(pkg.price).toLocaleString()} · {pkg.max_employees} seats
+                    </p>
+                    <p className="mt-0.5 text-[10px] text-ink-900/40 dark:text-gray-600 uppercase tracking-wide">
+                      {DATA_LIMIT_LABEL[pkg.data_limit_type] ?? pkg.data_limit_type}
+                    </p>
+                  </button>
+                );
+              })}
+            </div>
+          )}
         </div>
 
         <div className="mt-4 grid grid-cols-2 gap-4">
@@ -246,7 +333,7 @@ export default function CompanyFormModal({
           </button>
           <button
             type="submit"
-            disabled={saving}
+            disabled={saving || packagesLoading}
             className="rounded-lg bg-brand-600 px-4 py-2 text-sm font-medium text-white hover:bg-brand-700 disabled:opacity-50"
           >
             {saving ? "Saving…" : isEdit ? "Save Changes" : "Create Company"}

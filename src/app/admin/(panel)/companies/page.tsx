@@ -15,6 +15,8 @@ interface Company {
   phone: string | null;
   status: string;
   plan: string;
+  package_id: number | null;
+  package_name: string | null;
   max_employees: number;
   employee_count: number;
   areas: { id: number; name: string }[];
@@ -22,15 +24,11 @@ interface Company {
   created_at: string;
 }
 
-const PLAN_LABEL: Record<string, string> = {
-  free: "Free",
-  premium: "Premium",
-  ultra_premium: "Ultra Premium",
-  trial: "Free (legacy)",
-  basic: "Premium (legacy)",
-  pro: "Ultra Premium (legacy)",
-  enterprise: "Ultra Premium (legacy)",
-};
+interface SubscriptionPackage {
+  id: number;
+  name: string;
+  slug: string;
+}
 
 const PLAN_COLOR: Record<string, string> = {
   free: "bg-gray-100 text-gray-700 dark:bg-gray-800 dark:text-gray-300",
@@ -47,11 +45,20 @@ export default function CompanyManagementPage() {
   const [planFilter, setPlanFilter] = useState("");
   const [selected, setSelected] = useState<Set<string>>(new Set());
   const [bulkBusy, setBulkBusy] = useState(false);
-  const [editTarget, setEditTarget] = useState<CompanyEditData | null | undefined>(undefined); // undefined = closed, null = creating
-  
+  const [editTarget, setEditTarget] = useState<CompanyEditData | null | undefined>(undefined);
+  const [packages, setPackages] = useState<SubscriptionPackage[]>([]);
+
   // Pagination State
   const [page, setPage] = useState(1);
   const pageSize = 50;
+
+  // Load packages for the filter dropdown
+  useEffect(() => {
+    fetch("/api/admin/packages")
+      .then((r) => r.json())
+      .then((d) => setPackages(d.packages || []))
+      .catch(() => {});
+  }, []);
 
   const load = useCallback(async () => {
     setLoading(true);
@@ -71,10 +78,22 @@ export default function CompanyManagementPage() {
   // Filter companies based on search and dropdowns
   const filtered = companies.filter((c) => {
     if (statusFilter && c.status !== statusFilter) return false;
-    if (planFilter && c.plan !== planFilter) return false;
+    if (planFilter) {
+      // Match by package_id or plan slug for legacy rows
+      const pkgId = parseInt(planFilter, 10);
+      if (!isNaN(pkgId)) {
+        if (c.package_id !== pkgId) return false;
+      } else {
+        if (c.plan !== planFilter) return false;
+      }
+    }
     if (search) {
       const s = search.toLowerCase();
-      if (!c.name.toLowerCase().includes(s) && !(c.legal_name || "").toLowerCase().includes(s) && !c.email.toLowerCase().includes(s)) {
+      if (
+        !c.name.toLowerCase().includes(s) &&
+        !(c.legal_name || "").toLowerCase().includes(s) &&
+        !c.email.toLowerCase().includes(s)
+      ) {
         return false;
       }
     }
@@ -82,11 +101,8 @@ export default function CompanyManagementPage() {
   });
 
   // Reset to page 1 whenever filters change
-  useEffect(() => {
-    setPage(1);
-  }, [search, statusFilter, planFilter]);
+  useEffect(() => { setPage(1); }, [search, statusFilter, planFilter]);
 
-  // Calculate pagination variables based on filtered results
   const total = filtered.length;
   const totalPages = Math.ceil(total / pageSize) || 1;
   const currentRows = filtered.slice((page - 1) * pageSize, page * pageSize);
@@ -126,6 +142,7 @@ export default function CompanyManagementPage() {
         phone: data.company.phone,
         industry: data.company.industry,
         plan: data.company.plan,
+        package_id: data.company.package_id ?? null,
         max_employees: data.company.max_employees,
         status: data.company.status,
         areaIds: data.areas.map((a: any) => a.id),
@@ -134,6 +151,14 @@ export default function CompanyManagementPage() {
     } catch (e: any) {
       setError(e.message);
     }
+  }
+
+  // Display label: prefer real package name, fall back to plan slug
+  function planLabel(c: Company) {
+    return c.package_name || c.plan;
+  }
+  function planColorClass(c: Company) {
+    return PLAN_COLOR[c.plan] || PLAN_COLOR.free;
   }
 
   return (
@@ -165,15 +190,17 @@ export default function CompanyManagementPage() {
           <option value="suspended">Suspended</option>
           <option value="cancelled">Cancelled</option>
         </select>
+
+        {/* Dynamic plan filter — populated from the packages table */}
         <select
           value={planFilter}
           onChange={(e) => setPlanFilter(e.target.value)}
           className="rounded-lg border border-black/10 bg-white px-3 py-2 text-sm text-ink-900 outline-none focus:border-brand-500 dark:border-white/10 dark:bg-gray-800 dark:text-gray-100"
         >
-          <option value="">All plans</option>
-          <option value="free">Free</option>
-          <option value="premium">Premium</option>
-          <option value="ultra_premium">Ultra Premium</option>
+          <option value="">All packages</option>
+          {packages.map((pkg) => (
+            <option key={pkg.id} value={pkg.id}>{pkg.name}</option>
+          ))}
         </select>
       </div>
 
@@ -200,7 +227,7 @@ export default function CompanyManagementPage() {
               <th className="px-4 py-3">Industry</th>
               <th className="px-4 py-3">Assigned Areas</th>
               <th className="px-4 py-3">Employees</th>
-              <th className="px-4 py-3">Plan</th>
+              <th className="px-4 py-3">Package</th>
               <th className="px-4 py-3">Status</th>
               <th className="px-4 py-3 text-right">Actions</th>
             </tr>
@@ -235,8 +262,8 @@ export default function CompanyManagementPage() {
                   </td>
                   <td className="px-4 py-3 text-ink-900/60 dark:text-gray-400">{c.employee_count} / {c.max_employees}</td>
                   <td className="px-4 py-3">
-                    <span className={`inline-flex rounded-full px-2.5 py-0.5 text-xs font-medium ${PLAN_COLOR[c.plan] || PLAN_COLOR.free}`}>
-                      {PLAN_LABEL[c.plan] || c.plan}
+                    <span className={`inline-flex rounded-full px-2.5 py-0.5 text-xs font-medium ${planColorClass(c)}`}>
+                      {planLabel(c)}
                     </span>
                   </td>
                   <td className="px-4 py-3"><StatusBadge status={c.status} /></td>

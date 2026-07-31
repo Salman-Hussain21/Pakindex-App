@@ -28,8 +28,14 @@ export async function GET(req: Request) {
     const search = searchParams.get("search") || "";
     const statusFilter = searchParams.get("status") || "";
 
+    // Resolve the seat limit from the live subscription_packages row so that
+    // updating a package immediately reflects across all companies using it.
     const metaRes = await query(
-      `SELECT max_employees FROM companies WHERE id = $1 AND deleted_at IS NULL LIMIT 1`,
+      `SELECT COALESCE(sp.max_employees, c.max_employees, 5) AS max_employees
+       FROM companies c
+       LEFT JOIN subscription_packages sp ON sp.id = c.package_id
+       WHERE c.id = $1 AND c.deleted_at IS NULL
+       LIMIT 1`,
       [session.companyId]
     );
     const maxEmployeesLimit = metaRes.rows[0]?.max_employees ?? 5;
@@ -85,7 +91,11 @@ export async function POST(req: Request) {
     }
 
     const compRes = await query(
-      `SELECT max_employees FROM companies WHERE id = $1 AND deleted_at IS NULL LIMIT 1`,
+      `SELECT COALESCE(sp.max_employees, c.max_employees, 5) AS max_employees
+       FROM companies c
+       LEFT JOIN subscription_packages sp ON sp.id = c.package_id
+       WHERE c.id = $1 AND c.deleted_at IS NULL
+       LIMIT 1`,
       [session.companyId]
     );
     const maxLimit = compRes.rows[0]?.max_employees ?? 5;

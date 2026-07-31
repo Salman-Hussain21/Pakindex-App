@@ -9,9 +9,13 @@ export async function GET(_request: NextRequest, { params }: { params: Promise<{
 
   const companyResult = await query(
     `SELECT c.*, u.full_name AS admin_name, u.email AS admin_email,
+            sp.id AS package_id, sp.name AS package_name, sp.slug AS package_slug,
+            sp.price AS package_price, sp.max_employees AS package_max_employees,
+            sp.data_limit_type,
             (SELECT COUNT(*) FROM users e WHERE e.company_id = c.id AND e.role = 'employee' AND e.deleted_at IS NULL) AS employee_count
      FROM companies c
      LEFT JOIN users u ON u.id = c.admin_user_id
+     LEFT JOIN subscription_packages sp ON sp.id = c.package_id
      WHERE c.id = $1 AND c.deleted_at IS NULL`,
     [id]
   );
@@ -55,6 +59,7 @@ export async function PATCH(request: NextRequest, { params }: { params: Promise<
     maxEmployees?: number;
     industry?: string;
     plan?: string;
+    package_id?: number;
     status?: string;
     areaIds?: number[];
     categoryIds?: number[];
@@ -65,9 +70,25 @@ export async function PATCH(request: NextRequest, { params }: { params: Promise<
     return NextResponse.json({ error: "Invalid request body" }, { status: 400 });
   }
 
-  const before = await query(`SELECT name, status, plan FROM companies WHERE id = $1`, [id]);
+  const before = await query(`SELECT name, status, plan, package_id FROM companies WHERE id = $1`, [id]);
   if (before.rows.length === 0) {
     return NextResponse.json({ error: "Not found" }, { status: 404 });
+  }
+
+  // When package_id changes, resolve the canonical max_employees and plan slug
+  // from the package table so the companies row stays in sync automatically.
+  let resolvedPlan = body.plan;
+  let resolvedMaxEmployees = body.maxEmployees;
+
+  if (body.package_id !== undefined && body.package_id !== null) {
+    const pkgRes = await query(
+      `SELECT slug, max_employees FROM subscription_packages WHERE id = $1`,
+      [body.package_id]
+    );
+    if (pkgRes.rows.length > 0) {
+      resolvedPlan = pkgRes.rows[0].slug;
+      resolvedMaxEmployees = pkgRes.rows[0].max_employees;
+    }
   }
 
   const setClauses: string[] = [];
@@ -77,9 +98,10 @@ export async function PATCH(request: NextRequest, { params }: { params: Promise<
     legal_name: body.legalName,
     email: body.email,
     phone: body.phone,
-    max_employees: body.maxEmployees,
+    max_employees: resolvedMaxEmployees,
     industry: body.industry,
-    plan: body.plan,
+    plan: resolvedPlan,
+    package_id: body.package_id,
     status: body.status,
   };
   for (const [column, value] of Object.entries(fieldMap)) {
@@ -113,10 +135,16 @@ export async function PATCH(request: NextRequest, { params }: { params: Promise<
     entityId: id,
     action: "update",
     oldValues: before.rows[0],
-    newValues: { name: body.companyName || before.rows[0].name, ...body },
+    newValues: { name: body.companyName || before.rows[0].name, ...body, plan: resolvedPlan, max_employees: resolvedMaxEmployees },
   });
 
-  const { rows } = await query(`SELECT * FROM companies WHERE id = $1`, [id]);
+  const { rows } = await query(
+    `SELECT c.*, sp.name AS package_name, sp.price AS package_price
+     FROM companies c
+     LEFT JOIN subscription_packages sp ON sp.id = c.package_id
+     WHERE c.id = $1`,
+    [id]
+  );
   return NextResponse.json({ company: rows[0] });
 }
 

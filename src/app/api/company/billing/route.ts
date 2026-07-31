@@ -9,11 +9,15 @@ export async function GET() {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
 
-    // 1. Get company plan info
+    // 1. Get company plan info with linked subscription package details
     const companyRes = await query(
-      `SELECT name, plan, plan_expires_at, max_employees, max_territories
-       FROM companies
-       WHERE id = $1`,
+      `SELECT c.name, c.plan, c.plan_expires_at, 
+              COALESCE(sp.max_employees, c.max_employees, 5) AS max_employees, 
+              c.max_territories,
+              sp.name AS package_name, sp.price AS package_price, sp.data_limit_type
+       FROM companies c
+       LEFT JOIN subscription_packages sp ON sp.id = c.package_id
+       WHERE c.id = $1`,
       [session.companyId]
     );
 
@@ -36,6 +40,9 @@ export async function GET() {
     return NextResponse.json({
       name: company.name,
       plan: company.plan,
+      package_name: company.package_name || company.plan,
+      package_price: company.package_price ? Number(company.package_price) : 0,
+      data_limit_type: company.data_limit_type || "limited",
       plan_expires_at: company.plan_expires_at,
       max_employees: company.max_employees,
       max_territories: company.max_territories,

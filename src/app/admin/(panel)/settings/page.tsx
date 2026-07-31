@@ -187,6 +187,17 @@ function CategoriesTab() {
     }
   }
 
+  async function handleDelete(id: number) {
+    if (!confirm("Are you sure you want to delete this category?")) return;
+    try {
+      const { deleteCategory } = await import("@/lib/admin-api");
+      await deleteCategory(id);
+      load();
+    } catch (e: any) {
+      setError(e.message);
+    }
+  }
+
   return (
     <Card>
       <h2 className="mb-4 text-sm font-semibold text-ink-900 dark:text-gray-100">Categories</h2>
@@ -208,8 +219,14 @@ function CategoriesTab() {
       {error && <p className="mb-3 text-sm text-red-700 dark:text-red-400">{error}</p>}
       <ul className="space-y-1">
         {categories.map((c) => (
-          <li key={c.id} className="rounded-lg bg-gray-50 px-3 py-2 text-sm text-ink-900 dark:bg-gray-800 dark:text-gray-100">
-            {c.name}
+          <li key={c.id} className="flex justify-between items-center rounded-lg bg-gray-50 px-3 py-2 text-sm text-ink-900 dark:bg-gray-800 dark:text-gray-100">
+            <span>{c.name}</span>
+            <button
+              onClick={() => handleDelete(c.id)}
+              className="text-xs font-semibold text-red-600 hover:text-red-700 dark:text-red-400 dark:hover:text-red-300"
+            >
+              Delete
+            </button>
           </li>
         ))}
       </ul>
@@ -218,9 +235,11 @@ function CategoriesTab() {
 }
 
 function AreasTab() {
-  const [areas, setAreas] = useState<{ id: number; name: string; city_name: string }[]>([]);
+  const [areas, setAreas] = useState<{ id: number; name: string; city_name: string; latitude: number | null; longitude: number | null }[]>([]);
   const [cities, setCities] = useState<{ id: number; name: string }[]>([]);
   const [newName, setNewName] = useState("");
+  const [latitude, setLatitude] = useState("");
+  const [longitude, setLongitude] = useState("");
   const [cityId, setCityId] = useState<string>("");
   const [error, setError] = useState<string | null>(null);
   const [saving, setSaving] = useState(false);
@@ -241,8 +260,15 @@ function AreasTab() {
     setSaving(true);
     setError(null);
     try {
-      await createArea({ name: newName.trim(), cityId: Number(cityId) });
+      await createArea({
+        name: newName.trim(),
+        cityId: Number(cityId),
+        latitude: latitude ? Number(latitude) : undefined,
+        longitude: longitude ? Number(longitude) : undefined,
+      });
       setNewName("");
+      setLatitude("");
+      setLongitude("");
       load();
     } catch (e: any) {
       setError(e.message);
@@ -251,43 +277,93 @@ function AreasTab() {
     }
   }
 
+  async function handleDelete(id: number) {
+    if (!confirm("Are you sure you want to delete this area?")) return;
+    try {
+      const { deleteArea } = await import("@/lib/admin-api");
+      await deleteArea(id);
+      load();
+    } catch (e: any) {
+      setError(e.message);
+    }
+  }
+
   return (
     <Card>
       <h2 className="mb-2 text-sm font-semibold text-ink-900 dark:text-gray-100">Areas</h2>
       <p className="mb-4 text-xs text-ink-900/50 dark:text-gray-400">
-        Adding an area here improves address matching — businesses scraped or imported from
-        this neighborhood will now be tagged with it automatically.
+        Adding an area here improves address matching. Provide a Latitude and Longitude to register it as an active grid cell on the scraping map.
       </p>
-      <form onSubmit={handleAdd} className="mb-4 flex gap-2">
-        <input
-          value={newName}
-          onChange={(e) => setNewName(e.target.value)}
-          placeholder="e.g. Sharafabad"
-          className="flex-1 rounded-lg border border-black/10 bg-white px-3 py-2 text-sm text-ink-900 outline-none focus:border-brand-500 dark:border-white/10 dark:bg-gray-800 dark:text-gray-100"
-        />
-        <select
-          value={cityId}
-          onChange={(e) => setCityId(e.target.value)}
-          className="rounded-lg border border-black/10 bg-white px-3 py-2 text-sm text-ink-900 outline-none focus:border-brand-500 dark:border-white/10 dark:bg-gray-800 dark:text-gray-100"
-        >
-          {cities.map((c) => (
-            <option key={c.id} value={c.id}>{c.name}</option>
-          ))}
-        </select>
-        <button
-          type="submit"
-          disabled={saving}
-          className="rounded-lg bg-brand-600 px-4 py-2 text-sm font-medium text-white hover:bg-brand-700 disabled:opacity-50"
-        >
-          Add
-        </button>
+      <form onSubmit={handleAdd} className="mb-4 space-y-3">
+        <div className="flex gap-2">
+          <input
+            value={newName}
+            onChange={(e) => setNewName(e.target.value)}
+            placeholder="e.g. Sharafabad"
+            className="flex-1 rounded-lg border border-black/10 bg-white px-3 py-2 text-sm text-ink-900 outline-none focus:border-brand-500 dark:border-white/10 dark:bg-gray-800 dark:text-gray-100"
+            required
+          />
+          <select
+            value={cityId}
+            onChange={(e) => setCityId(e.target.value)}
+            className="rounded-lg border border-black/10 bg-white px-3 py-2 text-sm text-ink-900 outline-none focus:border-brand-500 dark:border-white/10 dark:bg-gray-800 dark:text-gray-100"
+          >
+            {cities.map((c) => (
+              <option key={c.id} value={c.id}>{c.name}</option>
+            ))}
+          </select>
+        </div>
+        <div className="flex gap-2">
+          <input
+            type="number"
+            step="any"
+            value={latitude}
+            onChange={(e) => setLatitude(e.target.value)}
+            placeholder="Latitude (e.g. 24.8941) [Optional]"
+            className="flex-1 rounded-lg border border-black/10 bg-white px-3 py-2 text-sm text-ink-900 outline-none focus:border-brand-500 dark:border-white/10 dark:bg-gray-800 dark:text-gray-100"
+          />
+          <input
+            type="number"
+            step="any"
+            value={longitude}
+            onChange={(e) => setLongitude(e.target.value)}
+            placeholder="Longitude (e.g. 67.0654) [Optional]"
+            className="flex-1 rounded-lg border border-black/10 bg-white px-3 py-2 text-sm text-ink-900 outline-none focus:border-brand-500 dark:border-white/10 dark:bg-gray-800 dark:text-gray-100"
+          />
+          <button
+            type="submit"
+            disabled={saving}
+            className="rounded-lg bg-brand-600 px-5 py-2 text-sm font-medium text-white hover:bg-brand-700 disabled:opacity-50"
+          >
+            Add
+          </button>
+        </div>
       </form>
       {error && <p className="mb-3 text-sm text-red-700 dark:text-red-400">{error}</p>}
       <ul className="max-h-64 space-y-1 overflow-y-auto">
         {areas.map((a) => (
-          <li key={a.id} className="flex justify-between rounded-lg bg-gray-50 px-3 py-2 text-sm dark:bg-gray-800">
-            <span className="text-ink-900 dark:text-gray-100">{a.name}</span>
-            <span className="text-ink-900/40 dark:text-gray-500">{a.city_name}</span>
+          <li key={a.id} className="flex justify-between items-center rounded-lg bg-gray-50 px-3 py-2 text-sm dark:bg-gray-800">
+            <div className="flex flex-col">
+              <span className="text-ink-900 dark:text-gray-100 font-medium">{a.name}</span>
+              {a.latitude && a.longitude ? (
+                <span className="text-[10px] text-brand-600 dark:text-brand-400 font-mono mt-0.5">
+                  Scraping Cell: {a.latitude}, {a.longitude}
+                </span>
+              ) : (
+                <span className="text-[10px] text-ink-900/40 dark:text-gray-500 mt-0.5">
+                  No coordinates (not in grid)
+                </span>
+              )}
+            </div>
+            <div className="flex items-center gap-3">
+              <span className="text-xs text-ink-900/40 dark:text-gray-500">{a.city_name}</span>
+              <button
+                onClick={() => handleDelete(a.id)}
+                className="text-xs font-semibold text-red-600 hover:text-red-700 dark:text-red-400 dark:hover:text-red-300"
+              >
+                Delete
+              </button>
+            </div>
           </li>
         ))}
       </ul>

@@ -7,6 +7,9 @@ import { getCompanyBilling } from "@/lib/company-api";
 interface BillingData {
   name: string;
   plan: string;
+  package_name: string;
+  package_price: number;
+  data_limit_type: string;
   plan_expires_at: string | null;
   max_employees: number;
   max_territories: number;
@@ -71,10 +74,10 @@ export default function BillingPage() {
             <div className="flex items-start justify-between">
               <div>
                 <span className="inline-flex items-center gap-1.5 rounded-full bg-brand-50 px-2.5 py-1 text-xs font-semibold uppercase text-brand-700 dark:bg-brand-900/30 dark:text-brand-400">
-                  <Zap size={14} /> {data.plan} Plan
+                  <Zap size={14} /> {data.package_name}
                 </span>
-                <p className="mt-3 text-3xl font-bold text-ink-900 dark:text-gray-100 capitalize">
-                  {data.plan}
+                <p className="mt-3 text-3xl font-bold text-ink-900 dark:text-gray-100">
+                  Rs {data.package_price.toLocaleString()}<span className="text-sm font-normal text-ink-900/60 dark:text-gray-400"> / month</span>
                 </p>
                 <p className="mt-2 text-sm text-ink-900/60 dark:text-gray-400">
                   Your plan renews on <strong>{expiresText}</strong>.
