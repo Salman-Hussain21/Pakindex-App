@@ -1,8 +1,8 @@
 "use client";
 
-import { createContext, useContext, useEffect, useState } from "react";
+import { createContext, useContext, useEffect, useRef, useState } from "react";
 
-const STORAGE_KEY = "pakindex-dark-mode"; // Same key as admin so the no-flash <script> in root layout.tsx works for both panels
+const STORAGE_KEY = "pakindex-dark-mode";
 
 interface ThemeContextValue {
   dark: boolean;
@@ -18,27 +18,46 @@ export function ThemeProvider({
   initialDarkMode: boolean;
   children: React.ReactNode;
 }) {
-  const [dark, setDarkState] = useState(initialDarkMode);
+  const [dark, setDarkState] = useState<boolean>(() => {
+    if (typeof window !== "undefined") {
+      const stored = localStorage.getItem(STORAGE_KEY);
+      if (stored !== null) return stored === "true";
+    }
+    return initialDarkMode;
+  });
+
+  const mounted = useRef(false);
 
   useEffect(() => {
-    const stored = localStorage.getItem(STORAGE_KEY);
-    if (stored !== null) setDarkState(stored === "true");
-  }, []);
+    if (!mounted.current) {
+      mounted.current = true;
+      const stored = localStorage.getItem(STORAGE_KEY);
+      const resolved = stored !== null ? stored === "true" : initialDarkMode;
+      document.documentElement.classList.toggle("dark", resolved);
 
-  useEffect(() => {
+      if (resolved !== initialDarkMode) {
+        setDarkState(resolved);
+        fetch("/api/company/me", {
+          method: "PATCH",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ darkMode: resolved }),
+        }).catch(() => {});
+      }
+      return;
+    }
     document.documentElement.classList.toggle("dark", dark);
     localStorage.setItem(STORAGE_KEY, String(dark));
-  }, [dark]);
+  }, [dark]); // eslint-disable-line react-hooks/exhaustive-deps
 
   function setDark(value: boolean) {
     setDarkState(value);
+    localStorage.setItem(STORAGE_KEY, String(value));
+    document.documentElement.classList.toggle("dark", value);
     fetch("/api/company/me", {
       method: "PATCH",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ darkMode: value }),
-    }).catch(() => {
-      // localStorage already has it for this browser regardless.
-    });
+    }).catch(() => {});
   }
 
   return <ThemeContext.Provider value={{ dark, setDark }}>{children}</ThemeContext.Provider>;

@@ -4,7 +4,7 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { LogOut } from "lucide-react";
 import { employeeLogout } from "@/lib/employee-api";
-import ThemeToggle from "@/components/admin/ThemeToggle"; // Reuse admin toggle
+import ThemeToggle from "@/components/employee/ThemeToggle";
 
 export default function EmployeeTopbar({
   fullName,
@@ -29,7 +29,7 @@ export default function EmployeeTopbar({
   }
 
   return (
-    <header className="flex h-16 flex-shrink-0 items-center justify-between border-b border-black/[0.06] bg-white/80 backdrop-blur-xl px-6 dark:border-white/[0.06] dark:bg-[#111827]/80">
+    <header className="flex h-16 flex-shrink-0 items-center justify-between border-b border-black/[0.06] bg-white/80 backdrop-blur-xl px-6 dark:border-white/[0.06] dark:bg-[#0c120f]/90">
       <h1 className="font-[family-name:var(--font-montserrat)] text-lg font-bold tracking-tight text-ink-900 dark:text-gray-100">{title || "Field Dashboard"}</h1>
       <div className="flex items-center gap-3">
         <ThemeToggle />

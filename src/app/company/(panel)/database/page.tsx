@@ -2,7 +2,8 @@
 
 import { useEffect, useState, useCallback } from "react";
 import { useSearchParams } from "next/navigation";
-import { Megaphone, Lock, ArrowUpRight, UserPlus, User, Star } from "lucide-react";
+import { Megaphone, Lock, ArrowUpRight, UserPlus, User, Star, Sparkles } from "lucide-react";
+import AIPitchModal from "@/components/company/AIPitchModal";
 import StatusBadge from "@/components/admin/StatusBadge";
 import BulkActionBar from "@/components/admin/BulkActionBar";
 import PreviewMapButtons from "@/components/admin/PreviewMapButtons";
@@ -66,6 +67,13 @@ export default function RestaurantDatabasePage() {
   const [selectedEmployeeId, setSelectedEmployeeId] = useState<string>("");
   const [assignSubmitting, setAssignSubmitting] = useState(false);
   const [assignError, setAssignError] = useState<string | null>(null);
+
+  // AI Pitch Modal state
+  const [aiModalBusiness, setAiModalBusiness] = useState<{
+    id: string; name: string; category?: string; area?: string; city?: string;
+    rating?: number | null; review_count?: number | null; price_range?: string | null;
+    phone?: string | null; address?: string | null;
+  } | null>(null);
 
   useEffect(() => {
     if (searchParams.get("upgrade") === "true") setShowUpsellModal(true);
@@ -315,6 +323,7 @@ export default function RestaurantDatabasePage() {
                 <th className="px-4 py-3">Area</th>
                 <th className="px-4 py-3">Status</th>
                 <th className="px-4 py-3">Assigned</th>
+                <th className="px-4 py-3 text-center">AI</th>
                 <th className="px-4 py-3 text-right">Actions</th>
               </tr>
             </thead>
@@ -391,6 +400,27 @@ export default function RestaurantDatabasePage() {
                           <UserPlus size={11} /> {b.assigned_employee_name ? "Reassign" : "Assign"}
                         </button>
                       </div>
+                    </td>
+                    {/* AI Intelligence */}
+                    <td className="px-4 py-3 text-center" onClick={(e) => e.stopPropagation()}>
+                      <button
+                        onClick={() => setAiModalBusiness({
+                          id: b.id,
+                          name: b.name,
+                          category: (b as any).category_name || b.business_type || undefined,
+                          area: (b as any).area_name || undefined,
+                          city: b.city_name || "Karachi",
+                          rating: b.rating,
+                          review_count: (b as any).review_count,
+                          price_range: (b as any).price_range,
+                          phone: b.phone || undefined,
+                          address: b.address || undefined,
+                        })}
+                        className="inline-flex items-center gap-1 rounded-full bg-gradient-to-r from-brand-600 to-indigo-600 px-2.5 py-1 text-[10px] font-bold text-white shadow hover:opacity-90 transition-all"
+                        title="Generate AI Sales Intelligence"
+                      >
+                        <Sparkles size={10} /> AI
+                      </button>
                     </td>
                     {/* Actions */}
                     <td className="px-4 py-3">
@@ -524,6 +554,15 @@ export default function RestaurantDatabasePage() {
             </div>
           </form>
         </div>
+      )}
+
+      {/* AI Intelligence Modal */}
+      {aiModalBusiness && (
+        <AIPitchModal
+          isOpen={!!aiModalBusiness}
+          onClose={() => setAiModalBusiness(null)}
+          business={aiModalBusiness}
+        />
       )}
     </div>
   );

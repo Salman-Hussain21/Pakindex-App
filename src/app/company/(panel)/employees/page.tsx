@@ -577,7 +577,7 @@ export default function FullyIntegratedEmployeeModule() {
                     <form onSubmit={handleAddEmployee} className="bg-white dark:bg-gray-900 rounded-2xl border border-slate-200 dark:border-white/10 max-w-md w-full p-6 space-y-4 shadow-xl max-h-[90vh] overflow-y-auto">
                         <div>
                             <h3 className="text-sm font-bold text-slate-900 dark:text-white">Add New Employee</h3>
-                            <p className="text-[11px] text-slate-400 mt-0.5">Fill in the details below to create a new employee account.</p>
+                            <p className="text-[11px] text-slate-400 dark:text-gray-500 mt-0.5">Fill in the details below to create a new employee account.</p>
                         </div>
                         {formError && (
                             <div className="p-3 text-xs font-medium text-red-700 bg-red-50 border border-red-200 rounded-lg">
@@ -587,42 +587,42 @@ export default function FullyIntegratedEmployeeModule() {
 
                         <div className="grid grid-cols-1 gap-3.5 pt-1">
                             <div>
-                                <label className="block text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-1">Full Name</label>
-                                <input type="text" required value={name} onChange={(e) => setName(e.target.value)} className="w-full border border-slate-200 rounded-xl p-2 text-xs outline-none focus:border-brand-500 transition-colors" placeholder="e.g. Muhammad Yousuf" />
+                                <label className="block text-[10px] font-bold text-slate-400 dark:text-gray-500 uppercase tracking-wider mb-1">Full Name</label>
+                                <input type="text" required value={name} onChange={(e) => setName(e.target.value)} className="w-full border border-slate-200 dark:border-white/10 rounded-xl p-2 text-xs outline-none focus:border-brand-500 transition-colors bg-white dark:bg-gray-800 text-slate-900 dark:text-gray-100 placeholder:text-slate-400 dark:placeholder:text-gray-500" placeholder="e.g. Muhammad Yousuf" />
                             </div>
                             <div className="grid grid-cols-2 gap-3">
                                 <div>
-                                    <label className="block text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-1">Email</label>
-                                    <input type="email" required value={email} onChange={(e) => setEmail(e.target.value)} className="w-full border border-slate-200 rounded-xl p-2 text-xs outline-none focus:border-brand-500 transition-colors" placeholder="name@domain.com" />
+                                    <label className="block text-[10px] font-bold text-slate-400 dark:text-gray-500 uppercase tracking-wider mb-1">Email</label>
+                                    <input type="email" required value={email} onChange={(e) => setEmail(e.target.value)} className="w-full border border-slate-200 dark:border-white/10 rounded-xl p-2 text-xs outline-none focus:border-brand-500 transition-colors bg-white dark:bg-gray-800 text-slate-900 dark:text-gray-100 placeholder:text-slate-400 dark:placeholder:text-gray-500" placeholder="name@domain.com" />
                                 </div>
                                 <div>
-                                    <label className="block text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-1">Username</label>
-                                    <input type="text" required value={username} onChange={(e) => setUsername(e.target.value)} className="w-full border border-slate-200 rounded-xl p-2 text-xs outline-none focus:border-brand-500 transition-colors" placeholder="yousuf99" />
+                                    <label className="block text-[10px] font-bold text-slate-400 dark:text-gray-500 uppercase tracking-wider mb-1">Username</label>
+                                    <input type="text" required value={username} onChange={(e) => setUsername(e.target.value)} className="w-full border border-slate-200 dark:border-white/10 rounded-xl p-2 text-xs outline-none focus:border-brand-500 transition-colors bg-white dark:bg-gray-800 text-slate-900 dark:text-gray-100 placeholder:text-slate-400 dark:placeholder:text-gray-500" placeholder="yousuf99" />
                                 </div>
                             </div>
                             <div>
-                                <label className="block text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-1">Password</label>
-                                <input type="password" required minLength={8} value={password} onChange={(e) => setPassword(e.target.value)} className="w-full border border-slate-200 rounded-xl p-2 text-xs outline-none focus:border-brand-500 transition-colors" placeholder="Minimum 8 characters" />
+                                <label className="block text-[10px] font-bold text-slate-400 dark:text-gray-500 uppercase tracking-wider mb-1">Password</label>
+                                <input type="password" required minLength={8} value={password} onChange={(e) => setPassword(e.target.value)} className="w-full border border-slate-200 dark:border-white/10 rounded-xl p-2 text-xs outline-none focus:border-brand-500 transition-colors bg-white dark:bg-gray-800 text-slate-900 dark:text-gray-100 placeholder:text-slate-400 dark:placeholder:text-gray-500" placeholder="Minimum 8 characters" />
                             </div>
                             <div>
-                                <label className="block text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-1">Phone (Optional)</label>
-                                <input type="text" value={phone} onChange={(e) => setPhone(e.target.value)} className="w-full border border-slate-200 rounded-xl p-2 text-xs outline-none focus:border-brand-500 transition-colors" placeholder="+92 300 1234567" />
+                                <label className="block text-[10px] font-bold text-slate-400 dark:text-gray-500 uppercase tracking-wider mb-1">Phone (Optional)</label>
+                                <input type="text" value={phone} onChange={(e) => setPhone(e.target.value)} className="w-full border border-slate-200 dark:border-white/10 rounded-xl p-2 text-xs outline-none focus:border-brand-500 transition-colors bg-white dark:bg-gray-800 text-slate-900 dark:text-gray-100 placeholder:text-slate-400 dark:placeholder:text-gray-500" placeholder="+92 300 1234567" />
                             </div>
                             <div className="grid grid-cols-2 gap-3">
                                 <div>
-                                    <label className="block text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-1">Designation</label>
-                                    <input type="text" value={designation} onChange={(e) => setDesignation(e.target.value)} className="w-full border border-slate-200 rounded-xl p-2 text-xs outline-none focus:border-brand-500 transition-colors" placeholder="e.g. Sales Rep" />
+                                    <label className="block text-[10px] font-bold text-slate-400 dark:text-gray-500 uppercase tracking-wider mb-1">Designation</label>
+                                    <input type="text" value={designation} onChange={(e) => setDesignation(e.target.value)} className="w-full border border-slate-200 dark:border-white/10 rounded-xl p-2 text-xs outline-none focus:border-brand-500 transition-colors bg-white dark:bg-gray-800 text-slate-900 dark:text-gray-100 placeholder:text-slate-400 dark:placeholder:text-gray-500" placeholder="e.g. Sales Rep" />
                                 </div>
                                 <div>
-                                    <label className="block text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-1">Department</label>
-                                    <input type="text" value={department} onChange={(e) => setDepartment(e.target.value)} className="w-full border border-slate-200 rounded-xl p-2 text-xs outline-none focus:border-brand-500 transition-colors" placeholder="e.g. Sales" />
+                                    <label className="block text-[10px] font-bold text-slate-400 dark:text-gray-500 uppercase tracking-wider mb-1">Department</label>
+                                    <input type="text" value={department} onChange={(e) => setDepartment(e.target.value)} className="w-full border border-slate-200 dark:border-white/10 rounded-xl p-2 text-xs outline-none focus:border-brand-500 transition-colors bg-white dark:bg-gray-800 text-slate-900 dark:text-gray-100 placeholder:text-slate-400 dark:placeholder:text-gray-500" placeholder="e.g. Sales" />
                                 </div>
                             </div>
                             <AssignedAreaField />
                         </div>
 
-                        <div className="flex justify-end gap-2 text-xs font-semibold pt-4 border-t border-slate-100">
-                            <button type="button" onClick={() => setShowAddModal(false)} className="px-3 py-2 bg-slate-50 hover:bg-slate-100 text-slate-600 rounded-xl border border-slate-200 cursor-pointer">Cancel</button>
+                        <div className="flex justify-end gap-2 text-xs font-semibold pt-4 border-t border-slate-100 dark:border-white/10">
+                            <button type="button" onClick={() => setShowAddModal(false)} className="px-3 py-2 bg-slate-50 hover:bg-slate-100 text-slate-600 rounded-xl border border-slate-200 dark:border-white/10 dark:bg-gray-800 dark:text-gray-300 dark:hover:bg-gray-700 cursor-pointer">Cancel</button>
                             <button type="submit" disabled={formSubmitting} className="px-4 py-2 bg-brand-600 hover:bg-brand-700 text-white rounded-xl shadow-sm disabled:opacity-50 transition-colors cursor-pointer">
                                 {formSubmitting ? "Saving…" : "Add Employee"}
                             </button>
@@ -634,10 +634,10 @@ export default function FullyIntegratedEmployeeModule() {
             {/* EDIT EMPLOYEE / UPDATE PROFILE DETAILS DIALOG MODAL (PRE-POPULATED DATA) */}
             {showEditModal && selectedEmp && (
                 <div className="fixed inset-0 z-40 flex items-center justify-center bg-black/30 backdrop-blur-xs p-4 animate-in fade-in duration-200">
-                    <form onSubmit={handleUpdateEmployeeProfile} className="bg-white rounded-2xl border border-slate-200 max-w-md w-full p-6 space-y-4 shadow-xl max-h-[90vh] overflow-y-auto">
+                    <form onSubmit={handleUpdateEmployeeProfile} className="bg-white dark:bg-gray-900 rounded-2xl border border-slate-200 dark:border-white/10 max-w-md w-full p-6 space-y-4 shadow-xl max-h-[90vh] overflow-y-auto">
                         <div>
-                            <h3 className="text-sm font-bold text-slate-900">Edit Employee</h3>
-                            <p className="text-[11px] text-slate-400 mt-0.5">Editing details for <span className="font-semibold text-slate-700">{selectedEmp.full_name}</span></p>
+                            <h3 className="text-sm font-bold text-slate-900 dark:text-white">Edit Employee</h3>
+                            <p className="text-[11px] text-slate-400 dark:text-gray-500 mt-0.5">Editing details for <span className="font-semibold text-slate-700">{selectedEmp.full_name}</span></p>
                         </div>
                         {formError && (
                             <div className="p-3 text-xs font-medium text-red-700 bg-red-50 border border-red-200 rounded-lg">
@@ -647,38 +647,38 @@ export default function FullyIntegratedEmployeeModule() {
 
                         <div className="grid grid-cols-1 gap-3.5 pt-1">
                             <div>
-                                <label className="block text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-1">Full Name</label>
-                                <input type="text" required value={name} onChange={(e) => setName(e.target.value)} className="w-full border border-slate-200 rounded-xl p-2 text-xs outline-none focus:border-brand-500 transition-colors" />
+                                <label className="block text-[10px] font-bold text-slate-400 dark:text-gray-500 uppercase tracking-wider mb-1">Full Name</label>
+                                <input type="text" required value={name} onChange={(e) => setName(e.target.value)} className="w-full border border-slate-200 dark:border-white/10 rounded-xl p-2 text-xs outline-none focus:border-brand-500 transition-colors bg-white dark:bg-gray-800 text-slate-900 dark:text-gray-100 placeholder:text-slate-400 dark:placeholder:text-gray-500" />
                             </div>
                             <div className="grid grid-cols-2 gap-3">
                                 <div>
-                                    <label className="block text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-1">Email</label>
-                                    <input type="email" required value={email} onChange={(e) => setEmail(e.target.value)} className="w-full border border-slate-200 rounded-xl p-2 text-xs outline-none focus:border-brand-500 transition-colors" />
+                                    <label className="block text-[10px] font-bold text-slate-400 dark:text-gray-500 uppercase tracking-wider mb-1">Email</label>
+                                    <input type="email" required value={email} onChange={(e) => setEmail(e.target.value)} className="w-full border border-slate-200 dark:border-white/10 rounded-xl p-2 text-xs outline-none focus:border-brand-500 transition-colors bg-white dark:bg-gray-800 text-slate-900 dark:text-gray-100 placeholder:text-slate-400 dark:placeholder:text-gray-500" />
                                 </div>
                                 <div>
-                                    <label className="block text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-1">Username</label>
-                                    <input type="text" required value={username} onChange={(e) => setUsername(e.target.value)} className="w-full border border-slate-200 rounded-xl p-2 text-xs outline-none focus:border-brand-500 transition-colors" />
+                                    <label className="block text-[10px] font-bold text-slate-400 dark:text-gray-500 uppercase tracking-wider mb-1">Username</label>
+                                    <input type="text" required value={username} onChange={(e) => setUsername(e.target.value)} className="w-full border border-slate-200 dark:border-white/10 rounded-xl p-2 text-xs outline-none focus:border-brand-500 transition-colors bg-white dark:bg-gray-800 text-slate-900 dark:text-gray-100 placeholder:text-slate-400 dark:placeholder:text-gray-500" />
                                 </div>
                             </div>
                             <div>
-                                <label className="block text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-1">Phone (Optional)</label>
-                                <input type="text" value={phone} onChange={(e) => setPhone(e.target.value)} className="w-full border border-slate-200 rounded-xl p-2 text-xs outline-none focus:border-brand-500 transition-colors" placeholder="—" />
+                                <label className="block text-[10px] font-bold text-slate-400 dark:text-gray-500 uppercase tracking-wider mb-1">Phone (Optional)</label>
+                                <input type="text" value={phone} onChange={(e) => setPhone(e.target.value)} className="w-full border border-slate-200 dark:border-white/10 rounded-xl p-2 text-xs outline-none focus:border-brand-500 transition-colors bg-white dark:bg-gray-800 text-slate-900 dark:text-gray-100 placeholder:text-slate-400 dark:placeholder:text-gray-500" placeholder="—" />
                             </div>
                             <div className="grid grid-cols-2 gap-3">
                                 <div>
-                                    <label className="block text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-1">Designation</label>
-                                    <input type="text" value={designation} onChange={(e) => setDesignation(e.target.value)} className="w-full border border-slate-200 rounded-xl p-2 text-xs outline-none focus:border-brand-500 transition-colors" placeholder="—" />
+                                    <label className="block text-[10px] font-bold text-slate-400 dark:text-gray-500 uppercase tracking-wider mb-1">Designation</label>
+                                    <input type="text" value={designation} onChange={(e) => setDesignation(e.target.value)} className="w-full border border-slate-200 dark:border-white/10 rounded-xl p-2 text-xs outline-none focus:border-brand-500 transition-colors bg-white dark:bg-gray-800 text-slate-900 dark:text-gray-100 placeholder:text-slate-400 dark:placeholder:text-gray-500" placeholder="—" />
                                 </div>
                                 <div>
-                                    <label className="block text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-1">Department</label>
-                                    <input type="text" value={department} onChange={(e) => setDepartment(e.target.value)} className="w-full border border-slate-200 rounded-xl p-2 text-xs outline-none focus:border-brand-500 transition-colors" placeholder="—" />
+                                    <label className="block text-[10px] font-bold text-slate-400 dark:text-gray-500 uppercase tracking-wider mb-1">Department</label>
+                                    <input type="text" value={department} onChange={(e) => setDepartment(e.target.value)} className="w-full border border-slate-200 dark:border-white/10 rounded-xl p-2 text-xs outline-none focus:border-brand-500 transition-colors bg-white dark:bg-gray-800 text-slate-900 dark:text-gray-100 placeholder:text-slate-400 dark:placeholder:text-gray-500" placeholder="—" />
                                 </div>
                             </div>
                             <AssignedAreaField />
                         </div>
 
-                        <div className="flex justify-end gap-2 text-xs font-semibold pt-4 border-t border-slate-100">
-                            <button type="button" onClick={() => { setShowEditModal(false); setSelectedEmp(null); }} className="px-3 py-2 bg-slate-50 hover:bg-slate-100 text-slate-600 rounded-xl border border-slate-200 cursor-pointer">Cancel</button>
+                        <div className="flex justify-end gap-2 text-xs font-semibold pt-4 border-t border-slate-100 dark:border-white/10">
+                            <button type="button" onClick={() => { setShowEditModal(false); setSelectedEmp(null); }} className="px-3 py-2 bg-slate-50 hover:bg-slate-100 text-slate-600 rounded-xl border border-slate-200 dark:border-white/10 dark:bg-gray-800 dark:text-gray-300 dark:hover:bg-gray-700 cursor-pointer">Cancel</button>
                             <button type="submit" disabled={formSubmitting} className="px-4 py-2 bg-brand-600 hover:bg-brand-700 text-white rounded-xl shadow-sm disabled:opacity-50 transition-colors cursor-pointer">
                                 {formSubmitting ? "Updating..." : "Save Changes"}
                             </button>
@@ -690,26 +690,26 @@ export default function FullyIntegratedEmployeeModule() {
             {/* PASSWORD CORRECTION CREDENTIAL OVERWRITE MODAL */}
             {showPassModal && selectedEmp && (
                 <div className="fixed inset-0 z-40 flex items-center justify-center bg-black/30 backdrop-blur-xs p-4 animate-in fade-in duration-200">
-                    <div className="bg-white rounded-2xl border border-slate-200 max-w-sm w-full p-6 space-y-4 shadow-xl">
+                    <div className="bg-white dark:bg-gray-900 rounded-2xl border border-slate-200 dark:border-white/10 max-w-sm w-full p-6 space-y-4 shadow-xl">
                         <div>
-                            <h3 className="text-sm font-bold text-slate-900">Reset Password</h3>
-                            <p className="text-xs text-slate-400 mt-0.5">Set a new password for <span className="font-semibold text-slate-700">{selectedEmp.full_name}</span></p>
+                            <h3 className="text-sm font-bold text-slate-900 dark:text-white">Reset Password</h3>
+                            <p className="text-xs text-slate-400 dark:text-gray-500 mt-0.5">Set a new password for <span className="font-semibold text-slate-700">{selectedEmp.full_name}</span></p>
                         </div>
                         <form onSubmit={handlePasswordReset} className="space-y-4">
                             <div>
-                                <label className="block text-[10px] font-bold text-slate-400 uppercase tracking-wide mb-1.5">New Password</label>
+                                <label className="block text-[10px] font-bold text-slate-400 dark:text-gray-500 uppercase tracking-wide mb-1.5">New Password</label>
                                 <input
                                     type="password"
                                     required
                                     minLength={8}
                                     value={password}
                                     onChange={(e) => setPassword(e.target.value)}
-                                    className="w-full rounded-xl border border-slate-200 px-3 py-2 text-xs focus:border-brand-500 focus:outline-none transition-all"
+                                    className="w-full rounded-xl border border-slate-200 dark:border-white/10 px-3 py-2 text-xs focus:border-brand-500 focus:outline-none transition-all bg-white dark:bg-gray-800 text-slate-900 dark:text-gray-100 placeholder:text-slate-400 dark:placeholder:text-gray-500"
                                     placeholder="••••••••"
                                 />
                             </div>
-                            <div className="flex justify-end space-x-2 pt-4 border-t border-slate-100 text-xs font-semibold">
-                                <button type="button" onClick={() => { setShowPassModal(false); setSelectedEmp(null); setPassword(""); }} className="rounded-xl border border-slate-200 px-4 py-2 text-slate-600 hover:bg-slate-50">Cancel</button>
+                            <div className="flex justify-end space-x-2 pt-4 border-t border-slate-100 dark:border-white/10 text-xs font-semibold">
+                                <button type="button" onClick={() => { setShowPassModal(false); setSelectedEmp(null); setPassword(""); }} className="rounded-xl border border-slate-200 dark:border-white/10 px-4 py-2 text-slate-600 dark:bg-gray-800 dark:text-gray-300 dark:hover:bg-gray-700 hover:bg-slate-50">Cancel</button>
                                 <button type="submit" disabled={formSubmitting} className="rounded-xl bg-brand-600 px-4 py-2 text-white hover:bg-brand-700 disabled:opacity-50 shadow-sm">Reset Credentials</button>
                             </div>
                         </form>

@@ -128,6 +128,7 @@ export default function CompanyManagementPage() {
         plan: data.company.plan,
         max_employees: data.company.max_employees,
         status: data.company.status,
+        package_id: data.company.package_id ?? null,
         areaIds: data.areas.map((a: any) => a.id),
         categoryIds: data.categories.map((c: any) => c.id),
       });

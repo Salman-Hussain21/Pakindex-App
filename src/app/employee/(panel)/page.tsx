@@ -78,7 +78,7 @@ export default function EmployeeDashboardPage() {
       {/* Gamification & Commission Estimator Strip */}
       <div className="grid grid-cols-1 gap-4 lg:grid-cols-3">
         {/* Quota Progress */}
-        <div className="rounded-2xl border border-black/[0.06] bg-white p-5 shadow-sm dark:border-white/[0.06] dark:bg-[#111827] hover:shadow-md transition-shadow duration-300">
+        <div className="rounded-2xl border border-black/[0.06] bg-white p-5 shadow-sm dark:border-white/[0.06] dark:bg-[#0c120f] hover:shadow-md transition-shadow duration-300">
           <div className="flex items-center gap-2 mb-2">
             <Target size={14} className="text-brand-500" />
             <p className="font-[family-name:var(--font-montserrat)] text-[10px] font-bold uppercase tracking-widest text-ink-900/40 dark:text-gray-500">Monthly Quota</p>
@@ -96,7 +96,7 @@ export default function EmployeeDashboardPage() {
         </div>
 
         {/* Commission Estimator */}
-        <div className="rounded-2xl border border-black/[0.06] bg-white p-5 shadow-sm dark:border-white/[0.06] dark:bg-[#111827] hover:shadow-md transition-shadow duration-300">
+        <div className="rounded-2xl border border-black/[0.06] bg-white p-5 shadow-sm dark:border-white/[0.06] dark:bg-[#0c120f] hover:shadow-md transition-shadow duration-300">
           <div className="flex items-center gap-2 mb-2">
             <Zap size={14} className="text-amber-500" />
             <p className="font-[family-name:var(--font-montserrat)] text-[10px] font-bold uppercase tracking-widest text-ink-900/40 dark:text-gray-500">Estimated Commission</p>
@@ -115,7 +115,7 @@ export default function EmployeeDashboardPage() {
         </div>
 
         {/* Performance Streak / Motivator */}
-        <div className="rounded-2xl border border-black/[0.06] bg-white p-5 shadow-sm dark:border-white/[0.06] dark:bg-[#111827] hover:shadow-md transition-shadow duration-300">
+        <div className="rounded-2xl border border-black/[0.06] bg-white p-5 shadow-sm dark:border-white/[0.06] dark:bg-[#0c120f] hover:shadow-md transition-shadow duration-300">
           <div className="flex items-center gap-2 mb-2">
             <Flame size={14} className="text-red-500 animate-pulse" />
             <p className="font-[family-name:var(--font-montserrat)] text-[10px] font-bold uppercase tracking-widest text-ink-900/40 dark:text-gray-500">Streak & Status</p>
@@ -142,7 +142,7 @@ export default function EmployeeDashboardPage() {
       {/* Main Split Content */}
       <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
         {/* Upcoming Follow-ups */}
-        <div className="rounded-2xl border border-black/[0.06] bg-white p-5 shadow-sm dark:border-white/[0.06] dark:bg-[#111827]">
+        <div className="rounded-2xl border border-black/[0.06] bg-white p-5 shadow-sm dark:border-white/[0.06] dark:bg-[#0c120f]">
           <div className="flex items-center justify-between mb-4">
             <h2 className="font-[family-name:var(--font-montserrat)] text-xs font-bold uppercase tracking-wider text-ink-900 dark:text-gray-100">Upcoming Follow-ups</h2>
             <Link href="/employee/crm" className="text-xs font-semibold text-brand-600 dark:text-brand-400 hover:underline flex items-center gap-0.5">
@@ -176,7 +176,7 @@ export default function EmployeeDashboardPage() {
         </div>
 
         {/* Recently Assigned Leads */}
-        <div className="rounded-2xl border border-black/[0.06] bg-white p-5 shadow-sm dark:border-white/[0.06] dark:bg-[#111827]">
+        <div className="rounded-2xl border border-black/[0.06] bg-white p-5 shadow-sm dark:border-white/[0.06] dark:bg-[#0c120f]">
           <div className="flex items-center justify-between mb-4">
             <h2 className="font-[family-name:var(--font-montserrat)] text-xs font-bold uppercase tracking-wider text-ink-900 dark:text-gray-100">Recently Assigned Leads</h2>
             <Link href="/employee/restaurants" className="text-xs font-semibold text-brand-600 dark:text-brand-400 hover:underline flex items-center gap-0.5">

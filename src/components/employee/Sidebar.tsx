@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { LayoutDashboard, MapPin, Users, Navigation, Table2 } from "lucide-react";
+import { LayoutDashboard, MapPin, Users, Navigation, Table2, Settings } from "lucide-react";
 
 interface NavItem {
   href: string;
@@ -33,6 +33,12 @@ const NAV_GROUPS: NavGroup[] = [
     items: [
       { href: "/employee/crm", label: "CRM / Leads", icon: Users },
       { href: "/employee/visits", label: "Field Visits", icon: Navigation },
+    ],
+  },
+  {
+    label: "Account",
+    items: [
+      { href: "/employee/settings", label: "Settings", icon: Settings },
     ],
   },
 ];
