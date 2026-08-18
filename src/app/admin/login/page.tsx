@@ -73,11 +73,6 @@ function LoginForm() {
             {loading ? "Signing in…" : "Sign In"}
           </button>
         </form>
-
-        <p className="mt-6 text-center text-xs text-ink-900/40">
-          First time? Run <code className="rounded bg-gray-100 px-1 py-0.5">node scripts/seed.js</code> to
-          create the first super_admin login.
-        </p>
       </div>
     </div>
   );
